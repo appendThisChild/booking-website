@@ -1,0 +1,17 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+.headerDiv {
+    /* background-color: #430064; */
+    height: 300px;
+
+}
+.sagSymbol {
+    background-image: url("./thisFlower.png");
+    background-size: 100%;
+    background-position: 10%;
+    background-repeat: no-repeat;
+    width: 200%;
+    height: 100%;
+}
