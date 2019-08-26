@@ -12,12 +12,11 @@ class Header extends Component {
 
     render(){
         return(
-            <div className={"headerDiv"}>
-                <div className={"sagSymbol"}>
-                    <h1>Blissed Out Body Work</h1>
-                    <span>By Matthew Sweatness</span>
-                    <Nav /> 
-                </div>
+            <div className={"headerBackground"}>
+                <span className={"navToggle"}>&#9776;</span>
+                <h1 className={"headerTitle1"}>Euphoric</h1>
+                <h1 className={"headerTitle2"}>Massage</h1>
+                <Nav /> 
             </div>
         )
     }

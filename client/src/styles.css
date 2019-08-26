@@ -2,16 +2,104 @@
     margin: 0px;
     padding: 0px;
 }
-.headerDiv {
-    /* background-color: #430064; */
+@font-face {
+    font-family: ChopinScript;
+    src:url(./fonts/ChopinScript.otf)
+}
+@font-face {
+    font-family: BlackSword;
+    src:url(./fonts/Blacksword.otf)
+}
+@font-face {
+    font-family: King;
+    src:url(./fonts/King.ttf)
+}
+@font-face {
+    font-family: nav1;
+    src:url(./fonts/SrabiScript.ttf)
+}
+@font-face {
+    font-family: nav2;
+    src:url(./fonts/Thinking_of_Betty.ttf)
+}
+@font-face {
+    font-family: nav3;
+    src:url(./fonts/TrushmeScript.ttf)
+}
+
+
+/* Header */
+.headerBackground {
+    background-image: url("./images/thisFlower.png");
+    background-size: 150%;
+    background-position: -50% 25%;
+    background-repeat: no-repeat;
     height: 300px;
+}
+.headerTitle1 {
+    opacity: .95;
+    font-size: 70px;
+    font-family: ChopinScript;
+    padding-left: 8px;
+    /* padding-top: 0px; */
 
 }
-.sagSymbol {
-    background-image: url("./thisFlower.png");
-    background-size: 100%;
-    background-position: 10%;
-    background-repeat: no-repeat;
-    width: 200%;
-    height: 100%;
+.headerTitle2 {
+    opacity: .95;
+    font-size: 70px;
+    font-family: ChopinScript;
+    padding-left: 85px;
+    /* padding-top: 40px; */
+
+}
+.navToggle {
+    font-size: 32px;
+    padding-left: 9px;
+    position: sticky;
+    top: 0;
+}
+.navBar {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* width: 100%;
+    position: absolute;
+    top: 244px; */
+    /* height: 100%; */
+    width: 90%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color:#430064e8;
+    overflow-x: hidden;
+    padding-top: 45px;
+    padding-bottom: 30px;
+    border-bottom-right-radius: 40px;
+    border-bottom: 4px double gold;
+    border-right: 1px double gold;
+    box-shadow: 7px 10px 15px 0px #000000;
+}
+.navBar > a {
+    text-decoration: none;
+    flex: 1;
+    /* text-align: center; */
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    font-family: nav1;
+    font-size: 35px;
+    text-shadow: 1px 8px 7px black;
+}
+
+/* Home  */
+.bodyBackground {
+    background-image: url("./images/sacred_geometry_png_1194283.png");
+    background-color: #bb32ff;
+    background-size: 500px;
+    background-attachment: fixed;
+    background-repeat: repeat-y;
+    background-position: 120% 0%;
+    height: 300px;
 }
