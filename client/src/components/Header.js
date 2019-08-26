@@ -13,10 +13,10 @@ class Header extends Component {
     render(){
         return(
             <div className={"headerBackground"}>
-                <span className={"navToggle"}>&#9776;</span>
                 <h1 className={"headerTitle1"}>Euphoric</h1>
                 <h1 className={"headerTitle2"}>Massage</h1>
-                <Nav /> 
+                <span className={"navToggle"} onClick={this.props.sideNavToggler}>&#9776;</span>
+                <Nav sideNavToggler={this.props.sideNavToggler} navSideToggle={this.props.navSideToggle}/> 
             </div>
         )
     }

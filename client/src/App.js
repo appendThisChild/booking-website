@@ -16,14 +16,21 @@ class App extends Component {
     constructor(){
         super()
         this.state = {
-
+            navSideToggle: false
         }
+    }
+    sideNavToggler = () => {
+        this.setState(prevState => ({
+            navSideToggle: !prevState.navSideToggle
+        }))
     }
 
     render(){
         return(
             <div>
-                <Header /> 
+                <Header 
+                    sideNavToggler={this.sideNavToggler} 
+                    navSideToggle={this.state.navSideToggle}/> 
                 <Switch>
                     <Route exact path="/" render={renderProps => <Home {...renderProps}/>}/>
                     <Route path="/book" render={renderProps => <Book {...renderProps}/>}/>
