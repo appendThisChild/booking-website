@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-class SignIn extends Component {
+class PickTime extends Component {
     constructor(){
         super()
         this.state = {
@@ -10,10 +10,10 @@ class SignIn extends Component {
     render(){
         return(
             <div>
-                Sign In
+                PickTime
             </div>
         )
     }
 }
 
-export default SignIn;
+export default PickTime;

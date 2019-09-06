@@ -7,24 +7,16 @@
     src:url(./fonts/ChopinScript.otf)
 }
 @font-face {
-    font-family: BlackSword;
-    src:url(./fonts/Blacksword.otf)
-}
-@font-face {
-    font-family: King;
-    src:url(./fonts/King.ttf)
-}
-@font-face {
     font-family: nav1;
     src:url(./fonts/SrabiScript.ttf)
 }
 @font-face {
-    font-family: nav2;
-    src:url(./fonts/Thinking_of_Betty.ttf)
+    font-family: headers;
+    src: url("./fonts/GeosansLight.ttf")
 }
 @font-face {
-    font-family: nav3;
-    src:url(./fonts/TrushmeScript.ttf)
+    font-family: paragraphs;
+    src: url("./fonts/GeosansLight-Oblique.ttf")
 }
 
 
@@ -40,7 +32,7 @@
     opacity: .95;
     font-size: 70px;
     font-family: ChopinScript;
-    padding-left: 8px;
+    padding-left: 5%;
     padding-top: 50px;
 
 }
@@ -48,7 +40,7 @@
     opacity: .95;
     font-size: 70px;
     font-family: ChopinScript;
-    padding-left: 85px;
+    padding-left: 25%;
 }
 .navToggle {
     font-size: 35px;
@@ -60,13 +52,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color:#430064c5;
+    background-color: rgba(245, 245, 245, 0.822);
     overflow-x: hidden;
     padding-bottom: 30px;
-    border-bottom-right-radius: 40px;
-    border-bottom: 4px double gold;
-    /* border-right: 1px double gold; */
-    box-shadow: 7px 10px 15px 0px #000000;
+    padding-top: 30px;
+    border-bottom-right-radius: 35px;
 }
 .navBarShown {
     width: 90%;
@@ -84,28 +74,111 @@
     padding-left: 15px;
     padding-top: 15px;
     padding-bottom: 15px;
-    color: white;
+    color: black;
     font-family: nav1;
     font-size: 35px;
-    text-shadow: 1px 8px 7px black;
+    /* text-shadow: 2px -2px 5px orange; */
+}
+.navBarLinks > a:hover {
+    text-shadow: 2px -2px 5px orange; 
 }
 
 /* Home  */
 .bodyBackground {
-    background-image: url("./images/sacred_geometry_png_1194283.png");
-    background-color: #bb32ff;
-    background-size: 150%;
+    background-image: url("./images/cawer3.jpg");
+    background-color: rgb(245, 245, 244);
+    background-size: 200%;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background-position: 120% 0%;
+    background-position: center;
     box-shadow: inset 0px 0px 35px 0px black;
+    /* height: 1000px; */
 }
 .homeBorder {
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .homeContainer {
     padding: 15px;
-    border: 1px solid black;
-    background-color: rgba(255, 255, 0, 0.7);
-    border-radius: 5px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-right: 7%;
+    color: white;
+}
+.homeContainer1 {
+    background-color: rgba(83, 11, 83, 0.87);
+    margin-bottom: 20px;
+}
+.homeContainer2 {
+    padding: 15px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    background-color: rgba(243, 243, 46, 0.87);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-left: 7%;
+    margin-bottom: 20px;
+}
+.homeContainer3 {
+    background-color: rgba(0, 172, 0, 0.87);
+}
+.homeContainer > h1 {
+    font-family: headers;
+    font-size: 45px;
+    border-bottom: 2px solid white;
+    text-shadow: 1px 2px 3px black;
+    padding-bottom: 3px;
+    margin-bottom: 5px;
+    box-shadow: 0px 1px 0px 0px black;
+}
+.homeContainer > p {
+    font-family: paragraphs;
+    font-size: 26px;
+    line-height: 28px;
+    text-shadow: 1px 1px 2px black;
+}
+.homeContainer2 > h1 {
+    font-family: headers;
+    font-size: 45px;
+    border-bottom: 2px solid black;
+    text-shadow: 1px 2px 3px white;
+    padding-bottom: 3px;
+    margin-bottom: 5px;
+    box-shadow: 0px 1px 0px 0px white;
+}
+.homeContainer2 > p {
+    font-family: paragraphs;
+    font-size: 26px;
+    line-height: 28px;
+    text-shadow: 1px 1px 2px white;
+}
+/* Footer  */
+.footer {
+    display: flex;
+    background-image: url("./images/wood.jpg");
+    background-position: 50% 80%;
+}
+.footer > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.5) 25%, rgba(0, 0, 0, 0));
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.footer > div > p {
+    font-family: headers;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    text-shadow: 1px 1px 1px black;
+}
+.ryanLink:hover {
+    color: yellow;
+    text-decoration: underline;
 }

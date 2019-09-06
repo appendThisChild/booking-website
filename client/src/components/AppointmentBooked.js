@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-class SignIn extends Component {
+class AppointmentBooked extends Component {
     constructor(){
         super()
         this.state = {
@@ -10,10 +10,10 @@ class SignIn extends Component {
     render(){
         return(
             <div>
-                Sign In
+                Your Appointment has been booked. Please submit additional information.
             </div>
         )
     }
 }
 
-export default SignIn;
+export default AppointmentBooked;

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-class SignIn extends Component {
+class PackageAndSubmit extends Component {
     constructor(){
         super()
         this.state = {
@@ -10,10 +10,10 @@ class SignIn extends Component {
     render(){
         return(
             <div>
-                Sign In
+                Pick a Package and Sumbit Payment
             </div>
         )
     }
 }
 
-export default SignIn;
+export default PackageAndSubmit;

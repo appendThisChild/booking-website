@@ -5,12 +5,13 @@ import { BrowserRouter} from "react-router-dom"
 import "./styles.css"
 
 // Providers
-
+import UserProvider from "./context/UserProvider.js"
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <UserProvider>
+            <App />
+        </UserProvider>
     </BrowserRouter>
-    
 ,
 document.getElementById("root"))
