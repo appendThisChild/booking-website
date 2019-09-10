@@ -1,11 +1,36 @@
-import React from "react"
+import React, { Component } from "react"
+import { withUser } from "../context/UserProvider.js"
+import { withAppointment } from "../context/AppointmentProvider.js"
 
-const Book = () => {
-    return(
-        <div>
-            Book
-        </div>
-    )
+
+class Book extends Component {
+    constructor(){
+        super()
+        this.state = {
+
+        }
+    }
+    handlePickTime = e => {
+        e.preventDefault()
+
+        this.props.makingAppointment()
+        this.props.history.push('/pickTime')
+    }
+    render(){
+
+
+        return(
+            <div>
+                <form onSubmit={this.handlePickTime}>
+                    {}
+                    <input
+                    
+                    />
+                    <button>Pick Time</button>
+                </form>
+            </div>
+        )
+    }
 }
 
-export default Book;
+export default withAppointment(withUser(Book));

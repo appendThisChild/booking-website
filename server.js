@@ -18,7 +18,9 @@ mongoose.connect('mongodb://localhost:27017/matthew-sweetness', {useNewUrlParser
     console.log('[o] Connected to the DB')
 })
 
-app.use("auth", require('./routes/authRoutes.js'))
+app.use("/auth", require('./routes/authRoutes.js'))
+app.use("/api/appointment", require('./routes/appointmentRoutes.js'))
+app.use("/appointment", require('./routes/appointmentRoutes.js'))
 
 app.use((err, req, res, next) => {
     console.log(err)

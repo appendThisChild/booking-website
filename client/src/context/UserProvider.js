@@ -34,7 +34,7 @@ class UserProvider extends Component {
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
     login = credentials => {
-        axios.post("auth/login", credentials)
+        axios.post("/auth/login", credentials)
             .then(res => {
                 const { user, token } = res.data
                 localStorage.user = JSON.stringify(user)
@@ -61,6 +61,7 @@ class UserProvider extends Component {
         })
     }
     makingAppointment = () => {
+        console.log("Booking Appointment")
         this.setState(() => ({
             makingAppointment: true
         }))
