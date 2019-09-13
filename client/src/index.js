@@ -6,11 +6,17 @@ import "./styles.css"
 
 // Providers
 import UserProvider from "./context/UserProvider.js"
+import AppointmentProvider from "./context/AppointmentProvider.js"
+import TherapistProvider from "./context/TherapistProvider.js"
 
 ReactDOM.render(
     <BrowserRouter>
         <UserProvider>
-            <App />
+            <AppointmentProvider>
+                <TherapistProvider>
+                    <App />
+                </TherapistProvider>
+            </AppointmentProvider>
         </UserProvider>
     </BrowserRouter>
 ,

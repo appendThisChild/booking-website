@@ -18,7 +18,7 @@ class Nav extends Component {
         let signInLinkName = "Sign In"
         if (token){
             signOut = <Link to="/" onClick={logout}>Sign Out</Link>
-            signInLinkName = "My Bookings"
+            signInLinkName = "My Profile"
         }
         return(
             <div className={`navBarBaseClass ${this.props.navSideToggle ? "navBarShown" : "navBarHidden"}`}>

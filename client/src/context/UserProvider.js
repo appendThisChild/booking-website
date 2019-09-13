@@ -61,12 +61,12 @@ class UserProvider extends Component {
         })
     }
     makingAppointment = () => {
-        console.log("Booking Appointment")
         this.setState(() => ({
             makingAppointment: true
         }))
     }
     appointmentSubmitted = () => {
+        console.log("Booking Completed")
         this.setState(() => ({
             makingAppointment: false
         }))
