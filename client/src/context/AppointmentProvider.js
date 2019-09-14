@@ -16,7 +16,16 @@ class AppointmentProvider extends Component {
         super()
         this.state = {
             ownerAppointments: [],
-            therapistAppointments: [],
+            therapistAppointments: [{
+                appDate: new Date(2019, 8, 16, 10, 30),
+                appLengthInMinutes: 60
+            },{
+                appDate: new Date(2019, 8, 16, 12, 0),
+                appLengthInMinutes: 60
+            },{
+                appDate: new Date(2019, 8, 17, 11, 30),
+                appLengthInMinutes: 90
+            }],
             clientAppointments: [],
             appLengths: [60, 90, 120],
             clientID: "",

@@ -18,33 +18,30 @@ class PickTime extends Component {
     }
     // 
     gettingAvailability = () => {
-        // console.log(this.state.selected)
-        // const today = this.props.thisMoment()
-        // const month = today.getMonth()
-        // const dayOfWeek = today.getDay()
-        // const date = today.getDate()
-        // const hour = today.getHours()
-        // console.log(today)
-        // console.log(month)
-        // console.log(dayOfWeek)
-        // console.log(date)
-        // console.log(hour)
-        // console.log(this.state.monthsOftheYear[month])
-        // console.log(this.state.daysOfTheWeek[dayOfWeek])
         const weekShowingArr = []
         const therapist = this.state.selected
+        const selectedAppointmentLengthInMinutes = parseInt(this.props.appLengthInMinutes)
+        let selectedAppointmentBlocks = 0
+        if (selectedAppointmentLengthInMinutes === 60){
+            selectedAppointmentBlocks = 2
+        } else if (selectedAppointmentLengthInMinutes === 90){
+            selectedAppointmentBlocks = 3
+        } else if (selectedAppointmentLengthInMinutes === 120){
+            selectedAppointmentBlocks = 4
+        }
         for (let i = this.state.viewedWeek; i < this.state.viewedWeek + 7; i++){
             const newDate = this.props.thisMoment()
             const dateSet = new Date(newDate.setDate(newDate.getDate() + i))
             const matchingDates = this.props.therapistAppointments.filter(obj => {
                 return obj.appDate.getFullYear() === dateSet.getFullYear() && obj.appDate.getMonth() === dateSet.getMonth() && obj.appDate.getDate() === dateSet.getDate()
             })
-            // const timesAvailable = []
+            const generalTimesAvailableForSelectedDay = []
             let startTime = 0
             let endTime = 0
+            const timesAvailableForThisDayGivenDesiredLength = []
             if (dateSet.getDay() === 0){
                 startTime = therapist.availabilitySundayHourStart;
-                endTime = therapist.availabilitySundayHourEnd
+                endTime = therapist.availabilitySundayHourEnd 
             } else if (dateSet.getDay() === 1){
                 startTime = therapist.availabilityMondayHourStart
                 endTime = therapist.availabilityMondayHourEnd
@@ -64,34 +61,107 @@ class PickTime extends Component {
                 startTime = therapist.availabilitySaturdayHourStart
                 endTime = therapist.availabilitySaturdayHourEnd
             }
-
-            // check if he has appointments for this day
-            // check what the start and ends times are for those appointments 
-            // block out those sections 
-            // 
-
-
-            // show start times for the selected length
-            // for () {
-                // check 
-            // }
-
-
-
-
-
-
-            console.log(startTime)
-            console.log(endTime)
-            console.log(therapist)
-            console.log(matchingDates)
+            let newTime = startTime
+            for (let j = 0; j < endTime - startTime; j++) {
+                if (newTime % 1 === 0){
+                    if (endTime % 1 === .5 && endTime - .5 === newTime){
+                        generalTimesAvailableForSelectedDay.push([newTime, 0])
+                        break;
+                    }   
+                    for (let k = 0; k < 2; k++){
+                        if (k === 0){
+                            generalTimesAvailableForSelectedDay.push([newTime, 0])
+                        } else if (k === 1){
+                            generalTimesAvailableForSelectedDay.push([newTime, 30])
+                        }
+                    }
+                } else {
+                    newTime = newTime - .5
+                    j--
+                    generalTimesAvailableForSelectedDay.push([newTime, 30])
+                }
+                newTime++ 
+            }
+            for (let l = 0; l < matchingDates.length; l++) {
+                const timeBlockToRemove = [matchingDates[l].appDate.getHours(), matchingDates[l].appDate.getMinutes()]
+                const foundIndexToRemove = generalTimesAvailableForSelectedDay.findIndex(arr =>{
+                    return arr[0] === timeBlockToRemove[0] && arr[1] === timeBlockToRemove[1]
+                })
+                let howManyBlocksToRemove = 0
+                if (matchingDates[l].appLengthInMinutes === 60){
+                    howManyBlocksToRemove = 2
+                } else if (matchingDates[l].appLengthInMinutes === 90){
+                    howManyBlocksToRemove = 3
+                } else if (matchingDates[l].appLengthInMinutes === 120){
+                    howManyBlocksToRemove = 4
+                }
+                generalTimesAvailableForSelectedDay.splice(foundIndexToRemove, howManyBlocksToRemove)
+            }
+            for (let n = 0; n < generalTimesAvailableForSelectedDay.length; n++){
+                const availableTimeBlock = generalTimesAvailableForSelectedDay[n]
+                const nextAvailableTimeBlock = generalTimesAvailableForSelectedDay[n + 1]
+                const nextAvailableTimeBlockAfterThat = generalTimesAvailableForSelectedDay[n + 2]
+                const nextAvailableTimeBlockAfterThatAgain = generalTimesAvailableForSelectedDay[n + 3]
+                if (nextAvailableTimeBlock){
+                    if (selectedAppointmentBlocks === 2){
+                        if (availableTimeBlock[1] === 0){
+                            if (nextAvailableTimeBlock[0] === availableTimeBlock[0]){
+                                timesAvailableForThisDayGivenDesiredLength.push(availableTimeBlock)
+                            }
+                        } else {
+                            if (nextAvailableTimeBlock[0] - 1 === availableTimeBlock[0] && 
+                                nextAvailableTimeBlock[1] === 0){
+                                timesAvailableForThisDayGivenDesiredLength.push(availableTimeBlock)
+                            }
+                        }
+                    } else if (selectedAppointmentBlocks === 3){
+                        if (nextAvailableTimeBlockAfterThat){
+                            if (availableTimeBlock[1] === 0){
+                                if (nextAvailableTimeBlock[0] === availableTimeBlock[0] && 
+                                    nextAvailableTimeBlockAfterThat[0] === availableTimeBlock[0] + 1 && 
+                                    nextAvailableTimeBlockAfterThat[1] === 0){
+                                    timesAvailableForThisDayGivenDesiredLength.push(availableTimeBlock)
+                                }
+                            } else {
+                                if (nextAvailableTimeBlock[0] - 1 === availableTimeBlock[0] && 
+                                    nextAvailableTimeBlock[1] === 0 && 
+                                    nextAvailableTimeBlockAfterThat[0] === availableTimeBlock[0] + 1){
+                                    timesAvailableForThisDayGivenDesiredLength.push(availableTimeBlock)
+                                }
+                            }
+                        }
+                    } else if (selectedAppointmentBlocks === 4){
+                        if (nextAvailableTimeBlockAfterThatAgain){
+                            if (availableTimeBlock[1] === 0){
+                                if (nextAvailableTimeBlock[0] === availableTimeBlock[0] && 
+                                    nextAvailableTimeBlockAfterThat[0] === availableTimeBlock[0] + 1 && 
+                                    nextAvailableTimeBlockAfterThat[1] === 0 && 
+                                    nextAvailableTimeBlockAfterThatAgain[0] === availableTimeBlock[0] + 1
+                                    ){
+                                    timesAvailableForThisDayGivenDesiredLength.push(availableTimeBlock)
+                                }
+                            } else {
+                                if (nextAvailableTimeBlock[0] - 1 === availableTimeBlock[0] && 
+                                    nextAvailableTimeBlock[1] === 0 && 
+                                    nextAvailableTimeBlockAfterThat[0] === availableTimeBlock[0] + 1 &&
+                                    nextAvailableTimeBlockAfterThatAgain[0] === availableTimeBlock[0] + 2
+                                    ){
+                                    if (nextAvailableTimeBlockAfterThatAgain[1] === 0){
+                                        timesAvailableForThisDayGivenDesiredLength.push(availableTimeBlock)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             weekShowingArr.push({
                 year: dateSet.getFullYear(),
                 month: dateSet.getMonth(),
                 date: dateSet.getDate(),
-                day: this.state.daysOfTheWeek[dateSet.getDay()]
+                day: this.state.daysOfTheWeek[dateSet.getDay()],
+                availableTimeBlocks: timesAvailableForThisDayGivenDesiredLength
             })
-            // get all the days availability 
         }
         this.setState({weekShowing: weekShowingArr})
     }
@@ -123,6 +193,9 @@ class PickTime extends Component {
     }
     render(){
         const { appLengthInMinutes, therapistName } = this.props
+        const mappedAvailability = this.state.weekShowing.map((dayObj, i) => {
+            // create new component for displaying all this fucking info
+        })
         console.log(this.state.weekShowing)
         return(
             <div>
@@ -141,27 +214,7 @@ class PickTime extends Component {
                     <span onClick={() => {this.newWeek(7)}}>{">>>"}</span>}
                     
                 </div>
-                <div>
-                    <h1>Sunday</h1>
-                </div>
-                <div>
-                    <h1>Monday</h1>
-                </div>
-                <div>
-                    <h1>Tuesday</h1>
-                </div>
-                <div>
-                    <h1>Wednesday</h1>
-                </div>
-                <div>
-                    <h1>Thursday</h1>
-                </div>
-                <div>
-                    <h1>Friday</h1>
-                </div>
-                <div>
-                    <h1>Saturday</h1>
-                </div>
+                {mappedAvailability}
             </div> 
         )
     }
