@@ -16,17 +16,9 @@ class AppointmentProvider extends Component {
         super()
         this.state = {
             ownerAppointments: [],
-            therapistAppointments: [{
-                appDate: new Date(2019, 8, 16, 10, 30),
-                appLengthInMinutes: 60
-            },{
-                appDate: new Date(2019, 8, 16, 12, 0),
-                appLengthInMinutes: 60
-            },{
-                appDate: new Date(2019, 8, 17, 11, 30),
-                appLengthInMinutes: 90
-            }],
+            therAppointments: [],
             clientAppointments: [],
+            currentAppointmentInProgress: {},
             appLengths: [60, 90, 120],
             clientID: "",
             clientName: "",
@@ -51,8 +43,12 @@ class AppointmentProvider extends Component {
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
-    postNewAppointment = () => {
-
+    postNewAppointment = date => {
+        this.setState({ appDate: date }, () => {
+            console.log(this.state)
+            // create appointment obj
+            // push to next page PackageAndSubmit.js
+        })
     }
     updateAppointment = () => {
 

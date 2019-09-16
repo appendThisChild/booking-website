@@ -60,7 +60,7 @@ const appointmentSchema = new Schema({
         type: Number,
         default: 0
     },
-    appointmentCreated: {
+    appointmentCreatedAt: {
         type: Date,
         default: Date.now
     }

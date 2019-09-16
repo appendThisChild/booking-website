@@ -1,5 +1,8 @@
 import React, { Component } from "react"
 
+import ChoiceDisplay from "./ChoiceDisplay.js"
+import AvailableAppointments from "./AvailableAppointments.js"
+
 import { withUser } from "../context/UserProvider.js"
 import { withAppointment } from "../context/AppointmentProvider.js"
 import { withTherapist } from "../context/TherapistProvider.js"
@@ -13,22 +16,15 @@ class PickTime extends Component {
             selected: {},
             monthsOftheYear: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             daysOfTheWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            weekShowing: [{}]
+            weekShowing: [],
+            editToggle: false
         }
     }
-    // 
     gettingAvailability = () => {
         const weekShowingArr = []
         const therapist = this.state.selected
-        const selectedAppointmentLengthInMinutes = parseInt(this.props.appLengthInMinutes)
-        let selectedAppointmentBlocks = 0
-        if (selectedAppointmentLengthInMinutes === 60){
-            selectedAppointmentBlocks = 2
-        } else if (selectedAppointmentLengthInMinutes === 90){
-            selectedAppointmentBlocks = 3
-        } else if (selectedAppointmentLengthInMinutes === 120){
-            selectedAppointmentBlocks = 4
-        }
+        const selectedAppointmentBlocks = parseInt(this.props.appLengthInMinutes) / 30
+        // looks at all the data for that specific day
         for (let i = this.state.viewedWeek; i < this.state.viewedWeek + 7; i++){
             const newDate = this.props.thisMoment()
             const dateSet = new Date(newDate.setDate(newDate.getDate() + i))
@@ -61,6 +57,7 @@ class PickTime extends Component {
                 startTime = therapist.availabilitySaturdayHourStart
                 endTime = therapist.availabilitySaturdayHourEnd
             }
+            // creates a list of available half hour time blocks based on selected therapist's preference
             let newTime = startTime
             for (let j = 0; j < endTime - startTime; j++) {
                 if (newTime % 1 === 0){
@@ -69,34 +66,37 @@ class PickTime extends Component {
                         break;
                     }   
                     for (let k = 0; k < 2; k++){
-                        if (k === 0){
-                            generalTimesAvailableForSelectedDay.push([newTime, 0])
-                        } else if (k === 1){
-                            generalTimesAvailableForSelectedDay.push([newTime, 30])
-                        }
+                        if (k === 0) generalTimesAvailableForSelectedDay.push([newTime, 0])
+                        else if (k === 1) generalTimesAvailableForSelectedDay.push([newTime, 30])
                     }
                 } else {
-                    newTime = newTime - .5
-                    j--
-                    generalTimesAvailableForSelectedDay.push([newTime, 30])
+                    newTime = newTime - .5;
+                    j--;
+                    generalTimesAvailableForSelectedDay.push([newTime, 30]);
                 }
-                newTime++ 
+                newTime++;
             }
-            for (let l = 0; l < matchingDates.length; l++) {
-                const timeBlockToRemove = [matchingDates[l].appDate.getHours(), matchingDates[l].appDate.getMinutes()]
-                const foundIndexToRemove = generalTimesAvailableForSelectedDay.findIndex(arr =>{
-                    return arr[0] === timeBlockToRemove[0] && arr[1] === timeBlockToRemove[1]
+            // takes the already booked appointments and removes them allowing for a half hour break before and after
+            const appBookedBlocks = []
+            matchingDates.forEach(obj => {
+                let hours = obj.appDate.getHours()
+                let minutes = obj.appDate.getMinutes()
+                if (obj.appDate.getMinutes() === 30) minutes = 0;
+                else {
+                    minutes = 30;
+                    hours = hours - 1;
+                }
+                const timeBlockArr = this.createTimeBlocks(hours, minutes, obj.appLengthInMinutes + 60)
+                timeBlockArr.forEach(arr1 => {
+                    const alreadyPresent = appBookedBlocks.some(arr2 => arr1[0] === arr2[0] && arr1[1] === arr2[1])
+                    if (!alreadyPresent) appBookedBlocks.push(arr1)
                 })
-                let howManyBlocksToRemove = 0
-                if (matchingDates[l].appLengthInMinutes === 60){
-                    howManyBlocksToRemove = 2
-                } else if (matchingDates[l].appLengthInMinutes === 90){
-                    howManyBlocksToRemove = 3
-                } else if (matchingDates[l].appLengthInMinutes === 120){
-                    howManyBlocksToRemove = 4
-                }
-                generalTimesAvailableForSelectedDay.splice(foundIndexToRemove, howManyBlocksToRemove)
-            }
+            })
+            appBookedBlocks.forEach(arr1 => {
+                const foundIndexToRemove = generalTimesAvailableForSelectedDay.findIndex(arr2 => arr1[0] === arr2[0] && arr1[1] === arr2[1])
+                if (foundIndexToRemove !== -1) generalTimesAvailableForSelectedDay.splice(foundIndexToRemove, 1)
+            })
+            // compiles the list into selectable times based on clients desired length of appointment
             for (let n = 0; n < generalTimesAvailableForSelectedDay.length; n++){
                 const availableTimeBlock = generalTimesAvailableForSelectedDay[n]
                 const nextAvailableTimeBlock = generalTimesAvailableForSelectedDay[n + 1]
@@ -155,6 +155,7 @@ class PickTime extends Component {
                     }
                 }
             }
+            // puts all that information into a singular obj for displaying
             weekShowingArr.push({
                 year: dateSet.getFullYear(),
                 month: dateSet.getMonth(),
@@ -169,52 +170,115 @@ class PickTime extends Component {
         const newWeek = this.state.viewedWeek + num
         this.setState({ viewedWeek: newWeek }, () => this.gettingAvailability())
     }
+    editToggler = () => {
+        this.setState(prevState => ({
+            editToggle: !prevState.editToggle
+        }))
+    }
+    handleEdit = () => {
+        this.therapistInfo()
+        this.editToggler()
+    }
+    handlePackageAndSubmit = (year, month, date, hours, minutes) => {
+        const scheduleChoice = new Date(year, month, date, hours, minutes)
+        const listOfCurrentAppointments = []
+        const choiceTimes = this.createTimeBlocks(hours, minutes, parseInt(this.props.appLengthInMinutes))
+        // recall to get therapists appointments
 
 
-    componentDidMount(){
-        // get all therapists current appointments
-        const today = this.props.thisMoment()
-        const hour = today.getHours()
-        let weekToView = 1
-        if ( hour > 17 ) {
-            weekToView = 2
+
+
+        const appointmentToCheck = this.props.therapistAppointments.filter(obj => {
+            return obj.appDate.getFullYear() === year && obj.appDate.getMonth() === month && obj.appDate.getDate() === date
+        })
+        appointmentToCheck.forEach(obj => {
+            const timeBlockArr = this.createTimeBlocks(obj.appDate.getHours(), obj.appDate.getMinutes(), obj.appLengthInMinutes)
+            timeBlockArr.forEach(arr => listOfCurrentAppointments.push(arr))
+        })
+        let isPresent = false
+        choiceTimes.forEach(arr1 => {
+            isPresent = listOfCurrentAppointments.some(arr2 => {
+                return arr1[0] === arr2[0] && arr1[1] === arr2[1]
+            })
+        })
+        if (isPresent) {
+            alert("That time is no longer available! Please select another time... ");
+            this.gettingAvailability()
+        } else {
+            this.props.postNewAppointment(scheduleChoice)
         }
-        if(this.props.therapistID === "") this.props.history.push("/book")
-        const selectedTherapist = this.props.therapists.find(therapist => therapist._id = this.props.therapistID)
+    }
+    createTimeBlocks = (hours, minutes, length) => {
+        const timeBlocks = []
+        const appLength = length / 30
+        let halfHourStart = 0
+        let min1 = 0
+        let min2 = 30
+        if (minutes === 30){
+            min1 = 30;
+            min2 = 0;
+            halfHourStart = 1;
+        }
+        for (let i = 0; i < appLength; i++){
+            let hourAdj = 0
+            if (halfHourStart === 0){
+                if (i === 2 || i === 3){
+                    hourAdj = 1
+                } else if (i === 4 || i === 5){
+                    hourAdj = 2
+                }
+            } else {
+                if (i === 1 || i === 2){
+                    hourAdj = 1
+                }   else if (i === 3 || i === 4){
+                    hourAdj = 2
+                } else if (i === 5){
+                    hourAdj = 3
+                }
+            }
+            if (i % 2 === 0){
+                timeBlocks.push([hours + hourAdj, min1])
+            } else {
+                timeBlocks.push([hours + hourAdj, min2])
+            }
+        }
+        return timeBlocks
+    }
+
+    therapistInfo = () => {
+        // call to get therapist appointments
+
+
+
+
+        const selectedTherapist = this.props.therapists.find(therapist => therapist._id === this.props.therapistID)
         this.props.handleNameIDAdd(
             this.props.user._id, 
             `${this.props.user.firstName} ${this.props.user.lastName}`, 
             `${selectedTherapist.firstName} ${selectedTherapist.lastName}`
         )
-        this.setState({ 
-            selected: selectedTherapist, 
-            viewedWeek: weekToView
-        }, () => this.gettingAvailability())
+        this.setState({ selected: selectedTherapist }, () => this.gettingAvailability())
+    }
+    componentDidMount(){
+        const today = this.props.thisMoment()
+        const hour = today.getHours()
+        let weekToView = 1
+        if ( hour > 17 ) weekToView = 2
+        if(this.props.therapistID === "") this.props.history.push("/book")
+        this.setState({ viewedWeek: weekToView }, () =>  this.therapistInfo())
     }
     render(){
-        const { appLengthInMinutes, therapistName } = this.props
-        const mappedAvailability = this.state.weekShowing.map((dayObj, i) => {
-            // create new component for displaying all this fucking info
-        })
-        console.log(this.state.weekShowing)
         return(
             <div>
-                <div>
-                    <p>Therapist: {therapistName}</p>
-                    <p>{appLengthInMinutes} Minutes</p>
-                </div>
-                <div>
-                    {this.state.viewedWeek < 6 ?
-                    null
-                    :
-                    <span onClick={() => {this.newWeek(-7)}}>{"<<<"}</span>}
-                    {this.state.viewedWeek > 90 ?
-                    null
-                    :
-                    <span onClick={() => {this.newWeek(7)}}>{">>>"}</span>}
-                    
-                </div>
-                {mappedAvailability}
+                <ChoiceDisplay  
+                    handleEdit={this.handleEdit} 
+                    therapistName={this.props.therapistName} 
+                    appLengthInMinutes={this.props.appLengthInMinutes} 
+                    editToggler={this.editToggler} 
+                    editToggle={this.state.editToggle} 
+                    viewedWeek={this.state.viewedWeek} 
+                    newWeek={this.newWeek}/>
+                <AvailableAppointments appointmentsArr={this.state.weekShowing} handlePackageAndSubmit={this.handlePackageAndSubmit}/> 
             </div> 
         )
     }

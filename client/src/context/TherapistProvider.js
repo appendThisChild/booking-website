@@ -15,7 +15,17 @@ class TherapistProvider extends Component {
     constructor(){
         super()
         this.state = {
-            therapists: []
+            therapists: [],
+            therapistAppointments: [{
+                appDate: new Date(2019, 8, 18, 10, 30),
+                appLengthInMinutes: 120
+            },{
+                appDate: new Date(2019, 8, 18, 9, 0),
+                appLengthInMinutes: 60
+            },{
+                appDate: new Date(2019, 8, 17, 11, 30),
+                appLengthInMinutes: 90
+            }]
         }
     }
     getAllTherapists = () => {
@@ -24,6 +34,12 @@ class TherapistProvider extends Component {
                 this.setState({ therapists: res.data })
             })
             .catch(err => console.log(err.response.data.errMsg))
+    }
+    getAllAppointmentsForSelectedTherapist = () => {
+        // get the appointments by therapist ID 
+        // check if canceled and remove from list
+        // check if payment pending and past 10 minutes and removed from list and delete
+        // 
     }
     render(){
         return(
