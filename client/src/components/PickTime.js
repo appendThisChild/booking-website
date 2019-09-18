@@ -25,7 +25,7 @@ class PickTime extends Component {
         const therapist = this.state.selected
         // looks at all the data for that specific day
         for (let i = this.state.viewedWeek; i < this.state.viewedWeek + 7; i++){
-            const newDate = this.props.thisMoment()
+            const newDate = new Date()
             const dateSet = new Date(newDate.setDate(newDate.getDate() + i))
             this.props.therapistAppointments.map(obj => obj.appDate = new Date(obj.appDate))
             const matchingDates = this.props.therapistAppointments.filter(obj => {
@@ -186,8 +186,7 @@ class PickTime extends Component {
     }
     componentDidMount(){
         if(this.props.therapistID === "") this.props.history.push("/book")
-        const today = this.props.thisMoment()
-        const hour = today.getHours()
+        const hour = new Date().getHours()
         let weekToView = 1
         if ( hour > 17 ) weekToView = 2
         this.setState({ viewedWeek: weekToView }, () =>  this.therapistInfo())

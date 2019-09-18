@@ -57,6 +57,10 @@ const userSchema = new Schema({
             state: "",
             zipcode: ""
         }
+    },
+    phoneNumber: {
+        type: Number,
+        default: 1111111111
     }
 })
 

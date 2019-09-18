@@ -13,7 +13,32 @@ appointmentRouter.route('/')
             return res.status(201).send(newAppointmentObj)
         })
     })
-
+appointmentRouter.route('/:id')
+    .get((req, res, next) => {
+        Appointment.find({
+            clientID: req.params.id,
+            status: "Paid"
+        }, 
+            (err, foundAppointments) => {
+            if (err){
+                res.status(500)
+                return next(err)
+            }
+            // foundAppointments.forEach(app => {
+            //     app.appointmentCreatedAt = null
+            //     app.canceled = null
+            //     app.clientID = null
+            //     app.clientName = null
+            //     app.status = null
+            //     app.therapistID = null
+            //     app.therapistName = null
+            //     app.amount = null
+            //     app.address = null
+            //     app.packageChoice = null
+            // })
+            return res.status(200).send(foundAppointments)
+        })
+    })
 // appointmentRouter.route('/:_id')
 //     .put((req, res, next) => {
 //         Appointment.findOneAndUpdate(

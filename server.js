@@ -13,22 +13,23 @@ const PORT = process.env.PORT || 6350
 app.use(express.json())
 app.use(morgan('dev'))
 app.use("/api", expressJwt({secret: process.env.SECRET}))
-app.use("/api/owner", (req, res, next) => {
-    checkIfOwner(req, res, next)
-})
-app.use("/api/therapist", (req, res, next) => {
-    checkIfTherapist(req, res, next)
-})
+app.use("/api/owner", (req, res, next) => checkIfOwner(req, res, next))
+app.use("/api/therapist", (req, res, next) => checkIfTherapist(req, res, next))
 
 mongoose.connect('mongodb://localhost:27017/matthew-sweetness', {useNewUrlParser: true}, () => {
     console.log('[o] Connected to the DB')
 })
 
 app.use("/auth", require('./routes/authRoutes.js'))
+// profile updates 
+
 app.use("/therapists", require('./routes/therapistsRoutes.js'))
 app.use("/api/therapists", require('./routes/apiTherapistRoutes.js'))
-app.use("/api/owner/appointment", require('./routes/appointmentOwnerRoutes.js'))
+
 app.use("/api/appointment", require('./routes/appointmentRoutes.js'))
+
+app.use("/api/owner/appointment", require('./routes/appointmentOwnerRoutes.js'))
+
 
 app.use((err, req, res, next) => {
     console.log(err)

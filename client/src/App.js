@@ -47,20 +47,42 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" render={renderProps => <Home {...renderProps}/>}/>
                     <Route path="/book" render={renderProps => <Book {...renderProps}/>}/>
-                        <Route path="/pickTime" render={renderProps => (
-                            token 
-                            ? <PickTime {...renderProps}/>
-                            : <SignIn {...renderProps}/>
-                        )}/>
-                            <Route path="/selectPackageAndSubmit" render={renderProps => <PackageAndSubmit {...renderProps}/>}/>
-                                <Route path="/appointmentBooked" render={renderProps => <AppointmentBooked {...renderProps}/>}/>
+                    <Route path="/pickTime" render={renderProps => (
+                        token 
+                        ? <PickTime {...renderProps}/>
+                        : <SignIn {...renderProps}/>
+                    )}/>
+                    <Route path="/selectPackageAndSubmit" render={renderProps => <PackageAndSubmit {...renderProps}/>}/>
+                    <Route path="/appointmentBooked" render={renderProps => <AppointmentBooked {...renderProps}/>}/>
                     <Route path="/contact" render={renderProps => <Contact {...renderProps}/>}/>
-                    <Route path="/user" render={renderProps => (
+                    <Route path="/profile" render={renderProps => (
                         token
                         ? <Profile {...renderProps}/>
                         : <SignIn {...renderProps}/>
                     )}/>
-
+                        {/* Personal Info */}
+                        {/* All the info attached to that user account */}
+                        {/* Ability to edit information */}
+                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
+                        {/* History */}
+                        {/* All of the appointments for that user */}
+                        {/* Split past and current */}
+                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
+                        {/* Selcting Appointment from history */}
+                        {/* Look at all the info for that specific appointment */}
+                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
+                        {/*  */}
+                        {/*  */}
+                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
+                        {/*  */}
+                        {/*  */}
+                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
+                        {/*  */}
+                        {/*  */}
+                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
+                        {/*  */}
+                        {/*  */}
+                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
                 </Switch>
                 <Footer />
             </div>

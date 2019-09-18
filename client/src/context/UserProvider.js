@@ -75,6 +75,11 @@ class UserProvider extends Component {
         const finalStr = str.charAt(0).toUpperCase() + str.substr(1, str.length - 1)
         return finalStr
     }
+    inputLowercaseNospace = str => {
+        const strPhase1 = str.trim()
+        const strFinal = strPhase1.toLowerCase()
+        return strFinal
+    }
     render(){
         return(
             <UserContext.Provider
@@ -85,7 +90,8 @@ class UserProvider extends Component {
                     logout: this.logout,
                     makingAppointment: this.makingAppointment,
                     appointmentSubmitted: this.appointmentSubmitted,
-                    firstCharCap: this.firstCharCap
+                    firstCharCap: this.firstCharCap,
+                    inputLowercaseNospace: this.inputLowercaseNospace
                 }}>
                 {this.props.children}
             </UserContext.Provider>

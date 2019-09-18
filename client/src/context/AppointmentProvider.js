@@ -39,6 +39,12 @@ class AppointmentProvider extends Component {
             .then( res => this.setState({ ownerAppointments: res.data }))
             .catch(err => console.log(err.response.data.errMsg))
     }
+    getAllClientAppointments = () => {
+        
+    }
+    getAllTherapistAppointments = () => {
+
+    }
     postNewAppointment = date => {
         this.setState({ appDate: date }, () => {
             const newAppointment = {
@@ -71,11 +77,6 @@ class AppointmentProvider extends Component {
 
     }
     handleNameIDAdd = (clientID, clientName, therapistName, address) => {
-        // add the address values 
-
-
-
-
         this.setState({
             clientID: clientID,
             clientName: clientName,
@@ -87,24 +88,6 @@ class AppointmentProvider extends Component {
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
         this.setState({ [e.target.name] : value })
     }
-    thisMoment = () => {
-        const thisMoment = new Date()
-        const thisMomentInYear = thisMoment.getFullYear()
-        const thisMomentInMonth = thisMoment.getMonth()
-        const thisMomentInDate = thisMoment.getDate()
-        const thisMomentInMountainTime = new Date(thisMoment.setHours(thisMoment.getUTCHours() - (7 + this.dST(thisMoment))))
-        if (thisMomentInMountainTime.getDate() < thisMomentInDate) {
-            thisMomentInMountainTime.setFullYear(thisMomentInYear, thisMomentInMonth, thisMomentInDate)
-        }
-        return thisMomentInMountainTime
-    }
-    dST = today => {
-        const jan = new Date(today.getFullYear(), 0, 1)
-        const jul = new Date(today.getFullYear(), 6, 1)
-        const dST = today.getTimezoneOffset() - Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset())
-        return dST / 60
-    }
-
     render(){
         return(
             <AppointmentContext.Provider
