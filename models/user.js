@@ -37,61 +37,26 @@ const userSchema = new Schema({
         type: Number,
         default: 0
     },
-    availabilitySundayHourStart: {
-        type: Number,
-        default: 0
+    availability: {
+        type: Array,
+        default: [
+            [0,0],
+            [9,17],
+            [9,17],
+            [9,17],
+            [9,17],
+            [9,17],
+            [0,0]
+        ]
     },
-    availabilitySundayHourEnd: {
-        type: Number,
-        default: 0
-    },
-    availabilityMondayHourStart: {
-        type: Number,
-        default: 9
-    },
-    availabilityMondayHourEnd: {
-        type: Number,
-        default: 17
-    },
-    availabilityTuesdayHourStart: {
-        type: Number,
-        default: 9
-    },
-    availabilityTuesdayHourEnd: {
-        type: Number,
-        default: 17
-    },
-    availabilityWednesdayHourStart: {
-        type: Number,
-        default: 9
-    },
-    availabilityWednesdayHourEnd: {
-        type: Number,
-        default: 17
-    },
-    availabilityThursdayHourStart: {
-        type: Number,
-        default: 9
-    },
-    availabilityThursdayHourEnd: {
-        type: Number,
-        default: 17
-    },
-    availabilityFridayHourStart: {
-        type: Number,
-        default: 9
-    },
-    availabilityFridayHourEnd: {
-        type: Number,
-        default: 17
-    },
-    availabilitySaturdayHourStart: {
-        type: Number,
-        default: 0
-    },
-    availabilitySaturdayHourEnd: {
-        type: Number,
-        default: 0
+    address: {
+        type: Object,
+        default: {
+            street: "",
+            city: "",
+            state: "",
+            zipcode: ""
+        }
     }
 })
 

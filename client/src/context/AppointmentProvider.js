@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import axios from "axios"
+import { withRouter } from 'react-router-dom'
 
 const AppointmentContext = React.createContext()
 
@@ -18,7 +19,7 @@ class AppointmentProvider extends Component {
             ownerAppointments: [],
             therAppointments: [],
             clientAppointments: [],
-            currentAppointmentInProgress: {},
+            currentAppointmentInProgress: "",
             appLengths: [60, 90, 120],
             clientID: "",
             clientName: "",
@@ -27,9 +28,6 @@ class AppointmentProvider extends Component {
             therapistID: "",
             therapistName: "",
             address: "",
-            city: "",
-            state: "",
-            zipcode: "",
             packageChoice: "",
             canceled: false,
             status: "",
@@ -38,16 +36,32 @@ class AppointmentProvider extends Component {
     }
     getAllAppointments = () => {
         dataAxios.get("/api/owner/appointment")
-            .then( res => {
-                this.setState({ ownerAppointments: res.data })
-            })
+            .then( res => this.setState({ ownerAppointments: res.data }))
             .catch(err => console.log(err.response.data.errMsg))
     }
     postNewAppointment = date => {
         this.setState({ appDate: date }, () => {
-            console.log(this.state)
-            // create appointment obj
-            // push to next page PackageAndSubmit.js
+            const newAppointment = {
+                clientID: this.state.clientID,
+                clientName: this.state.clientName,
+                appLengthInMinutes: this.state.appLengthInMinutes,
+                appDate: this.state.appDate,
+                therapistID: this.state.therapistID,
+                therapistName: this.state.therapistName,
+                address: this.state.address
+            }
+            dataAxios.post("/api/appointment", newAppointment)
+                .then(res => this.setState({ currentAppointmentInProgress: res.data }, () => this.props.history.push("/selectPackageAndSubmit")))
+                .catch(err => console.log(err.response.data.errMsg))
+            this.setState({
+                clientID: "",
+                clientName: "",
+                appLengthInMinutes: "",
+                appDate: "",
+                therapistID: "",
+                therapistName: "",
+                address: ""
+            })
         })
     }
     updateAppointment = () => {
@@ -56,11 +70,17 @@ class AppointmentProvider extends Component {
     deleteAppointment = () => {
 
     }
-    handleNameIDAdd = (clientID, clientName, therapistName) => {
+    handleNameIDAdd = (clientID, clientName, therapistName, address) => {
+        // add the address values 
+
+
+
+
         this.setState({
             clientID: clientID,
             clientName: clientName,
-            therapistName: therapistName
+            therapistName: therapistName,
+            address: address
         })
     }
     handleChange = e => {
@@ -104,7 +124,7 @@ class AppointmentProvider extends Component {
     }
 }
 
-export default AppointmentProvider;
+export default withRouter(AppointmentProvider);
 
 export const withAppointment = C => props => (
     <AppointmentContext.Consumer>

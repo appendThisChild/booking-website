@@ -27,19 +27,7 @@ const appointmentSchema = new Schema({
         required: true
     },
     address: {
-        type: String,
-        required: true
-    },
-    city: {
-        type: String,
-        required: true
-    },
-    state: {
-        type: String,
-        required: true
-    },
-    zipcode: {
-        type: Number,
+        type: Object,
         required: true
     },
     packageChoice: {

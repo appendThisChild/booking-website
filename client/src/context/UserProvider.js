@@ -71,7 +71,10 @@ class UserProvider extends Component {
             makingAppointment: false
         }))
     }
-
+    firstCharCap = str => {
+        const finalStr = str.charAt(0).toUpperCase() + str.substr(1, str.length - 1)
+        return finalStr
+    }
     render(){
         return(
             <UserContext.Provider
@@ -81,7 +84,8 @@ class UserProvider extends Component {
                     login: this.login,
                     logout: this.logout,
                     makingAppointment: this.makingAppointment,
-                    appointmentSubmitted: this.appointmentSubmitted
+                    appointmentSubmitted: this.appointmentSubmitted,
+                    firstCharCap: this.firstCharCap
                 }}>
                 {this.props.children}
             </UserContext.Provider>

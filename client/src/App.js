@@ -52,7 +52,7 @@ class App extends Component {
                             ? <PickTime {...renderProps}/>
                             : <SignIn {...renderProps}/>
                         )}/>
-                            <Route path="/selectPackageAndSumbit" render={renderProps => <PackageAndSubmit {...renderProps}/>}/>
+                            <Route path="/selectPackageAndSubmit" render={renderProps => <PackageAndSubmit {...renderProps}/>}/>
                                 <Route path="/appointmentBooked" render={renderProps => <AppointmentBooked {...renderProps}/>}/>
                     <Route path="/contact" render={renderProps => <Contact {...renderProps}/>}/>
                     <Route path="/user" render={renderProps => (

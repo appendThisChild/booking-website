@@ -16,37 +16,26 @@ class TherapistProvider extends Component {
         super()
         this.state = {
             therapists: [],
-            therapistAppointments: [{
-                appDate: new Date(2019, 8, 18, 10, 30),
-                appLengthInMinutes: 120
-            },{
-                appDate: new Date(2019, 8, 18, 9, 0),
-                appLengthInMinutes: 60
-            },{
-                appDate: new Date(2019, 8, 17, 11, 30),
-                appLengthInMinutes: 90
-            }]
+            therapistAppointments: []
         }
     }
     getAllTherapists = () => {
         dataAxios.get("/therapists")
-            .then(res => {
-                this.setState({ therapists: res.data })
-            })
+            .then(res => this.setState({ therapists: res.data }))
             .catch(err => console.log(err.response.data.errMsg))
     }
-    getAllAppointmentsForSelectedTherapist = () => {
-        // get the appointments by therapist ID 
-        // check if canceled and remove from list
-        // check if payment pending and past 10 minutes and removed from list and delete
-        // 
+    getAllAppointmentsForSelectedTherapist = (id, callback) => {
+        dataAxios.get(`/api/therapists/${id}`)
+            .then(res => this.setState({ therapistAppointments: res.data }, () => callback()))
+            .catch(err => console.log(err.response.data.errMsg))
     }
     render(){
         return(
             <TherapistContext.Provider
                 value={{
                     ...this.state,
-                    getAllTherapists: this.getAllTherapists
+                    getAllTherapists: this.getAllTherapists,
+                    getAllAppointmentsForSelectedTherapist: this.getAllAppointmentsForSelectedTherapist
                 }}>
                 {this.props.children}
             </TherapistContext.Provider>

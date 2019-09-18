@@ -2,17 +2,26 @@ const express = require('express')
 const appointmentRouter = express.Router()
 const Appointment = require('../models/appointment.js')
 
-appointmentRouter.route('/')
-    .post((req, res, next) => {
-        const newAppointment = new Appointment(req.body)
-        newAppointment.save((err, newAppointmentObj) => {
-            if (err){
-                res.status(500)
-                return next(err)
-            }
-            return res.status(201).send(newAppointmentObj)
-        })
-    })
+// appointmentRouter.route('/')
+//     .get((req, res, next) => {
+//         Appointment.find((err, appointments) => {
+//             if (err){
+//                 res.status(500)
+//                 return next(err)
+//             }
+//             return res.status(200).send(appointments)
+//         })
+//     })
+//     .post((req, res, next) => {
+//         const newAppointment = new Appointment(req.body)
+//         newAppointment.save((err, newAppointmentObj) => {
+//             if (err){
+//                 res.status(500)
+//                 return next(err)
+//             }
+//             return res.status(201).send(newAppointmentObj)
+//         })
+//     })
 
 // appointmentRouter.route('/:_id')
 //     .put((req, res, next) => {

@@ -26,7 +26,9 @@ mongoose.connect('mongodb://localhost:27017/matthew-sweetness', {useNewUrlParser
 
 app.use("/auth", require('./routes/authRoutes.js'))
 app.use("/therapists", require('./routes/therapistsRoutes.js'))
-app.use("/api/owner/appointment", require('./routes/appointmentRoutes.js'))
+app.use("/api/therapists", require('./routes/apiTherapistRoutes.js'))
+app.use("/api/owner/appointment", require('./routes/appointmentOwnerRoutes.js'))
+app.use("/api/appointment", require('./routes/appointmentRoutes.js'))
 
 app.use((err, req, res, next) => {
     console.log(err)

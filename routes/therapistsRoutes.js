@@ -1,7 +1,6 @@
 const express = require('express')
 const User = require('../models/user.js')
 const therapistRouter = express.Router()
-const jwt = require('jsonwebtoken')
 
 therapistRouter.get("/", (req, res, next) => {
     User.find({isTherapist: true}, (err, users) => {

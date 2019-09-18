@@ -38,8 +38,8 @@ class SignIn extends Component {
     handleSignupSubmit = e => {
         e.preventDefault()
         const credentials = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
+            firstName: this.inputLowercaseNospace(this.state.firstName),
+            lastName: this.inputLowercaseNospace(this.state.lastName),
             email: this.state.email,
             password: this.state.password
         }
@@ -50,6 +50,11 @@ class SignIn extends Component {
             email: "",
             password: ""
         })
+    }
+    inputLowercaseNospace = str => {
+        const strPhase1 = str.trim()
+        const strFinal = strPhase1.toLowerCase()
+        return strFinal
     }
     render(){
         return(
