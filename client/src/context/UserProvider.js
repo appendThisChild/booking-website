@@ -27,7 +27,7 @@ class UserProvider extends Component {
                     if(this.state.makingAppointment){
                         this.props.history.push('/pickTime')
                     } else {
-                        this.props.history.push('/user')
+                        this.props.history.push('/history')
                     }
                 })
             })
@@ -46,12 +46,13 @@ class UserProvider extends Component {
                     if(this.state.makingAppointment){
                         this.props.history.push("/pickTime")
                     } else {
-                        this.props.history.push("/user") 
+                        this.props.history.push("/history") 
                     }
                 })
             })
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
+    
     logout = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("user")

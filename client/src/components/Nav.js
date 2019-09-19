@@ -19,7 +19,7 @@ const Nav = props => {
                 <Link to="/">Home</Link>
                 <Link to="/book">Book a Massage</Link>
                 <Link to="/contact">Contact</Link>
-                <Link to="/profile">{signInLinkName}</Link>
+                <Link to="/history">{signInLinkName}</Link>
                 {signOut}
             </div>
         </div>

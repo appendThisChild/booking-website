@@ -1,12 +1,11 @@
 import React, { Component } from "react"
 
-// import Appointment from "./Appointment.js"
 import ProfileNav from "./ProfileNav.js"
 
 import { withUser } from "../context/UserProvider.js"
 import { withAppointment } from "../context/AppointmentProvider.js"
 
-class Profile extends Component {
+class PersonalInfo extends Component {
     constructor(){
         super()
         this.state = {
@@ -21,11 +20,13 @@ class Profile extends Component {
         return(
             <div>
                 <ProfileNav />
-                {/* Have upcoming appointments as client be on the main page */}
-
+                Peronsal Info
+                    {/* All the info attached to that user account */}
+                    {/* Ability to edit information */}
+                    
             </div>
         )
     }
 }
 
-export default withAppointment(withUser(Profile));
+export default withAppointment(withUser(PersonalInfo));

@@ -24,18 +24,6 @@ appointmentRouter.route('/:id')
                 res.status(500)
                 return next(err)
             }
-            // foundAppointments.forEach(app => {
-            //     app.appointmentCreatedAt = null
-            //     app.canceled = null
-            //     app.clientID = null
-            //     app.clientName = null
-            //     app.status = null
-            //     app.therapistID = null
-            //     app.therapistName = null
-            //     app.amount = null
-            //     app.address = null
-            //     app.packageChoice = null
-            // })
             return res.status(200).send(foundAppointments)
         })
     })

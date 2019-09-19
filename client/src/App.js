@@ -13,7 +13,10 @@ import PackageAndSubmit from "./components/PackageAndSubmit.js"
 import AppointmentBooked from "./components/AppointmentBooked.js"
 import Contact from "./components/Contact.js"
 import SignIn from "./components/SignIn.js"
-import Profile from "./components/Profile.js"
+import History from "./components/History.js"
+import PersonalInfo from "./components/PersonalInfo.js"
+import TherapistHistory from "./components/TherapistHistory.js"
+import CompanyHistory from "./components/CompanyHistory.js"
 import Footer from "./components/Footer.js"
 
 
@@ -55,34 +58,14 @@ class App extends Component {
                     <Route path="/selectPackageAndSubmit" render={renderProps => <PackageAndSubmit {...renderProps}/>}/>
                     <Route path="/appointmentBooked" render={renderProps => <AppointmentBooked {...renderProps}/>}/>
                     <Route path="/contact" render={renderProps => <Contact {...renderProps}/>}/>
-                    <Route path="/profile" render={renderProps => (
+                    <Route path="/history" render={renderProps => (
                         token
-                        ? <Profile {...renderProps}/>
+                        ? <History {...renderProps}/>
                         : <SignIn {...renderProps}/>
                     )}/>
-                        {/* Personal Info */}
-                        {/* All the info attached to that user account */}
-                        {/* Ability to edit information */}
-                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
-                        {/* History */}
-                        {/* All of the appointments for that user */}
-                        {/* Split past and current */}
-                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
-                        {/* Selcting Appointment from history */}
-                        {/* Look at all the info for that specific appointment */}
-                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
-                        {/*  */}
-                        {/*  */}
-                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
-                        {/*  */}
-                        {/*  */}
-                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
-                        {/*  */}
-                        {/*  */}
-                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
-                        {/*  */}
-                        {/*  */}
-                        {/* <Route path="/" render={renderProps => <Home {...renderProps}/>}/>  */}
+                    <Route path="/personalInfo" render={renderProps => <PersonalInfo {...renderProps}/>}/>
+                    <Route path="/therapistHistory" render={renderProps => <TherapistHistory {...renderProps}/>}/> 
+                    <Route path="/companyHistory" render={renderProps => <CompanyHistory {...renderProps}/>}/> 
                 </Switch>
                 <Footer />
             </div>

@@ -16,7 +16,7 @@ class AppointmentProvider extends Component {
     constructor(){
         super()
         this.state = {
-            ownerAppointments: [],
+            companyAppointments: [],
             therAppointments: [],
             clientAppointments: [],
             currentAppointmentInProgress: "",
@@ -34,16 +34,24 @@ class AppointmentProvider extends Component {
             amount: ""
         }
     }
-    getAllAppointments = () => {
+    getAllCompanyAppointments = callback => {
+        // filter out delete old appointments
+
+
+
         dataAxios.get("/api/owner/appointment")
-            .then( res => this.setState({ ownerAppointments: res.data }))
+            .then( res => this.setState({ companyAppointments: res.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
-    getAllClientAppointments = () => {
-        
+    getAllClientAppointments = (id, callback) => {
+        dataAxios.get(`/api/appointment/${id}`)
+            .then( res => this.setState({ clientAppointments: res.data }, () => callback()))
+            .catch(err => console.log(err.response.data.errMsg))
     }
-    getAllTherapistAppointments = () => {
-
+    getAllTherapistAppointments = (id, callback) => {
+        dataAxios.get(`/api/therapist/appointment/${id}`)
+            .then( res => this.setState({ therAppointments: res.data }, () => callback()))
+            .catch(err => console.log(err.response.data.errMsg))
     }
     postNewAppointment = date => {
         this.setState({ appDate: date }, () => {
@@ -88,18 +96,28 @@ class AppointmentProvider extends Component {
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
         this.setState({ [e.target.name] : value })
     }
+    orderAppointments = appointments => {
+        const today = new Date()
+        const past = appointments.filter(obj => new Date(obj.appDate) < today )
+        const present = appointments.filter(obj => new Date(obj.appDate) > today )
+        past.sort((app1, app2) => new Date(app2.appDate) - new Date(app1.appDate))
+        present.sort((app1, app2) => new Date(app1.appDate) - new Date(app2.appDate))
+        return [past, present]
+    }
     render(){
         return(
             <AppointmentContext.Provider
                 value={{
                     ...this.state,
-                    getAllAppointments: this.getAllAppointments,
+                    getAllCompanyAppointments: this.getAllCompanyAppointments,
+                    getAllClientAppointments: this.getAllClientAppointments,
+                    getAllTherapistAppointments: this.getAllTherapistAppointments,
                     postNewAppointment: this.postNewAppointment,
                     updateAppointment: this.updateAppointment,
                     deleteAppointment: this.deleteAppointment,
                     handleChange: this.handleChange,
                     handleNameIDAdd: this.handleNameIDAdd,
-                    thisMoment: this.thisMoment
+                    orderAppointments: this.orderAppointments
                 }}>
                 {this.props.children}
             </AppointmentContext.Provider>

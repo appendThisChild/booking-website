@@ -4,16 +4,22 @@ import { Link } from "react-router-dom"
 import { withUser } from "../context/UserProvider.js"
 
 const ProfileNav = props => {
-
-    // get the user info for links
-
-
-    const mappedLinks = props.links.map((link, i) => 
-        <Link to={`/${link}`} key={i}>{props.firstCharCap(link)}</Link>
+    const { user } = props
+    const links = ["/history", "/personalInfo"]
+    const linkName = ["Your History", "Personal Information"]
+    if (user.isTherapist){
+        links.push("/therapistHistory")
+        linkName.push("Your Therapist History")
+    }
+    if (user.isOwner){
+        links.push("/companyHistory")
+        linkName.push("Company History")
+    }
+    const mappedLinks = links.map((link, i) => 
+        <Link to={`${link}`} key={i}>{linkName[i]}</Link>
     )
     return(
         <div>
-            Nav
             {mappedLinks}
         </div>
     )

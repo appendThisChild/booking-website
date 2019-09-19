@@ -1,10 +1,13 @@
 const express = require('express')
-const appointmentOwnerRouter = express.Router()
+const appointmentTherapistRouter = express.Router()
 const Appointment = require('../models/appointment.js')
 
-appointmentOwnerRouter.route('/')
+appointmentTherapistRouter.route('/:id')
     .get((req, res, next) => {
-        Appointment.find((err, foundAppointments) => {
+        Appointment.find({
+            therapistID: req.params.id
+        },
+            (err, foundAppointments) => {
             if (err){
                 res.status(500)
                 return next(err)
@@ -13,4 +16,4 @@ appointmentOwnerRouter.route('/')
         })
     })
 
-module.exports = appointmentOwnerRouter;
+module.exports = appointmentTherapistRouter;

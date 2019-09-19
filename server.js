@@ -5,7 +5,6 @@ require('dotenv').config()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const expressJwt = require('express-jwt')
-// check if owner when making changes
 const { checkIfOwner, checkIfTherapist } = require("./utils/app.js")
 const PORT = process.env.PORT || 6350
 
@@ -21,13 +20,16 @@ mongoose.connect('mongodb://localhost:27017/matthew-sweetness', {useNewUrlParser
 })
 
 app.use("/auth", require('./routes/authRoutes.js'))
-// profile updates 
+// personal info portal
 
+// booking structure portals
 app.use("/therapists", require('./routes/therapistsRoutes.js'))
 app.use("/api/therapists", require('./routes/apiTherapistRoutes.js'))
-
+// client portal
 app.use("/api/appointment", require('./routes/appointmentRoutes.js'))
-
+// therapist portal
+app.use("/api/therapist/appointment", require('./routes/appointmentTherapistRoutes'))
+// owner portal
 app.use("/api/owner/appointment", require('./routes/appointmentOwnerRoutes.js'))
 
 
