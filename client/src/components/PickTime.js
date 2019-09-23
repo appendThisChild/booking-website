@@ -33,8 +33,8 @@ class PickTime extends Component {
                 return objDate.getFullYear() === dateSet.getFullYear() && objDate.getMonth() === dateSet.getMonth() && objDate.getDate() === dateSet.getDate()
             })
             const generalTimesAvailableForSelectedDay = []
-            const startTime = therapist.availability[dateSet.getDay()][0]
-            const endTime = therapist.availability[dateSet.getDay()][1]
+            const startTime = therapist.availability[dateSet.getDay()][0] / 10
+            const endTime = therapist.availability[dateSet.getDay()][1] / 10
             const timesAvailableForThisDayGivenDesiredLength = []
             // creates a list of available half hour time blocks based on selected therapist's preference
             let newTime = startTime
@@ -180,6 +180,11 @@ class PickTime extends Component {
             `${this.props.firstCharCap(this.props.user.firstName)} ${this.props.firstCharCap(this.props.user.lastName)}`, 
             `${this.props.firstCharCap(selectedTherapist.firstName)} ${this.props.firstCharCap(selectedTherapist.lastName)}`,
             selectedTherapist.address
+            // adding numbers for client and therapist
+
+
+
+            
         )
         this.setState({ selected: selectedTherapist }, () => this.gettingAvailability())
         })

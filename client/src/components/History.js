@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
-// import Appointment from "./Appointment.js"
 import ProfileNav from "./ProfileNav.js"
+import AppointmentHistory from "./AppointmentHistory.js"
 
 import { withUser } from "../context/UserProvider.js"
 import { withAppointment } from "../context/AppointmentProvider.js"
@@ -44,7 +44,6 @@ class History extends Component {
     }
     switchPastMonth = (num) => {
         const { pastMonth } = this.state
-
         if (num === 1 && pastMonth === 11){
             this.setState(prevState => ({
                 pastYear: prevState.pastYear + 1,
@@ -72,15 +71,38 @@ class History extends Component {
     }
 
     render(){
-        // const { upcomingAppointments, pastAppointments } = this.state
+        const { upcomingAppointments, pastAppointments, dataIn, presentMonth, pastMonth, presentYear, pastYear, presentToggle, pastToggle } = this.state
+        const { switchPastMonth, switchPresentMonth } = this
         return(
             <div>
-                History
-                    {/* All of the appointments for that user */}
-                    {/* Split past and current */}
-                    {/* How many appointments remaining */}
                 <ProfileNav />
-                
+                {dataIn ?
+                <>
+                    <AppointmentHistory 
+                        history={upcomingAppointments} 
+                        title={"Upcoming Appointments"} 
+                        subTitle={"New to Newest"} 
+                        future={true}
+                        client={true}
+                        owner={false}
+                        month={presentMonth} 
+                        year={presentYear} 
+                        toggle={presentToggle}
+                        switchMonth={switchPresentMonth}/>
+                    <AppointmentHistory 
+                        history={pastAppointments} 
+                        title={"Past Appointments"} 
+                        subTitle={"Old to Oldest"} 
+                        future={false}
+                        client={true}
+                        owner={false} 
+                        month={pastMonth} 
+                        year={pastYear} 
+                        toggle={pastToggle}
+                        switchMonth={switchPastMonth}/>
+                </>
+                : null
+                }
             </div>
         )
     }

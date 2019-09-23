@@ -52,7 +52,7 @@ class UserProvider extends Component {
             })
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
-    
+
     logout = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("user")
@@ -81,6 +81,26 @@ class UserProvider extends Component {
         const strFinal = strPhase1.toLowerCase()
         return strFinal
     }
+    numberDisplay = phoneNumber => {
+        const phoneString = []
+        const phoneArr = phoneNumber.toString().split("").reverse()
+        phoneArr.forEach((num, i) => {
+            if (i === 4){
+                phoneString.unshift("-")
+            } else if (i === 7){
+                phoneString.unshift(")", " ")
+            } else if (i === 10){
+                phoneString.unshift(" ")
+            }
+            phoneString.unshift(num)
+            if (i === 9){
+                phoneString.unshift("(")
+            } else if (i === phoneArr.length - 1 && i > 9){
+                phoneString.unshift("+")
+            }
+        })
+        return phoneString.join("")
+    }
     render(){
         return(
             <UserContext.Provider
@@ -92,7 +112,8 @@ class UserProvider extends Component {
                     makingAppointment: this.makingAppointment,
                     appointmentSubmitted: this.appointmentSubmitted,
                     firstCharCap: this.firstCharCap,
-                    inputLowercaseNospace: this.inputLowercaseNospace
+                    inputLowercaseNospace: this.inputLowercaseNospace,
+                    numberDisplay: this.numberDisplay
                 }}>
                 {this.props.children}
             </UserContext.Provider>

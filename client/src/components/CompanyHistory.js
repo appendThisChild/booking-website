@@ -46,7 +46,6 @@ class CompanyHistory extends Component {
     }
     switchPastMonth = (num) => {
         const { pastMonth } = this.state
-
         if (num === 1 && pastMonth === 11){
             this.setState(prevState => ({
                 pastYear: prevState.pastYear + 1,
@@ -76,10 +75,12 @@ class CompanyHistory extends Component {
     render(){
         const { upcomingAppointments, pastAppointments, dataIn, presentMonth, pastMonth, presentYear, pastYear, presentToggle, pastToggle } = this.state
         const { switchPastMonth, switchPresentMonth } = this
+        const yearEarnings = pastAppointments.filter(app => new Date(app.appDate).getFullYear() === pastYear && app.canceled === false ).reduce((total, sum) => total + sum.amount, 0) / 100
+        const therapistEarnings = (yearEarnings * .80).toFixed(2)
+        const websiteDeductions = (yearEarnings * .10).toFixed(2)
+        const companyEarnings = (yearEarnings - therapistEarnings - websiteDeductions).toFixed(2)
         return(
             <div>
-                Company History
-                    {/* All appointments - with amount breakoutdowns - "Similar to therapist breakdown, but all appointments" */}
                 <ProfileNav />
                 {dataIn ?
                 <>
@@ -89,6 +90,7 @@ class CompanyHistory extends Component {
                         subTitle={"New to Newest"} 
                         future={true}
                         client={false}
+                        owner={true}
                         month={presentMonth} 
                         year={presentYear} 
                         toggle={presentToggle}
@@ -98,13 +100,13 @@ class CompanyHistory extends Component {
                         title={"Past Appointments"} 
                         subTitle={"Old to Oldest"} 
                         future={false}
-                        client={false} 
+                        client={false}
+                        owner={true} 
                         month={pastMonth} 
                         year={pastYear} 
                         toggle={pastToggle}
                         switchMonth={switchPastMonth}/>
-                    {/* Show total for that month */}
-                    {/* Show year total */}
+                    <p>{pastYear}'s Company Earnings: ${yearEarnings} - "80% Therapist(s) Payment (-${therapistEarnings})" - "10% Website Service (-${websiteDeductions})" = ${companyEarnings}</p>
                 </>
                 : null
                 }

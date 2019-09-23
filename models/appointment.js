@@ -10,6 +10,10 @@ const appointmentSchema = new Schema({
         type: String,
         required: true
     },
+    clientPhoneNumber: {
+        type: Number,
+        required: true
+    },
     appLengthInMinutes: {
         type: Number,
         required: true
@@ -26,13 +30,17 @@ const appointmentSchema = new Schema({
         type: String,
         required: true
     },
+    therapistPhoneNumber: {
+        type: Number,
+        required: true
+    },
     address: {
         type: Object,
         required: true
     },
     packageChoice: {
         type: Number,
-        enum: [1, 3],
+        enum: [0, 1, 2],
         default: 1
     },
     canceled: {

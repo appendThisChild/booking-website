@@ -2,29 +2,30 @@ import React from "react"
 
 
 const Appointment = props => {
-    const { appLengthInMinutes, appDate, therapistName } = props.appointment
-    // address
+    const { appLengthInMinutes, appDate, therapistName, address } = props.appointment
+    const { street, city, state, zipcode } = address
     const date = new Date(appDate)
-    let min = date.getHours()
-    let sec = date.getMinutes()
+    let hour = date.getHours()
+    let min = date.getMinutes()
     let amPm = "am"
     if (date.getHours() > 12){
-        min = date.getHours() -12;
+        hour = date.getHours() -12;
         amPm = "pm";
     }
-    if (date.getMinutes() === 0) sec = "00";
+    if (date.getMinutes() === 0) min = "00";
     return(
         <div>
             <h1>Your Appointment:</h1>
-            <p>Therapist's Name: {therapistName}</p>
+            <p>Therapist: {therapistName}</p>
+            {/* <p>Phone #: </p> */}
             <p>Date: {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}</p>
-            <p>Time: {min}:{sec} {amPm}</p>
+            <p>Time: {hour}:{min} {amPm}</p>
             <p>Length: {appLengthInMinutes} Minutes</p>
             <p>Address:</p>
-            {/* <p>{address.street}</p>
-            <p>{address.city}</p>
-            <p>{address.state}</p>
-            <p>{address.zipcode}</p> */}
+            <p>{street}</p>
+            <p>{city}</p>
+            <p>{state}</p>
+            <p>{zipcode}</p>
         </div>
     )
 }
