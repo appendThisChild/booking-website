@@ -28,7 +28,6 @@ class PackageAndSubmit extends Component {
     }
 
     componentDidMount(){
-        if (this.props.currentAppointmentInProgress === "") this.props.history.push("/book")
         // this is where we ask for selecting of package & payment
         // shows selection details 
         // sign wavier required
@@ -36,6 +35,7 @@ class PackageAndSubmit extends Component {
 
     }
     render(){
+        if (this.props.currentAppointmentInProgress === "") this.props.history.push("/book")
         return(
             <div>
                 <Countdown date={Date.now() + 600000} renderer={this.tenMinuteTimer}/>

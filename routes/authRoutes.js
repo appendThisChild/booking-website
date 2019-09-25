@@ -51,4 +51,10 @@ authRouter.post("/login", (req, res, next) => {
 
 // editing information
 
+
+
+
+
+
+
 module.exports = authRouter;

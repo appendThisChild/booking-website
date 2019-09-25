@@ -8,7 +8,11 @@ const Appointment = props => {
     let hour = date.getHours()
     let min = date.getMinutes()
     let amPm = "am"
-    if (date.getHours() > 12){
+    if (date.getHours() === 0){
+        hour = 12
+    } else if (date.getHours() === 12){
+        amPm = "pm"
+    } else if (date.getHours() > 12){
         hour = date.getHours() -12;
         amPm = "pm";
     }
@@ -17,7 +21,19 @@ const Appointment = props => {
         <div>
             <h1>Your Appointment:</h1>
             <p>Therapist: {therapistName}</p>
+
+
+
             {/* <p>Phone #: </p> */}
+
+            {/* This fourth */}
+            {/* the phone number for the therapist to this showing of the the selected appointment */}
+            {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+            {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+            {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+            {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+            {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+
             <p>Date: {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}</p>
             <p>Time: {hour}:{min} {amPm}</p>
             <p>Length: {appLengthInMinutes} Minutes</p>

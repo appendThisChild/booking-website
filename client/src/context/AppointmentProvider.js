@@ -78,12 +78,22 @@ class AppointmentProvider extends Component {
             })
         })
     }
+
+
+
     updateAppointment = () => {
 
     }
     deleteAppointment = () => {
 
     }
+
+
+
+
+
+
+    
     handleNameIDAdd = (clientID, clientName, therapistName, address) => {
         this.setState({
             clientID: clientID,

@@ -8,13 +8,27 @@ const AppointmentBullet = props => {
     const { street, city, state, zipcode } = address
     const packages = ["Pre-Paid Massage", "One Massage", "Three Massage Package"]
     // const phoStr1 = this.props.numberDisplay(therapistPhoneNumber)
-    // const phoStr2 = this.props.numberDisplay(clientPhoneNumber)
+
+    // this third ^^^^^^^^^^^^^^^^^^^^^^^^^
+    // I'm trying to get phoneNumber properties from the appointment 
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ vvvvvvvvvvvv
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ vvvvvvvvvvvv
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ vvvvvvvvvvvv
+    //                                         vvvvvvvvvvvv
+    //                                         vvvvvvvvvvvv
+    //                                         vvvvvvvvvvvv
+
     const date = new Date(appDate)
     let hour = date.getHours()
     let min = date.getMinutes()
     let amPm = "am"
-    if (date.getHours() > 12){
-        hour = date.getHours() -12;
+    if (date.getHours() === 0){
+        hour = 12
+    } else if (date.getHours() === 12){
+        amPm = "pm"
+    } else if (date.getHours() > 12){
+        hour = date.getHours() - 12;
         amPm = "pm";
     }
     if (date.getMinutes() === 0) min = "00";
@@ -33,7 +47,13 @@ const AppointmentBullet = props => {
             <>
                 <div>
                     <span>Therapist: {therapistName}</span>
+
+
+
                     {/* <span>Phone #: {phoStr1}</span> */}
+
+
+
                     <span>Address:</span>
                     <span>{street}</span>
                     <span>{city}</span>
@@ -42,7 +62,6 @@ const AppointmentBullet = props => {
                 </div>
                 <div>
                     <span>Client: {clientName}</span>
-                    {/* <span>Phone #: {phoStr2}</span> */}
                     <span>Package Choice: {packages[packageChoice]}</span>
                 </div>
             </>

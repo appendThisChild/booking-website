@@ -22,6 +22,14 @@ mongoose.connect('mongodb://localhost:27017/matthew-sweetness', {useNewUrlParser
 app.use("/auth", require('./routes/authRoutes.js'))
 // personal info portal
 
+    // Adding a new .use for changing personal information
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 // booking structure portals
 app.use("/therapists", require('./routes/therapistsRoutes.js'))
 app.use("/api/therapists", require('./routes/apiTherapistRoutes.js'))

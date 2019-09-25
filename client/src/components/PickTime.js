@@ -57,6 +57,18 @@ class PickTime extends Component {
             }
             // takes the already booked appointments and removes them allowing for a half hour break before and after
             const appBookedBlocks = []
+            // might have to adjust this with new date ... 
+
+
+            // this second 
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
             matchingDates.forEach(obj => {
                 let hours = obj.appDate.getHours()
                 let minutes = obj.appDate.getMinutes()
@@ -86,12 +98,17 @@ class PickTime extends Component {
                 if (allPresent) timesAvailableForThisDayGivenDesiredLength.push(arr1)
             })
             // puts all that information into a singular obj for displaying
+            let endSchedule = timesAvailableForThisDayGivenDesiredLength
+            if (startTime === -1 || endTime === -1){
+                endSchedule = []
+                console.log("No availability")
+            }
             weekShowingArr.push({
                 year: dateSet.getFullYear(),
                 month: dateSet.getMonth(),
                 date: dateSet.getDate(),
                 day: this.state.daysOfTheWeek[dateSet.getDay()],
-                availableTimeBlocks: timesAvailableForThisDayGivenDesiredLength
+                availableTimeBlocks: endSchedule
             })
         }
         this.setState({weekShowing: weekShowingArr})
@@ -180,23 +197,28 @@ class PickTime extends Component {
             `${this.props.firstCharCap(this.props.user.firstName)} ${this.props.firstCharCap(this.props.user.lastName)}`, 
             `${this.props.firstCharCap(selectedTherapist.firstName)} ${this.props.firstCharCap(selectedTherapist.lastName)}`,
             selectedTherapist.address
-            // adding numbers for client and therapist
+            // adding # for therapist
+
+            // this first ^^^^^^^^^^^^^^^^^^^^^^^^
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-
-            
         )
         this.setState({ selected: selectedTherapist }, () => this.gettingAvailability())
         })
     }
     componentDidMount(){
-        if(this.props.therapistID === "") this.props.history.push("/book")
         const hour = new Date().getHours()
         let weekToView = 1
         if ( hour > 17 ) weekToView = 2
         this.setState({ viewedWeek: weekToView }, () =>  this.therapistInfo())
     }
     render(){
+        if(this.props.therapistID === "") this.props.history.push("/book")
         return(
             <div>
                 <ChoiceDisplay  

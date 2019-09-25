@@ -40,13 +40,13 @@ const userSchema = new Schema({
     availability: {
         type: Array,
         default: [
-            [0,0],
+            [-10,-10],
             [90,170],
             [90,170],
             [90,170],
             [90,170],
             [90,170],
-            [0,0]
+            [-10,-10]
         ]
     },
     address: {

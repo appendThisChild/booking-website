@@ -52,7 +52,6 @@ class UserProvider extends Component {
             })
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
-
     logout = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("user")

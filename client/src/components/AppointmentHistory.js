@@ -59,7 +59,7 @@ const AppointmentHistory = props => {
                         <span>120-Minute Appointments: #{count120}</span>
                         <span>Total Hours: {monthHours}hrs</span>
                     </div>
-                    {!owner ?
+                    {owner ?
                     <div>
                         <span>{monthsOftheYear[month]}'s Company Earnings: ${monthEarnings} - "80% Therapist(s) Payment (-${therapistEarnings})" - "10% Website Service (-${companyEarnings})" = ${companyEarnings}</span>
                     </div>

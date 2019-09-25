@@ -5,7 +5,11 @@ const AvailableTime = props => {
     let minuteBlock = timeBlock[0]
     let secondBlock = timeBlock[1]
     let amPm = "am"
-    if (timeBlock[0] > 12){
+    if (timeBlock[0] === 0){
+        minuteBlock = 12
+    } else if (timeBlock[0] === 12){
+        amPm = "pm"
+    } else if (timeBlock[0] > 12){
         minuteBlock = timeBlock[0] -12;
         amPm = "pm";
     }
