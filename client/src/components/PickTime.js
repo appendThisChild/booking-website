@@ -113,6 +113,9 @@ class PickTime extends Component {
         this.therapistInfo()
         this.editToggler()
     }
+    sendToNextPage = () => {
+        this.props.history.push("/selectPackageAndSubmit")
+    }
     handlePackageAndSubmit = (year, month, date, hours, minutes) => {
         const scheduleChoice = new Date(year, month, date, hours, minutes)
         const listOfCurrentAppointments = []
@@ -136,7 +139,7 @@ class PickTime extends Component {
                 alert("That time is no longer available! Please select another time... ");
                 this.gettingAvailability()
             } else {
-                this.props.postNewAppointment(scheduleChoice)
+                this.props.postNewAppointment(scheduleChoice, () => this.sendToNextPage())
             }
         })
     }
@@ -189,7 +192,7 @@ class PickTime extends Component {
         })
     }
     componentDidMount(){
-        if(this.props.therapistID === "") this.props.history.push("/book")
+        if(this.props.therapistID === "" || this.props.appLengthInMinutes === "") this.props.history.push("/book")
         const hour = new Date().getHours()
         let weekToView = 1
         if ( hour > 17 ) weekToView = 2

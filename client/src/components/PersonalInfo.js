@@ -58,8 +58,8 @@ class PersonalInfo extends Component {
             if (!response){
                 const infoUpdates = {
                     email: this.state.email,
-                    firstName: this.state.firstName,
-                    lastName: this.state.lastName,
+                    firstName: this.props.inputLowercaseNospace(this.state.firstName),
+                    lastName: this.props.inputLowercaseNospace(this.state.lastName),
                     address: this.state.address,
                     availability: this.state.availability,
                     phoneNumber: this.props.numberDeconstruct(this.state.phoneNumber)
@@ -78,7 +78,6 @@ class PersonalInfo extends Component {
     render(){
         const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist } = this.props.user
         const { street, city, state, zipcode } = address
-        const phoStr = this.props.numberDisplay(phoneNumber)
         const mappedAvailabilty = availability.map((arr, i) => <Availability key={i} day={this.state.daysOfTheWeek[i]} arr={arr}/>)
         return(
             <div>
@@ -87,9 +86,9 @@ class PersonalInfo extends Component {
                 {this.props.on ?
                 <>
                     <h2>Email: </h2><p>{email}</p>
-                    <h2>First Name: </h2><p>{firstName}</p>
-                    <h2>Last Name: </h2><p>{lastName}</p>
-                    <h2>Phone #: </h2><p>{phoStr}</p>
+                    <h2>First Name: </h2><p>{this.props.firstCharCap(firstName)}</p>
+                    <h2>Last Name: </h2><p>{this.props.firstCharCap(lastName)}</p>
+                    <h2>Phone #: </h2><p>{this.props.numberDisplay(phoneNumber)}</p>
                     {isTherapist ?
                     <>
                         <h2>Adress: </h2>

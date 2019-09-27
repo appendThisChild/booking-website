@@ -8,13 +8,16 @@ import "./styles.css"
 import UserProvider from "./context/UserProvider.js"
 import AppointmentProvider from "./context/AppointmentProvider.js"
 import TherapistProvider from "./context/TherapistProvider.js"
+import OwnerProvider from "./context/OwnerProvider.js";
 
 ReactDOM.render(
     <BrowserRouter>
         <UserProvider>
             <AppointmentProvider>
                 <TherapistProvider>
-                    <App />
+                    <OwnerProvider>
+                        <App />
+                    </OwnerProvider>
                 </TherapistProvider>
             </AppointmentProvider>
         </UserProvider>

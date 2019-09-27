@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import axios from "axios"
-import { withRouter } from 'react-router-dom'
 
 const AppointmentContext = React.createContext()
 
@@ -50,7 +49,7 @@ class AppointmentProvider extends Component {
             .then( res => this.setState({ therAppointments: res.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
-    postNewAppointment = date => {
+    postNewAppointment = (date, callback) => {
         this.setState({ appDate: date }, () => {
             const newAppointment = {
                 clientID: this.state.clientID,
@@ -63,7 +62,7 @@ class AppointmentProvider extends Component {
                 address: this.state.address
             }
             dataAxios.post("/api/appointment", newAppointment)
-                .then(res => this.setState({ currentAppointmentInProgress: res.data }, () => this.props.history.push("/selectPackageAndSubmit")))
+                .then(res => this.setState({ currentAppointmentInProgress: res.data }, () => callback()))
                 .catch(err => console.log(err.response.data.errMsg))
             this.setState({
                 clientID: "",
@@ -134,7 +133,7 @@ class AppointmentProvider extends Component {
     }
 }
 
-export default withRouter(AppointmentProvider);
+export default AppointmentProvider;
 
 export const withAppointment = C => props => (
     <AppointmentContext.Consumer>

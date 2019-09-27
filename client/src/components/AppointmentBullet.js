@@ -4,10 +4,11 @@ import { withUser } from "../context/UserProvider.js"
 import { withToggler } from "./Toggler.js"
 
 const AppointmentBullet = props => {
-    const { appDate, appLengthInMinutes, amount, address, clientName, therapistName, canceled, packageChoice, therapistPhoneNumber } = props
+    const { appDate, appLengthInMinutes, amount, address, clientName, therapistName, canceled, packageChoice, therapistPhoneNumber, clientPhoneNumber } = props
     const { street, city, state, zipcode } = address
     const packages = ["Pre-Paid Massage", "One Massage", "Three Massage Package"]
     const phoStr1 = props.numberDisplay(therapistPhoneNumber)
+    const phoStr2 = props.numberDisplay(clientPhoneNumber)
     const date = new Date(appDate)
     let hour = date.getHours()
     let min = date.getMinutes()
@@ -49,6 +50,7 @@ const AppointmentBullet = props => {
                 </div>
                 <div>
                     <span>Client: {clientName}</span>
+                    <span>Phone #: {phoStr2}</span>
                     <span>Package Choice: {packages[packageChoice]}</span>
                 </div>
             </>

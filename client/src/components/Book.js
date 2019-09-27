@@ -16,8 +16,10 @@ class Book extends Component {
         this.props.getAllTherapists()
     }
     handlePickTime = () => {
+
         this.props.makingAppointment()
         this.props.history.push('/pickTime')
+        
     }
     render(){
         return(

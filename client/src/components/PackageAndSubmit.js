@@ -33,7 +33,17 @@ class PackageAndSubmit extends Component {
         // this is where we ask for selecting of package & payment
         // shows selection details 
         // sign wavier required
-        // send update to amount, package choice, and status
+        // send update to amount, package choice, and status, client phone number
+        // send email to acount 
+
+
+
+        // Finishing up the application
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     }
     render(){
@@ -46,7 +56,7 @@ class PackageAndSubmit extends Component {
                     <Appointment appointment={this.props.currentAppointmentInProgress}/>
 
 
-                    
+
                 </>
                 :null}
             </div>

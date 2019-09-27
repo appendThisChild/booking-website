@@ -17,6 +17,8 @@ import History from "./components/History.js"
 import PersonalInfo from "./components/PersonalInfo.js"
 import TherapistHistory from "./components/TherapistHistory.js"
 import CompanyHistory from "./components/CompanyHistory.js"
+import AllAccounts from "./components/AllAccounts.js"
+import AccountHistory from "./components/AccountHistory.js"
 import Footer from "./components/Footer.js"
 
 
@@ -66,10 +68,8 @@ class App extends Component {
                     <Route path="/personalInfo" render={renderProps => <PersonalInfo {...renderProps}/>}/>
                     <Route path="/therapistHistory" render={renderProps => <TherapistHistory {...renderProps}/>}/> 
                     <Route path="/companyHistory" render={renderProps => <CompanyHistory {...renderProps}/>}/> 
-                    {/* creating an all users display route */}
-
-
-                    
+                    <Route path="/accounts" render={renderProps => <AllAccounts {...renderProps}/>}/> 
+                    <Route path="/accountHistory" render={renderProps => <AccountHistory {...renderProps}/>}/> 
                 </Switch>
                 <Footer />
             </div>

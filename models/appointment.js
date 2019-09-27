@@ -10,6 +10,10 @@ const appointmentSchema = new Schema({
         type: String,
         required: true
     },
+    clientPhoneNumber: {
+        type: Number,
+        default: 1111111111
+    },
     appLengthInMinutes: {
         type: Number,
         required: true

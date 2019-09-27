@@ -14,11 +14,8 @@ const ProfileNav = props => {
     if (user.isOwner){
         links.push("/companyHistory")
         linkName.push("Company History")
-        // adding 
-        // option to look up all users
-
-
-
+        links.push("/accounts")
+        linkName.push("All Accounts")
     }
     const mappedLinks = links.map((link, i) => 
         <Link to={`${link}`} key={i}>{linkName[i]}</Link>
