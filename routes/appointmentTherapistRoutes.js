@@ -5,7 +5,8 @@ const Appointment = require('../models/appointment.js')
 appointmentTherapistRouter.route('/:id')
     .get((req, res, next) => {
         Appointment.find({
-            therapistID: req.params.id
+            therapistID: req.params.id,
+            status: "Paid"
         },
             (err, foundAppointments) => {
             if (err){

@@ -27,6 +27,7 @@ class AppointmentProvider extends Component {
             appDate: "",
             therapistID: "",
             therapistName: "",
+            therapistPhoneNumber: "",
             address: "",
             packageChoice: "",
             canceled: false,
@@ -35,10 +36,6 @@ class AppointmentProvider extends Component {
         }
     }
     getAllCompanyAppointments = callback => {
-        // filter out delete old appointments
-
-
-
         dataAxios.get("/api/owner/appointment")
             .then( res => this.setState({ companyAppointments: res.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
@@ -62,6 +59,7 @@ class AppointmentProvider extends Component {
                 appDate: this.state.appDate,
                 therapistID: this.state.therapistID,
                 therapistName: this.state.therapistName,
+                therapistPhoneNumber: this.state.therapistPhoneNumber,
                 address: this.state.address
             }
             dataAxios.post("/api/appointment", newAppointment)
@@ -93,13 +91,14 @@ class AppointmentProvider extends Component {
 
 
 
-    
-    handleNameIDAdd = (clientID, clientName, therapistName, address) => {
+
+    handleNameIDAdd = (clientID, clientName, therapistName, address, phoneNumber) => {
         this.setState({
             clientID: clientID,
             clientName: clientName,
             therapistName: therapistName,
-            address: address
+            address: address,
+            therapistPhoneNumber: phoneNumber
         })
     }
     handleChange = e => {

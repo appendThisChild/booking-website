@@ -4,21 +4,10 @@ import { withUser } from "../context/UserProvider.js"
 import { withToggler } from "./Toggler.js"
 
 const AppointmentBullet = props => {
-    const { appDate, appLengthInMinutes, amount, address, clientName, therapistName, canceled, packageChoice } = props
+    const { appDate, appLengthInMinutes, amount, address, clientName, therapistName, canceled, packageChoice, therapistPhoneNumber } = props
     const { street, city, state, zipcode } = address
     const packages = ["Pre-Paid Massage", "One Massage", "Three Massage Package"]
-    // const phoStr1 = this.props.numberDisplay(therapistPhoneNumber)
-
-    // this third ^^^^^^^^^^^^^^^^^^^^^^^^^
-    // I'm trying to get phoneNumber properties from the appointment 
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ vvvvvvvvvvvv
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ vvvvvvvvvvvv
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ vvvvvvvvvvvv
-    //                                         vvvvvvvvvvvv
-    //                                         vvvvvvvvvvvv
-    //                                         vvvvvvvvvvvv
-
+    const phoStr1 = props.numberDisplay(therapistPhoneNumber)
     const date = new Date(appDate)
     let hour = date.getHours()
     let min = date.getMinutes()
@@ -34,7 +23,11 @@ const AppointmentBullet = props => {
     if (date.getMinutes() === 0) min = "00";
     return(
         <div>
+
+            {/* Edit later to change color */}
             {canceled ? <span>"Appointment below was canceled"</span>: null}
+
+
             <div onClick={props.toggle}>
                 <span>Date: {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}</span>
                 <span>Time: {hour}:{min} {amPm}</span>
@@ -47,13 +40,7 @@ const AppointmentBullet = props => {
             <>
                 <div>
                     <span>Therapist: {therapistName}</span>
-
-
-
-                    {/* <span>Phone #: {phoStr1}</span> */}
-
-
-
+                    <span>Phone #: {phoStr1}</span>
                     <span>Address:</span>
                     <span>{street}</span>
                     <span>{city}</span>

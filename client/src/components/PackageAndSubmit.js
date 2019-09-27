@@ -11,7 +11,7 @@ class PackageAndSubmit extends Component {
     constructor(){
         super()
         this.state = {
-            
+            dataIn: false
         }
     }
     tenMinuteTimer = ({ hours, minutes, seconds, completed }) => {
@@ -28,6 +28,8 @@ class PackageAndSubmit extends Component {
     }
 
     componentDidMount(){
+        if (this.props.currentAppointmentInProgress === ""){ this.props.history.push("/book")} 
+        else { this.setState({dataIn: true}) }
         // this is where we ask for selecting of package & payment
         // shows selection details 
         // sign wavier required
@@ -35,11 +37,18 @@ class PackageAndSubmit extends Component {
 
     }
     render(){
-        if (this.props.currentAppointmentInProgress === "") this.props.history.push("/book")
+        const { dataIn } = this.state
         return(
             <div>
                 <Countdown date={Date.now() + 600000} renderer={this.tenMinuteTimer}/>
-                <Appointment appointment={this.props.currentAppointmentInProgress}/>
+                {dataIn ?
+                <>
+                    <Appointment appointment={this.props.currentAppointmentInProgress}/>
+
+
+                    
+                </>
+                :null}
             </div>
         )
     }

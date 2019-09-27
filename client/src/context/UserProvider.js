@@ -4,6 +4,14 @@ import { withRouter } from 'react-router-dom'
 
 const UserContext = React.createContext()
 
+const dataAxios = axios.create()
+
+dataAxios.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token")
+    config.headers.Authorization = `Bearer ${token}`
+    return config
+})
+
 class UserProvider extends Component {
     constructor(){
         super()
@@ -60,6 +68,28 @@ class UserProvider extends Component {
             token: ""
         })
     }
+    checkEmail = (email, callback) => {
+        const _id = this.state.user._id
+        dataAxios.post(`/api/info/email/${_id}`, {email: email})
+            .then(res => {
+                callback(res.data.isPresent)
+            })
+            .catch(err => this.setState({errMsg: err.response.data.errMsg}))
+    }
+    updateUserInfo = (updates) => {
+        const _id = this.state.user._id
+        dataAxios.put(`/api/info/${_id}`, updates)
+            .then(res => {
+                const { user, token } = res.data
+                localStorage.user = JSON.stringify(user)
+                localStorage.token = token
+                this.setState({
+                    user,
+                    token
+                })
+            })
+            .catch(err => this.setState({errMsg: err.response.data.errMsg}))
+    }
     makingAppointment = () => {
         this.setState(() => ({
             makingAppointment: true
@@ -100,6 +130,12 @@ class UserProvider extends Component {
         })
         return phoneString.join("")
     }
+    numberDeconstruct = num => {
+        const numArr = num.toString().split("")
+        const trueNum = numArr.filter(str => !isNaN(str) && str !== " ")
+        const newNum = Number(trueNum.join(""))
+        return newNum
+    }
     render(){
         return(
             <UserContext.Provider
@@ -108,11 +144,14 @@ class UserProvider extends Component {
                     signup: this.signup,
                     login: this.login,
                     logout: this.logout,
+                    checkEmail: this.checkEmail,
+                    updateUserInfo: this.updateUserInfo,
                     makingAppointment: this.makingAppointment,
                     appointmentSubmitted: this.appointmentSubmitted,
                     firstCharCap: this.firstCharCap,
                     inputLowercaseNospace: this.inputLowercaseNospace,
-                    numberDisplay: this.numberDisplay
+                    numberDisplay: this.numberDisplay,
+                    numberDeconstruct: this.numberDeconstruct
                 }}>
                 {this.props.children}
             </UserContext.Provider>

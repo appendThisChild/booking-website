@@ -66,6 +66,10 @@ class App extends Component {
                     <Route path="/personalInfo" render={renderProps => <PersonalInfo {...renderProps}/>}/>
                     <Route path="/therapistHistory" render={renderProps => <TherapistHistory {...renderProps}/>}/> 
                     <Route path="/companyHistory" render={renderProps => <CompanyHistory {...renderProps}/>}/> 
+                    {/* creating an all users display route */}
+
+
+                    
                 </Switch>
                 <Footer />
             </div>

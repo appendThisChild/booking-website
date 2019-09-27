@@ -11,6 +11,8 @@ class PersonalInfo extends Component {
     constructor(props){
         super(props)
         this.state = {
+            emailExists: "",
+            checkInput: "",
             daysOfTheWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
             email: props.user.email,
             firstName: props.user.firstName,
@@ -52,31 +54,29 @@ class PersonalInfo extends Component {
     }
     handleSubmit = e => {
         e.preventDefault()
-        const infoUpdates = {
-            email: this.state.email,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            address: this.state.address,
-            availability: this.state.availability,
-            phoneNumber: this.state.phoneNumber
-            // deconstruct number into just numbers
-        }
-        console.log(infoUpdates);
-        // this.props.updateBounty(this.props._id, bountyUpdates)
-        this.props.toggle()
-
-
-
-        // This is next issue ^^^^^^^^^^^^^^^^
-        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        this.props.checkEmail(this.state.email, response => {
+            if (!response){
+                const infoUpdates = {
+                    email: this.state.email,
+                    firstName: this.state.firstName,
+                    lastName: this.state.lastName,
+                    address: this.state.address,
+                    availability: this.state.availability,
+                    phoneNumber: this.props.numberDeconstruct(this.state.phoneNumber)
+                }
+                this.props.updateUserInfo(infoUpdates)
+                this.props.toggle()
+                this.setState({emailExists: ""})
+            } else {
+                this.setState({
+                    emailExists: '"This email already exists!"',
+                    checkInput: '"Something went wrong!"'
+                })
+            }
+        })
     }
-
     render(){
-        const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining } = this.props.user
+        const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist } = this.props.user
         const { street, city, state, zipcode } = address
         const phoStr = this.props.numberDisplay(phoneNumber)
         const mappedAvailabilty = availability.map((arr, i) => <Availability key={i} day={this.state.daysOfTheWeek[i]} arr={arr}/>)
@@ -90,19 +90,17 @@ class PersonalInfo extends Component {
                     <h2>First Name: </h2><p>{firstName}</p>
                     <h2>Last Name: </h2><p>{lastName}</p>
                     <h2>Phone #: </h2><p>{phoStr}</p>
-
-                    {/* Change so only therapist can change the info below */}
-
-                    <h2>Adress: </h2>
-                    <p>{street}</p>
-                    <p>{city}</p>
-                    <p>{state}</p>
-                    <p>{zipcode}</p>
-                    <h2>Availability: </h2>
-                    {mappedAvailabilty}
-
-
-                    
+                    {isTherapist ?
+                    <>
+                        <h2>Adress: </h2>
+                        <p>{street}</p>
+                        <p>{city}</p>
+                        <p>{state}</p>
+                        <p>{zipcode}</p>
+                        <h2>Availability: </h2>
+                        {mappedAvailabilty}
+                    </>
+                    : null}
                     <button onClick={this.props.toggle}>Edit Information</button>
                 </>
                 :
@@ -114,6 +112,8 @@ class PersonalInfo extends Component {
                         handleAvailabilityChange={this.handleAvailabilityChange}
                         handleSubmit={this.handleSubmit}
                         btnText="Submit Edit"
+                        emailExists={this.state.emailExists}
+                        checkInput={this.state.checkInput}
                         {...this.state}/>
                     <button onClick={this.props.toggle}>Cancel</button>
                 </>

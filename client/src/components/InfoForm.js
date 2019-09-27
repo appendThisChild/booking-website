@@ -3,7 +3,7 @@ import React from 'react'
 import { withUser } from "../context/UserProvider.js"
 
 const InfoForm = props => {
-    const { handleSubmit, handleChange, handleAddressChange, handleAvailabilityChange, btnText, email, firstName, lastName, address, availability, phoneNumber, daysOfTheWeek } = props
+    const { handleSubmit, handleChange, handleAddressChange, handleAvailabilityChange, btnText, email, firstName, lastName, address, availability, phoneNumber, daysOfTheWeek, emailExists, checkInput } = props
     const { street, city, state, zipcode } = address
     const states = [ "AK","AL","AR","AS","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]
     const timeNames = []
@@ -32,7 +32,9 @@ const InfoForm = props => {
         const mappedDay = day.map((time, j) => {
             const startEndArr = ["Start Time", "End Time"]
             const mappedTimes = timeAmounts.map((amount, k) =>  <option value={amount} key={k}>{timeNames[k]}</option> )
-            const index = `${i}`+`${j}`
+            const index1 = `${i}`
+            const index2 = `${j}`
+            const index = index1 + index2
             return(
                 <div key={j}>
                     <span>{startEndArr[j]}: </span>
@@ -59,6 +61,7 @@ const InfoForm = props => {
                 value={email}
                 onChange={handleChange}
                 placeholder="123@mail.com"/>
+            <span> {emailExists}</span>
             <h2>First Name: </h2>
             <input 
                 type="text"
@@ -79,39 +82,44 @@ const InfoForm = props => {
                 name="phoneNumber"
                 value={phoneNumber}
                 onChange={handleChange}
-                placeholder="(###)###-####"/>        
-            <h2>Address: </h2>
-            <div>
-                <span>Street: </span>
-                <input 
-                    type="text"
-                    name="street"
-                    value={street}
-                    onChange={handleAddressChange}
-                    placeholder="123 Sesame Street"/>
-                <span>City: </span>
-                <input 
-                    type="text"
-                    name="city"
-                    value={city}
-                    onChange={handleAddressChange}
-                    placeholder="New York City"/>
-                <span>State: </span>
-                <select name="state" value={state} onChange={handleAddressChange}>
-                    <option value="">Select State</option>
-                    {mappedStates}
-                </select>
-                <span>Zip Code:</span>
-                <input 
-                    type="text"
-                    name="zipcode"
-                    value={zipcode}
-                    onChange={handleAddressChange}
-                    placeholder="10128"/>
-            </div>
-            <h2>Availability: </h2>
-            {mappedAvailabilityTimes}
+                placeholder="(###)###-####"/>
+            {props.user.isTherapist ?
+            <>
+                <h2>Address: </h2>
+                <div>
+                    <span>Street: </span>
+                    <input 
+                        type="text"
+                        name="street"
+                        value={street}
+                        onChange={handleAddressChange}
+                        placeholder="123 Sesame Street"/>
+                    <span>City: </span>
+                    <input 
+                        type="text"
+                        name="city"
+                        value={city}
+                        onChange={handleAddressChange}
+                        placeholder="New York City"/>
+                    <span>State: </span>
+                    <select name="state" value={state} onChange={handleAddressChange}>
+                        <option value="">Select State</option>
+                        {mappedStates}
+                    </select>
+                    <span>Zip Code:</span>
+                    <input 
+                        type="text"
+                        name="zipcode"
+                        value={zipcode}
+                        onChange={handleAddressChange}
+                        placeholder="10128"/>
+                </div>
+                <h2>Availability: </h2>
+                {mappedAvailabilityTimes}
+            </>
+            :null}
             <button>{btnText}</button>
+            <span> {checkInput}</span>
         </form>
     )
 }

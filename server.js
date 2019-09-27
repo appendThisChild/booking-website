@@ -15,21 +15,15 @@ app.use("/api", expressJwt({secret: process.env.SECRET}))
 app.use("/api/owner", (req, res, next) => checkIfOwner(req, res, next))
 app.use("/api/therapist", (req, res, next) => checkIfTherapist(req, res, next))
 
-mongoose.connect('mongodb://localhost:27017/matthew-sweetness', {useNewUrlParser: true}, () => {
-    console.log('[o] Connected to the DB')
-})
+mongoose.connect('mongodb://localhost:27017/matthew-sweetness', {
+    useNewUrlParser: true, 
+    useFindAndModify: false, 
+    useCreateIndex: true 
+}, () => { console.log('[o] Connected to the DB') })
 
 app.use("/auth", require('./routes/authRoutes.js'))
 // personal info portal
-
-    // Adding a new .use for changing personal information
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+app.use("/api/info", require('./routes/apiInfoRoutes.js'))
 // booking structure portals
 app.use("/therapists", require('./routes/therapistsRoutes.js'))
 app.use("/api/therapists", require('./routes/apiTherapistRoutes.js'))
@@ -38,7 +32,7 @@ app.use("/api/appointment", require('./routes/appointmentRoutes.js'))
 // therapist portal
 app.use("/api/therapist/appointment", require('./routes/appointmentTherapistRoutes'))
 // owner portal
-app.use("/api/owner/appointment", require('./routes/appointmentOwnerRoutes.js'))
+app.use("/api/owner", require('./routes/ownerRoutes.js'))
 
 
 app.use((err, req, res, next) => {
