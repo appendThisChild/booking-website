@@ -44,7 +44,7 @@ ownerRouter.route('/appointment')
             const paidApps = foundAppointments.filter(arr => arr.status === "Paid")
             const oldApps = foundAppointments.filter(arr => arr.appointmentCreatedAt.setMinutes(arr.appointmentCreatedAt.getMinutes() + 10) < new Date() && arr.status === "Pending")
             oldApps.forEach(app => {
-                Appointment.findByIdAndRemove(
+                Appointment.findOneAndRemove(
                     {_id: app._id},
                     (err) => {
                         if (err){
@@ -67,7 +67,7 @@ ownerRouter.route('/appointment/therapist/:_id')
             const paidApps = foundAppointments.filter(arr => arr.status === "Paid")
             const oldApps = foundAppointments.filter(arr => arr.appointmentCreatedAt.setMinutes(arr.appointmentCreatedAt.getMinutes() + 10) < new Date() && arr.status === "Pending")
             oldApps.forEach(app => {
-                Appointment.findByIdAndRemove(
+                Appointment.findOneAndRemove(
                     {_id: app._id},
                     (err) => {
                         if (err){
@@ -90,7 +90,7 @@ ownerRouter.route('/appointment/client/:_id')
             const paidApps = foundAppointments.filter(arr => arr.status === "Paid")
             const oldApps = foundAppointments.filter(arr => arr.appointmentCreatedAt.setMinutes(arr.appointmentCreatedAt.getMinutes() + 10) < new Date() && arr.status === "Pending")
             oldApps.forEach(app => {
-                Appointment.findByIdAndRemove(
+                Appointment.findOneAndRemove(
                     {_id: app._id},
                     (err) => {
                         if (err){

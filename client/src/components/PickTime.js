@@ -6,6 +6,7 @@ import AvailableAppointments from "./AvailableAppointments.js"
 import { withUser } from "../context/UserProvider.js"
 import { withAppointment } from "../context/AppointmentProvider.js"
 import { withTherapist } from "../context/TherapistProvider.js"
+import { withBlackoutDates } from "../context/BlackoutDatesProvider.js"
 
 class PickTime extends Component {
     constructor(){
@@ -31,6 +32,11 @@ class PickTime extends Component {
             const matchingDates = this.props.therapistAppointments.filter(obj => {
                 const objDate = obj.appDate
                 return objDate.getFullYear() === dateSet.getFullYear() && objDate.getMonth() === dateSet.getMonth() && objDate.getDate() === dateSet.getDate()
+            })
+            // find if the date matches any of the blackout dates
+            const dateBlackedOut = this.props.blackoutDates.some(obj => {
+                const date = new Date(obj.blackoutDate)
+                return date.getUTCFullYear() === dateSet.getFullYear() && date.getUTCMonth() === dateSet.getMonth() && date.getUTCDate() === dateSet.getDate()
             })
             const generalTimesAvailableForSelectedDay = []
             const startTime = therapist.availability[dateSet.getDay()][0] / 10
@@ -89,6 +95,8 @@ class PickTime extends Component {
             let endSchedule = timesAvailableForThisDayGivenDesiredLength
             if (startTime === -1 || endTime === -1){
                 endSchedule = []
+            } else if (dateBlackedOut){
+               endSchedule = []
             }
             weekShowingArr.push({
                 year: dateSet.getFullYear(),
@@ -182,13 +190,15 @@ class PickTime extends Component {
     therapistInfo = () => {
         this.props.getAllAppointmentsForSelectedTherapist(this.props.therapistID, () => {
             const selectedTherapist = this.props.therapists.find(therapist => therapist._id === this.props.therapistID)
-        this.props.handleNameIDAdd(
-            this.props.user._id, 
-            `${this.props.firstCharCap(this.props.user.firstName)} ${this.props.firstCharCap(this.props.user.lastName)}`, 
-            `${this.props.firstCharCap(selectedTherapist.firstName)} ${this.props.firstCharCap(selectedTherapist.lastName)}`,
-            selectedTherapist.address, selectedTherapist.phoneNumber
-        )
-        this.setState({ selected: selectedTherapist }, () => this.gettingAvailability())
+            this.props.handleNameIDAdd(
+                this.props.user._id, 
+                `${this.props.firstCharCap(this.props.user.firstName)} ${this.props.firstCharCap(this.props.user.lastName)}`, 
+                `${this.props.firstCharCap(selectedTherapist.firstName)} ${this.props.firstCharCap(selectedTherapist.lastName)}`,
+                selectedTherapist.address, selectedTherapist.phoneNumber
+            )
+            this.props.clientGetTherapistsBlackDates(this.props.therapistID, () => {
+                this.setState({ selected: selectedTherapist }, () => this.gettingAvailability())
+            })
         })
     }
     componentDidMount(){
@@ -215,4 +225,4 @@ class PickTime extends Component {
     }
 }
 
-export default withAppointment(withTherapist(withUser(PickTime)));
+export default withAppointment(withTherapist(withUser(withBlackoutDates(PickTime))));

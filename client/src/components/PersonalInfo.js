@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import ProfileNav from "./ProfileNav.js"
 import Availability from "./Availability.js";
 import InfoForm from "./InfoForm.js"
+import BlackoutDates from "./BlackoutDates.js"
 
 import { withUser } from "../context/UserProvider.js"
 import { withToggler } from "./Toggler.js"
@@ -76,13 +77,14 @@ class PersonalInfo extends Component {
         })
     }
     render(){
-        const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist } = this.props.user
+        const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist, _id } = this.props.user
         const { street, city, state, zipcode } = address
         const mappedAvailabilty = availability.map((arr, i) => <Availability key={i} day={this.state.daysOfTheWeek[i]} arr={arr}/>)
         return(
             <div>
                 <ProfileNav />
                 <p>Pre-Paid Visits Remaing: {visitsRemaining}</p>
+                <button onClick={this.props.toggle}>Edit Information</button>
                 {this.props.on ?
                 <>
                     <h2>Email: </h2><p>{email}</p>
@@ -98,12 +100,13 @@ class PersonalInfo extends Component {
                         <p>{zipcode}</p>
                         <h2>Availability: </h2>
                         {mappedAvailabilty}
+                        <BlackoutDates therapistID={_id}/>
                     </>
                     : null}
-                    <button onClick={this.props.toggle}>Edit Information</button>
                 </>
                 :
                 <>
+                    <button onClick={this.props.toggle}>Cancel</button>
                     <InfoForm 
                         handleChange={this.handleChange}
                         daysOfTheWeek={this.state.daysOfTheWeek}
@@ -114,7 +117,6 @@ class PersonalInfo extends Component {
                         emailExists={this.state.emailExists}
                         checkInput={this.state.checkInput}
                         {...this.state}/>
-                    <button onClick={this.props.toggle}>Cancel</button>
                 </>
                 }
             </div>

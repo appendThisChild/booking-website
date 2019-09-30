@@ -1,8 +1,11 @@
 const express = require('express')
 const Appointment = require('../models/appointment.js')
-const therapistAppointmentRouter = express.Router()
+const BlackoutDate = require('../models/blackoutDate.js')
+const therapistRouter = express.Router()
 
-therapistAppointmentRouter.route('/:id')
+// When client is using the backend for booking appointments
+
+therapistRouter.route('/:id')
     .get((req, res, next) => {
         Appointment.find({
             therapistID: req.params.id,
@@ -33,4 +36,17 @@ therapistAppointmentRouter.route('/:id')
         })
     })
 
-module.exports = therapistAppointmentRouter;
+therapistRouter.route('/blackout/:id')
+    .get((req, res, next) => {
+        BlackoutDate.find({ therapistID: req.params.id },
+            (err, foundBlackoutDates) => {
+            if (err){
+                res.status(500)
+                return next(err)
+            }
+            const futureDates = foundBlackoutDates.filter(arr => arr.blackoutDate > new Date())
+            return res.status(200).send(futureDates)
+        })
+    })
+
+module.exports = therapistRouter;

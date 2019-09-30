@@ -26,6 +26,7 @@ const Appointment = props => {
             <p>Date: {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}</p>
             <p>Time: {hour}:{min} {amPm}</p>
             <p>Length: {appLengthInMinutes} Minutes</p>
+            {/* I may not want to show this information until after the appointmenmt is paid for. */}
             <p>Address:</p>
             <p>{street}</p>
             <p>{city}</p>

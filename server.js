@@ -26,11 +26,11 @@ app.use("/auth", require('./routes/authRoutes.js'))
 app.use("/api/info", require('./routes/apiInfoRoutes.js'))
 // booking structure portals
 app.use("/therapists", require('./routes/therapistsRoutes.js'))
-app.use("/api/therapists", require('./routes/apiTherapistRoutes.js'))
+app.use("/api/therapists", require('./routes/apiTherapistsRoutes.js'))
 // client portal
 app.use("/api/appointment", require('./routes/appointmentRoutes.js'))
 // therapist portal
-app.use("/api/therapist/appointment", require('./routes/appointmentTherapistRoutes'))
+app.use("/api/therapist", require('./routes/therapistRoutes.js'))
 // owner portal
 app.use("/api/owner", require('./routes/ownerRoutes.js'))
 
