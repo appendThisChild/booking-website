@@ -63,6 +63,7 @@ ImageRouter.route('/images')
 ImageRouter.route('/images/:filename')
     .get((req, res, next) => {
         gfs.files.findOne({filename: req.params.filename}, (err, file) => {
+            // console.log(file)
             if (err){
                 res.status(500)
                 return next(err)

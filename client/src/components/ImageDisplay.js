@@ -12,20 +12,14 @@ class ImageDisplay extends Component {
 
     uploadImage = e => {
         let imageFormObj = new FormData();
-
-        imageFormObj.append("imageName", "multer-image-" + Date.now())
         imageFormObj.append("file", e.target.files[0])
-
-        // stores a readable instance of 
-        // the image being uploaded using multer
         this.setState({
             multerImage: URL.createObjectURL(e.target.files[0])
         });
-
        this.props.postImage(imageFormObj)
     }
     getThisImage = () => {
-        this.props.getImageFile("86a21212e065e683441be3156646b5cd.png")
+        this.props.getImageFile("1fa28df229dcbdf1c3bec63079de507f.png")
     }
 
     componentDidMount(){

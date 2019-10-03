@@ -20,7 +20,6 @@ class ImageProvider extends Component {
             viewImage: DefaultImg
         }
     }
-
     getImageFiles = () => {
         axios.get('/image/images')
             .then(res => {
@@ -32,7 +31,7 @@ class ImageProvider extends Component {
         axios.get(`/image/images/${filename}`)
             .then(res => {
                 console.log(res.data)
-                this.setState({viewImage: res.data})
+                this.setState({viewImage: ` data:image/png;base64,${res.data}`})
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
@@ -40,14 +39,15 @@ class ImageProvider extends Component {
     postImage = (imageFormObj) => {
         axios.post('/image/upload', imageFormObj)
             .then(res => {
-            if (res.data.success) {
-                console.log("Image has been successfully uploaded using multer")
-            }
+                // console.log(res.data)
+
+
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
 
     render(){
+        // console.log(this.state.viewImage)
         return(
             <ImageContext.Provider
                 value={{
