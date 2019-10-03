@@ -3,7 +3,8 @@ import React from "react"
 import { withUser } from "../context/UserProvider.js"
 
 const Appointment = props => {
-    const { appLengthInMinutes, appDate, therapistName, address, therapistPhoneNumber} = props.appointment
+    const { appLengthInMinutes, appDate, therapistName, address} = props.appointment
+    // therapistPhoneNumber
     const { street, city, state, zipcode } = address
     const date = new Date(appDate)
     // const phoStr1 = props.numberDisplay(therapistPhoneNumber)

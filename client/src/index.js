@@ -10,6 +10,7 @@ import AppointmentProvider from "./context/AppointmentProvider.js"
 import TherapistProvider from "./context/TherapistProvider.js"
 import OwnerProvider from "./context/OwnerProvider.js";
 import BlackoutDatesProvider from "./context/BlackoutDatesProvider.js"
+import ImageProvider from "./context/ImageProvider.js";
 
 ReactDOM.render(
     <BrowserRouter>
@@ -18,7 +19,9 @@ ReactDOM.render(
                 <TherapistProvider>
                     <OwnerProvider>
                         <BlackoutDatesProvider>
-                            <App />
+                            <ImageProvider>
+                                <App />
+                            </ImageProvider>
                         </BlackoutDatesProvider>
                     </OwnerProvider>
                 </TherapistProvider>

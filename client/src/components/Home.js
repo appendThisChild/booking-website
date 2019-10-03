@@ -1,4 +1,5 @@
 import React from "react"
+import ImageDisplay from "./ImageDisplay.js";
 
 const Home = () => {
     return(
@@ -11,6 +12,11 @@ const Home = () => {
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.</p>
                 </div>
                 <div className={"homeContainer2"}>
+
+
+                    <ImageDisplay />
+
+
                     <h1>Our Therapists</h1>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.</p>

@@ -29,8 +29,18 @@ therapistRouter.route('/blackout/:id')
                 return next(err)
             }
             const futureDates = foundBlackoutDates.filter(arr => arr.blackoutDate > new Date())
-            // get old dates
-            // loops through and delete
+            const oldDates = foundBlackoutDates.filter(arr => arr.blackoutDate < new Date())
+            oldDates.forEach(dateObj => {
+                BlackoutDate.findOneAndRemove(
+                    {_id: dateObj._id},
+                    (err) => {
+                        if (err){
+                            res.status(500)
+                            return next(err)
+                        }
+                    }
+                )
+            })
             return res.status(200).send(futureDates)
         })
     })
