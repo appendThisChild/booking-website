@@ -1,25 +1,25 @@
 const express = require('express');
-// const Image = require('../models/image.js');
+
 const ImageRouter = express.Router();
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') 
 const path = require('path')
 const crypto = require('crypto')
 const multer = require('multer')
 const GridFsStorage = require('multer-gridfs-storage')
 const Grid = require('gridfs-stream')
+const { mongoURI, options } = require("../utils/app.js")
+const bucket = "uploads"
 
-const mongoURI = 'mongodb://localhost:27017/matthew-sweetness'
-const options = {
-    useNewUrlParser: true, 
-    useFindAndModify: false, 
-    useCreateIndex: true 
-}
+const conn = mongoose.connection
 
-const conn2 = mongoose.createConnection(mongoURI, options)
+// Grid.mongo = mongoose.mongo
+// const gfs = Grid(conn)
+// gfs.collection(bucket)
+
 let gfs;
-conn2.once('open', () => {
-    gfs = Grid(conn2.db, mongoose.mongo)
-    gfs.collection('uploads')
+conn.once('open', () => {
+    gfs = Grid(conn.db, mongoose.mongo)
+    gfs.collection(bucket)
 })
 
 const storage = new GridFsStorage({
@@ -33,49 +33,45 @@ const storage = new GridFsStorage({
                 const filename = buf.toString('hex') + path.extname(file.originalname)
                 const fileInfo = {
                     filename: filename,
-                    bucketName: 'uploads'
+                    bucketName: bucket
                 }
                 resolve(fileInfo)
             })
         })
-    }
+    },
+    options: { useNewUrlParser: true }
 })
 const upload = multer({ storage })
 
-ImageRouter.route('/upload')
-    .post(upload.single('file'), (req, res, next) => {
-        console.log({ file: req.file })
-        
-    });
-
-
-ImageRouter.route('/images')
-    .get((req, res, next) => {
-        gfs.files.find().toArray((err, files) => {
-            if (err){
-                res.status(500)
-                return next(err)
-            }
-            return res.status(200).send(files)
-        })
+ImageRouter.route('/')
+    .post(upload.single('image'), (req, res, next) => {
+        console.log(req.file)
+        // console.log(res)
+        res.send(req.file)
     })
 
-ImageRouter.route('/images/:filename')
+
+        // gfs.files.find().toArray((err, files) => {
+        //     console.log(files)
+        // })
+
+
+ImageRouter.route('/:id')
     .get((req, res, next) => {
-        gfs.files.findOne({filename: req.params.filename}, (err, file) => {
-            // console.log(file)
-            if (err){
-                res.status(500)
-                return next(err)
+        const id = req.params.id
+        gfs.files.find({filename: id}).toArray((err, files) => {
+            if(!files || files.length === 0){
+                return res.status(404).json({
+                    responseCode: 1,
+                    responseMessage: "error"
+                });
             }
-            if (file.contentType === "image/jep" || file.contentType === "image/png"){
-                const readstream = gfs.createReadStream(file.filename)
-                readstream.pipe(res)
-
-            } else {
-                return res.status(404).send({ err: 'Not an image' })
-            }
-        })
+            const readstream = gfs.createReadStream({ filename: files[0].filename });
+            readstream.setEncoding('base64');
+            // let data = ''
+            // readstream.on('data', (chunk) => data += chunk)
+            // readstream.on('end', () => res.send(data))
+            readstream.pipe(res)
+        });
     })
-
 module.exports = ImageRouter;

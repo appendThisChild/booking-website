@@ -17,44 +17,35 @@ class ImageProvider extends Component {
     constructor(){
         super()
         this.state = {
-            viewImage: DefaultImg
+            image: DefaultImg
         }
     }
-    getImageFiles = () => {
-        axios.get('/image/images')
-            .then(res => {
+    postFile = data => {
+        // console.log(data)
+        axios.post('/image/', data)
+            .then( res => {
                 console.log(res.data)
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
-    getImageFile = (filename) => {
-        axios.get(`/image/images/${filename}`)
-            .then(res => {
+    getFile = (id, callback) => {
+        axios.get(`/image/${id}`)
+            .then( res => {
                 console.log(res.data)
-                this.setState({viewImage: ` data:image/png;base64,${res.data}`})
-            })
-            .catch(err => console.log(err.response.data.errMsg))
-    }
-
-    postImage = (imageFormObj) => {
-        axios.post('/image/upload', imageFormObj)
-            .then(res => {
-                // console.log(res.data)
-
-
+                this.setState({
+                    image: `data:image/png;base64,${res.data}`
+                }, () => callback())
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
 
     render(){
-        // console.log(this.state.viewImage)
         return(
             <ImageContext.Provider
                 value={{
                     ...this.state,
-                    postImage: this.postImage,
-                    getImageFiles: this.getImageFiles,
-                    getImageFile: this.getImageFile
+                    postFile: this.postFile,
+                    getFile: this.getFile
                 }}>
                 {this.props.children}
             </ImageContext.Provider>

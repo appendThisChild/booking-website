@@ -6,32 +6,35 @@ class ImageDisplay extends Component {
     constructor(props){
         super(props)
         this.state = {
-            multerImage: props.viewImage
+            image: props.image,
+            imageData: ""
         }
     }
-
-    uploadImage = e => {
-        let imageFormObj = new FormData();
-        imageFormObj.append("file", e.target.files[0])
+    handleChange = e => {
+        // console.log(URL.createObjectURL(e.target.files[0]))
+        const data = new FormData()
+        data.append('image', e.target.files[0])
         this.setState({
-            multerImage: URL.createObjectURL(e.target.files[0])
-        });
-       this.props.postImage(imageFormObj)
+            image: URL.createObjectURL(e.target.files[0]),
+            imageData : data
+        })
     }
-    getThisImage = () => {
-        this.props.getImageFile("1fa28df229dcbdf1c3bec63079de507f.png")
+    handleUpload = () => {
+        const data = this.state.imageData
+        this.props.postFile(data)
     }
-
     componentDidMount(){
-        this.props.getImageFiles()
-
+        this.props.getFile("f995b3dfc1967790a369480d3696528b.JPG", () => {
+            this.setState({ image: this.props.image})
+        })
     }
+
     render(){
         return(
             <div>
-                <input type="file" onChange={(e) => this.uploadImage(e)} />
-                <img src={this.state.multerImage} alt="uploadedImg" className="displayImg"/>
-                <button onClick={this.getThisImage}>Get Image</button>
+                <img src={this.state.image} alt="file" className="displayImg"/>
+                <input type="file" onChange={(e) => this.handleChange(e)}/>
+                <button onClick={this.handleUpload}>Upload</button>
             </div>
         )
     }
