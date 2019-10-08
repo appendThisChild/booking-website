@@ -14,6 +14,10 @@ const appointmentSchema = new Schema({
         type: Number,
         default: 1111111111
     },
+    clientEmail: {
+        type: String,
+        required: true
+    },
     appLengthInMinutes: {
         type: Number,
         required: true
@@ -32,6 +36,10 @@ const appointmentSchema = new Schema({
     },
     therapistPhoneNumber: {
         type: Number,
+        required: true
+    },
+    therapistEmail: {
+        type: String,
         required: true
     },
     address: {

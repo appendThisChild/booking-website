@@ -34,8 +34,8 @@ const userSchema = new Schema({
         default: false
     },
     visitsRemaining: {
-        type: Number,
-        default: 0
+        type: Array,
+        default: [0, 0, 0]
     },
     availability: {
         type: Array,

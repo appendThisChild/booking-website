@@ -22,11 +22,13 @@ class AppointmentProvider extends Component {
             appLengths: [60, 90, 120],
             clientID: "",
             clientName: "",
+            clientEmail: "",
             appLengthInMinutes: "",
             appDate: "",
             therapistID: "",
             therapistName: "",
             therapistPhoneNumber: "",
+            therapistEmail: "",
             address: "",
             packageChoice: "",
             canceled: false,
@@ -54,10 +56,12 @@ class AppointmentProvider extends Component {
             const newAppointment = {
                 clientID: this.state.clientID,
                 clientName: this.state.clientName,
+                clientEmail: this.state.clientEmail,
                 appLengthInMinutes: this.state.appLengthInMinutes,
                 appDate: this.state.appDate,
                 therapistID: this.state.therapistID,
                 therapistName: this.state.therapistName,
+                therapistEmail: this.state.therapistEmail,
                 therapistPhoneNumber: this.state.therapistPhoneNumber,
                 address: this.state.address
             }
@@ -67,10 +71,12 @@ class AppointmentProvider extends Component {
             this.setState({
                 clientID: "",
                 clientName: "",
+                clientEmail: "",
                 appLengthInMinutes: "",
                 appDate: "",
                 therapistID: "",
                 therapistName: "",
+                therapistEmail: "",
                 address: ""
             })
         })
@@ -81,7 +87,7 @@ class AppointmentProvider extends Component {
     updateAppointment = () => {
 
     }
-    deleteAppointment = () => {
+    cancelAppointment = () => {
 
     }
 
@@ -91,13 +97,15 @@ class AppointmentProvider extends Component {
 
 
 
-    handleNameIDAdd = (clientID, clientName, therapistName, address, phoneNumber) => {
+    handleNameIDAdd = (clientID, clientName, therapistName, address, phoneNumber, clientEmail, therapistEmail) => {
         this.setState({
             clientID: clientID,
             clientName: clientName,
             therapistName: therapistName,
             address: address,
-            therapistPhoneNumber: phoneNumber
+            therapistPhoneNumber: phoneNumber,
+            clientEmail: clientEmail,
+            therapistEmail: therapistEmail
         })
     }
     handleChange = e => {

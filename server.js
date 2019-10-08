@@ -1,4 +1,5 @@
 const express = require('express')
+// const cors = require('cors')
 const app = express()
 
 require('dotenv').config()
@@ -33,6 +34,8 @@ app.use("/api/therapist", require('./routes/therapistRoutes.js'))
 app.use("/api/owner", require('./routes/ownerRoutes.js'))
 // image portal
 app.use('/images', require('./routes/imageRoutes.js'))
+// payment portal
+app.use('/payment', require('./routes/stripeRoutes.js'))
 
 app.use((err, req, res, next) => {
     console.log('Caught Error')

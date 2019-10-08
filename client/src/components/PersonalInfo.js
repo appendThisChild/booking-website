@@ -81,10 +81,23 @@ class PersonalInfo extends Component {
         const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist, _id } = this.props.user
         const { street, city, state, zipcode } = address
         const mappedAvailabilty = availability.map((arr, i) => <Availability key={i} day={this.state.daysOfTheWeek[i]} arr={arr}/>)
+        const mappedRemaining = visitsRemaining.map((remain, i) => {
+            let minutes = ""
+            if (i === 0){
+                minutes = "60"
+            } else if (i === 1){
+                minutes = "90"
+            } else {
+                minutes = "120"
+            }
+            return <p key={i}>Pre-Paid {minutes}-Minute Visits Remaining: {remain}</p>
+        })
         return(
             <div>
                 <ProfileNav />
-                <p>Pre-Paid Visits Remaing: {visitsRemaining}</p>
+                <div>
+                    {mappedRemaining}
+                </div>
                 <button onClick={this.props.toggle}>Edit Information</button>
                 {this.props.on ?
                 <>

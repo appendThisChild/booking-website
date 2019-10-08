@@ -13,8 +13,12 @@ class Header extends Component {
     render(){
         return(
             <div className={"headerBackground"}>
-                <h1 className={"headerTitle1"}>Euphoric</h1>
-                <h1 className={"headerTitle2"}>Massage</h1>
+                <div className={"titleContainer"}>
+                    <h1 className={"headerTitle1"}>Blissed</h1>
+                    <h1 className={"headerTitle2"}>Out</h1>
+                    <h1 className={"headerTitle3"}>Body</h1>
+                    <h1 className={"headerTitle4"}>Works</h1>
+                </div>
                 <span className={"navToggle"} onClick={this.props.sideNavToggler}>&#9776;</span>
                 <Nav sideNavToggler={this.props.sideNavToggler} navSideToggle={this.props.navSideToggle}/> 
             </div>

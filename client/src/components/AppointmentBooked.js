@@ -7,6 +7,11 @@ class AppointmentBooked extends Component {
 
         }
     }
+    componentDidMount(){
+        // ask for phone number to update info
+        // ask for body part info
+        //
+    }
     render(){
         return(
             <div>

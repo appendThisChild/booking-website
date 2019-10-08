@@ -146,6 +146,21 @@ class UserProvider extends Component {
         const newNum = Number(trueNum.join(""))
         return newNum
     }
+    checkVisitsRemaining = (_id, appLength, callback) => {
+        let intCheck;
+        if (appLength === 60){
+            intCheck = 0
+        } else if (appLength === 90) {
+            intCheck = 1
+        } else if (appLength === 120) {
+            intCheck = 2
+        }
+        dataAxios.get(`/api/info/visits/${_id}/${intCheck}`)
+            .then(res => {
+                callback(res.data.visitsRemaining)
+            })
+            .catch(err => this.setState({errMsg: err.response.data.errMsg}))
+    }
     render(){
         return(
             <UserContext.Provider
@@ -162,7 +177,8 @@ class UserProvider extends Component {
                     inputLowercaseNospace: this.inputLowercaseNospace,
                     numberDisplay: this.numberDisplay,
                     numberDeconstruct: this.numberDeconstruct,
-                    updateState: this.updateState
+                    updateState: this.updateState,
+                    checkVisitsRemaining: this.checkVisitsRemaining
                 }}>
                 {this.props.children}
             </UserContext.Provider>

@@ -3,11 +3,10 @@ import React from "react"
 import { withUser } from "../context/UserProvider.js"
 
 const Appointment = props => {
-    const { appLengthInMinutes, appDate, therapistName, address, status } = props.appointment
-    // therapistPhoneNumber
+    const { appLengthInMinutes, appDate, therapistName, address, status, therapistPhoneNumber } = props.appointment
     const { street, city, state, zipcode } = address
     const date = new Date(appDate)
-    // const phoStr1 = props.numberDisplay(therapistPhoneNumber)
+    const phoStr1 = props.numberDisplay(therapistPhoneNumber)
     let hour = date.getHours()
     let min = date.getMinutes()
     let amPm = "am"
@@ -27,9 +26,9 @@ const Appointment = props => {
             <p>Date: {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}</p>
             <p>Time: {hour}:{min} {amPm}</p>
             <p>Length: {appLengthInMinutes} Minutes</p>
-            {/* I may not want to show this information until after the appointmenmt is paid for. */}
             {status === "Paid" ?
             <>
+                <p>Therapist's #: {phoStr1}</p>
                 <p>Address:</p>
                 <p>{street}</p>
                 <p>{city}</p>

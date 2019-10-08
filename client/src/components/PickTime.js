@@ -194,7 +194,10 @@ class PickTime extends Component {
                 this.props.user._id, 
                 `${this.props.firstCharCap(this.props.user.firstName)} ${this.props.firstCharCap(this.props.user.lastName)}`, 
                 `${this.props.firstCharCap(selectedTherapist.firstName)} ${this.props.firstCharCap(selectedTherapist.lastName)}`,
-                selectedTherapist.address, selectedTherapist.phoneNumber
+                selectedTherapist.address, 
+                selectedTherapist.phoneNumber, 
+                this.props.user.email,
+                selectedTherapist.email
             )
             this.props.clientGetTherapistsBlackDates(this.props.therapistID, () => {
                 this.setState({ selected: selectedTherapist }, () => this.gettingAvailability())
