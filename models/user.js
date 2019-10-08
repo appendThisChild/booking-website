@@ -61,6 +61,10 @@ const userSchema = new Schema({
     phoneNumber: {
         type: Number,
         default: 1111111111
+    },
+    profileImgName: {
+        type: String,
+        default: "none"
     }
 })
 

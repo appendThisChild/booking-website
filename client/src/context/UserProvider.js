@@ -90,6 +90,16 @@ class UserProvider extends Component {
             })
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
+    updateState = credentials => {
+        const { user, token } = credentials
+        localStorage.user = JSON.stringify(user)
+        localStorage.token = token
+        this.setState({
+            user,
+            token
+        })
+    }
+
     makingAppointment = () => {
         this.setState(() => ({
             makingAppointment: true
@@ -151,7 +161,8 @@ class UserProvider extends Component {
                     firstCharCap: this.firstCharCap,
                     inputLowercaseNospace: this.inputLowercaseNospace,
                     numberDisplay: this.numberDisplay,
-                    numberDeconstruct: this.numberDeconstruct
+                    numberDeconstruct: this.numberDeconstruct,
+                    updateState: this.updateState
                 }}>
                 {this.props.children}
             </UserContext.Provider>

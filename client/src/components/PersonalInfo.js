@@ -1,9 +1,10 @@
 import React, { Component } from "react"
 
 import ProfileNav from "./ProfileNav.js"
-import Availability from "./Availability.js";
+import Availability from "./Availability.js"
 import InfoForm from "./InfoForm.js"
 import BlackoutDates from "./BlackoutDates.js"
+import ImageDisplay from "./ImageDisplay.js"
 
 import { withUser } from "../context/UserProvider.js"
 import { withToggler } from "./Toggler.js"
@@ -101,6 +102,7 @@ class PersonalInfo extends Component {
                         <h2>Availability: </h2>
                         {mappedAvailabilty}
                         <BlackoutDates therapistID={_id}/>
+                        <ImageDisplay />
                     </>
                     : null}
                 </>

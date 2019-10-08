@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
 import TherapistTimeChoice from "./TherapistTimeChoice.js"
+import TherapistDisplay from "./TherapistDisplay.js"
 
 import { withUser } from "../context/UserProvider.js"
 import { withTherapist } from "../context/TherapistProvider.js"
@@ -26,6 +27,7 @@ class Book extends Component {
             <div>
                 <TherapistTimeChoice />
                 <button onClick={this.handlePickTime}>Pick Time</button>
+                <TherapistDisplay />
             </div>
         )
     }

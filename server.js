@@ -32,7 +32,7 @@ app.use("/api/therapist", require('./routes/therapistRoutes.js'))
 // owner portal
 app.use("/api/owner", require('./routes/ownerRoutes.js'))
 // image portal
-app.use('/image', require('./routes/imageRoutes.js'))
+app.use('/images', require('./routes/imageRoutes.js'))
 
 app.use((err, req, res, next) => {
     console.log('Caught Error')

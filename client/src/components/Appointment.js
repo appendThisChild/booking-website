@@ -3,7 +3,7 @@ import React from "react"
 import { withUser } from "../context/UserProvider.js"
 
 const Appointment = props => {
-    const { appLengthInMinutes, appDate, therapistName, address} = props.appointment
+    const { appLengthInMinutes, appDate, therapistName, address, status } = props.appointment
     // therapistPhoneNumber
     const { street, city, state, zipcode } = address
     const date = new Date(appDate)
@@ -28,11 +28,15 @@ const Appointment = props => {
             <p>Time: {hour}:{min} {amPm}</p>
             <p>Length: {appLengthInMinutes} Minutes</p>
             {/* I may not want to show this information until after the appointmenmt is paid for. */}
-            <p>Address:</p>
-            <p>{street}</p>
-            <p>{city}</p>
-            <p>{state}</p>
-            <p>{zipcode}</p>
+            {status === "Paid" ?
+            <>
+                <p>Address:</p>
+                <p>{street}</p>
+                <p>{city}</p>
+                <p>{state}</p>
+                <p>{zipcode}</p>
+            </>
+            :null}
         </div>
     )
 }
