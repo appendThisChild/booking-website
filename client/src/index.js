@@ -11,6 +11,7 @@ import TherapistProvider from "./context/TherapistProvider.js"
 import OwnerProvider from "./context/OwnerProvider.js";
 import BlackoutDatesProvider from "./context/BlackoutDatesProvider.js"
 import ImageProvider from "./context/ImageProvider.js";
+import GoogleCalendarProvider from "./context/GoogleCalendarProvider.js"
 
 ReactDOM.render(
     <BrowserRouter>
@@ -20,7 +21,9 @@ ReactDOM.render(
                     <OwnerProvider>
                         <BlackoutDatesProvider>
                             <ImageProvider>
-                                <App />
+                                <GoogleCalendarProvider>
+                                    <App />
+                                </GoogleCalendarProvider>
                             </ImageProvider>
                         </BlackoutDatesProvider>
                     </OwnerProvider>

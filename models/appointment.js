@@ -67,6 +67,10 @@ const appointmentSchema = new Schema({
     appointmentCreatedAt: {
         type: Date,
         default: Date.now
+    },
+    googleId: {
+        type: String,
+        default: ''
     }
 })
 

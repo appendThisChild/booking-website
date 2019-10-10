@@ -77,6 +77,9 @@ class PersonalInfo extends Component {
             }
         })
     }
+    componentDidMount(){
+        this.props.getCurrentinfo(this.props.user._id)
+    }
     render(){
         const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist, _id } = this.props.user
         const { street, city, state, zipcode } = address

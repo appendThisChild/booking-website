@@ -70,5 +70,15 @@ infoRouter.route('/:_id')
             }
         )
     })
+    .get((req, res, next) => {
+        User.findOne({_id: req.params._id}, (err, user) => {
+            if (err){
+                res.status(500)
+                return next(err)
+            }
+            const token = jwt.sign(user.withoutPassword(), process.env.SECRET)
+            return res.status(201).send({user: user.withoutPassword(), token})
+        })
+    })
 
 module.exports = infoRouter;

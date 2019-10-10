@@ -80,13 +80,14 @@ class UserProvider extends Component {
         const _id = this.state.user._id
         dataAxios.put(`/api/info/${_id}`, updates)
             .then(res => {
-                const { user, token } = res.data
-                localStorage.user = JSON.stringify(user)
-                localStorage.token = token
-                this.setState({
-                    user,
-                    token
-                })
+                this.updateState(res.data)
+            })
+            .catch(err => this.setState({errMsg: err.response.data.errMsg}))
+    }
+    getCurrentinfo = (_id) => {
+        dataAxios.get(`/api/info/${_id}`)
+            .then(res => {
+                this.updateState(res.data)
             })
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
@@ -99,14 +100,12 @@ class UserProvider extends Component {
             token
         })
     }
-
     makingAppointment = () => {
         this.setState(() => ({
             makingAppointment: true
         }))
     }
     appointmentSubmitted = () => {
-        console.log("Booking Completed")
         this.setState(() => ({
             makingAppointment: false
         }))
@@ -178,7 +177,8 @@ class UserProvider extends Component {
                     numberDisplay: this.numberDisplay,
                     numberDeconstruct: this.numberDeconstruct,
                     updateState: this.updateState,
-                    checkVisitsRemaining: this.checkVisitsRemaining
+                    checkVisitsRemaining: this.checkVisitsRemaining,
+                    getCurrentinfo: this.getCurrentinfo
                 }}>
                 {this.props.children}
             </UserContext.Provider>

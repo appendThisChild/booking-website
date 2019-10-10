@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { withAppointment } from "../context/AppointmentProvider.js"
 import { withUser } from "../context/UserProvider.js"
+import { withGoogle } from "../context/GoogleCalendarProvider.js"
 
 import Appointment from "./Appointment.js";
 
@@ -78,14 +79,15 @@ class PackageAndSubmit extends Component {
                             visitsIndex = 2
                         }
                         this.props.updateVisits(clientID, { index: visitsIndex, adjust: 2 }, () => {
-                            // send Email
-                            // push
+                            this.props.postEvent(this.props.currentAppointmentInProgress, () => {
+                                this.props.history.push('/appointmentBooked')
+                            })
                         })
                     } else {
-                        // send Email
-                        // push
+                        this.props.postEvent(this.props.currentAppointmentInProgress, () => {
+                            this.props.history.push('/appointmentBooked')
+                        })
                     }
-                    // this.props.history.push('/appointmentBooked')
                 })
             } else {
                 toast.update(display, {
@@ -116,10 +118,10 @@ class PackageAndSubmit extends Component {
                 visitsIndex = 2
             }
             this.props.updateVisits(clientID, { index: visitsIndex, adjust: -1 }, () => {
-                // send Email
-                // push
+                this.props.postEvent(this.props.currentAppointmentInProgress, () => {
+                    this.props.history.push('/appointmentBooked')
+                })
             })
-            // this.props.history.push('/appointmentBooked')
         })
     }
     componentDidMount(){
@@ -139,7 +141,7 @@ class PackageAndSubmit extends Component {
                 currentAppointmentInProgress.clientID, 
                 currentAppointmentInProgress.appLengthInMinutes, 
                 (visitsRemaining) => {
-                if (visitsRemaining !== 0){
+                if (visitsRemaining > 0){
                     this.setState({
                         dataIn: true,
                         amount: 0,
@@ -168,6 +170,9 @@ class PackageAndSubmit extends Component {
         // includes prices and wavier doc.
             // create backend model for all extra details to add-in
             // create owner link to access info and edit as needed
+
+        // 3.)
+        // create a way to cancel an appointment which removes the appointment from the google calendar
 
     }
     render(){
@@ -215,4 +220,4 @@ class PackageAndSubmit extends Component {
     }
 }
 
-export default withUser(withAppointment(PackageAndSubmit));
+export default withGoogle(withUser(withAppointment(PackageAndSubmit)));

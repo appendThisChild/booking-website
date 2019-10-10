@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
 import { withAppointment } from "../context/AppointmentProvider.js"
+import { withUser } from "../context/UserProvider.js"
 
 import Appointment from "./Appointment.js";
 
@@ -15,8 +16,10 @@ class AppointmentBooked extends Component {
         const { currentAppointmentInProgress } = this.props
         if (currentAppointmentInProgress === ""){ this.props.history.push("/book")} 
         else {
+            this.props.appointmentSubmitted()
             this.setState({dataIn: true})
         }
+        
         // ask for phone number to update info
         // ask for body part info
         //
@@ -28,7 +31,7 @@ class AppointmentBooked extends Component {
                 {dataIn ?
                 <>
                     <Appointment appointment={this.props.currentAppointmentInProgress}/>
-                    
+
                 </>
                 :null}
                 Your Appointment has been booked. Please submit additional information.
@@ -37,4 +40,4 @@ class AppointmentBooked extends Component {
     }
 }
 
-export default withAppointment(AppointmentBooked);
+export default withUser(withAppointment(AppointmentBooked));
