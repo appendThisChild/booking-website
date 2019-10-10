@@ -1,24 +1,40 @@
 import React, { Component } from "react"
 
+import { withAppointment } from "../context/AppointmentProvider.js"
+
+import Appointment from "./Appointment.js";
+
 class AppointmentBooked extends Component {
     constructor(){
         super()
         this.state = {
-
+            dataIn: false
         }
     }
     componentDidMount(){
+        const { currentAppointmentInProgress } = this.props
+        if (currentAppointmentInProgress === ""){ this.props.history.push("/book")} 
+        else {
+            this.setState({dataIn: true})
+        }
         // ask for phone number to update info
         // ask for body part info
         //
     }
     render(){
+        const { dataIn } = this.state
         return(
             <div>
+                {dataIn ?
+                <>
+                    <Appointment appointment={this.props.currentAppointmentInProgress}/>
+                    
+                </>
+                :null}
                 Your Appointment has been booked. Please submit additional information.
             </div>
         )
     }
 }
 
-export default AppointmentBooked;
+export default withAppointment(AppointmentBooked);

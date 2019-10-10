@@ -22,7 +22,7 @@ paymentRouter.route('/charge')
                 customer: customer.id,
                 receipt_email: token.email,
                 description: `Purchase of ${product.name}`
-                //, application_fee_amount: parseInt(product.price * .1)
+                // , application_fee_amount: parseInt(product.price * .1)
             }, (err, charge) => {
                 if (err){
                     res.status(500)
@@ -34,8 +34,8 @@ paymentRouter.route('/charge')
         })
     }) 
 
-    // {
-    //     stripe_account: "{{CONNECTED_STRIPE_ACCOUNT_ID}}",
-    //   }
+    // ,{
+    //     stripe_account: "pk_test_TBxFm87qdHM3KmZRKE3PWQY700uf5seoC9",
+    // }
 
 module.exports = paymentRouter;

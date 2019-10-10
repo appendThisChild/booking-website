@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import Countdown from "react-countdown-now"
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast, Slide, Flip } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 import { withAppointment } from "../context/AppointmentProvider.js"
 import { withUser } from "../context/UserProvider.js"
@@ -37,8 +38,11 @@ class PackageAndSubmit extends Component {
         this.setState({ [e.target.name] : value })
     }
     handleSubmit = (token) => {
+        const display = toast("Receiving Payment, please wait...", {
+            transition: Slide
+        })
         const { amount, amounts } = this.state
-        const { appLengthInMinutes } = this.props.currentAppointmentInProgress
+        const { appLengthInMinutes, _id, clientID } = this.props.currentAppointmentInProgress
         const index = amounts.findIndex((num) => num === amount)
         let message = "-Minute Massage"
         let pChoice = 1
@@ -54,40 +58,69 @@ class PackageAndSubmit extends Component {
             } 
         })
         .then(res => {
-            console.log(res.data)
             if (res.data === "succeeded"){
-                console.log("Win")
-                // handle success
-
-
-
+                const updates = {
+                    packageChoice: pChoice,
+                    amount: amount,
+                    status: "Paid"
+                }
+                toast.update(display, {
+                    render: "Payment Completed! Please wait...",
+                    type: toast.TYPE.SUCCESS,
+                    transition: Flip
+                })
+                this.props.updateAppointment(_id, updates, () => {
+                    if (pChoice === 2){
+                        let visitsIndex = 0
+                        if (appLengthInMinutes === 90){
+                            visitsIndex = 1
+                        } else if (appLengthInMinutes === 120){
+                            visitsIndex = 2
+                        }
+                        this.props.updateVisits(clientID, { index: visitsIndex, adjust: 2 }, () => {
+                            // send Email
+                            // push
+                        })
+                    } else {
+                        // send Email
+                        // push
+                    }
+                    // this.props.history.push('/appointmentBooked')
+                })
             } else {
-                console.log('Loose')
-                // handle failure
-
-
-
+                toast.update(display, {
+                    render: `Payment Failed: ${res.data}`,
+                    type: toast.TYPE.ERROR,
+                    transition: Flip
+                })
             }
         })
         .catch(err => console.log(err.response.data.errMsg))
-        //// Update
-        // package choice 1, or 2
-        // console.log(pChoice)
-        // amount 
-        // console.log(amount)
-        // status
-        // send email and creat appointment in gmail in backend
-
     }
     handlePrepaid = () => {
-        console.log("Clicked")
-
-        //// Update
-        // package choice 0
-        // amount 
-        // status
-        // send email and creat appointment in gmail
-
+        toast.success("Completing Appointment! Please wait...", {
+            transition: Slide
+        })
+        const { amount } = this.state
+        const { _id, appLengthInMinutes, clientID } = this.props.currentAppointmentInProgress
+        const updates = {
+            packageChoice: 0,
+            amount: amount,
+            status: "Paid"
+        }
+        this.props.updateAppointment(_id, updates, () => {
+            let visitsIndex = 0
+            if (appLengthInMinutes === 90){
+                visitsIndex = 1
+            } else if (appLengthInMinutes === 120){
+                visitsIndex = 2
+            }
+            this.props.updateVisits(clientID, { index: visitsIndex, adjust: -1 }, () => {
+                // send Email
+                // push
+            })
+            // this.props.history.push('/appointmentBooked')
+        })
     }
     componentDidMount(){
         const { currentAppointmentInProgress } = this.props
@@ -123,24 +156,18 @@ class PackageAndSubmit extends Component {
             })
         }
 
-
+        // 1.)
         // sign wavier required
-        // 
+            // vvvvv above button
+            // have button to check & 
+            // create click option to download the wavier 
+                // create pdf life download for owner
+
+        // 2.)
         // create owner link for purchase details
         // includes prices and wavier doc.
-        //
-        // finish purchase with update appointment details 
-        // 
-
-
-
-
-
-
-
-
-
-
+            // create backend model for all extra details to add-in
+            // create owner link to access info and edit as needed
 
     }
     render(){
@@ -159,6 +186,7 @@ class PackageAndSubmit extends Component {
         return(
             <div>
                 <Countdown date={date + 600000} renderer={this.tenMinuteTimer}/>
+                <ToastContainer autoClose={10000} />
                 {dataIn ?
                 <>
                     <Appointment appointment={this.props.currentAppointmentInProgress}/>

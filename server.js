@@ -36,6 +36,8 @@ app.use("/api/owner", require('./routes/ownerRoutes.js'))
 app.use('/images', require('./routes/imageRoutes.js'))
 // payment portal
 app.use('/payment', require('./routes/stripeRoutes.js'))
+// google portal
+app.use('/calendar', require('./routes/googleCalendarRoutes.js'))
 
 app.use((err, req, res, next) => {
     console.log('Caught Error')

@@ -29,10 +29,6 @@ const userSchema = new Schema({
         type: String,
         default: ""
     },
-    signedWavier: {
-        type: Boolean,
-        default: false
-    },
     visitsRemaining: {
         type: Array,
         default: [0, 0, 0]

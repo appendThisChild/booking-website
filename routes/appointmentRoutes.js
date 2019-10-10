@@ -13,6 +13,7 @@ appointmentRouter.route('/')
             return res.status(201).send(newAppointmentObj)
         })
     })
+
 appointmentRouter.route('/:id')
     .get((req, res, next) => {
         Appointment.find({
@@ -27,21 +28,20 @@ appointmentRouter.route('/:id')
             return res.status(200).send(foundAppointments)
         })
     })
-// appointmentRouter.route('/:_id')
-//     .put((req, res, next) => {
-//         Appointment.findOneAndUpdate(
-//             {_id: req.params._id},
-//             req.body,
-//             {new: true},
-//             (err, updatedAppointment) => {
-//                 if (err){
-//                     res.status(500)
-//                     return next(err)
-//                 }
-//                 return res.status(201).send(updatedAppointment)
-//             }
-//         )
-//     })
+    .put((req, res, next) => {
+        Appointment.findOneAndUpdate(
+            {_id: req.params.id},
+            req.body,
+            {new: true},
+            (err, updatedAppointment) => {
+                if (err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(201).send(updatedAppointment)
+            }
+        )
+    })
 //     .delete((req, res, next) => {
 //         Appointment.findOneAndRemove(
 //             {_id: req.params._id},

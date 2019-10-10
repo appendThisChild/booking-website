@@ -18,6 +18,31 @@ infoRouter.route('/email/:_id')
             return res.status(200).send({isPresent: isPresent})
         })
     })
+
+infoRouter.route('/visits/:_id')
+    .put((req, res, next) => {
+        const { index, adjust } = req.body
+        User.findOne({_id: req.params._id}, (err, user) => {
+            if (err){
+                res.status(500)
+                return next(err)
+            }
+            const { visitsRemaining } = user
+            visitsRemaining.splice(index, 1, visitsRemaining[index] + adjust)
+            User.findOneAndUpdate(
+                {_id: req.params._id},
+                {visitsRemaining: visitsRemaining},
+                {new: true}, 
+                (err, user) => {
+                if (err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(200).send("Done")
+            })
+        })
+    })
+
 infoRouter.route('/visits/:_id/:int')
     .get((req, res, next) => {
         User.findOne({_id: req.params._id}, (err, user) => {
@@ -28,7 +53,6 @@ infoRouter.route('/visits/:_id/:int')
             return res.status(200).send({visitsRemaining: user.visitsRemaining[req.params.int]})
         })
     })
-
 
 infoRouter.route('/:_id')
     .put((req, res, next) => {
