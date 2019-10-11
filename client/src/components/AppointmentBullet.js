@@ -1,10 +1,28 @@
 import React from "react"
 
 import { withUser } from "../context/UserProvider.js"
+import { withAppointment } from "../context/AppointmentProvider.js"
 import { withToggler } from "./Toggler.js"
 
 const AppointmentBullet = props => {
-    const { appDate, appLengthInMinutes, amount, address, clientName, therapistName, canceled, packageChoice, therapistPhoneNumber, clientPhoneNumber } = props
+    const {
+        _id,
+        googleId,
+        clientID,
+        appDate, 
+        appLengthInMinutes, 
+        amount, 
+        address, 
+        clientName, 
+        therapistName, 
+        canceled, 
+        packageChoice, 
+        therapistPhoneNumber, 
+        clientPhoneNumber,
+        client,
+        therapist,
+        future
+    } = props
     const { street, city, state, zipcode } = address
     const packages = ["Pre-Paid Massage", "One Massage", "Three Massage Package"]
     const phoStr1 = props.numberDisplay(therapistPhoneNumber)
@@ -48,15 +66,26 @@ const AppointmentBullet = props => {
                     <span>{state}</span>
                     <span>{zipcode}</span>
                 </div>
+                {!client ?
                 <div>
                     <span>Client: {clientName}</span>
                     <span>Phone #: {phoStr2}</span>
                     <span>Package Choice: {packages[packageChoice]}</span>
                 </div>
+                :null}
+                {(future && client) || (future && therapist) ?
+                <>
+                    {!canceled ?
+                    <div>
+                        <button onClick={() => props.cancelAppointment(appLengthInMinutes, clientID, appDate, client, _id, googleId)}>Cancel Appointment</button>
+                    </div>
+                    :null}
+                </>
+                :null}
             </>
             }
         </div>
     )
 }
 
-export default withUser(withToggler(AppointmentBullet));
+export default withAppointment(withUser(withToggler(AppointmentBullet)));

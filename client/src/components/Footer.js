@@ -4,7 +4,7 @@ const Footer = () => {
     return(
         <div className={"footer"}>
             <div>
-                <p>&#169; 2020 Euphoric Massage.</p>
+                <p>&#169; 2020 Blissed Out Body Works.</p>
                 <p> All rights reserved.</p>
             </div>
             <div>

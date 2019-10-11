@@ -7,15 +7,16 @@ import { withOwner } from "../context/OwnerProvider.js"
 import Availability from "./Availability.js"
 
 const Account = props => {
-    const { firstName, lastName, visitsRemaining, on, isTherapist, email, phoneNumber, address, availability, _id, callback } = props
+    const { firstName, lastName, visitsRemaining, on, isTherapist, email, phoneNumber, address, availability, _id, callback, order } = props
     const { street, city, state, zipcode } = address
     const pho1 = props.numberDisplay(phoneNumber)
     const mappedAvailabilty = availability.map((arr, i) => <Availability key={i} arr={arr}/>)
     return(
         <div>
             <div onClick={props.toggle}>
-                <span>{props.firstCharCap(firstName)} {props.firstCharCap(lastName)}</span>
-                <span>Visits Remaining: {visitsRemaining}</span>
+                <span>{order + 1}.) </span>
+                <span>{props.firstCharCap(lastName)}, {props.firstCharCap(firstName)}</span>
+                <span>Pre-Paid Visits: 60min - {visitsRemaining[0]} 90min - {visitsRemaining[1]} 120min - {visitsRemaining[2]}</span>
             </div>
             {!on ?
             <div>

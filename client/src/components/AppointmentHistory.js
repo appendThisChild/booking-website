@@ -3,11 +3,16 @@ import React from 'react'
 import AppointmentBullet from "./AppointmentBullet.js"
 
 const AppointmentHistory = props => {
-    const { title, subTitle, history, future, client, owner, month, year, switchMonth, toggle } = props
+    const { title, subTitle, history, future, client, owner, month, year, switchMonth, toggle, therapist } = props
     const monthsOftheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     const thisMonthsHistory = history.filter(app => new Date(app.appDate).getFullYear() === year && new Date(app.appDate).getMonth() === month )
-    const mappedHistory = thisMonthsHistory.map(app => <AppointmentBullet {...app} key={app._id}/> )
-    const filterNotCanceled = thisMonthsHistory.filter(app => app.canceled === false)
+    const mappedHistory = thisMonthsHistory.map(app => <AppointmentBullet {...app} client={client} therapist={therapist} future={future} key={app._id}/> )
+    let filterNotCanceled = []
+    if (owner){
+        filterNotCanceled = thisMonthsHistory
+    } else {
+        filterNotCanceled = thisMonthsHistory.filter(app => app.canceled === false)
+    }
     const monthEarnings = filterNotCanceled.reduce((total, sum) => total + sum.amount, 0) / 100
     const websiteDeductions = (monthEarnings * .10).toFixed(2)
     const therapistEarnings = (monthEarnings * .80).toFixed(2)

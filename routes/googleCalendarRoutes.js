@@ -111,6 +111,7 @@ googleRouter.route('/:id')
         const calendar = google.calendar({version: 'v3', auth});
         calendar.events.delete({
           calendarId: 'primary',
+          sendNotifications: true,
           eventId: req.params.id,
         }, (err) => {
           if (err) {

@@ -65,8 +65,9 @@ class History extends Component {
     }
     componentDidMount(){
         this.props.getAllClientAppointments(this.props.user._id, () => {
-            const order = this.props.orderAppointments(this.props.clientAppointments)
-            this.setState({ upcomingAppointments: order[1], pastAppointments: order[0], dataIn: true })
+            this.props.orderAppointments(this.props.clientAppointments, (order) => {
+                this.setState({ upcomingAppointments: order[1], pastAppointments: order[0], dataIn: true })
+            })
         })
     }
 
@@ -84,6 +85,7 @@ class History extends Component {
                         subTitle={"New to Newest"} 
                         future={true}
                         client={true}
+                        therapist={false}
                         owner={false}
                         month={presentMonth} 
                         year={presentYear} 
@@ -95,6 +97,7 @@ class History extends Component {
                         subTitle={"Old to Oldest"} 
                         future={false}
                         client={true}
+                        therapist={false}
                         owner={false} 
                         month={pastMonth} 
                         year={pastYear} 

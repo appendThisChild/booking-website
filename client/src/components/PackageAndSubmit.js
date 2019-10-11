@@ -171,8 +171,6 @@ class PackageAndSubmit extends Component {
             // create backend model for all extra details to add-in
             // create owner link to access info and edit as needed
 
-        // 3.)
-        // create a way to cancel an appointment which removes the appointment from the google calendar
 
     }
     render(){

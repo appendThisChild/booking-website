@@ -15,21 +15,21 @@ import GoogleCalendarProvider from "./context/GoogleCalendarProvider.js"
 
 ReactDOM.render(
     <BrowserRouter>
-        <UserProvider>
-            <AppointmentProvider>
-                <TherapistProvider>
-                    <OwnerProvider>
-                        <BlackoutDatesProvider>
-                            <ImageProvider>
-                                <GoogleCalendarProvider>
+        <GoogleCalendarProvider>
+            <UserProvider>
+                <AppointmentProvider>
+                    <TherapistProvider>
+                        <OwnerProvider>
+                            <BlackoutDatesProvider>
+                                <ImageProvider>
                                     <App />
-                                </GoogleCalendarProvider>
-                            </ImageProvider>
-                        </BlackoutDatesProvider>
-                    </OwnerProvider>
-                </TherapistProvider>
-            </AppointmentProvider>
-        </UserProvider>
+                                </ImageProvider>
+                            </BlackoutDatesProvider>
+                        </OwnerProvider>
+                    </TherapistProvider>
+                </AppointmentProvider>
+            </UserProvider>
+        </GoogleCalendarProvider>
     </BrowserRouter>
 ,
 document.getElementById("root"))

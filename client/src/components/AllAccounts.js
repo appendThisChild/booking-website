@@ -21,12 +21,19 @@ class AllAccounts extends Component {
     }
     render(){
         const { accounts } = this.props
+        accounts.sort((a, b)=> {
+            const x = a.lastName.toLowerCase();
+            const y = b.lastName.toLowerCase();
+            if (x < y) {return -1;}
+            if (x > y) {return 1;}
+            return 0;
+        })
         const owners = accounts.filter(account => account.isOwner === true && account.isTherapist === false)
         const therapists = accounts.filter(account => account.isTherapist === true)
         const clients = accounts.filter(account => account.isTherapist === false && account.isOwner === false)
-        const mappedOwners = owners.map(account => <Account key={account._id} {...account} callback={this.sendToAccount}/>)
-        const mappedTherapists = therapists.map(account => <Account key={account._id} {...account} callback={this.sendToAccount}/>)
-        const mappedClients = clients.map(account => <Account key={account._id} {...account} callback={this.sendToAccount}/>)
+        const mappedOwners = owners.map((account, i) => <Account key={account._id} order={i} {...account} callback={this.sendToAccount}/>)
+        const mappedTherapists = therapists.map((account, i) => <Account key={account._id} order={i} {...account} callback={this.sendToAccount}/>)
+        const mappedClients = clients.map((account, i) => <Account key={account._id} order={i} {...account} callback={this.sendToAccount}/>)
         return(
             <div>
                 <ProfileNav />

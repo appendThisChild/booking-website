@@ -42,17 +42,19 @@ appointmentRouter.route('/:id')
             }
         )
     })
-//     .delete((req, res, next) => {
-//         Appointment.findOneAndRemove(
-//             {_id: req.params._id},
-//             (err, deletedAppointment) => {
-//                 if (err){
-//                     res.status(500)
-//                     return next(err)
-//                 }
-//                 return res.status(202).send(`Successfully removed the Appointment!`)
-//             }
-//         )
-//     })
+    .delete((req, res, next) => {
+        Appointment.findOneAndUpdate(
+            {_id: req.params.id},
+            {canceled: true},
+            {new: true},
+            (err) => {
+                if (err){
+                    res.status(500)
+                    return next(err)
+                }
+                return res.status(202).send(`Appointment Canceled!`)
+            }
+        )
+    })
 
 module.exports = appointmentRouter;

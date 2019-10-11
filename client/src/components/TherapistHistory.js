@@ -65,17 +65,30 @@ class TherapistHistory extends Component {
     }
     componentDidMount(){
         this.props.getAllTherapistAppointments(this.props.user._id, () => {
-            const order = this.props.orderAppointments(this.props.therAppointments)
-            this.setState({ upcomingAppointments: order[1], pastAppointments: order[0], dataIn: true })
+            this.props.therAppointments.map(app => {
+                if (app.packageChoice !== 1){
+                    if (app.appLengthInMinutes === 60){
+                        app.amount = 19998 / 3
+                    } else if (app.appLengthInMinutes === 90){
+                        app.amount = 29997 / 3
+                    } else if (app.appLengthInMinutes === 120) {
+                        app.amount = 39996 / 3
+                    }
+                } 
+                return app
+            })
+            this.props.orderAppointments(this.props.therAppointments, (order) => {
+                this.setState({ upcomingAppointments: order[1], pastAppointments: order[0], dataIn: true })
+            })
         })
     }
 
     render(){
         const { upcomingAppointments, pastAppointments, dataIn, presentMonth, pastMonth, presentYear, pastYear, presentToggle, pastToggle } = this.state
         const { switchPastMonth, switchPresentMonth } = this
-        const yearEarnings = pastAppointments.filter(app => new Date(app.appDate).getFullYear() === pastYear && app.canceled === false ).reduce((total, sum) => total + sum.amount, 0)
-        const therapistEarnings = yearEarnings * .80
-        const serviceDeducted = yearEarnings * .20
+        const yearEarnings = pastAppointments.filter(app => new Date(app.appDate).getFullYear() === pastYear && app.canceled === false ).reduce((total, sum) => total + sum.amount, 0) / 100
+        const therapistEarnings = (yearEarnings * .80).toFixed(2)
+        const serviceDeducted = (yearEarnings * .20).toFixed(2)
         return(
             <div>
                 <ProfileNav />
@@ -87,6 +100,7 @@ class TherapistHistory extends Component {
                         subTitle={"New to Newest"} 
                         future={true}
                         client={false}
+                        therapist={true}
                         owner={false}
                         month={presentMonth} 
                         year={presentYear} 
@@ -98,6 +112,7 @@ class TherapistHistory extends Component {
                         subTitle={"Old to Oldest"} 
                         future={false}
                         client={false}
+                        therapist={true}
                         owner={false} 
                         month={pastMonth} 
                         year={pastYear} 

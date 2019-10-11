@@ -67,15 +67,16 @@ class CompanyHistory extends Component {
     }
     componentDidMount(){
         this.props.getAllCompanyAppointments(() => {
-            const order = this.props.orderAppointments(this.props.companyAppointments)
-            this.setState({ upcomingAppointments: order[1], pastAppointments: order[0], dataIn: true })
+            this.props.orderAppointments(this.props.companyAppointments, (order) => {
+                this.setState({ upcomingAppointments: order[1], pastAppointments: order[0], dataIn: true })
+            })
         })
     }
 
     render(){
         const { upcomingAppointments, pastAppointments, dataIn, presentMonth, pastMonth, presentYear, pastYear, presentToggle, pastToggle } = this.state
         const { switchPastMonth, switchPresentMonth } = this
-        const yearEarnings = pastAppointments.filter(app => new Date(app.appDate).getFullYear() === pastYear && app.canceled === false ).reduce((total, sum) => total + sum.amount, 0) / 100
+        const yearEarnings = pastAppointments.filter(app => new Date(app.appDate).getFullYear() === pastYear ).reduce((total, sum) => total + sum.amount, 0) / 100
         const therapistEarnings = (yearEarnings * .80).toFixed(2)
         const websiteDeductions = (yearEarnings * .10).toFixed(2)
         const companyEarnings = (yearEarnings - therapistEarnings - websiteDeductions).toFixed(2)
@@ -90,6 +91,7 @@ class CompanyHistory extends Component {
                         subTitle={"New to Newest"} 
                         future={true}
                         client={false}
+                        therapist={false}
                         owner={true}
                         month={presentMonth} 
                         year={presentYear} 
@@ -101,6 +103,7 @@ class CompanyHistory extends Component {
                         subTitle={"Old to Oldest"} 
                         future={false}
                         client={false}
+                        therapist={false}
                         owner={true} 
                         month={pastMonth} 
                         year={pastYear} 

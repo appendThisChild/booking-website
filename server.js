@@ -19,6 +19,8 @@ app.use("/api/therapist", (req, res, next) => checkIfTherapist(req, res, next))
 const conn = mongoose.connect(mongoURI, options)
 conn.then(() => console.log('[o] Connected to the DB'), (err) => console.log(err))
 
+// generalInfo
+app.use('/generalInfo', require('./routes/generalInfoRoutes.js'))
 // login portals
 app.use("/auth", require('./routes/authRoutes.js'))
 // personal info portal

@@ -31,13 +31,29 @@ class OwnerProvider extends Component {
         const account = this.state.accounts.filter(account => account._id === _id)[0]
         dataAxios.get(`/api/owner/appointment/client/${_id}`)
             .then(res => this.setState(
-                { searchedAccount: account, searchedClientHistory: res.data.sort((app1, app2) => new Date(app2.appDate) - new Date(app1.appDate)) }, 
+                { 
+                    searchedAccount: account, 
+                    searchedClientHistory: res.data.sort((app1, app2) => new Date(app2.appDate) - new Date(app1.appDate)) 
+                }, 
                 !account.isTherapist ? () => callback() : () => {
                     dataAxios.get(`/api/owner/appointment/therapist/${_id}`)
-                        .then(res => this.setState(
-                            { searchedTherapistHistory: res.data.sort((app1, app2) => new Date(app2.appDate) - new Date(app1.appDate))},
-                            () => callback()
-                        ))
+                        .then(res => {
+                            const apps = res.data.map(app => {
+                                if (app.packageChoice !== 1){
+                                    if (app.appLengthInMinutes === 60){
+                                        app.amount = 19998 / 3
+                                    } else if (app.appLengthInMinutes === 90){
+                                        app.amount = 29997 / 3
+                                    } else if (app.appLengthInMinutes === 120) {
+                                        app.amount = 39996 / 3
+                                    }
+                                } 
+                                return app
+                            })
+                            this.setState({ 
+                                searchedTherapistHistory: apps.sort((app1, app2) => new Date(app2.appDate) - new Date(app1.appDate))
+                            }, () => callback())
+                        })
                         .catch(err => console.log(err.response.data.errMsg))
                 }
             ))

@@ -80,7 +80,8 @@ class AccontHistory extends Component {
                 title={""} 
                 subTitle={"Old to Oldest"} 
                 future={false}
-                client={true}
+                therapist={false}
+                client={false}
                 owner={false}
                 month={presentMonth} 
                 year={presentYear} 
@@ -94,6 +95,7 @@ class AccontHistory extends Component {
                 subTitle={"Old to Oldest"} 
                 future={false}
                 client={true}
+                therapist={false}
                 owner={false} 
                 month={pastMonth} 
                 year={pastYear} 

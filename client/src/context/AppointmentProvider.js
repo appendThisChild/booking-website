@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import axios from "axios"
 
+import { withGoogle } from "./GoogleCalendarProvider.js"
+
 const AppointmentContext = React.createContext()
 
 const dataAxios = axios.create()
@@ -86,18 +88,34 @@ class AppointmentProvider extends Component {
             .then(res => this.setState({ currentAppointmentInProgress: res.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
-    cancelAppointment = () => {
-
-
-
-
-
-
-
-
-
-        
-
+    cancelAppointment = (appLengthInMinutes, clientID, appDate, client, _id, googleId) => {
+        let visitsIndex = 0
+        if (appLengthInMinutes === 90){
+            visitsIndex = 1
+        } else if (appLengthInMinutes === 120){
+            visitsIndex = 2
+        }
+        const today24 = new Date()
+        today24.setHours(today24.getHours() + 24)
+        this.props.deleteEvent(googleId, () => {
+            dataAxios.delete(`/api/appointment/${_id}`)
+                .then(() => {
+                    if (client){
+                        if (new Date(appDate) > today24){
+                            this.updateVisits(clientID, { index: visitsIndex, adjust: 1 }, () => {
+                                window.location.reload();
+                            })
+                        } else {
+                            window.location.reload();
+                        }
+                    } else {
+                        this.updateVisits(clientID, { index: visitsIndex, adjust: 1 }, () => {
+                            window.location.reload();
+                        })
+                    }
+                })
+                .catch(err => console.log(err.response.data.errMsg))
+        })
     }
     updateVisits = (_id, updates, callback) => {
         dataAxios.put(`/api/info/visits/${_id}`, updates)
@@ -121,13 +139,13 @@ class AppointmentProvider extends Component {
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
         this.setState({ [e.target.name] : value })
     }
-    orderAppointments = appointments => {
+    orderAppointments = (appointments, callback) => {
         const today = new Date()
         const past = appointments.filter(obj => new Date(obj.appDate) < today )
         const present = appointments.filter(obj => new Date(obj.appDate) > today )
         past.sort((app1, app2) => new Date(app2.appDate) - new Date(app1.appDate))
         present.sort((app1, app2) => new Date(app1.appDate) - new Date(app2.appDate))
-        return [past, present]
+        callback([past, present])
     }
     render(){
         return(
@@ -139,7 +157,7 @@ class AppointmentProvider extends Component {
                     getAllTherapistAppointments: this.getAllTherapistAppointments,
                     postNewAppointment: this.postNewAppointment,
                     updateAppointment: this.updateAppointment,
-                    // deleteAppointment: this.deleteAppointment,
+                    cancelAppointment: this.cancelAppointment,
                     handleChange: this.handleChange,
                     handleNameIDAdd: this.handleNameIDAdd,
                     orderAppointments: this.orderAppointments,
@@ -151,7 +169,7 @@ class AppointmentProvider extends Component {
     }
 }
 
-export default AppointmentProvider;
+export default withGoogle(AppointmentProvider);
 
 export const withAppointment = C => props => (
     <AppointmentContext.Consumer>
