@@ -101,9 +101,9 @@ class PersonalInfo extends Component {
                 <div>
                     {mappedRemaining}
                 </div>
-                <button onClick={this.props.toggle}>Edit Information</button>
                 {this.props.on ?
                 <>
+                    <button onClick={this.props.toggle}>Edit Information</button>
                     <h2>Email: </h2><p>{email}</p>
                     <h2>First Name: </h2><p>{this.props.firstCharCap(firstName)}</p>
                     <h2>Last Name: </h2><p>{this.props.firstCharCap(lastName)}</p>
@@ -124,7 +124,7 @@ class PersonalInfo extends Component {
                 </>
                 :
                 <>
-                    <button onClick={this.props.toggle}>Cancel</button>
+                    <button onClick={this.props.toggle}>Cancel Edit</button>
                     <InfoForm 
                         handleChange={this.handleChange}
                         daysOfTheWeek={this.state.daysOfTheWeek}
@@ -134,7 +134,8 @@ class PersonalInfo extends Component {
                         btnText="Submit Edit"
                         emailExists={this.state.emailExists}
                         checkInput={this.state.checkInput}
-                        {...this.state}/>
+                        {...this.state}
+                    />
                 </>
                 }
             </div>

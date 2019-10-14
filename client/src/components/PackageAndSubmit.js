@@ -171,7 +171,6 @@ class PackageAndSubmit extends Component {
             // create backend model for all extra details to add-in
             // create owner link to access info and edit as needed
 
-
     }
     render(){
         const { dataIn, apiKey, amount, amounts, except } = this.state

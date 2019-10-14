@@ -122,7 +122,7 @@ class AppointmentProvider extends Component {
             .then(res => {
                 if (res.data === "Done") callback()
             })
-            .catch(err => this.setState({errMsg: err.response.data.errMsg}))
+            .catch(err => console.log(err.response.data.errMsg))
     }
     handleNameIDAdd = (clientID, clientName, therapistName, address, phoneNumber, clientEmail, therapistEmail) => {
         this.setState({

@@ -12,10 +12,8 @@ const ProfileNav = props => {
         linkName.push("Your Therapist History")
     }
     if (user.isOwner){
-        links.push("/companyHistory")
-        linkName.push("Company History")
-        links.push("/accounts")
-        linkName.push("All Accounts")
+        links.push("/companyHistory", "/accounts", "/citeInfo")
+        linkName.push("Company History", "All Accounts", "Cite Info")
     }
     const mappedLinks = links.map((link, i) => 
         <Link to={`${link}`} key={i}>{linkName[i]}</Link>

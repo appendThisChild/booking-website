@@ -32,8 +32,9 @@ app.use("/api/therapists", require('./routes/apiTherapistsRoutes.js'))
 app.use("/api/appointment", require('./routes/appointmentRoutes.js'))
 // therapist portal
 app.use("/api/therapist", require('./routes/therapistRoutes.js'))
-// owner portal
+// owner portals
 app.use("/api/owner", require('./routes/ownerRoutes.js'))
+app.use("/api/owner/generalInfo", require('./routes/ownerGeneralInfoRoutes.js'))
 // image portal
 app.use('/images', require('./routes/imageRoutes.js'))
 // payment portal
