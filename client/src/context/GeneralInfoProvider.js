@@ -33,6 +33,26 @@ class GeneratorInfoProvider extends Component {
             .then(res => this.setState({genInfo: res.data}))
             .catch(err => console.log(err.response.data.errMsg))
     }
+    postPDF = (data, callback) => {
+        dataAxios.post(`/api/owner/generalInfo/upload/${this.state.genInfo._id}`, data)
+            .then(res => this.setState({genInfo: res.data}, () => {
+                this.downloadPDF(callback)
+            }))
+            .catch(err => console.log(err.response.data.errMsg))
+        
+    }
+    updatePDF = (data, callback) => {
+        dataAxios.put(`/api/owner/generalInfo/upload/${this.state.genInfo._id}/${this.state.genInfo.liabilityWavierId}`, data)
+            .then(res => this.setState({genInfo: res.data}, () => {
+                this.downloadPDF(callback)
+            }))
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+    downloadPDF = callback => {
+        axios.get(`/generalInfo/download/${this.state.genInfo.liabilityWavierId}`)
+            .then(res => { callback(res.data) })
+            .catch(err => console.log(err.response.data.errMsg))
+    }
     render(){
         return(
             <GeneralInfoContext.Provider
@@ -40,7 +60,10 @@ class GeneratorInfoProvider extends Component {
                     ...this.state,
                     getGeneralInfo: this.getGeneralInfo,
                     createGeneralInfo: this.createGeneralInfo,
-                    updateGeneralInfo: this.updateGeneralInfo
+                    updateGeneralInfo: this.updateGeneralInfo,
+                    postPDF: this.postPDF,
+                    updatePDF: this.updatePDF,
+                    downloadPDF: this.downloadPDF
                 }}>
                 {this.props.children}
             </GeneralInfoContext.Provider>

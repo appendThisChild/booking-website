@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom"
 
 // Providers
 import { withUser } from "./context/UserProvider.js"
+import { withGeneral } from './context/GeneralInfoProvider.js'
 
 // Component/Routes
 import Header from "./components/Header.js"
@@ -27,7 +28,8 @@ class App extends Component {
     constructor(){
         super()
         this.state = {
-            navSideToggle: false
+            navSideToggle: false,
+            dataIn: false
         }
     }
     sideNavToggler = () => {
@@ -42,7 +44,9 @@ class App extends Component {
             })
         } 
     }
-
+    componentDidMount(){
+        this.props.getGeneralInfo(() => this.setState({ dataIn: true }))
+    }
     render(){
         const { token } = this.props
         return(
@@ -50,6 +54,7 @@ class App extends Component {
                 <Header 
                     sideNavToggler={this.sideNavToggler} 
                     navSideToggle={this.state.navSideToggle}/> 
+                { this.state.dataIn ?
                 <Switch>
                     <Route exact path="/" render={renderProps => <Home {...renderProps}/>}/>
                     <Route path="/book" render={renderProps => <Book {...renderProps}/>}/>
@@ -73,10 +78,11 @@ class App extends Component {
                     <Route path="/accountHistory" render={renderProps => <AccountHistory {...renderProps}/>}/> 
                     <Route path="/citeInfo" render={renderProps => <CiteInfo {...renderProps}/>}/>
                 </Switch>
+                :null}
                 <Footer />
             </div>
         )
     }
 }
 
-export default withUser(App);
+export default withGeneral(withUser(App));

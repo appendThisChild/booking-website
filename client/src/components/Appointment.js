@@ -3,7 +3,8 @@ import React from "react"
 import { withUser } from "../context/UserProvider.js"
 
 const Appointment = props => {
-    const { appLengthInMinutes, appDate, therapistName, address, status, therapistPhoneNumber } = props.appointment
+    const { showAddress } = props
+    const { appLengthInMinutes, appDate, therapistName, address, therapistPhoneNumber } = props.appointment
     const { street, city, state, zipcode } = address
     const date = new Date(appDate)
     const phoStr1 = props.numberDisplay(therapistPhoneNumber)
@@ -26,7 +27,7 @@ const Appointment = props => {
             <p>Date: {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}</p>
             <p>Time: {hour}:{min} {amPm}</p>
             <p>Length: {appLengthInMinutes} Minutes</p>
-            {status === "Paid" ?
+            {showAddress ?
             <>
                 <p>Therapist's #: {phoStr1}</p>
                 <p>Address:</p>

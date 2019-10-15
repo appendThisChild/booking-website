@@ -1,6 +1,6 @@
 const express = require('express')
 const paymentRouter = express.Router()
-const { stripeSecret } = require('../utils/imp.js')
+const stripeSecret = process.env.STRIPE_SECRET
 const stripe = require("stripe")(stripeSecret)
 const uuid = require('uuid/v4')
 

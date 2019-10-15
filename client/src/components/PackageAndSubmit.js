@@ -8,14 +8,19 @@ import 'react-toastify/dist/ReactToastify.css';
 import { withAppointment } from "../context/AppointmentProvider.js"
 import { withUser } from "../context/UserProvider.js"
 import { withGoogle } from "../context/GoogleCalendarProvider.js"
+import { withGeneral } from '../context/GeneralInfoProvider.js'
 
 import Appointment from "./Appointment.js";
+import CancelationPolicyDisplay from "./CancelationPolicyDisplay.js"
 
 class PackageAndSubmit extends Component {
     constructor(){
         super()
         this.state = {
             dataIn: false,
+            dataPDF: '',
+            checkBoxMessage: '',
+            liabilityCheck: false,
             apiKey: "pk_test_Ey7aoXR5LLcmV14JOonguHik00jlEq8OT3",
             amount: 0,
             amounts: [],
@@ -33,6 +38,14 @@ class PackageAndSubmit extends Component {
             if (sec.length === 1) sec = "0" + seconds;
             return <p>Time remaing: {min}:{sec}</p>;
         }
+    }
+    handleCheck = e => {
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
+        const name = e.target.name
+        this.setState({ [name]: value})
+    }
+    checkBox = () => {
+        this.setState({ checkBoxMessage: '"Wavier check required"' })
     }
     handleChange = e => {
         const value = parseInt(e.target.value)
@@ -137,6 +150,9 @@ class PackageAndSubmit extends Component {
             } else if (length === 120) {
                 amounts.push(19997, 39996)
             }
+            this.props.downloadPDF((pdf) => {
+                this.setState({ dataPDF: pdf })
+            })
             this.props.checkVisitsRemaining(
                 currentAppointmentInProgress.clientID, 
                 currentAppointmentInProgress.appLengthInMinutes, 
@@ -157,23 +173,9 @@ class PackageAndSubmit extends Component {
                 }
             })
         }
-
-        // 1.)
-        // sign wavier required
-            // vvvvv above button
-            // have button to check & 
-            // create click option to download the wavier 
-                // create pdf life download for owner
-
-        // 2.)
-        // create owner link for purchase details
-        // includes prices and wavier doc.
-            // create backend model for all extra details to add-in
-            // create owner link to access info and edit as needed
-
     }
     render(){
-        const { dataIn, apiKey, amount, amounts, except } = this.state
+        const { dataIn, liabilityCheck, checkBoxMessage, apiKey, amount, amounts, except } = this.state
         const { clientEmail, appLengthInMinutes, appointmentCreatedAt } = this.props.currentAppointmentInProgress
         const date = new Date(appointmentCreatedAt).getTime()
         const mappedAmounts = amounts.map((amount, i) => {
@@ -191,7 +193,7 @@ class PackageAndSubmit extends Component {
                 <ToastContainer autoClose={10000} />
                 {dataIn ?
                 <>
-                    <Appointment appointment={this.props.currentAppointmentInProgress}/>
+                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={false}/>
                     <h2>Choose a package:</h2>
                     <select name="amount" value={amount} onChange={this.handleChange}>
                         {except ? 
@@ -199,17 +201,29 @@ class PackageAndSubmit extends Component {
                         :null}
                         {mappedAmounts}
                     </select>
+                    <div>
+                        <div>
+                            <span>Read 'Liability Wavier' and check box: </span>
+                            <input type="checkbox" name="liabilityCheck" onChange={this.handleCheck}/>
+                        </div>
+                        <div>
+                            <a href={`data:application/pdf;base64,${this.state.dataPDF}`} download="Massage-Therapy-Wavier.pdf">Click Here</a>
+                            <span> to download Liability Wavier</span>
+                        </div>
+                    </div>
+                    <p>{checkBoxMessage}</p>
                     {amount !== 0 ?
                     <StripeCheckout 
                         name="Euphoric Massage"
                         stripeKey={apiKey}
-                        token={this.handleSubmit}
+                        token={!liabilityCheck ? this.checkBox : this.handleSubmit}
                         amount={amount}
                         email={clientEmail}
                     />
                     :
-                    <button onClick={this.handlePrepaid}>Use Pre-Paid Visit</button>
+                    <button onClick={!liabilityCheck ? this.checkBox : this.handlePrepaid}>Use Pre-Paid Visit</button>
                     }
+                    <CancelationPolicyDisplay />
                 </>
                 :null}
             </div>
@@ -217,4 +231,4 @@ class PackageAndSubmit extends Component {
     }
 }
 
-export default withGoogle(withUser(withAppointment(PackageAndSubmit)));
+export default withGeneral(withGoogle(withUser(withAppointment(PackageAndSubmit))));

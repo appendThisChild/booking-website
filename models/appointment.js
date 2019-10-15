@@ -71,7 +71,15 @@ const appointmentSchema = new Schema({
     googleId: {
         type: String,
         default: ''
-    }
+    },
+    intake: {
+        type: Object,
+        default: {
+            // shoulders 
+            // neck 
+            // etc...
+        }
+    } 
 })
 
 module.exports = mongoose.model("Appointment", appointmentSchema)

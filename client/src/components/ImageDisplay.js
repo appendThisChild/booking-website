@@ -42,14 +42,17 @@ class ImageDisplay extends Component {
         const { profileImgName } = this.props.user
         return(
             <div>
+                <h2>Profile Image:</h2>
                 <img src={this.state.imageDisplay} alt="file" className="displayImg"/>
                 {profileImgName === "none" ?
                 <>
+                    <p>Upload a Image</p>
                     <input type="file" onChange={(e) => this.handleChange(e)}/>
                     <button onClick={this.handleUpload}>Upload</button>
                 </>
                 :
                 <>
+                    <p>Replace the Iamge</p>
                     <input type="file" onChange={(e) => this.handleChange(e)}/>
                     <button onClick={this.handleReplace}>Replace</button>
                 </>}

@@ -30,7 +30,7 @@ class AppointmentBooked extends Component {
             <div>
                 {dataIn ?
                 <>
-                    <Appointment appointment={this.props.currentAppointmentInProgress}/>
+                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={true}/>
 
                 </>
                 :null}

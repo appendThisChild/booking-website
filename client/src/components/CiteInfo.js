@@ -16,7 +16,7 @@ class CiteInfo extends Component {
             homeTherapistSubtitle: props.genInfo.homeTherapistSubtitle, 
             pricing: props.genInfo.pricing, 
             cancelationPolicy: props.genInfo.cancelationPolicy,
-            dataIn: false
+            dataPDF: ''
         }
     }
     handleChange = e => {
@@ -61,54 +61,63 @@ class CiteInfo extends Component {
     addLine = name => {
         this.setState(prevState => ({ [name]: [...prevState[name], "new text..."] }))
     }
-    componentDidMount(){
-        this.props.getGeneralInfo(() => {
-            const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy } = this.props.genInfo
-            this.setState({
-                homeTitle: homeTitle, 
-                homeInfo: homeInfo, 
-                homeTherapistSubtitle: homeTherapistSubtitle, 
-                pricing: pricing, 
-                cancelationPolicy: cancelationPolicy,
-                dataIn: true
-            })
+    handleUpload = e => {
+        const data = new FormData()
+        data.append('pdf', e.target.files[0])
+        this.props.postPDF(data, (pdf) => {
+            this.setState({dataPDF: pdf})
         })
+    }
+    handleReplace = e => {
+        const data = new FormData()
+        data.append('pdf', e.target.files[0])
+        this.props.updatePDF(data, (pdf) => {
+            this.setState({dataPDF: pdf})
+        })
+    }
+    componentDidMount(){
+        // downloads pdf
+        if (this.props.genInfo.liabilityWavierId !== "none"){
+            this.props.downloadPDF((pdf) => {
+                this.setState({dataPDF: pdf})
+            })
+        }
     }
     render(){
         const { genInfo, createGeneralInfo, on, toggle } = this.props
-        const { dataIn } = this.state
         return(
             <div>
                 <ProfileNav />
-                {dataIn ?
+                {genInfo ? 
                 <>
-                    {genInfo ? 
+                    {on ?
                     <>
-                        {on ?
-                        <>
-                            <button onClick={toggle}>Edit Cite Info</button>
-                            <GeneralInfoDisplay {...genInfo}/>
-                        </>
-                        :
-                        <>
-                            <button onClick={toggle}>Cancel Edit</button>
-                            <GeneralInfoForm 
-                                {...this.state}
-                                handleChange={this.handleChange}
-                                handleSubmit={this.handleSubmit}
-                                removeLine={this.removeLine}
-                                addLine={this.addLine}
-                            />
-                        </>
-                        }
+                        <button onClick={toggle}>Edit Cite Info</button>
+                        <GeneralInfoDisplay 
+                            handleUpload={this.handleUpload}
+                            handleReplace={this.handleReplace}
+                            pdf={this.state.dataPDF}
+                            {...genInfo}
+                        />
                     </>
                     :
                     <>
-                        <button onClick={createGeneralInfo}>Create General Info</button>
+                        <button onClick={toggle}>Cancel Edit</button>
+                        <GeneralInfoForm 
+                            {...this.state}
+                            handleChange={this.handleChange}
+                            handleSubmit={this.handleSubmit}
+                            removeLine={this.removeLine}
+                            addLine={this.addLine}
+                        />
                     </>
                     }
                 </>
-                :null}
+                :
+                <>
+                    <button onClick={createGeneralInfo}>Create General Info</button>
+                </>
+                }
             </div>
         )
     }
