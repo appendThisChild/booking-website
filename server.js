@@ -15,7 +15,7 @@ app.use("/api/owner", (req, res, next) => checkIfOwner(req, res, next))
 app.use("/api/therapist", (req, res, next) => checkIfTherapist(req, res, next))
 
 
-const conn = mongoose.connect(mongoURI, options)
+const conn = mongoose.connect(process.env.MONGODB_URI || mongoURI, options)
 conn.then(() => console.log('[o] Connected to the DB'), (err) => console.log(err))
 
 // generalInfo

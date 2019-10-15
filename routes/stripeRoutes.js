@@ -1,5 +1,6 @@
 const express = require('express')
 const paymentRouter = express.Router()
+const GeneralInfo = require('../models/generalInfo.js')
 const stripeSecret = process.env.STRIPE_SECRET
 const stripe = require("stripe")(stripeSecret)
 const uuid = require('uuid/v4')
@@ -16,20 +17,28 @@ paymentRouter.route('/charge')
                 res.status(500)
                 return next(err)
             }
-            stripe.charges.create({
-                amount: product.price,
-                currency: "usd",
-                customer: customer.id,
-                receipt_email: token.email,
-                description: `Purchase of ${product.name}`
-                // , application_fee_amount: parseInt(product.price * .1)
-            }, (err, charge) => {
+            const { length, choice} = product.price
+            GeneralInfo.find((err, info) => {
                 if (err){
                     res.status(500)
                     return next(err)
                 }
-                const { status } = charge
-                return res.status(201).send(status)
+                const price = info[0].pricing[length][choice]
+                stripe.charges.create({
+                    amount: price,
+                    currency: "usd",
+                    customer: customer.id,
+                    receipt_email: token.email,
+                    description: `Purchase of ${product.name}`
+                    // , application_fee_amount: parseInt(product.price * .1)
+                }, (err, charge) => {
+                    if (err){
+                        res.status(500)
+                        return next(err)
+                    }
+                    const { status } = charge
+                    return res.status(201).send(status)
+                })
             })
         })
     }) 

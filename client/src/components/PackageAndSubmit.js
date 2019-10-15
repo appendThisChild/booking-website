@@ -64,11 +64,20 @@ class PackageAndSubmit extends Component {
             message+= " Package of 3"
             pChoice++
         }
+        let length = 0
+        if (appLengthInMinutes === 90){
+            length = 1
+        } else if (appLengthInMinutes === 120){
+            length = 2
+        }
         axios.post('/payment/charge', { 
             token, 
             product: { 
                 name: `${appLengthInMinutes}${message}`, 
-                price: amount 
+                price: {
+                    choice: pChoice - 1,
+                    length: length
+                }
             } 
         })
         .then(res => {
@@ -92,12 +101,14 @@ class PackageAndSubmit extends Component {
                             visitsIndex = 2
                         }
                         this.props.updateVisits(clientID, { index: visitsIndex, adjust: 2 }, () => {
-                            this.props.postEvent(this.props.currentAppointmentInProgress, () => {
+                            this.props.postEvent(this.props.currentAppointmentInProgress, (message) => {
+                                console.log(message)
                                 this.props.history.push('/appointmentBooked')
                             })
                         })
                     } else {
-                        this.props.postEvent(this.props.currentAppointmentInProgress, () => {
+                        this.props.postEvent(this.props.currentAppointmentInProgress, (message) => {
+                            console.log(message)
                             this.props.history.push('/appointmentBooked')
                         })
                     }
@@ -131,7 +142,8 @@ class PackageAndSubmit extends Component {
                 visitsIndex = 2
             }
             this.props.updateVisits(clientID, { index: visitsIndex, adjust: -1 }, () => {
-                this.props.postEvent(this.props.currentAppointmentInProgress, () => {
+                this.props.postEvent(this.props.currentAppointmentInProgress, (message) => {
+                    console.log(message)
                     this.props.history.push('/appointmentBooked')
                 })
             })

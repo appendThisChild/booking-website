@@ -32,12 +32,12 @@ class GoogleProvider extends Component {
             endDate: new Date(date)
         }
         dataAxios.post('/api/calendar', toSend)
-            .then(res => { 
-                if (res.data === "success"){ 
-                    callback() 
-                }
+            .then(() => { 
+                callback("Success") 
             })
-            .catch(err => console.log(err.response.data.errMsg))
+            .catch(err => {
+                callback(err.response.data.errMsg)
+            })
     }
     deleteEvent = (id, callback) => {
         dataAxios.delete(`/api/calendar/${id}`)
