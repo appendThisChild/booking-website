@@ -49,12 +49,17 @@ class CiteInfo extends Component {
             pricing: pricing,
             cancelationPolicy: cancelationPolicy
         }
-        // send info to update
-
-
-
+        this.props.updateGeneralInfo(this.props.genInfo._id, newGenInfo)
         this.props.toggle()
-        console.log(newGenInfo)
+    }
+    removeLine = nameIndex => {
+        const nameArr = nameIndex.split(" ")
+        const newArr = this.state[nameArr[0]]
+        newArr.splice(Number(nameArr[1]), 1)
+        this.setState({ [nameArr[0]]: newArr })
+    }
+    addLine = name => {
+        this.setState(prevState => ({ [name]: [...prevState[name], "new text..."] }))
     }
     componentDidMount(){
         this.props.getGeneralInfo(() => {
@@ -70,7 +75,6 @@ class CiteInfo extends Component {
         })
     }
     render(){
-        // updateGeneralInfo
         const { genInfo, createGeneralInfo, on, toggle } = this.props
         const { dataIn } = this.state
         return(
@@ -92,7 +96,8 @@ class CiteInfo extends Component {
                                 {...this.state}
                                 handleChange={this.handleChange}
                                 handleSubmit={this.handleSubmit}
-
+                                removeLine={this.removeLine}
+                                addLine={this.addLine}
                             />
                         </>
                         }

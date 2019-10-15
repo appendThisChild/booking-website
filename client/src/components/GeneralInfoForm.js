@@ -1,7 +1,7 @@
 import React from 'react'
 
 const GeneralInfoForm = props => {
-    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, handleChange, handleSubmit } = props
+    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, handleChange, handleSubmit, removeLine, addLine } = props
     const mappedHomeInfo = homeInfo.map((para, i) => {
         const name = "homeInfo"
         const nameIndex = name + ` ${i}`
@@ -15,6 +15,7 @@ const GeneralInfoForm = props => {
                     rows="4" 
                     cols="50"
                 />
+                <span onClick={() => removeLine(nameIndex)}> &#9747; Delete</span>
             </div>
         )
     })
@@ -74,6 +75,7 @@ const GeneralInfoForm = props => {
                     rows="4" 
                     cols="50"
                 />
+                <span onClick={() => removeLine(nameIndex)}> &#9747; Delete</span>
             </div>
         )
     })
@@ -90,6 +92,7 @@ const GeneralInfoForm = props => {
             />
             <h3>Home's Main Paragraphs:</h3>
             {mappedHomeInfo}
+            <p onClick={() => addLine("homeInfo")}> &#x2b; Add Line</p>
             <h3>Home's Therapist Subtitle:</h3>
             <textarea 
                 name="homeTherapistSubtitle"
@@ -107,6 +110,7 @@ const GeneralInfoForm = props => {
             {mappedTriples}
             <h3>Cancelation Policy:</h3>
             {mappedCancelPolicy}
+            <p onClick={() => addLine("cancelationPolicy")}> &#x2b; Add Line</p>
             <button>Submit Cite Changes</button>
         </form>
     )
