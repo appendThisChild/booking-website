@@ -19,8 +19,29 @@ class GeneratorInfoProvider extends Component {
         }
     }
     getGeneralInfo = callback => {
+        const noInfo = {
+            _id: "none",
+            homeTitle: "Our Mission",
+            homeInfo: [
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis."
+                ],
+            homeTherapistSubtitle: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
+            pricing: [
+                    [9999, 19998],
+                    [14998, 29997],
+                    [19997, 39996]
+                ],
+            cancelationPolicy: [
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis."
+                ],
+            liabilityWavierId: 'none'
+        }
         axios.get("/generalInfo")
-            .then(res => this.setState({genInfo: res.data[0]}, () => callback()))
+            .then(res => this.setState({genInfo: res.data[0] || noInfo}, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
     createGeneralInfo = () => {
@@ -53,6 +74,11 @@ class GeneratorInfoProvider extends Component {
             .then(res => { callback(res.data) })
             .catch(err => console.log(err.response.data.errMsg))
     }
+    connectWithStripe = (authCode, callback) => {
+        dataAxios.post('/api/owner/generalInfo/payment/auth', authCode)
+            .then(res => { callback("Success, Refresh Page!") })
+            .catch(err => console.log(err.response.data.errMsg))
+    }
     render(){
         return(
             <GeneralInfoContext.Provider
@@ -63,7 +89,8 @@ class GeneratorInfoProvider extends Component {
                     updateGeneralInfo: this.updateGeneralInfo,
                     postPDF: this.postPDF,
                     updatePDF: this.updatePDF,
-                    downloadPDF: this.downloadPDF
+                    downloadPDF: this.downloadPDF,
+                    connectWithStripe: this.connectWithStripe
                 }}>
                 {this.props.children}
             </GeneralInfoContext.Provider>

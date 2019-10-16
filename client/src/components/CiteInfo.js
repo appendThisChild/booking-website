@@ -16,8 +16,13 @@ class CiteInfo extends Component {
             homeTherapistSubtitle: props.genInfo.homeTherapistSubtitle, 
             pricing: props.genInfo.pricing, 
             cancelationPolicy: props.genInfo.cancelationPolicy,
-            dataPDF: ''
+            dataPDF: '',
+            authCode: '',
+            message: ''
         }
+    }
+    send = () => {
+        window.location.href = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FxhgoH6aBA1AL6rOGYGo9g0GVYEIy9jj&scope=read_write`
     }
     handleChange = e => {
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
@@ -84,11 +89,12 @@ class CiteInfo extends Component {
         }
     }
     render(){
-        const { genInfo, createGeneralInfo, on, toggle } = this.props
+        const { genInfo, createGeneralInfo, on, toggle, connectWithStripe } = this.props
+        const { connected } = genInfo
         return(
             <div>
                 <ProfileNav />
-                {genInfo ? 
+                {genInfo._id !== "none" ? 
                 <>
                     {on ?
                     <>
@@ -99,6 +105,23 @@ class CiteInfo extends Component {
                             pdf={this.state.dataPDF}
                             {...genInfo}
                         />
+                        {!connected ?
+                        <>
+                            <button onClick={this.send} className="stripe-connect"></button>
+                            <p>Copy & Paste the Authorization Code Here:</p>
+                            <input 
+                                type="text"
+                                name="authCode"
+                                value={this.state.authCode}
+                                onChange={this.handleChange}
+                                placeholder="Authorization Code..."
+                            />
+                            <button onClick={() => connectWithStripe({authCode: this.state.authCode}, (message) => {
+                                this.setState({message: message})
+                            })}>Authorize</button>
+                            <span>{this.state.message}</span>
+                        </>
+                        :null}
                     </>
                     :
                     <>

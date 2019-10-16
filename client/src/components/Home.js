@@ -26,11 +26,13 @@ class Home extends Component {
     // 3.) create contact us page
         // send the email an email
 
+    // -side-: what about google expiry date???
+
     // 4.) finish up with stripe integration
+        // mostly done - placing new integration links through env. 
 
     // 5.) Style
         
-
 
     render(){
         const { homeTitle, homeInfo, homeTherapistSubtitle } = this.props.genInfo

@@ -19,6 +19,9 @@ infoRouter.route('/')
                 res.status(500)
                 return next(err)
             }
+            info.forEach(info => {
+                info.connected_stripe_account = null
+            })
             return res.status(200).send(info)
         })
     })

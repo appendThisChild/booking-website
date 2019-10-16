@@ -18,7 +18,7 @@ ownerRouter.route('/user')
     })
 ownerRouter.route('/user/:_id')
     .put((req, res, next) => {
-        User.findByIdAndUpdate(
+        User.findOneAndUpdate(
             {_id: req.params._id},
             req.body,
             {new: true},

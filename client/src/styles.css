@@ -208,10 +208,13 @@
     color: yellow;
     text-decoration: underline;
 }
-
-
-
-
+/* stripe connections */
+.stripe-connect {
+    background-image: url("./images/blue-on-dark.png");
+    height: 33px;
+    width: 193px;
+    border-radius: 5px;
+} 
 .displayImg {
     height: 300px;
 }

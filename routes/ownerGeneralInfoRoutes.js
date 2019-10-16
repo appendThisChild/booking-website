@@ -8,6 +8,8 @@ const multer = require('multer')
 const GridFsStorage = require('multer-gridfs-storage')
 const Grid = require('gridfs-stream')
 const { mongoURI, options } = require("../utils/app.js")
+const stripeSecret = process.env.STRIPE_SECRET
+const stripe = require("stripe")(stripeSecret)
 
 const bucket = "wavier"
 const conn = mongoose.connection
@@ -49,6 +51,7 @@ ownerRouter.route('/')
                 res.status(500)
                 return next(err)
             }
+            newInfoObj.connected_stripe_account = null
             return res.status(201).send(newInfoObj)
         })
     })
@@ -64,6 +67,7 @@ ownerRouter.route('/:_id')
                     res.status(500)
                     return next(err)
                 }
+                updatedInfo.connected_stripe_account = null
                 return res.status(201).send(updatedInfo)
             }
         )
@@ -82,6 +86,7 @@ ownerRouter.route('/upload/:_id')
                     res.status(500)
                     return next(err)
                 }
+                updatedInfo.connected_stripe_account = null
                 return res.status(200).send(updatedInfo)
             }
         )
@@ -106,9 +111,48 @@ ownerRouter.route('/upload/:_id/:filename')
                         res.status(500)
                         return next(err)
                     }
+                    updatedInfo.connected_stripe_account = null
                     return res.status(200).send(updatedInfo)
                 }
             )
+        })
+    })
+
+ownerRouter.route('/payment/auth')
+    .post((req, res, next) => {
+        const code = req.body.authCode
+        stripe.oauth.token({
+            grant_type: 'authorization_code',
+            code: code
+        },(err, response) => {
+            if (err){
+                res.status(500)
+                return next(err)
+            }
+            const connected_account_id = response.stripe_user_id
+            GeneralInfo.find((err, info) => {
+                if (err){
+                    res.status(500)
+                    return next(err)
+                }
+                const _id = info[0]._id
+                GeneralInfo.findOneAndUpdate(
+                    {_id: _id},
+                    {
+                        connected_stripe_account: connected_account_id,
+                        connected: true
+                    },
+                    {new: true},
+                    (err, updatedInfo) => {
+                        if (err){
+                            res.status(500)
+                            return next(err)
+                        }
+                        updatedInfo.connected_stripe_account = null
+                        return res.status(204).send(updatedInfo)
+                    }
+                )
+            })
         })
     })
 

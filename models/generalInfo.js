@@ -37,6 +37,14 @@ const generalInfoSchema = new Schema({
     liabilityWavierId: {
         type: String,
         default: 'none'
+    },
+    connected_stripe_account: {
+        type: String,
+        default: ''
+    },
+    connected: {
+        type: Boolean,
+        default: false
     }
 });
 
