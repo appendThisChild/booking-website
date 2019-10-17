@@ -17,6 +17,7 @@ class AppointmentBooked extends Component {
         if (currentAppointmentInProgress === ""){ this.props.history.push("/book")} 
         else {
             this.props.appointmentSubmitted()
+            this.props.eraseKey()
             this.setState({dataIn: true})
         }
         

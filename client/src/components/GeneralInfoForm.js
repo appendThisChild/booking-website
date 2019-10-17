@@ -111,6 +111,12 @@ const GeneralInfoForm = props => {
             <h3>Cancelation Policy:</h3>
             {mappedCancelPolicy}
             <p onClick={() => addLine("cancelationPolicy")}> &#x2b; Add Line</p>
+            {/* adding in FAQs section */}
+            {/* add line for FAQs */}
+
+
+
+            
             <button>Submit Cite Changes</button>
         </form>
     )

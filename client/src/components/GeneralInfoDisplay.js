@@ -19,6 +19,11 @@ const GeneralInfoDisplay = props => {
             <PricingDisplay pricing={pricing} className={""}/>
             <h3>Cancelation Policy:</h3>
             {mappedCancelPolicy}
+            {/* add map for FAQs */}
+
+
+
+
             {liabilityWavierId !== "none" ?
             <>
                 <h3>Liability Wavier</h3>

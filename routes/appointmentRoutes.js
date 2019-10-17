@@ -1,6 +1,7 @@
 const express = require('express')
 const appointmentRouter = express.Router()
 const Appointment = require('../models/appointment.js')
+const react_secret = process.env.REACT_APP_SECRET
 
 appointmentRouter.route('/')
     .post((req, res, next) => {
@@ -10,7 +11,7 @@ appointmentRouter.route('/')
                 res.status(500)
                 return next(err)
             }
-            return res.status(201).send(newAppointmentObj)
+            return res.status(201).send({app: newAppointmentObj, key: react_secret})
         })
     })
 

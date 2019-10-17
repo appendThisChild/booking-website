@@ -21,7 +21,6 @@ class PackageAndSubmit extends Component {
             dataPDF: '',
             checkBoxMessage: '',
             liabilityCheck: false,
-            apiKey: "pk_test_Ey7aoXR5LLcmV14JOonguHik00jlEq8OT3",
             amount: 0,
             amounts: [],
             except: false
@@ -187,7 +186,8 @@ class PackageAndSubmit extends Component {
         }
     }
     render(){
-        const { dataIn, liabilityCheck, checkBoxMessage, apiKey, amount, amounts, except } = this.state
+        const { dataIn, liabilityCheck, checkBoxMessage, amount, amounts, except } = this.state
+        const { apiKey } = this.props
         const { clientEmail, appLengthInMinutes, appointmentCreatedAt } = this.props.currentAppointmentInProgress
         const date = new Date(appointmentCreatedAt).getTime()
         const mappedAmounts = amounts.map((amount, i) => {

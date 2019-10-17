@@ -45,6 +45,15 @@ const generalInfoSchema = new Schema({
     connected: {
         type: Boolean,
         default: false
+    },
+    FAQs: {
+        type: Array,
+        default: [
+            {
+                question: "Cancelation Policy",
+                answer: "Something"
+            }
+        ]
     }
 });
 

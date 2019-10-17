@@ -35,7 +35,8 @@ class AppointmentProvider extends Component {
             packageChoice: "",
             canceled: false,
             status: "",
-            amount: ""
+            amount: "",
+            apiKey: ""
         }
     }
     getAllCompanyAppointments = callback => {
@@ -68,7 +69,7 @@ class AppointmentProvider extends Component {
                 address: this.state.address
             }
             dataAxios.post("/api/appointment", newAppointment)
-                .then(res => this.setState({ currentAppointmentInProgress: res.data }, () => callback()))
+                .then(res => this.setState({ currentAppointmentInProgress: res.data.app, apiKey: res.data.key }, () => callback()))
                 .catch(err => console.log(err.response.data.errMsg))
             this.setState({
                 clientID: "",
@@ -147,6 +148,9 @@ class AppointmentProvider extends Component {
         present.sort((app1, app2) => new Date(app1.appDate) - new Date(app2.appDate))
         callback([past, present])
     }
+    eraseKey = () => {
+        this.setState({ apiKey: ""})
+    }
     render(){
         return(
             <AppointmentContext.Provider
@@ -161,7 +165,8 @@ class AppointmentProvider extends Component {
                     handleChange: this.handleChange,
                     handleNameIDAdd: this.handleNameIDAdd,
                     orderAppointments: this.orderAppointments,
-                    updateVisits: this.updateVisits
+                    updateVisits: this.updateVisits,
+                    eraseKey: this.eraseKey
                 }}>
                 {this.props.children}
             </AppointmentContext.Provider>

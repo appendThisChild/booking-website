@@ -9,6 +9,7 @@ class Home extends Component {
     constructor(){
         super()
         this.state = {
+            
         }
     }
     
@@ -17,21 +18,21 @@ class Home extends Component {
         // add route
         // add in info to therapist/owner appointment details
 
+        
     // 2.) add in review ability for customers... 
         // create seperate portal to backend
             // checking for unique emails
             // adding title & comments section
             // adding in stars
 
+
+
     // 3.) create contact us page
-        // send the email an email
+        // understand sending emails with css
+        // creating a FAQs tag in the generalInfo Database
 
-    // -side-: what about google expiry date???
 
-    // 4.) finish up with stripe integration
-        // mostly done - placing new integration links through env. 
-
-    // 5.) Style
+    // 4.) Style
         
 
     render(){

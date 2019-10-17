@@ -13,6 +13,7 @@ import BlackoutDatesProvider from "./context/BlackoutDatesProvider.js"
 import ImageProvider from "./context/ImageProvider.js";
 import GoogleCalendarProvider from "./context/GoogleCalendarProvider.js"
 import GeneralInfoProvider from "./context/GeneralInfoProvider.js"
+import EmailProvider from "./context/EmailProvider.js"
 
 ReactDOM.render(
     <BrowserRouter>
@@ -24,7 +25,9 @@ ReactDOM.render(
                             <BlackoutDatesProvider>
                                 <ImageProvider>
                                     <GeneralInfoProvider>
-                                        <App />
+                                        <EmailProvider>
+                                            <App />
+                                        </EmailProvider>
                                     </GeneralInfoProvider>
                                 </ImageProvider>
                             </BlackoutDatesProvider>

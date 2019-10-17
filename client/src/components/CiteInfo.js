@@ -16,6 +16,10 @@ class CiteInfo extends Component {
             homeTherapistSubtitle: props.genInfo.homeTherapistSubtitle, 
             pricing: props.genInfo.pricing, 
             cancelationPolicy: props.genInfo.cancelationPolicy,
+            // add section here for FAQs
+
+
+
             dataPDF: '',
             authCode: '',
             message: ''
@@ -44,6 +48,11 @@ class CiteInfo extends Component {
             this.setState({ [name]: value })
         }
     }
+    // new handleChange for loops obj values 
+
+
+    
+
     handleSubmit = e => {
         e.preventDefault()
         const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy } = this.state
@@ -53,6 +62,10 @@ class CiteInfo extends Component {
             homeTherapistSubtitle: homeTherapistSubtitle, 
             pricing: pricing,
             cancelationPolicy: cancelationPolicy
+            // submitting new line for FAQs 
+
+
+
         }
         this.props.updateGeneralInfo(this.props.genInfo._id, newGenInfo)
         this.props.toggle()
@@ -66,6 +79,11 @@ class CiteInfo extends Component {
     addLine = name => {
         this.setState(prevState => ({ [name]: [...prevState[name], "new text..."] }))
     }
+    // adding FAQs obj new header and answer
+
+
+
+
     handleUpload = e => {
         const data = new FormData()
         data.append('pdf', e.target.files[0])
