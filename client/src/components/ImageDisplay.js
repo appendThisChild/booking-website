@@ -21,12 +21,14 @@ class ImageDisplay extends Component {
             imageData : data
         })
     }
-    handleUpload = () => {
+    handleUpload = e => {
+        e.preventDefault()
         const data = this.state.imageData
         const { _id } = this.props.user
         this.props.postFile(_id, data)
     }
-    handleReplace = () => {
+    handleReplace = e => {
+        e.preventDefault()
         const data = this.state.imageData
         const { _id, profileImgName } = this.props.user
         this.props.updateFile(_id, profileImgName, data)
@@ -45,17 +47,17 @@ class ImageDisplay extends Component {
                 <h2>Profile Image:</h2>
                 <img src={this.state.imageDisplay} alt="file" className="displayImg"/>
                 {profileImgName === "none" ?
-                <>
+                <form onSubmit={this.handleUpload}>
                     <p>Upload a Image</p>
-                    <input type="file" onChange={(e) => this.handleChange(e)}/>
-                    <button onClick={this.handleUpload}>Upload</button>
-                </>
+                    <input type="file" required={true} onChange={(e) => this.handleChange(e)}/>
+                    <button>Upload</button>
+                </form>
                 :
-                <>
+                <form onSubmit={this.handleReplace}>
                     <p>Replace the Iamge</p>
-                    <input type="file" onChange={(e) => this.handleChange(e)}/>
-                    <button onClick={this.handleReplace}>Replace</button>
-                </>}
+                    <input type="file" required={true} onChange={(e) => this.handleChange(e)}/>
+                    <button>Replace</button>
+                </form>}
             </div>
         )
     }

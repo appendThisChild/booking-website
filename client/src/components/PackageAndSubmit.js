@@ -149,17 +149,17 @@ class PackageAndSubmit extends Component {
         })
     }
     componentDidMount(){
-        const { currentAppointmentInProgress } = this.props
+        const { currentAppointmentInProgress, genInfo } = this.props
         if (currentAppointmentInProgress === ""){ this.props.history.push("/book")} 
         else { 
             const length = currentAppointmentInProgress.appLengthInMinutes
-            const amounts = []
+            let amounts = []
             if (length === 60){
-                amounts.push(9999, 19998)
+                amounts = genInfo.pricing[0]
             } else if (length === 90) {
-                amounts.push(14998, 29997)
+                amounts = genInfo.pricing[1]
             } else if (length === 120) {
-                amounts.push(19997, 39996)
+                amounts = genInfo.pricing[2]
             }
             this.props.downloadPDF((pdf) => {
                 this.setState({ dataPDF: pdf })
@@ -217,27 +217,34 @@ class PackageAndSubmit extends Component {
                         <div>
                             <span>Read 'Liability Wavier' and check box: </span>
                             <input type="checkbox" name="liabilityCheck" onChange={this.handleCheck}/>
+                            
                         </div>
                         <div>
                             <a href={`data:application/pdf;base64,${this.state.dataPDF}`} download="Massage-Therapy-Wavier.pdf">Click Here</a>
                             <span> to download Liability Wavier</span>
                         </div>
                     </div>
-                    <p>{checkBoxMessage}</p>
                     {amount !== 0 ?
-                    <StripeCheckout 
-                        name="Euphoric Massage"
-                        stripeKey={apiKey}
-                        token={!liabilityCheck ? this.checkBox : this.handleSubmit}
-                        amount={amount}
-                        email={clientEmail}
-                    />
+                    <>
+                        {liabilityCheck ? 
+                        <StripeCheckout 
+                            name="Euphoric Massage"
+                            stripeKey={apiKey}
+                            token={this.handleSubmit}
+                            amount={amount}
+                            email={clientEmail}
+                        />
+                        :
+                        <button onClick={this.checkBox}>Pay With Card</button>
+                        }
+                    </>
                     :
                     <button onClick={!liabilityCheck ? this.checkBox : this.handlePrepaid}>Use Pre-Paid Visit</button>
                     }
-                    <CancelationPolicyDisplay />
+                    <p>{checkBoxMessage}</p>
                 </>
                 :null}
+                <CancelationPolicyDisplay />
             </div>
         )
     }

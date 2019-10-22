@@ -21,6 +21,7 @@ import CompanyHistory from "./components/CompanyHistory.js"
 import AllAccounts from "./components/AllAccounts.js"
 import AccountHistory from "./components/AccountHistory.js"
 import CiteInfo from "./components/CiteInfo.js"
+import Reviews from "./components/Reviews.js"
 import Footer from "./components/Footer.js"
 
 
@@ -77,6 +78,7 @@ class App extends Component {
                     <Route path="/accounts" render={renderProps => <AllAccounts {...renderProps}/>}/> 
                     <Route path="/accountHistory" render={renderProps => <AccountHistory {...renderProps}/>}/> 
                     <Route path="/citeInfo" render={renderProps => <CiteInfo {...renderProps}/>}/>
+                    <Route path="/reviews" render={renderProps => <Reviews {...renderProps}/> }/>
                 </Switch>
                 :null}
                 <Footer />

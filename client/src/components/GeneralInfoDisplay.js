@@ -3,9 +3,20 @@ import React from 'react'
 import PricingDisplay from './PricingDisplay.js';
 
 const GeneralInfoDisplay = props => {
-    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, liabilityWavierId, handleUpload, handleReplace, pdf } = props
+    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, FAQs, liabilityWavierId, handleUpload, handleReplace, pdf } = props
     const mappedHomeInfo = homeInfo.map((para, i) => <p key={i}>{i + 1}.) {para}</p>)
     const mappedCancelPolicy = cancelationPolicy.map((para, i) => <p key={i}>{i + 1}.) {para}</p>)
+    const mappedFAQs = FAQs.map((obj, i) => {
+        return(
+            <div key={i}>
+                <p>{i + 1}.)</p>
+                <p>Question:</p>
+                <p>"{obj.question}"</p>
+                <p>Answer:</p>
+                <p>"{obj.answer}"</p>
+            </div>
+        )
+    })
     return(
         <div>
             <h2>Cite Info</h2>
@@ -19,11 +30,8 @@ const GeneralInfoDisplay = props => {
             <PricingDisplay pricing={pricing} className={""}/>
             <h3>Cancelation Policy:</h3>
             {mappedCancelPolicy}
-            {/* add map for FAQs */}
-
-
-
-
+            <h3>Frequently asked questions (FAQs):</h3>
+            {mappedFAQs}
             {liabilityWavierId !== "none" ?
             <>
                 <h3>Liability Wavier</h3>

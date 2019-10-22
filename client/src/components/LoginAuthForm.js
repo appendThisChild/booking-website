@@ -9,14 +9,14 @@ const LoginAuthForm = props => {
                 name="email" 
                 value={email} 
                 onChange={handleChange} 
-                require="true"
+                required={true}
                 placeholder="Email"/>
             <input 
                 type="password" 
                 name="password" 
                 value={password} 
                 onChange={handleChange} 
-                require="true"
+                required={true}
                 placeholder="Password"/>
             <button>{btnText}</button>
         </form>

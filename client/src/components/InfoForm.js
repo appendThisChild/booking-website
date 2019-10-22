@@ -55,19 +55,21 @@ const InfoForm = props => {
     return(
         <form onSubmit={handleSubmit}>
             <h2>Email: </h2>
+            <p>{emailExists}</p>
             <input 
                 type="email"
                 name="email"
                 value={email}
                 onChange={handleChange}
+                required={true}
                 placeholder="123@mail.com"/>
-            <span> {emailExists}</span>
             <h2>First Name: </h2>
             <input 
                 type="text"
                 name="firstName"
                 value={firstName}
                 onChange={handleChange}
+                required={true}
                 placeholder="First Name"/>
             <h2>Last Name: </h2>
             <input 
@@ -75,6 +77,7 @@ const InfoForm = props => {
                 name="lastName"
                 value={lastName}
                 onChange={handleChange}
+                required={true}
                 placeholder="Last Name"/>
             <h2>Phone #: </h2>
             <input 

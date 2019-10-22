@@ -8,7 +8,7 @@ const Blackout = props => {
     return(
         <div>
             <span>{month}/{day}/{year}</span>
-            <span onClick={() => handleDelete(_id)}> &#9747;</span>
+            <span onClick={() => handleDelete(_id)}> &#9747; Delete</span>
         </div>
     )
 }

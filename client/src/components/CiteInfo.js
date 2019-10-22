@@ -16,10 +16,7 @@ class CiteInfo extends Component {
             homeTherapistSubtitle: props.genInfo.homeTherapistSubtitle, 
             pricing: props.genInfo.pricing, 
             cancelationPolicy: props.genInfo.cancelationPolicy,
-            // add section here for FAQs
-
-
-
+            FAQs: props.genInfo.FAQs,
             dataPDF: '',
             authCode: '',
             message: ''
@@ -36,10 +33,8 @@ class CiteInfo extends Component {
             const newArr = this.state[nameArr[0]].map((element, i) => {
                 if (i === Number(nameArr[1])){
                     if (nameArr[2]){
-                        return element.map((price, j) => {
-                            if (j === Number(nameArr[2])){ return Number(value) }
-                            else { return price }
-                        })
+                        element[nameArr[2]] = !isNaN(value) && value !== "" ? Number(value) : value
+                        return element
                     } else { return value }
                 } else { return element }
             })
@@ -48,24 +43,16 @@ class CiteInfo extends Component {
             this.setState({ [name]: value })
         }
     }
-    // new handleChange for loops obj values 
-
-
-    
-
     handleSubmit = e => {
         e.preventDefault()
-        const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy } = this.state
+        const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, FAQs } = this.state
         const newGenInfo = {
             homeTitle: homeTitle, 
             homeInfo: homeInfo, 
             homeTherapistSubtitle: homeTherapistSubtitle, 
             pricing: pricing,
-            cancelationPolicy: cancelationPolicy
-            // submitting new line for FAQs 
-
-
-
+            cancelationPolicy: cancelationPolicy,
+            FAQs: FAQs
         }
         this.props.updateGeneralInfo(this.props.genInfo._id, newGenInfo)
         this.props.toggle()
@@ -77,13 +64,15 @@ class CiteInfo extends Component {
         this.setState({ [nameArr[0]]: newArr })
     }
     addLine = name => {
-        this.setState(prevState => ({ [name]: [...prevState[name], "new text..."] }))
+        let insert = ""
+        if (name === "FAQs"){
+            insert = {
+                question: "",
+                answer: ""
+            }
+        }
+        this.setState(prevState => ({ [name]: [...prevState[name], insert] }))
     }
-    // adding FAQs obj new header and answer
-
-
-
-
     handleUpload = e => {
         const data = new FormData()
         data.append('pdf', e.target.files[0])
@@ -99,7 +88,6 @@ class CiteInfo extends Component {
         })
     }
     componentDidMount(){
-        // downloads pdf
         if (this.props.genInfo.liabilityWavierId !== "none"){
             this.props.downloadPDF((pdf) => {
                 this.setState({dataPDF: pdf})

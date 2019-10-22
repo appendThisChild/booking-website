@@ -18,7 +18,8 @@ class Book extends Component {
     componentDidMount(){
         this.props.getAllTherapists()
     }
-    handlePickTime = () => {
+    handlePickTime = e => {
+        e.preventDefault()
         this.props.makingAppointment()
         this.props.history.push('/pickTime')
         
@@ -26,8 +27,7 @@ class Book extends Component {
     render(){
         return(
             <div>
-                <TherapistTimeChoice />
-                <button onClick={this.handlePickTime}>Pick Time</button>
+                <TherapistTimeChoice handleSubmit={this.handlePickTime}/>
                 <h3>Pricing</h3>
                 <PricingDisplay pricing={this.props.genInfo.pricing} className={""}/>
                 <TherapistDisplay />

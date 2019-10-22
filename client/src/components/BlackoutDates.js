@@ -49,6 +49,7 @@ class BlackoutDates extends Component {
                         name="blackoutDate"
                         value={blackoutDate}
                         onChange={this.handleChange}
+                        required={true}
                     />
                     <button>Submit Date</button>
                 </form>

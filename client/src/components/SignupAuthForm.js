@@ -9,28 +9,28 @@ const SignupAuthForm = props => {
                 name="firstName" 
                 value={firstName} 
                 onChange={handleChange} 
-                require="true"
+                required={true}
                 placeholder="First Name"/>
             <input 
                 type="text" 
                 name="lastName" 
                 value={lastName} 
                 onChange={handleChange} 
-                require="true"
+                required={true}
                 placeholder="Last Name"/>
             <input 
                 type="email" 
                 name="email" 
                 value={email} 
                 onChange={handleChange} 
-                require="true"
+                required={true}
                 placeholder="Email"/>
             <input 
                 type="password" 
                 name="password" 
                 value={password} 
                 onChange={handleChange} 
-                require="true"
+                required={true}
                 placeholder="Password"/>
             <button>{btnText}</button>
         </form>

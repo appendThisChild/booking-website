@@ -24,7 +24,6 @@ const makeBody = (to, from, subject, message) => {
 
 emailRouter.route('/contact')
     .post((req, res, next) => {
-        console.log(req.body)
         const { to, from, subject, message } = req.body
         fs.readFile('credentials.json', (err, content) => {
             if (err) {

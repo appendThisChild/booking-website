@@ -7,7 +7,7 @@ import { withUser } from "../context/UserProvider.js"
 // firstCharCap
 
 const TherapistTimeChoice = props => {
-    const { therapists, handleChange, therapistID, appLengthInMinutes, appLengths } = props
+    const { therapists, handleChange, therapistID, appLengthInMinutes, appLengths, handleSubmit } = props
     const mappedTherapists = therapists.map((therapist, i) => 
         <option value={therapist._id} key={i}>{props.firstCharCap(therapist.firstName)} {props.firstCharCap(therapist.lastName)}</option>
     )
@@ -16,8 +16,8 @@ const TherapistTimeChoice = props => {
     )
     return(
         <div>
-            <form >
-                <select name="therapistID" required={true} value={therapistID} onChange={handleChange}>
+            <form onSubmit={handleSubmit}>
+                <select name="therapistID" value={therapistID} onChange={handleChange} required={true}>
                     <option>Select Therapist</option>
                     {mappedTherapists}
                 </select>
@@ -25,6 +25,7 @@ const TherapistTimeChoice = props => {
                 <option>Select Appointment Length</option>
                     {mappedAppLengths}
                 </select>
+                <button>Pick Time</button>
             </form>
         </div>
     )

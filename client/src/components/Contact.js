@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { withEmail } from '../context/EmailProvider.js'
 import { withGeneral } from '../context/GeneralInfoProvider.js'
 
+import FAQsDisplay from './FAQsDisplay.js'
+
 class Contact extends Component {
     constructor(){
         super()
@@ -22,6 +24,7 @@ class Contact extends Component {
     handleSubmit = e => {
         e.preventDefault()
         const { from, subject, message } = this.state
+
         this.props.sendEmail(from, subject, message, (message) => {
             this.setState({
                 from: '',
@@ -37,19 +40,18 @@ class Contact extends Component {
 
     render(){
         const { from, subject, message } = this.state
+        const { FAQs } = this.props.genInfo
+        const mappedFAQs = FAQs.map((obj, i) => <FAQsDisplay key={i} faq={obj} />)
         return(
             <div>
                 <ToastContainer autoClose={10000} />
-                {/* frequently asked questions */}
-                {/* if faqs === 0 ? no show */}
                 <h2>FAQs</h2>
-                
-
+                {mappedFAQs}
                 <h2>Contact Us:</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="from" value={from} onChange={this.handleChange} require="true" placeholder="Your Email"/>
-                    <input type="text" name="subject" value={subject} onChange={this.handleChange} require="true" placeholder="Subject"/>
-                    <textarea name="message" value={message} onChange={this.handleChange} rows="4" cols="50" require="true" placeholder="Message" />
+                    <input type="email" name="from" value={from} onChange={this.handleChange} required={true} placeholder="Your Email"/>
+                    <input type="text" name="subject" value={subject} onChange={this.handleChange} required={true} placeholder="Subject"/>
+                    <textarea name="message" value={message} onChange={this.handleChange} rows="4" cols="50" required={true} placeholder="Message" />
                     <button>Send Message</button>
                 </form>
             </div>

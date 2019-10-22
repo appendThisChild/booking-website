@@ -1,7 +1,7 @@
 import React from 'react'
 
 const GeneralInfoForm = props => {
-    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, handleChange, handleSubmit, removeLine, addLine } = props
+    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, FAQs, handleChange, handleSubmit, removeLine, addLine } = props
     const mappedHomeInfo = homeInfo.map((para, i) => {
         const name = "homeInfo"
         const nameIndex = name + ` ${i}`
@@ -79,6 +79,33 @@ const GeneralInfoForm = props => {
             </div>
         )
     })
+    const mappedFAQs = FAQs.map((obj, i) => {
+        const name = "FAQs"
+        const nameIndex = name + ` ${i}`
+        const questionParam = "question"
+        const answerParam = "answer"
+        const qIndex = name + ` ${i} ` + questionParam
+        const aIndex = name + ` ${i} ` + answerParam
+        return(
+            <div key={i}>
+                <input 
+                    type="text"
+                    name={qIndex}
+                    value={obj.question}
+                    onChange={handleChange}
+                    placeholder={"Place question here..."}
+                />
+                <input 
+                    type="text"
+                    name={aIndex}
+                    value={obj.answer}
+                    onChange={handleChange}
+                    placeholder={"Place answer here..."}
+                />
+                <span onClick={() => removeLine(nameIndex)}> &#9747; Delete</span>
+            </div>
+        )
+    })
     return(
         <form onSubmit={handleSubmit}>
             <h2>Edit Cite Info</h2>
@@ -111,12 +138,9 @@ const GeneralInfoForm = props => {
             <h3>Cancelation Policy:</h3>
             {mappedCancelPolicy}
             <p onClick={() => addLine("cancelationPolicy")}> &#x2b; Add Line</p>
-            {/* adding in FAQs section */}
-            {/* add line for FAQs */}
-
-
-
-            
+            <h3>Frequently asked questions (FAQs):</h3>
+            {mappedFAQs}
+            <p onClick={() => addLine("FAQs")}> &#x2b; Add Line</p>
             <button>Submit Cite Changes</button>
         </form>
     )

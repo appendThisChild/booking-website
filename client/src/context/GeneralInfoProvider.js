@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
+import { withReview } from "./ReviewProvider.js"
+
 const GeneralInfoContext = React.createContext()
 
 const dataAxios = axios.create()
@@ -22,26 +24,26 @@ class GeneratorInfoProvider extends Component {
         const noInfo = {
             _id: "none",
             homeTitle: "Our Mission",
-            homeInfo: [
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis."
-                ],
+            homeInfo: ["nothing"],
             homeTherapistSubtitle: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
             pricing: [
                     [9999, 19998],
                     [14998, 29997],
                     [19997, 39996]
                 ],
-            cancelationPolicy: [
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.",
-                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis."
-                ],
-            liabilityWavierId: 'none'
+            cancelationPolicy: ["nothing"],
+            liabilityWavierId: 'none',
+            FAQs: [
+                {
+                    question: "",
+                    answer: ""
+                }
+            ]
         }
         axios.get("/generalInfo")
-            .then(res => this.setState({genInfo: res.data[0] || noInfo}, () => callback()))
+            .then(res => this.setState({genInfo: res.data[0] || noInfo}, () => {
+                this.props.getReviews(callback)
+            }))
             .catch(err => console.log(err.response.data.errMsg))
     }
     createGeneralInfo = () => {
@@ -98,7 +100,7 @@ class GeneratorInfoProvider extends Component {
     }
 }
 
-export default GeneratorInfoProvider;
+export default withReview(GeneratorInfoProvider);
 
 export const withGeneral = C => props => (
     <GeneralInfoContext.Consumer>

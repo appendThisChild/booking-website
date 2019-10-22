@@ -50,8 +50,8 @@ const generalInfoSchema = new Schema({
         type: Array,
         default: [
             {
-                question: "Cancelation Policy",
-                answer: "Something"
+                question: "Question",
+                answer: "Answer"
             }
         ]
     }
