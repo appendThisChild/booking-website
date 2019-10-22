@@ -9,15 +9,28 @@ reviewRouter.route('/')
                 res.status(500)
                 return next(err)
             }
-            // if the bad review is older than a month, delete it and filter it from the send
-
-
-
-            foundReviews.sort((rev1, rev2) => {
-                return new Date(rev1.createdAt) < new Date(rev2.createdAt)
+            const oldBadReviews = foundReviews.filter(review => {
+                return review.rating < 3 && new Date(review.createdAt).setMonth(new Date(review.createdAt).getMonth() + 1) < new Date()
             })
-            const rating = (foundReviews.reduce((total, sum) => total + sum.rating, 0) / foundReviews.length).toFixed(2)
-            return res.status(200).send({ reviews: foundReviews, rating: Number(rating) })
+            const reviews = []
+            foundReviews.forEach(review1 => {
+                const isPresent = oldBadReviews.some(review2 => review2._id === review1._id )
+                if (!isPresent) reviews.push(review1);
+            })
+            oldBadReviews.forEach(review => {
+                Review.findOneAndRemove(
+                    {_id: review._id },
+                    (err) => {
+                        if (err){
+                            res.status(500)
+                            return next(err)
+                        }
+                    }
+                )
+            })
+            reviews.sort((rev1, rev2) => rev2.createdAt - rev1.createdAt )
+            const rating = (reviews.reduce((total, sum) => total + sum.rating, 0) / reviews.length).toFixed(2)
+            return res.status(200).send({ reviews: reviews, rating: Number(rating) })
         })
     })
     .post((req, res, next) => {

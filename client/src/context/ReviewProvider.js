@@ -7,20 +7,20 @@ class ReviewProvider extends Component {
     constructor(){
         super()
         this.state = {
-            reviews: {
-                reviews: [],
-                rating: 5
-            }
+            reviews: [],
+            rating: 5
         }
     }
     getReviews = callback => {
         axios.get('/reviews')
-            .then(res => this.setState({ reviews: res.data }, () => callback()))
+            .then(res => this.setState({ reviews: res.data.reviews, rating: res.data.rating }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
     postReview = (data, callback) => {
         axios.post('/reviews', data)
             .then(() => { 
+                // create local storage for reviews
+                localStorage.review = JSON.stringify(false)
                 callback({ message: "Thanks! Review Submitted!" }) 
             })
             .catch(err => { 

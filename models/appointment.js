@@ -75,9 +75,17 @@ const appointmentSchema = new Schema({
     intake: {
         type: Object,
         default: {
-            // shoulders 
-            // neck 
-            // etc...
+            head: [false, false],
+            neck: [false, false],
+            shoulders: [false, false],
+            chest: [false, false],
+            abs: [false, false],
+            upperBack: [false, false],
+            middleBack: [false, false],
+            lowerBack: [false, false],
+            glute: [false, false],
+            thigh: [false, false],
+            calf: [false, false]
         }
     } 
 })

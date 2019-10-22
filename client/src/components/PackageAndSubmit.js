@@ -101,13 +101,11 @@ class PackageAndSubmit extends Component {
                         }
                         this.props.updateVisits(clientID, { index: visitsIndex, adjust: 2 }, () => {
                             this.props.postEvent(this.props.currentAppointmentInProgress, (message) => {
-                                console.log(message)
                                 this.props.history.push('/appointmentBooked')
                             })
                         })
                     } else {
                         this.props.postEvent(this.props.currentAppointmentInProgress, (message) => {
-                            console.log(message)
                             this.props.history.push('/appointmentBooked')
                         })
                     }
@@ -142,7 +140,6 @@ class PackageAndSubmit extends Component {
             }
             this.props.updateVisits(clientID, { index: visitsIndex, adjust: -1 }, () => {
                 this.props.postEvent(this.props.currentAppointmentInProgress, (message) => {
-                    console.log(message)
                     this.props.history.push('/appointmentBooked')
                 })
             })

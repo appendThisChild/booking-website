@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import StarRatings from 'react-star-ratings'
 
 import TherapistDisplay from "./TherapistDisplay"
 
@@ -10,30 +11,45 @@ class Home extends Component {
     constructor(){
         super()
         this.state = {
-            
+            reviewsShown: 3
         }
     }
+
+    // 1.) Show intake form in each appointment 
     
-    // 1.) Create 'intake' object for appointment booked finish section
-        // update appointment model
-        // add route
-        // add in info to therapist/owner appointment details
+    // 2.) Style
 
 
-    // 2.) add in review ability for customers... 
-        // create seperate portal to backend
-            // checking for unique emails
-            // adding title & comments section
-            // adding in stars
-
-    // 4.) Style
-        
+    showMore = () => {
+        this.setState(prevState => ({ reviewsShown: prevState.reviewsShown + 3 }))
+    }
 
     render(){
         const { homeTitle, homeInfo, homeTherapistSubtitle } = this.props.genInfo
         const mappedHomeInfo = homeInfo.map((para, i) => <p key={i}>{para}</p>)
-        // map through three of the reviews and reveal 3 with additional clicks
-        console.log(this.props.reviews)
+        const mappedReviews = this.props.reviews.map((review, i) => {
+            if (i < this.state.reviewsShown){
+                const month = new Date(review.createdAt).getMonth()
+                const date = new Date(review.createdAt).getDate()
+                const year = new Date(review.createdAt).getFullYear()
+                return(
+                    <div key={i}>
+                        <h3>{review.name}</h3> 
+                        <StarRatings
+                            rating={review.rating}
+                            starRatedColor="gold"
+                            starDimension="20px"
+                            starSpacing="0px"
+                        />
+                        <span> {review.rating}/5</span>
+                        <p> ~ "{review.message}"</p>
+                        <p>{month}/{date}/{year}</p>
+                    </div>
+                )
+            } else {
+                return null
+            }
+        })
         return(
             <div className={"bodyBackground"}>
                 <div className={"homeBorder"}>
@@ -47,11 +63,16 @@ class Home extends Component {
                         <TherapistDisplay />
                     </div>
                     <div className={`homeContainer ${"homeContainer3"}`}>
-
                         <h1>Reviews</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur in doloremque ipsum ipsa cum dignissimos aperiam voluptas, modi aut excepturi ducimus magnam reiciendis eos vitae quos praesentium enim sit corporis.</p>
+                        <StarRatings 
+                            rating={this.props.rating}
+                            starRatedColor="gold"
+                            starDimension="30px"
+                            starSpacing="3px"
+                        />
+                        <span> - {this.props.rating}/5</span>
+                        {mappedReviews}
+                        <span onClick={this.showMore}>Show more</span>
                     </div>
                 </div>
             </div>

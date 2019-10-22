@@ -25,6 +25,7 @@ class AppointmentProvider extends Component {
             clientID: "",
             clientName: "",
             clientEmail: "",
+            clientPhoneNumber: "",
             appLengthInMinutes: "",
             appDate: "",
             therapistID: "",
@@ -60,6 +61,7 @@ class AppointmentProvider extends Component {
                 clientID: this.state.clientID,
                 clientName: this.state.clientName,
                 clientEmail: this.state.clientEmail,
+                clientPhoneNumber: this.state.clientPhoneNumber,
                 appLengthInMinutes: this.state.appLengthInMinutes,
                 appDate: this.state.appDate,
                 therapistID: this.state.therapistID,
@@ -75,6 +77,7 @@ class AppointmentProvider extends Component {
                 clientID: "",
                 clientName: "",
                 clientEmail: "",
+                clientPhoneNumber: "",
                 appLengthInMinutes: "",
                 appDate: "",
                 therapistID: "",
@@ -87,6 +90,11 @@ class AppointmentProvider extends Component {
     updateAppointment = (_id, updates, callback) => {
         dataAxios.put(`/api/appointment/${_id}`, updates)
             .then(res => this.setState({ currentAppointmentInProgress: res.data }, () => callback()))
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+    updateIntake = (id, data, callback) => {
+        dataAxios.put(`/api/appointment/intake/${id}`, data)
+            .then(() => callback())
             .catch(err => console.log(err.response.data.errMsg))
     }
     cancelAppointment = (appLengthInMinutes, clientID, appDate, client, _id, googleId) => {
@@ -125,10 +133,11 @@ class AppointmentProvider extends Component {
             })
             .catch(err => console.log(err.response.data.errMsg))
     }
-    handleNameIDAdd = (clientID, clientName, therapistName, address, phoneNumber, clientEmail, therapistEmail) => {
+    handleNameIDAdd = (clientID, clientName, clientPhoneNumber, therapistName, address, phoneNumber, clientEmail, therapistEmail) => {
         this.setState({
             clientID: clientID,
             clientName: clientName,
+            clientPhoneNumber: clientPhoneNumber,
             therapistName: therapistName,
             address: address,
             therapistPhoneNumber: phoneNumber,
@@ -161,6 +170,7 @@ class AppointmentProvider extends Component {
                     getAllTherapistAppointments: this.getAllTherapistAppointments,
                     postNewAppointment: this.postNewAppointment,
                     updateAppointment: this.updateAppointment,
+                    updateIntake: this.updateIntake,
                     cancelAppointment: this.cancelAppointment,
                     handleChange: this.handleChange,
                     handleNameIDAdd: this.handleNameIDAdd,

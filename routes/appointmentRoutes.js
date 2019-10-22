@@ -1,6 +1,7 @@
 const express = require('express')
 const appointmentRouter = express.Router()
 const Appointment = require('../models/appointment.js')
+const User = require('../models/user.js')
 const react_secret = process.env.REACT_APP_SECRET
 
 appointmentRouter.route('/')
@@ -54,6 +55,36 @@ appointmentRouter.route('/:id')
                     return next(err)
                 }
                 return res.status(202).send(`Appointment Canceled!`)
+            }
+        )
+    })
+appointmentRouter.route('/intake/:id')
+    .put((req, res, next) => {
+        const { clientPhoneNumber, intake, numberDidChange } = req.body 
+        const updates = { clientPhoneNumber, intake }
+        Appointment.findOneAndUpdate(
+            {_id: req.params.id},
+            updates,
+            {new: true},
+            (err, updatedAppointment) => {
+                if (err){
+                    res.status(500)
+                    return next(err)
+                }
+                if (numberDidChange){
+                    User.findOneAndUpdate(
+                        {_id: updatedAppointment.clientID},
+                        {phoneNumber: clientPhoneNumber},
+                        {new: true},
+                        (err) => {
+                            if (err){
+                                res.status(500)
+                                return next(err)
+                            }
+                        }
+                    )
+                }
+                return res.status(202).send("Success")
             }
         )
     })

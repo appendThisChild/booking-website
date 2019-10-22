@@ -193,6 +193,7 @@ class PickTime extends Component {
             this.props.handleNameIDAdd(
                 this.props.user._id, 
                 `${this.props.firstCharCap(this.props.user.firstName)} ${this.props.firstCharCap(this.props.user.lastName)}`, 
+                this.props.user.phoneNumber,
                 `${this.props.firstCharCap(selectedTherapist.firstName)} ${this.props.firstCharCap(selectedTherapist.lastName)}`,
                 selectedTherapist.address, 
                 selectedTherapist.phoneNumber, 

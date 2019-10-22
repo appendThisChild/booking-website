@@ -22,7 +22,7 @@ const Appointment = props => {
     if (date.getMinutes() === 0) min = "00";
     return(
         <div>
-            <h1>Your Appointment:</h1>
+            <h2>Your Appointment:</h2>
             <p>Therapist: {therapistName}</p>
             <p>Date: {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}</p>
             <p>Time: {hour}:{min} {amPm}</p>

@@ -42,41 +42,55 @@ class Reviews extends Component {
                     transition: Slide
                 })
             } else {
-                toast.success(res.message, {
-                    transition: Slide
-                })
+                window.location.reload();
             }
         })
+    }
+    componentDidMount(){
+        if (JSON.parse(localStorage.getItem('review')) === null){
+            localStorage.review = JSON.stringify(true)
+            window.location.reload();
+        }
     }
     render(){
         const { email, name, message, rating } = this.state
         return(
-            <form onSubmit={this.handleSubmit}>
-                <ToastContainer autoClose={10000} />
-                <h2>Give us a review!</h2>
-                <p>We appreciate your feedback!</p>
-                <StarRatings
-                    rating={rating}
-                    starDimension="25px"
-                    changeRating={this.handleRatingChange}
-                    name="rating"
-                />
-                <p>Email:</p>
-                <input type="email" name="email" value={email} onChange={this.handleChange} required={true}  placeholder="Email"/>
-                <p>First name (or leave blank):</p>
-                <input type="text" name="name" value={name} onChange={this.handleChange} placeholder="First Name"/>
-                <p>Comment:</p>
-                <textarea 
-                    name="message"
-                    value={message}
-                    onChange={this.handleChange}
-                    rows="4" 
-                    cols="50"
-                    placeholder="Comment..." 
-                    required={true}
-                />
-                <button>Submit</button>
-            </form>
+            <div>
+                {JSON.parse(localStorage.getItem('review')) ?
+                <form onSubmit={this.handleSubmit}>
+                    <ToastContainer autoClose={10000} />
+                    <h2>Give us a review!</h2>
+                    <p>We appreciate your feedback!</p>
+                    <StarRatings
+                        rating={rating}
+                        starDimension="25px"
+                        changeRating={this.handleRatingChange}
+                        name="rating"
+                    />
+                    <p>Email:</p>
+                    <input type="email" name="email" value={email} onChange={this.handleChange} required={true}  placeholder="Email"/>
+                    <p>First name (or leave blank):</p>
+                    <input type="text" name="name" value={name} onChange={this.handleChange} placeholder="First Name"/>
+                    <p>Comment:</p>
+                    <textarea 
+                        name="message"
+                        value={message}
+                        onChange={this.handleChange}
+                        rows="4" 
+                        cols="50"
+                        placeholder="Comment..." 
+                        required={true}
+                    />
+                    <button>Submit</button>
+                </form>
+                :
+                <>
+                    <h2>Your Review was Successful!</h2>
+                    <p>We appreciate you taking the time to leave us a review. Your feedback is very important to us.</p>
+                    <h3>Thank you!</h3>
+                </>
+                }
+            </div>
         )
     }
 }

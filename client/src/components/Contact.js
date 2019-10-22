@@ -49,9 +49,12 @@ class Contact extends Component {
                 {mappedFAQs}
                 <h2>Contact Us:</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="email" name="from" value={from} onChange={this.handleChange} required={true} placeholder="Your Email"/>
-                    <input type="text" name="subject" value={subject} onChange={this.handleChange} required={true} placeholder="Subject"/>
-                    <textarea name="message" value={message} onChange={this.handleChange} rows="4" cols="50" required={true} placeholder="Message" />
+                    <p>Email:</p>
+                    <input type="email" name="from" value={from} onChange={this.handleChange} required={true} placeholder="Your Email..."/>
+                    <p>Subject:</p>
+                    <input type="text" name="subject" value={subject} onChange={this.handleChange} required={true} placeholder="Subject..."/>
+                    <p>Message:</p>
+                    <textarea name="message" value={message} onChange={this.handleChange} rows="4" cols="50" required={true} placeholder="Message..." />
                     <button>Send Message</button>
                 </form>
             </div>
