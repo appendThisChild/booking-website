@@ -14,19 +14,12 @@ class Home extends Component {
             reviewsShown: 3
         }
     }
-
-    // 1.) Show intake form in each appointment 
-    
-    // 2.) Style
-
-
     showMore = () => {
         this.setState(prevState => ({ reviewsShown: prevState.reviewsShown + 3 }))
     }
-
     render(){
         const { homeTitle, homeInfo, homeTherapistSubtitle } = this.props.genInfo
-        const mappedHomeInfo = homeInfo.map((para, i) => <p key={i}>{para}</p>)
+        const mappedHomeInfo = homeInfo.map((para, i) => <p key={i}> {para}</p>)
         const mappedReviews = this.props.reviews.map((review, i) => {
             if (i < this.state.reviewsShown){
                 const month = new Date(review.createdAt).getMonth()
@@ -53,26 +46,32 @@ class Home extends Component {
         return(
             <div className={"bodyBackground"}>
                 <div className={"homeBorder"}>
-                    <div className={`homeContainer ${"homeContainer1"}`}>
-                        <h1>{homeTitle}</h1>
-                        {mappedHomeInfo}
+                    <div className={`homeContainer ${"homeContainerInside"}`}>
+                        <div>
+                            <h1>{homeTitle}</h1>
+                            {mappedHomeInfo}
+                        </div>
                     </div>
-                    <div className={"homeContainer2"}>
-                        <h1>Our Therapists</h1>
-                        <p>{homeTherapistSubtitle}</p>
-                        <TherapistDisplay />
+                    <div className={`homeContainer ${"homeContainerInside"}`}>
+                        <div>
+                            <h1>Our Therapists</h1>
+                            <p>{homeTherapistSubtitle}</p>
+                            <TherapistDisplay />
+                        </div>
                     </div>
-                    <div className={`homeContainer ${"homeContainer3"}`}>
-                        <h1>Reviews</h1>
-                        <StarRatings 
-                            rating={this.props.rating}
-                            starRatedColor="gold"
-                            starDimension="30px"
-                            starSpacing="3px"
-                        />
-                        <span> - {this.props.rating}/5</span>
-                        {mappedReviews}
-                        <span onClick={this.showMore}>Show more</span>
+                    <div className={`homeContainer`}>
+                        <div>
+                            <h1>Reviews</h1>
+                            <StarRatings 
+                                rating={this.props.rating}
+                                starRatedColor="gold"
+                                starDimension="30px"
+                                starSpacing="3px"
+                            />
+                            <span> - {this.props.rating}/5</span>
+                            {mappedReviews}
+                            <span onClick={this.showMore}>Show more</span>
+                        </div>
                     </div>
                 </div>
             </div>

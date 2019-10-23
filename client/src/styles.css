@@ -68,6 +68,11 @@
     grid-column: 26/-1;
     grid-row: 37/ -1;
 }
+
+
+
+
+/* Nav */
 .navToggle {
     font-size: 35px;
     margin: 10px;
@@ -109,11 +114,20 @@
     text-shadow: 2px -2px 5px orange; 
 }
 
+
+
+
+
+
+
+
+
+
 /* Home  */
 .bodyBackground {
-    background-image: url("./images/cawer3.jpg");
+    background-image: url("./images/kisscc0-mandala-islamic-geometric-patterns-sacred-geometry-border-4-derivative-9-5b3e06150d5b14.0181865015307914450547.png");
     background-color: rgb(245, 245, 244);
-    background-size: 200%;
+    background-size: 150%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
@@ -121,67 +135,79 @@
     /* height: 1000px; */
 }
 .homeBorder {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 .homeContainer {
-    padding: 15px;
+    background-image: url("./images/cawer3.jpg");
+    background-color: rgb(245, 245, 244);
+    background-size: 200%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    margin-right: 7%;
-    color: white;
+    /* border-right: 1px solid black; */
+    /* border-top-right-radius: 15px; */
+    /* border-bottom-right-radius: 15px; */
+    /* margin-right: 7%; */
+    /* color: white; */
 }
-.homeContainer1 {
-    background-color: rgba(83, 11, 83, 0.87);
-    margin-bottom: 20px;
+.homeContainerInside {
+    margin-bottom: 60px;
 }
-.homeContainer2 {
-    padding: 15px;
-    border-top: 1px solid black;
+
+/* background-color: rgba(83, 11, 83, 0.87); */
+/* background-color: rgba(243, 243, 46, 0.87); */
+/* background-color: rgba(0, 172, 0, 0.87); */
+
+.homeContainer > div {
+    /* padding: 15px; */
+    padding-bottom: 15px;
+    background-image: radial-gradient(rgba(255, 255, 255, 0), rgba(83, 11, 83));
+    /* background-color: rgba(83, 11, 83, 0.87); */
+}
+.homeContainer > div > h1 {
+    font-family: headers;
+    font-size: 45px;
     border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    background-color: rgba(243, 243, 46, 0.87);
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    margin-left: 7%;
-    margin-bottom: 20px;
-}
-.homeContainer3 {
-    background-color: rgba(0, 172, 0, 0.87);
-}
-.homeContainer > h1 {
-    font-family: headers;
-    font-size: 45px;
-    border-bottom: 2px solid white;
-    text-shadow: 1px 2px 3px black;
+    /* text-shadow: 1px 2px 3px black; */
     padding-bottom: 3px;
-    margin-bottom: 5px;
-    box-shadow: 0px 1px 0px 0px black;
+    margin-bottom: 10px;
+    /* box-shadow: 0px 1px 0px 0px black; */
+    text-align: center;
+    /* color: white; */
+
 }
-.homeContainer > p {
+.homeContainer > div > p {
+    text-indent: 30px;
     font-family: paragraphs;
-    font-size: 26px;
+    font-size: 27px;
     line-height: 28px;
-    text-shadow: 1px 1px 2px black;
+    /* text-shadow: 1px 1px 2px black; */
+
+    /* border-radius: 7px; */
+    /* border: 1px solid white; */
+    /* padding: 10px; */
+    margin-top: 15px;
+    margin-right: 15px;
+    margin-left: 15px;
+    /* background-image: radial-gradient(rgba(243, 243, 46, .88) 45%, rgba(255, 255, 255, 0) ); */
+    /* background-color: rgba(243, 243, 46, 0.70); */
 }
-.homeContainer2 > h1 {
-    font-family: headers;
-    font-size: 45px;
-    border-bottom: 2px solid black;
-    text-shadow: 1px 2px 3px white;
-    padding-bottom: 3px;
-    margin-bottom: 5px;
-    box-shadow: 0px 1px 0px 0px white;
-}
-.homeContainer2 > p {
-    font-family: paragraphs;
-    font-size: 26px;
-    line-height: 28px;
-    text-shadow: 1px 1px 2px white;
-}
+
+/* Planning on changing the font to something more robust and white */
+
+
+
+
+
+
+
+
+
 /* Footer  */
 .footer {
     display: flex;
@@ -208,6 +234,16 @@
     color: yellow;
     text-decoration: underline;
 }
+
+
+
+
+
+
+
+
+
+
 /* stripe connections */
 .stripe-connect {
     background-image: url("./images/blue-on-dark.png");
