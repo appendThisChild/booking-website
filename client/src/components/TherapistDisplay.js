@@ -19,7 +19,7 @@ class TherapistDisplay extends Component {
             <Therapist {...therapist} key={therapist._id}/>
         )
         return(
-            <div>
+            <div className="therapistContainer">
                 {mappedTherapists}
             </div>
         )

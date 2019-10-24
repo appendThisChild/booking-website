@@ -26,7 +26,6 @@ const GeneralInfoDisplay = props => {
             {mappedHomeInfo}
             <h3>Home Therapist Subtitle:</h3>
             <p>{homeTherapistSubtitle}</p>
-            <h3>Pricing:</h3>
             <PricingDisplay pricing={pricing} className={""}/>
             <h3>Cancelation Policy:</h3>
             {mappedCancelPolicy}

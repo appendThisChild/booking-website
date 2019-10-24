@@ -10,14 +10,41 @@
     font-family: nav1;
     src:url(./fonts/SrabiScript.ttf)
 }
-@font-face {
+/* @font-face {
     font-family: headers;
     src: url("./fonts/GeosansLight.ttf")
-}
-@font-face {
+} */
+/* @font-face {
     font-family: paragraphs;
     src: url("./fonts/GeosansLight-Oblique.ttf")
+} */
+/* @font-face {
+    font-family: Rossanova-Bold;
+    src: url("./fonts/Rossanova-Bold.otf")
+} */
+@font-face {
+    font-family: Rossanova;
+    src: url("./fonts/Rossanova-Regular.otf")
 }
+@font-face {
+    font-family: Rossanova-Italic;
+    src: url("./fonts/Rossanova-Italic.otf")
+}
+@font-face {
+    font-family: Tangerine;
+    src: url("./fonts/Tangerine_Regular.ttf")
+}
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===============Header================ */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
 
 /* Header */
 .headerBackground {
@@ -38,17 +65,14 @@
     opacity: .95;
     font-size: 70px;
     font-family: ChopinScript;
-    /* padding-left: 5%; */
     grid-column: 4/-1;
     grid-row: 6/-1;
-    /* padding-top: 10px; */
 
 }
 .headerTitle2 {
     opacity: .95;
     font-size: 60px;
     font-family: ChopinScript;
-    /* padding-left: 15%; */
     grid-column: 35/-1;
     grid-row: 17/-1;
 }
@@ -56,7 +80,6 @@
     opacity: .95;
     font-size: 70px;
     font-family: ChopinScript;
-    /* padding-left: 25%; */
     grid-column: 0/-1;
     grid-row: 25/-1;
 }
@@ -64,7 +87,6 @@
     opacity: .95;
     font-size: 60px;
     font-family: ChopinScript;
-    /* padding-left: 35%; */
     grid-column: 26/-1;
     grid-row: 37/ -1;
 }
@@ -108,7 +130,6 @@
     color: black;
     font-family: nav1;
     font-size: 35px;
-    /* text-shadow: 2px -2px 5px orange; */
 }
 .navBarLinks > a:hover {
     text-shadow: 2px -2px 5px orange; 
@@ -117,26 +138,45 @@
 
 
 
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===============Header================ */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
 
 
 
 
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ================Home================= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+/* background-color: rgba(83, 11, 83); */
+/* background-color: rgba(243, 243, 46); */
+/* background-color: rgba(0, 172, 0); */
 
 
 /* Home  */
 .bodyBackground {
     background-image: url("./images/kisscc0-mandala-islamic-geometric-patterns-sacred-geometry-border-4-derivative-9-5b3e06150d5b14.0181865015307914450547.png");
     background-color: rgb(245, 245, 244);
-    background-size: 150%;
+    background-size: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
-    box-shadow: inset 0px 0px 35px 0px black;
-    /* height: 1000px; */
+    box-shadow: inset 0px 0px 55px 0px black;
 }
 .homeBorder {
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding-top: 45px;
+    padding-bottom: 45px;
 }
 .homeContainer {
     background-image: url("./images/cawer3.jpg");
@@ -145,65 +185,306 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
-
-    
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    /* border-right: 1px solid black; */
-    /* border-top-right-radius: 15px; */
-    /* border-bottom-right-radius: 15px; */
-    /* margin-right: 7%; */
-    /* color: white; */
 }
 .homeContainerInside {
-    margin-bottom: 60px;
+    margin-bottom: 45px;
 }
-
-/* background-color: rgba(83, 11, 83, 0.87); */
-/* background-color: rgba(243, 243, 46, 0.87); */
-/* background-color: rgba(0, 172, 0, 0.87); */
-
 .homeContainer > div {
-    /* padding: 15px; */
     padding-bottom: 15px;
-    background-image: radial-gradient(rgba(255, 255, 255, 0), rgba(83, 11, 83));
-    /* background-color: rgba(83, 11, 83, 0.87); */
+    background-image: radial-gradient(rgba(83, 11, 83, .50) 25%, rgba(83, 11, 83, .95) 85%);
 }
 .homeContainer > div > h1 {
-    font-family: headers;
-    font-size: 45px;
+    font-family: Tangerine;
+    font-size: 55px;
+    padding-top: 5px;
     border-bottom: 1px solid black;
-    /* text-shadow: 1px 2px 3px black; */
-    padding-bottom: 3px;
-    margin-bottom: 10px;
-    /* box-shadow: 0px 1px 0px 0px black; */
+    text-shadow: 2px 1px 3px black;
     text-align: center;
-    /* color: white; */
+    color: white;
 
 }
 .homeContainer > div > p {
-    text-indent: 30px;
-    font-family: paragraphs;
-    font-size: 27px;
+    text-indent: 25px;
+    font-size: 25px;
+    letter-spacing: 1.25px;
     line-height: 28px;
-    /* text-shadow: 1px 1px 2px black; */
-
-    /* border-radius: 7px; */
-    /* border: 1px solid white; */
-    /* padding: 10px; */
+    color: white;
+    text-shadow: 1px 2px 2px black;
     margin-top: 15px;
     margin-right: 15px;
     margin-left: 15px;
-    /* background-image: radial-gradient(rgba(243, 243, 46, .88) 45%, rgba(255, 255, 255, 0) ); */
-    /* background-color: rgba(243, 243, 46, 0.70); */
 }
 
-/* Planning on changing the font to something more robust and white */
+
+
+
+/* Therapist Display */
+.therapistContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.therapist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.displayImg {
+    height: 225px;
+    width:  225px;
+    border-radius: 50%;
+    padding-bottom: 10px;
+}
+.therapist > p {
+    font-size: 22px;
+    font-style: italic;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    line-height: 28px;
+}
 
 
 
 
 
+
+/* Review */
+.ratings {
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+}
+.ratings > span {
+    color: white;
+    font-size: 20px;
+    padding-top: 8px;
+}
+.reviewItem {
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 5px;
+    margin: 15px;
+    padding: 10px;
+}
+.reviewItem > h3 {
+    color: white;
+    font-size: 19px;
+    letter-spacing: .25px;
+}
+.reviewItem > p:nth-child(n) {
+    text-indent: 15px;
+    color: white;
+    font-size: 18px;
+    font-style: italic;
+}
+.reviewItem > p:nth-child(2n) {
+    font-family: auto;
+    font-size: 15px;
+    font-style: inherit;
+    text-align: right;
+}
+.ratings2 {
+    display: flex;
+}
+.ratings2 > span {
+    color: white;
+    font-size: 15px;
+    padding-top: 3px;
+}
+.addReviews {
+    display: block;
+    text-align: center;
+    text-decoration: underline;
+    color: white;
+    font-size: 17px;
+}
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ================Home================= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ================Book================= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+
+
+
+/* Book Container */
+.bookContainer {
+    background-image: url("./images/kisscc0-mandala-islamic-geometric-patterns-sacred-geometry-border-4-derivative-9-5b3e06150d5b14.0181865015307914450547.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: inset 0px 0px 55px 0px black;
+}
+.bookContainerBorder {
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+
+/* Pricing Display */
+/* Container */
+.bookingPriceDisplay {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/sagittarius_PNG74.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 80%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    margin-bottom: 45px;
+}
+.bookingPriceDisplay > div {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-bottom: 15px;
+}
+/* Title */
+.bookingPriceDisplay > div > h3 {
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 55px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+}
+/* Price Choice Container */
+.bookingPriceDisplay > div > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.bookingPriceDisplay > div > div > div {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+/* Choice Title */
+.bookingPriceDisplay > div > div > div > h4 {
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 45px;
+}
+/* Price Lines */
+.bookingPriceDisplay > div > div > div > p {
+    text-align: center;
+    font-size: 23px;
+    line-height: 30px;
+}
+
+
+
+
+/* Booing Therapist Choice */
+
+.bookingTherapistDisplay {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/sagittarius_PNG74.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 80%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bookingTherapistDisplay > div {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-bottom: 15px;
+}
+/* select container */
+.selectTherapist {
+
+}
+/* select title */
+.selectTherapist > h3 {
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 55px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+}
+/* select form */
+.selectTherapist > form {
+    display: flex;
+    flex-direction: column;
+}
+/* new select display
+.selectTherapist > form > div {
+    
+} */
+/* select form select tags */
+.selectTherapist > form > select {
+    border: 1px solid black;
+    border-radius: 0px;
+    margin: 5px;
+    line-height: 35px;
+    font-size: 23px;
+    font-family: auto;
+}
+/* text for select tags */
+.selectTherapist > form > select > option {
+    font-family: auto;
+    
+}
+/* submit button for form */
+.selectTherapist > form > button {
+
+}
+
+
+/* Last thing I was trying to accomplish was figuring out how to style the the scrollbar of the select elements */
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ================Book================= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===============Footer================ */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
 
 
 
@@ -211,24 +492,22 @@
 /* Footer  */
 .footer {
     display: flex;
-    background-image: url("./images/wood.jpg");
-    background-position: 50% 80%;
+    background-image: url("./images/thisFlower.png");
+    background-size: 400%;
+    background-position: 50% 35%;
 }
 .footer > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex: 1;
-    background-image: radial-gradient(rgba(0, 0, 0, 0.5) 25%, rgba(0, 0, 0, 0));
+    background-color: rgba(243, 243, 46, 0.4);
     padding-top: 5px;
     padding-bottom: 5px;
 }
 .footer > div > p {
-    font-family: headers;
-    color: white;
     text-align: center;
-    font-size: 15px;
-    text-shadow: 1px 1px 1px black;
+    font-size: 17px;
 }
 .ryanLink:hover {
     color: yellow;
@@ -238,8 +517,13 @@
 
 
 
-
-
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===============Footer================ */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
 
 
 
@@ -251,6 +535,3 @@
     width: 193px;
     border-radius: 5px;
 } 
-.displayImg {
-    height: 300px;
-}

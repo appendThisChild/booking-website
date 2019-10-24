@@ -26,11 +26,16 @@ class Book extends Component {
     }
     render(){
         return(
-            <div>
-                <TherapistTimeChoice handleSubmit={this.handlePickTime}/>
-                <h3>Pricing</h3>
-                <PricingDisplay pricing={this.props.genInfo.pricing} className={""}/>
-                <TherapistDisplay />
+            <div className="bookContainer">
+                <div className="bookContainerBorder">
+                    <PricingDisplay pricing={this.props.genInfo.pricing} className={"bookingPriceDisplay"}/>
+                    <div className="bookingTherapistDisplay">
+                        <div>
+                            <TherapistTimeChoice handleSubmit={this.handlePickTime}/>
+                            <TherapistDisplay />
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

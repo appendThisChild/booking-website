@@ -24,7 +24,7 @@ class Therapist extends Component {
     render(){
         const { firstName, lastName, address, firstCharCap } = this.props
         return(
-            <div>
+            <div className="therapist">
                 <img src={this.state.image} alt={"one"} className="displayImg"/>
                 <p>{firstCharCap(firstName)} {firstCharCap(lastName)}</p>
                 <p>{address.city}, {address.state}</p>

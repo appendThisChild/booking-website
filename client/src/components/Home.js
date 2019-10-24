@@ -26,17 +26,19 @@ class Home extends Component {
                 const date = new Date(review.createdAt).getDate()
                 const year = new Date(review.createdAt).getFullYear()
                 return(
-                    <div key={i}>
+                    <div key={i} className="reviewItem">
+                        <div className="ratings2">
+                            <StarRatings
+                                rating={review.rating}
+                                starRatedColor="gold"
+                                starDimension="20px"
+                                starSpacing="0px"
+                            />
+                            <span> - {review.rating}/5</span>
+                        </div>
                         <h3>{review.name}</h3> 
-                        <StarRatings
-                            rating={review.rating}
-                            starRatedColor="gold"
-                            starDimension="20px"
-                            starSpacing="0px"
-                        />
-                        <span> {review.rating}/5</span>
-                        <p> ~ "{review.message}"</p>
-                        <p>{month}/{date}/{year}</p>
+                        <p> ~ {review.message}</p>
+                        <p> - {month}/{date}/{year}</p>
                     </div>
                 )
             } else {
@@ -62,15 +64,17 @@ class Home extends Component {
                     <div className={`homeContainer`}>
                         <div>
                             <h1>Reviews</h1>
-                            <StarRatings 
-                                rating={this.props.rating}
-                                starRatedColor="gold"
-                                starDimension="30px"
-                                starSpacing="3px"
-                            />
-                            <span> - {this.props.rating}/5</span>
+                            <div className="ratings">
+                                <StarRatings 
+                                    rating={this.props.rating}
+                                    starRatedColor="gold"
+                                    starDimension="35px"
+                                    starSpacing="2px"
+                                />
+                                <span> - {this.props.rating}/5</span>
+                            </div>
                             {mappedReviews}
-                            <span onClick={this.showMore}>Show more</span>
+                            <span onClick={this.showMore} className="addReviews">Show more</span>
                         </div>
                     </div>
                 </div>

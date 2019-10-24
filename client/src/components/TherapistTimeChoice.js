@@ -15,16 +15,21 @@ const TherapistTimeChoice = props => {
         <option value={length} key={i}>{length} Minutes</option>
     )
     return(
-        <div>
+        <div className="selectTherapist">
+            <h3>Book a Massage:</h3>
             <form onSubmit={handleSubmit}>
-                <select name="therapistID" value={therapistID} onChange={handleChange} required={true}>
-                    <option>Select Therapist</option>
-                    {mappedTherapists}
-                </select>
-                <select name="appLengthInMinutes" required={true} value={appLengthInMinutes} onChange={handleChange}>
-                <option>Select Appointment Length</option>
-                    {mappedAppLengths}
-                </select>
+                {/* <div> */}
+                    <select name="therapistID" value={therapistID} onChange={handleChange} required={true}>
+                        <option>Select Therapist</option>
+                        {mappedTherapists}
+                    </select>
+                {/* </div> */}
+                {/* <div> */}
+                    <select name="appLengthInMinutes" required={true} value={appLengthInMinutes} onChange={handleChange}>
+                        <option>Select Appointment Length</option>
+                        {mappedAppLengths}
+                    </select>
+                {/* </div> */}
                 <button>Pick Time</button>
             </form>
         </div>
