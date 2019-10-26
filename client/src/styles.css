@@ -353,7 +353,7 @@
     border-bottom: 1px solid black;
     background-image: url("./images/sagittarius_PNG74.png");
     background-color: rgb(245, 245, 244);
-    background-size: 80%;
+    background-size: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
@@ -411,7 +411,7 @@
     border-bottom: 1px solid black;
     background-image: url("./images/sagittarius_PNG74.png");
     background-color: rgb(245, 245, 244);
-    background-size: 80%;
+    background-size: 100%;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
@@ -510,7 +510,6 @@
     font-size: 17px;
 }
 .ryanLink:hover {
-    color: yellow;
     text-decoration: underline;
 }
 

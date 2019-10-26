@@ -17,9 +17,14 @@ class AppointmentProvider extends Component {
     constructor(){
         super()
         this.state = {
-            companyAppointments: [],
-            therAppointments: [],
-            clientAppointments: [],
+            companyAppointmentsPresent: [],
+            companyAppointmentsPast: [],
+            companyEarningsData: {},
+            therAppointmentsPresent: [],
+            therAppointmentsPast: [],
+            therEarningsData: {},
+            clientAppointmentsPresent: [],
+            clientAppointmentsPast: [],
             currentAppointmentInProgress: "",
             appLengths: [60, 90, 120],
             clientID: "",
@@ -40,19 +45,37 @@ class AppointmentProvider extends Component {
             apiKey: ""
         }
     }
-    getAllCompanyAppointments = callback => {
-        dataAxios.get("/api/owner/appointment")
-            .then( res => this.setState({ companyAppointments: res.data }, () => callback()))
+    // owner
+    getAllPresentCompanyAppointments = (dateData, callback) => {
+        dataAxios.post("/api/owner/appointment/present", dateData)
+            .then( res => this.setState({ companyAppointmentsPresent: res.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
-    getAllClientAppointments = (id, callback) => {
-        dataAxios.get(`/api/appointment/${id}`)
-            .then( res => this.setState({ clientAppointments: res.data }, () => callback()))
+    getAllPastCompanyAppointments = (dateData, callback) => {
+        dataAxios.post("/api/owner/appointment/past", dateData)
+            .then( res => this.setState({ companyAppointmentsPast: res.data.apps, companyEarningsData: res.data.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
-    getAllTherapistAppointments = (id, callback) => {
-        dataAxios.get(`/api/therapist/appointment/${id}`)
-            .then( res => this.setState({ therAppointments: res.data }, () => callback()))
+    // client
+    getAllPresentClientAppointments = (id, dateData, callback) => {
+        dataAxios.post(`/api/appointment/present/${id}`, dateData)
+            .then( res => this.setState({ clientAppointmentsPresent: res.data }, () => callback()))
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+    getAllPastClientAppointments = (id, dateData, callback) => {
+        dataAxios.post(`/api/appointment/past/${id}`, dateData)
+            .then( res => this.setState({ clientAppointmentsPast: res.data }, () => callback()))
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+    // therapist
+    getAllPresentTherapistAppointments = (id, dateData, callback) => {
+        dataAxios.post(`/api/therapist/appointment/present/${id}`, dateData)
+            .then( res => this.setState({ therAppointmentsPresent: res.data }, () => callback()))
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+    getAllPastTherapistAppointments = (id, dateData, callback) => {
+        dataAxios.post(`/api/therapist/appointment/past/${id}`, dateData)
+            .then( res => this.setState({ therAppointmentsPast: res.data.apps, therEarningsData: res.data.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
     postNewAppointment = (date, callback) => {
@@ -149,14 +172,6 @@ class AppointmentProvider extends Component {
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
         this.setState({ [e.target.name] : value })
     }
-    orderAppointments = (appointments, callback) => {
-        const today = new Date()
-        const past = appointments.filter(obj => new Date(obj.appDate) < today )
-        const present = appointments.filter(obj => new Date(obj.appDate) > today )
-        past.sort((app1, app2) => new Date(app2.appDate) - new Date(app1.appDate))
-        present.sort((app1, app2) => new Date(app1.appDate) - new Date(app2.appDate))
-        callback([past, present])
-    }
     eraseKey = () => {
         this.setState({ apiKey: ""})
     }
@@ -165,16 +180,18 @@ class AppointmentProvider extends Component {
             <AppointmentContext.Provider
                 value={{
                     ...this.state,
-                    getAllCompanyAppointments: this.getAllCompanyAppointments,
-                    getAllClientAppointments: this.getAllClientAppointments,
-                    getAllTherapistAppointments: this.getAllTherapistAppointments,
+                    getAllPresentCompanyAppointments: this.getAllPresentCompanyAppointments,
+                    getAllPastCompanyAppointments: this.getAllPastCompanyAppointments,
+                    getAllPresentClientAppointments: this.getAllPresentClientAppointments,
+                    getAllPastClientAppointments: this.getAllPastClientAppointments,
+                    getAllPresentTherapistAppointments: this.getAllPresentTherapistAppointments,
+                    getAllPastTherapistAppointments: this.getAllPastTherapistAppointments,
                     postNewAppointment: this.postNewAppointment,
                     updateAppointment: this.updateAppointment,
                     updateIntake: this.updateIntake,
                     cancelAppointment: this.cancelAppointment,
                     handleChange: this.handleChange,
                     handleNameIDAdd: this.handleNameIDAdd,
-                    orderAppointments: this.orderAppointments,
                     updateVisits: this.updateVisits,
                     eraseKey: this.eraseKey
                 }}>

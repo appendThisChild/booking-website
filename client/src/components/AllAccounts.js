@@ -15,7 +15,20 @@ class AllAccounts extends Component {
     sendToAccount = () => {
         this.props.history.push("/accountHistory")
     }
-
+    getHistory = (_id, isTherapist) => {
+        const date = new Date()
+        const dateData = {
+            month: date.getMonth() + 1,
+            year: date.getFullYear()
+        }
+        this.props.setAccount(_id, dateData, () => {
+            if (isTherapist){
+                this.props.getAccountTherapistHistory(_id, dateData, this.sendToAccount)
+            } else {
+                this.sendToAccount()
+            }
+        })
+    }
     componentDidMount(){
         this.props.getAllAccounts()
     }
@@ -31,9 +44,9 @@ class AllAccounts extends Component {
         const owners = accounts.filter(account => account.isOwner === true && account.isTherapist === false)
         const therapists = accounts.filter(account => account.isTherapist === true)
         const clients = accounts.filter(account => account.isTherapist === false && account.isOwner === false)
-        const mappedOwners = owners.map((account, i) => <Account key={account._id} order={i} {...account} callback={this.sendToAccount}/>)
-        const mappedTherapists = therapists.map((account, i) => <Account key={account._id} order={i} {...account} callback={this.sendToAccount}/>)
-        const mappedClients = clients.map((account, i) => <Account key={account._id} order={i} {...account} callback={this.sendToAccount}/>)
+        const mappedOwners = owners.map((account, i) => <Account key={account._id} order={i} {...account} getHistory={this.getHistory}/>)
+        const mappedTherapists = therapists.map((account, i) => <Account key={account._id} order={i} {...account} getHistory={this.getHistory}/>)
+        const mappedClients = clients.map((account, i) => <Account key={account._id} order={i} {...account} getHistory={this.getHistory}/>)
         return(
             <div>
                 <ProfileNav />

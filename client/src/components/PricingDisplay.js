@@ -16,8 +16,8 @@ const PricingDisplay = props => {
             }  
         })
     })
-    const mappedSingles = singles.map((price, i) => <p key={i}>{minutesArr[i]}-Minutes - ${price / 100}</p>)
-    const mappedTriples = triples.map((price, i) => <p key={i}>{minutesArr[i]}-Minutes - ${price / 100}</p>)
+    const mappedSingles = singles.map((price, i) => <p key={i}>{minutesArr[i]} Minutes - ${price / 100}</p>)
+    const mappedTriples = triples.map((price, i) => <p key={i}>{minutesArr[i]} Minutes - ${price / 100}</p>)
     return(
         <div className={className}>
             <div>

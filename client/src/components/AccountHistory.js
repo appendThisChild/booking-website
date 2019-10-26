@@ -10,8 +10,6 @@ class AccontHistory extends Component {
     constructor(props){
         super(props)
         this.state = {
-            searchedTherapistHistory: props.searchedTherapistHistory, 
-            searchedClientHistory: props.searchedClientHistory,
             presentMonth: new Date().getMonth() + 1,
             presentYear: new Date().getFullYear(),
             pastMonth: new Date().getMonth() + 1,
@@ -20,52 +18,90 @@ class AccontHistory extends Component {
             pastToggle: 0
         }
     }
-
+    // get client history
     switchPresentMonth = (num) => {
-        const { presentMonth } = this.state
+        const { presentMonth, presentYear } = this.state
         if (num === 1 && presentMonth === 11){
-            this.setState(prevState => ({
-                presentYear: prevState.presentYear + 1,
-                presentMonth: 0,
-                presentToggle: prevState.presentToggle + num
-            }))
+            const dateData = {
+                month: 0,
+                year: presentYear + 1
+            }
+            this.props.getAccountTherapistHistory(this.props.searchedAccount._id, dateData, () => {
+                this.setState(prevState => ({
+                    presentYear: prevState.presentYear + 1,
+                    presentMonth: 0,
+                    presentToggle: prevState.presentToggle + num
+                }))
+            })
         } else if (num === -1 && presentMonth === 0){
-            this.setState(prevState => ({
-                presentYear: prevState.presentYear - 1,
-                presentMonth: 11,
-                presentToggle: prevState.presentToggle + num
-            }))
+            const dateData = {
+                month: 11,
+                year: presentYear - 1
+            }
+            this.props.getAccountTherapistHistory(this.props.searchedAccount._id, dateData, () => {
+                this.setState(prevState => ({
+                    presentYear: prevState.presentYear - 1,
+                    presentMonth: 11,
+                    presentToggle: prevState.presentToggle + num
+                }))
+            })
         } else {
-            this.setState(prevState => ({
-                presentMonth: prevState.presentMonth + num,
-                presentToggle: prevState.presentToggle + num
-            }))
+            const dateData = {
+                month: presentMonth + num,
+                year: presentYear
+            }
+            this.props.getAccountTherapistHistory(this.props.searchedAccount._id, dateData, () => {
+                this.setState(prevState => ({
+                    presentMonth: prevState.presentMonth + num,
+                    presentToggle: prevState.presentToggle + num
+                }))
+            })
         }
     }
+    // get therapist history 
     switchPastMonth = (num) => {
-        const { pastMonth } = this.state
+        const { pastMonth, pastYear } = this.state
         if (num === 1 && pastMonth === 11){
-            this.setState(prevState => ({
-                pastYear: prevState.pastYear + 1,
-                pastMonth: 0,
-                pastToggle: prevState.pastToggle + num
-            }))
+            const dateData = {
+                month: 0,
+                year: pastYear + 1
+            }
+            this.props.getAccountClientHistory(this.props.searchedAccount._id, dateData, () => {
+                this.setState(prevState => ({
+                    pastYear: prevState.pastYear + 1,
+                    pastMonth: 0,
+                    pastToggle: prevState.pastToggle + num
+                }))
+            })
         } else if (num === -1 && pastMonth === 0){
-            this.setState(prevState => ({
-                pastYear: prevState.pastYear - 1,
-                pastMonth: 11,
-                pastToggle: prevState.pastToggle + num
-            }))
+            const dateData = {
+                month: 11,
+                year: pastYear - 1
+            }
+            this.props.getAccountClientHistory(this.props.searchedAccount._id, dateData, () => {
+                this.setState(prevState => ({
+                    pastYear: prevState.pastYear - 1,
+                    pastMonth: 11,
+                    pastToggle: prevState.pastToggle + num
+                }))
+            })
         } else {
-            this.setState(prevState => ({
-                pastMonth: prevState.pastMonth + num,
-                pastToggle: prevState.pastToggle + num
-            }))
+            const dateData = {
+                month: pastMonth + num,
+                year: pastYear
+            }
+            this.props.getAccountClientHistory(this.props.searchedAccount._id, dateData, () => {
+                this.setState(prevState => ({
+                    pastMonth: prevState.pastMonth + num,
+                    pastToggle: prevState.pastToggle + num
+                }))
+            })
         }
     }
     render(){
         const { searchedAccount, firstCharCap } = this.props
-        const { searchedTherapistHistory, searchedClientHistory, presentMonth, pastMonth, presentYear, pastYear, presentToggle, pastToggle } = this.state
+        const { presentToggle, pastToggle, pastMonth, pastYear, presentMonth, presentYear } = this.state
+        const { searchedTherapistHistory, searchedClientHistory } = this.props
         const { switchPastMonth, switchPresentMonth } = this
         return(
             <div>

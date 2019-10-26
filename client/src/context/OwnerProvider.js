@@ -27,38 +27,23 @@ class OwnerProvider extends Component {
             .then(res => this.setState({ accounts: res.data.sort((acc1, acc2) => acc2.phoneNumber - acc1.phoneNumber) }))
             .catch(err => console.log(err.response.data.errMsg))
     }
-    getAccountHistory = (_id, callback) => {
+
+
+    setAccount = (_id, dateData, callback) => {
         const account = this.state.accounts.filter(account => account._id === _id)[0]
-        dataAxios.get(`/api/owner/appointment/client/${_id}`)
-            .then(res => this.setState(
-                { 
-                    searchedAccount: account, 
-                    searchedClientHistory: res.data.sort((app1, app2) => new Date(app2.appDate) - new Date(app1.appDate)) 
-                }, 
-                !account.isTherapist ? () => callback() : () => {
-                    dataAxios.get(`/api/owner/appointment/therapist/${_id}`)
-                        .then(res => {
-                            const apps = res.data.map(app => {
-                                if (app.packageChoice !== 1){
-                                    if (app.appLengthInMinutes === 60){
-                                        app.amount = 19998 / 3
-                                    } else if (app.appLengthInMinutes === 90){
-                                        app.amount = 29997 / 3
-                                    } else if (app.appLengthInMinutes === 120) {
-                                        app.amount = 39996 / 3
-                                    }
-                                } 
-                                return app
-                            })
-                            this.setState({ 
-                                searchedTherapistHistory: apps.sort((app1, app2) => new Date(app2.appDate) - new Date(app1.appDate))
-                            }, () => callback())
-                        })
-                        .catch(err => console.log(err.response.data.errMsg))
-                }
-            ))
+        this.setState({ searchedAccount: account }, () => this.getAccountClientHistory(_id, dateData, callback))
+    }
+
+    getAccountClientHistory = (_id, dateData, callback) => {
+        dataAxios.post(`/api/owner/appointment/client/${_id}`, dateData)
+            .then(res => this.setState({ searchedClientHistory: res.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
 
+    }
+    getAccountTherapistHistory = (_id, dateData, callback) => {
+        dataAxios.post(`/api/owner/appointment/therapist/${_id}`, dateData)
+            .then(res => this.setState({ searchedTherapistHistory: res.data }, () => callback()))
+            .catch(err => console.log(err.response.data.errMsg))
     }
 
     updateAccount = (_id, updates) => {
@@ -76,7 +61,9 @@ class OwnerProvider extends Component {
                     ...this.state,
                     getAllAccounts: this.getAllAccounts,
                     updateAccount: this.updateAccount,
-                    getAccountHistory: this.getAccountHistory
+                    setAccount: this.setAccount,
+                    getAccountClientHistory: this.getAccountClientHistory,
+                    getAccountTherapistHistory: this.getAccountTherapistHistory
                 }}>
                 {this.props.children}
             </OwnerContext.Provider>

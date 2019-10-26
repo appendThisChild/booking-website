@@ -5,23 +5,22 @@ import AppointmentBullet from "./AppointmentBullet.js"
 const AppointmentHistory = props => {
     const { title, subTitle, history, future, client, owner, month, year, switchMonth, toggle, therapist } = props
     const monthsOftheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    const thisMonthsHistory = history.filter(app => new Date(app.appDate).getFullYear() === year && new Date(app.appDate).getMonth() === month )
-    const mappedHistory = thisMonthsHistory.map(app => <AppointmentBullet {...app} client={client} therapist={therapist} future={future} key={app._id}/> )
+    const mappedHistory = history.map(app => <AppointmentBullet {...app} client={client} therapist={therapist} future={future} key={app._id}/> )
     let filterNotCanceled = []
     if (owner){
-        filterNotCanceled = thisMonthsHistory
+        filterNotCanceled = history
     } else {
-        filterNotCanceled = thisMonthsHistory.filter(app => app.canceled === false)
+        filterNotCanceled = history.filter(app => app.canceled === false)
     }
     const monthEarnings = filterNotCanceled.reduce((total, sum) => total + sum.amount, 0) / 100
     const websiteDeductions = (monthEarnings * .10).toFixed(2)
     const therapistEarnings = (monthEarnings * .80).toFixed(2)
     const companyEarnings = (monthEarnings - websiteDeductions - therapistEarnings).toFixed(2)
     const serviceDeducted = (parseFloat(websiteDeductions) + parseFloat(companyEarnings))
-    const monthHours = thisMonthsHistory.reduce((total, sum) => total + sum.appLengthInMinutes, 0) / 60
-    const count60 = thisMonthsHistory.filter(app => app.appLengthInMinutes === 60).length
-    const count90 = thisMonthsHistory.filter(app => app.appLengthInMinutes === 90).length
-    const count120 = thisMonthsHistory.filter(app => app.appLengthInMinutes === 120).length
+    const monthHours = history.reduce((total, sum) => total + sum.appLengthInMinutes, 0) / 60
+    const count60 = history.filter(app => app.appLengthInMinutes === 60).length
+    const count90 = history.filter(app => app.appLengthInMinutes === 90).length
+    const count120 = history.filter(app => app.appLengthInMinutes === 120).length
     return(
         <div>
             <h1>{title}</h1>

@@ -10,8 +10,6 @@ class TherapistHistory extends Component {
     constructor(){
         super()
         this.state = {
-            upcomingAppointments: [],
-            pastAppointments: [],
             dataIn: false,
             presentMonth: new Date().getMonth(),
             presentYear: new Date().getFullYear(),
@@ -22,80 +20,107 @@ class TherapistHistory extends Component {
         }
     }
     switchPresentMonth = (num) => {
-        const { presentMonth } = this.state
+        const { presentMonth, presentYear } = this.state
         if (num === 1 && presentMonth === 11){
-            this.setState(prevState => ({
-                presentYear: prevState.presentYear + 1,
-                presentMonth: 0,
-                presentToggle: prevState.presentToggle + num
-            }))
+            const dateData = {
+                month: 0,
+                year: presentYear + 1
+            }
+            this.props.getAllPresentTherapistAppointments(this.props.user._id, dateData, () => {
+                this.setState(prevState => ({
+                    presentYear: prevState.presentYear + 1,
+                    presentMonth: 0,
+                    presentToggle: prevState.presentToggle + num
+                }))
+            })
         } else if (num === -1 && presentMonth === 0){
-            this.setState(prevState => ({
-                presentYear: prevState.presentYear - 1,
-                presentMonth: 11,
-                presentToggle: prevState.presentToggle + num
-            }))
+            const dateData = {
+                month: 11,
+                year: presentYear - 1
+            }
+            this.props.getAllPresentTherapistAppointments(this.props.user._id, dateData, () => {
+                this.setState(prevState => ({
+                    presentYear: prevState.presentYear - 1,
+                    presentMonth: 11,
+                    presentToggle: prevState.presentToggle + num
+                }))
+            })
         } else {
-            this.setState(prevState => ({
-                presentMonth: prevState.presentMonth + num,
-                presentToggle: prevState.presentToggle + num
-            }))
+            const dateData = {
+                month: presentMonth + num,
+                year: presentYear
+            }
+            this.props.getAllPresentTherapistAppointments(this.props.user._id, dateData, () => {
+                this.setState(prevState => ({
+                    presentMonth: prevState.presentMonth + num,
+                    presentToggle: prevState.presentToggle + num
+                }))
+            })
         }
     }
     switchPastMonth = (num) => {
-        const { pastMonth } = this.state
+        const { pastMonth, pastYear } = this.state
         if (num === 1 && pastMonth === 11){
-            this.setState(prevState => ({
-                pastYear: prevState.pastYear + 1,
-                pastMonth: 0,
-                pastToggle: prevState.pastToggle + num
-            }))
+            const dateData = {
+                month: 0,
+                year: pastYear + 1
+            }
+            this.props.getAllPastTherapistAppointments(this.props.user._id, dateData, () => {
+                this.setState(prevState => ({
+                    pastYear: prevState.pastYear + 1,
+                    pastMonth: 0,
+                    pastToggle: prevState.pastToggle + num
+                }))
+            })
         } else if (num === -1 && pastMonth === 0){
-            this.setState(prevState => ({
-                pastYear: prevState.pastYear - 1,
-                pastMonth: 11,
-                pastToggle: prevState.pastToggle + num
-            }))
+            const dateData = {
+                month: 11,
+                year: pastYear - 1
+            }
+            this.props.getAllPastTherapistAppointments(this.props.user._id, dateData, () => {
+                this.setState(prevState => ({
+                    pastYear: prevState.pastYear - 1,
+                    pastMonth: 11,
+                    pastToggle: prevState.pastToggle + num
+                }))
+            })
         } else {
-            this.setState(prevState => ({
-                pastMonth: prevState.pastMonth + num,
-                pastToggle: prevState.pastToggle + num
-            }))
+            const dateData = {
+                month: pastMonth + num,
+                year: pastYear
+            }
+            this.props.getAllPastTherapistAppointments(this.props.user._id, dateData, () => {
+                this.setState(prevState => ({
+                    pastMonth: prevState.pastMonth + num,
+                    pastToggle: prevState.pastToggle + num
+                }))
+            })
         }
     }
     componentDidMount(){
-        this.props.getAllTherapistAppointments(this.props.user._id, () => {
-            this.props.therAppointments.map(app => {
-                if (app.packageChoice !== 1){
-                    if (app.appLengthInMinutes === 60){
-                        app.amount = 19998 / 3
-                    } else if (app.appLengthInMinutes === 90){
-                        app.amount = 29997 / 3
-                    } else if (app.appLengthInMinutes === 120) {
-                        app.amount = 39996 / 3
-                    }
-                } 
-                return app
-            })
-            this.props.orderAppointments(this.props.therAppointments, (order) => {
-                this.setState({ upcomingAppointments: order[1], pastAppointments: order[0], dataIn: true })
+        const dateData = {
+            month: new Date().getMonth(),
+            year: new Date().getFullYear()
+        }
+        this.props.getAllPresentTherapistAppointments(this.props.user._id, dateData, () => {
+            this.props.getAllPastTherapistAppointments(this.props.user._id, dateData, () => {
+                this.setState({ dataIn: true })
             })
         })
     }
 
     render(){
-        const { upcomingAppointments, pastAppointments, dataIn, presentMonth, pastMonth, presentYear, pastYear, presentToggle, pastToggle } = this.state
+        const { dataIn, presentMonth, pastMonth, presentYear, pastYear, presentToggle, pastToggle } = this.state
+        const { therAppointmentsPresent, therAppointmentsPast, therEarningsData } = this.props
+        const { yearEarnings, therapistEarnings, serviceDeducted } = therEarningsData
         const { switchPastMonth, switchPresentMonth } = this
-        const yearEarnings = pastAppointments.filter(app => new Date(app.appDate).getFullYear() === pastYear && app.canceled === false ).reduce((total, sum) => total + sum.amount, 0) / 100
-        const therapistEarnings = (yearEarnings * .80).toFixed(2)
-        const serviceDeducted = (yearEarnings * .20).toFixed(2)
         return(
             <div>
                 <ProfileNav />
                 {dataIn ?
                 <>
                     <AppointmentHistory 
-                        history={upcomingAppointments} 
+                        history={therAppointmentsPresent} 
                         title={"Upcoming Appointments"} 
                         subTitle={"New to Newest"} 
                         future={true}
@@ -107,7 +132,7 @@ class TherapistHistory extends Component {
                         toggle={presentToggle}
                         switchMonth={switchPresentMonth}/>
                     <AppointmentHistory 
-                        history={pastAppointments} 
+                        history={therAppointmentsPast} 
                         title={"Past Appointments"} 
                         subTitle={"Old to Oldest"} 
                         future={false}

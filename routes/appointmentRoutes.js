@@ -16,8 +16,11 @@ appointmentRouter.route('/')
         })
     })
 
-appointmentRouter.route('/:id')
-    .get((req, res, next) => {
+
+// Here
+appointmentRouter.route('/present/:id')
+    .post((req, res, next) => {
+        const { month, year } = req.body
         Appointment.find({
             clientID: req.params.id,
             status: "Paid"
@@ -27,9 +30,31 @@ appointmentRouter.route('/:id')
                 res.status(500)
                 return next(err)
             }
-            return res.status(200).send(foundAppointments)
+            const today = new Date()
+            const apps = foundAppointments.filter(arr => arr.appDate.getMonth() === month && arr.appDate.getFullYear() === year && arr.appDate > today)
+            apps.sort((app1, app2) => app1.appDate - app2.appDate)
+            return res.status(200).send(apps)
         })
     })
+appointmentRouter.route('/past/:id')
+    .post((req, res, next) => {
+        const { month, year } = req.body
+        Appointment.find({
+            clientID: req.params.id,
+            status: "Paid"
+        }, 
+            (err, foundAppointments) => {
+            if (err){
+                res.status(500)
+                return next(err)
+            }
+            const today = new Date()
+            const apps = foundAppointments.filter(arr => arr.appDate.getMonth() === month && arr.appDate.getFullYear() === year && arr.appDate < today)
+            apps.sort((app1, app2) => app2.appDate - app1.appDate)
+            return res.status(200).send(apps)
+        })
+    })
+appointmentRouter.route('/:id')
     .put((req, res, next) => {
         Appointment.findOneAndUpdate(
             {_id: req.params.id},
