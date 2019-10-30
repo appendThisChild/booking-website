@@ -2,6 +2,7 @@ import React, { Component } from "react"
 
 import ChoiceDisplay from "./ChoiceDisplay.js"
 import AvailableAppointments from "./AvailableAppointments.js"
+import MonthDisplay from './MonthDisplay.js'
 
 import { withUser } from "../context/UserProvider.js"
 import { withAppointment } from "../context/AppointmentProvider.js"
@@ -12,12 +13,13 @@ class PickTime extends Component {
     constructor(){
         super()
         this.state = {
-            nextWeek: [],
-            viewedWeek: 0,
+            viewedDay: 0,
+            nextDay: 1,
+            startDay: new Date(),
             selected: {},
-            monthsOftheYear: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            monthsOfTheYear: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             daysOfTheWeek: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            weekShowing: [],
+            dayShowing: [],
             editToggle: false
         }
     }
@@ -25,7 +27,8 @@ class PickTime extends Component {
         const weekShowingArr = []
         const therapist = this.state.selected
         // looks at all the data for that specific day
-        for (let i = this.state.viewedWeek; i < this.state.viewedWeek + 7; i++){
+        // for (let i = this.state.viewedWeek; i < this.state.viewedWeek + 7; i++){
+            const i = this.state.viewedDay
             const newDate = new Date()
             const dateSet = new Date(newDate.setDate(newDate.getDate() + i))
             this.props.therapistAppointments.map(obj => obj.appDate = new Date(obj.appDate))
@@ -105,12 +108,14 @@ class PickTime extends Component {
                 day: this.state.daysOfTheWeek[dateSet.getDay()],
                 availableTimeBlocks: endSchedule
             })
-        }
-        this.setState({weekShowing: weekShowingArr})
+        // }
+        this.setState({dayShowing: weekShowingArr})
     }
-    newWeek = num => {
-        const newWeek = this.state.viewedWeek + num
-        this.setState({ viewedWeek: newWeek }, () => this.gettingAvailability())
+    newDay = num => {
+        this.setState(prevState => ({ viewedDay: prevState.viewedDay + num }), () => this.gettingAvailability())
+    }
+    setViewedDay = num => {
+        this.setState({ viewedDay: num}, () => this.gettingAvailability())
     }
     editToggler = () => {
         this.setState(prevState => ({
@@ -207,29 +212,47 @@ class PickTime extends Component {
     }
     componentDidMount(){
         if(this.props.therapistID === "" || this.props.appLengthInMinutes === "") this.props.history.push("/book")
-        window.scrollTo(0, 0)
         const hour = new Date().getHours()
-        let weekToView = 1
-        if ( hour > 17 ) weekToView = 2
-        this.setState({ viewedWeek: weekToView }, () =>  this.therapistInfo())
+        let dayToView = 1
+        if ( hour > 17 ) dayToView = 2
+        const startDay = new Date(new Date().setDate(new Date().getDate() + dayToView))
+        this.setState({ 
+            startDay: startDay,
+            viewedDay: dayToView,
+            nextDay: dayToView + 1
+         }, () =>  {
+            window.scrollTo(0, 0)
+            this.therapistInfo()
+        })
+       
     }
     render(){
+        const { therapistName, appLengthInMinutes } = this.props
+        const { startDay, viewedDay, editToggle, dayShowing, nextDay, monthsOfTheYear } = this.state
         return(
             <div className="background">
                 <div className="border">
                     <ChoiceDisplay  
                         handleEdit={this.handleEdit} 
-                        therapistName={this.props.therapistName} 
-                        appLengthInMinutes={this.props.appLengthInMinutes} 
+                        therapistName={therapistName} 
+                        appLengthInMinutes={appLengthInMinutes} 
                         editToggler={this.editToggler} 
-                        editToggle={this.state.editToggle} 
-                        />
+                        editToggle={editToggle} 
+                    />
+                    <MonthDisplay 
+                        monthsOfTheYear={monthsOfTheYear}
+                        startDay={startDay} 
+                        nextDay={nextDay}
+                        viewedDay={viewedDay}
+                        setViewedDay={this.setViewedDay}
+                    />
                     <AvailableAppointments 
-                        appointmentsArr={this.state.weekShowing} 
+                        appointmentsArr={dayShowing} 
                         handlePackageAndSubmit={this.handlePackageAndSubmit}
-                        viewedWeek={this.state.viewedWeek} 
-                        newWeek={this.newWeek}
-                        /> 
+                        viewedDay={viewedDay} 
+                        newDay={this.newDay}
+                        nextDay={nextDay}
+                    /> 
                 </div>
             </div> 
         )

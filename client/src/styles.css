@@ -2,6 +2,9 @@
     margin: 0px;
     padding: 0px;
 }
+button:focus {
+    outline: none;
+}
 @font-face {
     font-family: ChopinScript;
     src:url(./fonts/ChopinScript.otf)
@@ -234,9 +237,10 @@
     margin-right: auto;
 }
 .therapistContainer::-webkit-scrollbar {
-    height: 10px;
+    /* height: 10px; */
+    display: none;
 }
-.therapistContainer::-webkit-scrollbar-track {
+/* .therapistContainer::-webkit-scrollbar-track {
     background: #ffffff73;
     border-radius: 50px;
     height: 25px;
@@ -249,7 +253,7 @@
   }
 .therapistContainer::-webkit-scrollbar-thumb:hover {
     background: #555;
-}
+} */
 .therapist {
     display: flex;
     flex-direction: column;
@@ -568,6 +572,109 @@ select:active, select:hover {
 
 
 
+
+
+/* calendar display */
+.calendar {
+    margin-bottom: 45px;
+
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.calendar > div {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-bottom: 15px;
+}
+.calendar > div > h4 {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 55px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+}
+.calendar > div > div {
+    display: flex;
+    justify-content: center;
+}
+.calendar > div > div > div {
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+}
+.calendar > div > div > div > div {
+    display: flex;
+    flex-direction: column;
+}
+.calendar > div > div > div > div > div:nth-child(1) {
+    background-color: rgba(255, 255, 255, 0);
+    padding: 3px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+.buttonContainer {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 1px;
+}
+
+.calendar > div > div > div > div > div:nth-child(1) > button {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 14px;
+    font-family: auto;
+    /* border-radius: 50%; */
+    border: 0px solid black;
+    /* padding: 0px; */
+    width: 100%;
+}
+
+.calendarDateUnselected {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 19px;
+    font-family: auto;
+    border-radius: 50%;
+    border: 0px solid black;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+}
+.calendarDateUnselectedNotAvailable {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 19px;
+    font-family: auto;
+    border-radius: 50%;
+    border: 0px solid black;
+    color: gray;
+    padding: 5px;
+    width: 100%;
+    text-align: center;
+}
+.calendarDateSelected {
+    background-color: rgba(0, 0, 0, 0.692);
+    font-size: 19px;
+    font-family: auto;
+    border-radius: 50%;
+    border: 0px solid black;
+    color: white;
+    padding: 5px;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
 /* toggle container */
 .weekToggleContainer {
     display: flex;
@@ -655,6 +762,8 @@ select:active, select:hover {
 }
 /* time itself */
 .availableDays > div > button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px solid black;
     font-family: auto;
     font-size: 19px;
     color: white;
@@ -700,7 +809,7 @@ select:active, select:hover {
     flex-direction: column;
     justify-content: center;
     flex: 1;
-    background-color: rgba(243, 243, 46, 0.4);
+    background-color: rgba(0, 0, 0, 0.37);
     padding-top: 5px;
     padding-bottom: 5px;
 }

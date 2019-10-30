@@ -18,7 +18,7 @@ const Nav = props => {
             <div className={"navBarLinks"}>
                 <Link to="/">Home</Link>
                 <Link to="/book">Book a Massage</Link>
-                <Link to="/contact">Contact</Link>
+                <Link to="/contact">Contact Us</Link>
                 <Link to="/history">{signInLinkName}</Link>
                 {signOut}
             </div>
