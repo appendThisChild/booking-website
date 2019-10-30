@@ -7,7 +7,7 @@ import { withUser } from "../context/UserProvider.js"
 // firstCharCap
 
 const TherapistTimeChoice = props => {
-    const { therapists, handleChange, therapistID, appLengthInMinutes, appLengths, handleSubmit } = props
+    const { therapists, handleChange, therapistID, appLengthInMinutes, appLengths, handleSubmit, className, cancelButton, cancelFunction } = props
     const mappedTherapists = therapists.map((therapist, i) => 
         <option value={therapist._id} key={i}>{props.firstCharCap(therapist.firstName)} {props.firstCharCap(therapist.lastName)}</option>
     )
@@ -15,23 +15,21 @@ const TherapistTimeChoice = props => {
         <option value={length} key={i}>{length} Minutes</option>
     )
     return(
-        <div className="selectTherapist">
-            <h3>Book a Massage:</h3>
+        <div className={className}>
             <form onSubmit={handleSubmit}>
-                {/* <div> */}
                     <select name="therapistID" value={therapistID} onChange={handleChange} required={true}>
                         <option>Select Therapist</option>
                         {mappedTherapists}
                     </select>
-                {/* </div> */}
-                {/* <div> */}
                     <select name="appLengthInMinutes" required={true} value={appLengthInMinutes} onChange={handleChange}>
-                        <option>Select Appointment Length</option>
+                        <option>Select Length</option>
                         {mappedAppLengths}
                     </select>
-                {/* </div> */}
-                <button>Pick Time</button>
+                <button>Get Availability</button>
             </form>
+            {cancelButton ?
+            <button onClick={cancelFunction}>Cancel Edit</button>
+            :null}
         </div>
     )
 }

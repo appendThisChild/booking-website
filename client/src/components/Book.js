@@ -16,6 +16,7 @@ class Book extends Component {
         }
     }
     componentDidMount(){
+        window.scrollTo(0, 0)
         this.props.getAllTherapists()
     }
     handlePickTime = e => {
@@ -26,13 +27,14 @@ class Book extends Component {
     }
     render(){
         return(
-            <div className="bookContainer">
-                <div className="bookContainerBorder">
+            <div className="background">
+                <div className="border">
                     <PricingDisplay pricing={this.props.genInfo.pricing} className={"bookingPriceDisplay"}/>
                     <div className="bookingTherapistDisplay">
                         <div>
-                            <TherapistTimeChoice handleSubmit={this.handlePickTime}/>
+                            <h3>Book a Massage:</h3>
                             <TherapistDisplay />
+                            <TherapistTimeChoice handleSubmit={this.handlePickTime} className="selectTherapist"/>
                         </div>
                     </div>
                 </div>

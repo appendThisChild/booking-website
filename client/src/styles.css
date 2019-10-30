@@ -165,7 +165,7 @@
 
 
 /* Home  */
-.bodyBackground {
+.background {
     background-image: url("./images/kisscc0-mandala-islamic-geometric-patterns-sacred-geometry-border-4-derivative-9-5b3e06150d5b14.0181865015307914450547.png");
     background-color: rgb(245, 245, 244);
     background-size: 100%;
@@ -174,7 +174,7 @@
     background-position: center;
     box-shadow: inset 0px 0px 55px 0px black;
 }
-.homeBorder {
+.border {
     padding-top: 45px;
     padding-bottom: 45px;
 }
@@ -223,24 +223,64 @@
 /* Therapist Display */
 .therapistContainer {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    /* justify-content: center; */
+    /* flex-wrap: wrap; */
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    /* border: 1px solid black; */
+    margin-top: 15px;
+    width: 275px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.therapistContainer::-webkit-scrollbar {
+    height: 10px;
+}
+.therapistContainer::-webkit-scrollbar-track {
+    background: #ffffff73;
+    border-radius: 50px;
+    height: 25px;
+    margin: 117px;
+}
+.therapistContainer::-webkit-scrollbar-thumb {
+    background: rgba(82, 82, 82, 0.849);
+    height: 5px;
+    border-radius: 50px;
+  }
+.therapistContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 .therapist {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-left: 15px;
+    /* padding-top: 25px; */
+    padding-right: 25px;
+    padding-left: 25px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    padding-bottom: 5px;
 }
 .displayImg {
     height: 225px;
     width:  225px;
+    overflow-y: hidden;
     border-radius: 50%;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+    /* border: 1px solid white; */
+    box-shadow: 0px 0px 10px 1px black;
 }
-.therapist > p {
+.displayImg > img {
+    width:  225px;
+    position: 50% 50%;
+}
+.therapist > div:nth-child(2n) {
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 5px;
+    padding: 10px;
+}
+.therapist > div > p {
+    text-align: center;
     font-size: 22px;
     font-style: italic;
     color: white;
@@ -329,29 +369,12 @@
 
 
 
-
-/* Book Container */
-.bookContainer {
-    background-image: url("./images/kisscc0-mandala-islamic-geometric-patterns-sacred-geometry-border-4-derivative-9-5b3e06150d5b14.0181865015307914450547.png");
-    background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center;
-    box-shadow: inset 0px 0px 55px 0px black;
-}
-.bookContainerBorder {
-    padding-top: 45px;
-    padding-bottom: 45px;
-}
-
-
 /* Pricing Display */
 /* Container */
 .bookingPriceDisplay {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    background-image: url("./images/sagittarius_PNG74.png");
+    background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
     background-size: 100%;
     background-attachment: fixed;
@@ -376,16 +399,17 @@
 }
 /* Price Choice Container */
 .bookingPriceDisplay > div > div {
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; */
+
 }
 .bookingPriceDisplay > div > div > div {
     padding: 10px;
-    margin: 5px;
-    border: 1px solid black;
+    margin: 15px;
+    /* border: 1px solid black; */
     border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.45);
     color: white;
 }
 /* Choice Title */
@@ -393,12 +417,14 @@
     text-align: center;
     font-family: Tangerine;
     font-size: 45px;
+    text-shadow: 2px 1px 3px black;
 }
 /* Price Lines */
 .bookingPriceDisplay > div > div > div > p {
     text-align: center;
     font-size: 23px;
     line-height: 30px;
+    text-shadow: 2px 1px 3px black;
 }
 
 
@@ -409,7 +435,7 @@
 .bookingTherapistDisplay {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    background-image: url("./images/sagittarius_PNG74.png");
+    background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
     background-size: 100%;
     background-attachment: fixed;
@@ -420,12 +446,8 @@
     background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
     padding-bottom: 15px;
 }
-/* select container */
-.selectTherapist {
-
-}
 /* select title */
-.selectTherapist > h3 {
+.bookingTherapistDisplay > div > h3 {
     color: white;
     text-shadow: 2px 1px 3px black;
     text-align: center;
@@ -434,32 +456,50 @@
     padding: 5px;
     border-bottom: 1px solid black;
 }
+/* select container */
+.selectTherapist {
+    /* display: flex;
+    justify-content: center; */
+}
 /* select form */
 .selectTherapist > form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    margin-top: 15px;
+    margin-right: 15px;
+    margin-left: 15px;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.45);
 }
-/* new select display
-.selectTherapist > form > div {
-    
-} */
 /* select form select tags */
 .selectTherapist > form > select {
-    border: 1px solid black;
-    border-radius: 0px;
     margin: 5px;
-    line-height: 35px;
-    font-size: 23px;
+    font-size: 20px;
     font-family: auto;
+    border: 1px inset white;
+    width: 80%;
+    padding-left: 25px;
 }
-/* text for select tags */
-.selectTherapist > form > select > option {
-    font-family: auto;
-    
+select:active, select:hover {
+    outline: none;
 }
 /* submit button for form */
 .selectTherapist > form > button {
-
+    font-family: auto;
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 10px;
+    padding-right: 11px;
+    padding-left: 11px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-image: radial-gradient(rgb(11, 187, 84) 50%, rgba(0, 0, 0, 0.918));
+    border: 0px outset white;
+    box-shadow: 0px 0px 3px 0px white;
+    border-radius: 10px;
 }
 
 
@@ -470,6 +510,165 @@
 /* ===================================== */
 /* ===================================== */
 /* ================Book================= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =============Pick Time=============== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+/* Choice containers */
+.choiceDisplay {
+    margin-bottom: 45px;
+
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images//115-1150399_gold-sacred-geometry-png.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.choiceDisplay > div {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-bottom: 15px;
+}
+/* Acess to the form for changes */
+.choiceDisplay > div > form {
+    
+}
+/* form selections */
+.choiceDisplay > div > form > select {
+
+}
+/* form button */
+.choiceDisplay > div > form > button {
+
+}
+/* Therapist and Length Display */
+.choiceDisplay > div > p {
+
+}
+/* Edit and Cance Edit Buttons */
+.choiceDisplay > div > button {
+    
+}
+
+
+
+
+/* toggle container */
+.weekToggleContainer {
+    display: flex;
+    justify-content: space-between;
+}
+/* toggle forward */
+.nextWeek {
+    /* display: inline-block; */
+    margin-left: auto;
+    font-size: 30px;
+    /* border: 1px solid black; */
+    padding-right: 5px;
+}
+/* toggle back */
+.prevWeek {
+    margin-right: auto;
+    font-size: 30px;
+    padding-left: 5px;
+}
+
+
+
+
+
+
+/* availability container */
+.availableAppointments {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.availableAppointments > div {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-bottom: 15px;
+}
+.availableAppointments > div > h1 {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 55px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+}
+/* Individual Days */
+.availableDays {
+    border: 1px solid black;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+/* day display */
+.availableDays > h1 {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 44px;
+    padding: 5px;
+    border-bottom: 1px solid black;
+}
+/* date display */
+.availableDays > p {
+    font-size: 20px;
+    padding: 2px;
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    text-align: center;
+}
+/* time container */
+.availableDays > div {
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.30);
+}
+/* time itself */
+.availableDays > div > button {
+    font-family: auto;
+    font-size: 19px;
+    color: white;
+    width: 100%;
+}
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =============Pick Time=============== */
 /* ===================================== */
 /* ===================================== */
 /* ===================================== */

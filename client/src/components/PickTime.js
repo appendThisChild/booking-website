@@ -207,6 +207,7 @@ class PickTime extends Component {
     }
     componentDidMount(){
         if(this.props.therapistID === "" || this.props.appLengthInMinutes === "") this.props.history.push("/book")
+        window.scrollTo(0, 0)
         const hour = new Date().getHours()
         let weekToView = 1
         if ( hour > 17 ) weekToView = 2
@@ -214,16 +215,22 @@ class PickTime extends Component {
     }
     render(){
         return(
-            <div>
-                <ChoiceDisplay  
-                    handleEdit={this.handleEdit} 
-                    therapistName={this.props.therapistName} 
-                    appLengthInMinutes={this.props.appLengthInMinutes} 
-                    editToggler={this.editToggler} 
-                    editToggle={this.state.editToggle} 
-                    viewedWeek={this.state.viewedWeek} 
-                    newWeek={this.newWeek}/>
-                <AvailableAppointments appointmentsArr={this.state.weekShowing} handlePackageAndSubmit={this.handlePackageAndSubmit}/> 
+            <div className="background">
+                <div className="border">
+                    <ChoiceDisplay  
+                        handleEdit={this.handleEdit} 
+                        therapistName={this.props.therapistName} 
+                        appLengthInMinutes={this.props.appLengthInMinutes} 
+                        editToggler={this.editToggler} 
+                        editToggle={this.state.editToggle} 
+                        />
+                    <AvailableAppointments 
+                        appointmentsArr={this.state.weekShowing} 
+                        handlePackageAndSubmit={this.handlePackageAndSubmit}
+                        viewedWeek={this.state.viewedWeek} 
+                        newWeek={this.newWeek}
+                        /> 
+                </div>
             </div> 
         )
     }

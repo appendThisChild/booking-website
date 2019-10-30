@@ -17,6 +17,9 @@ class Home extends Component {
     showMore = () => {
         this.setState(prevState => ({ reviewsShown: prevState.reviewsShown + 3 }))
     }
+    componentDidMount(){
+        window.scrollTo(0, 0)
+    }
     render(){
         const { homeTitle, homeInfo, homeTherapistSubtitle } = this.props.genInfo
         const mappedHomeInfo = homeInfo.map((para, i) => <p key={i}> {para}</p>)
@@ -46,8 +49,8 @@ class Home extends Component {
             }
         })
         return(
-            <div className={"bodyBackground"}>
-                <div className={"homeBorder"}>
+            <div className={"background"}>
+                <div className={"border"}>
                     <div className={`homeContainer ${"homeContainerInside"}`}>
                         <div>
                             <h1>{homeTitle}</h1>
