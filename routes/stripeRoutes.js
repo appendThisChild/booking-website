@@ -22,7 +22,7 @@ paymentRouter.route('/charge')
                 email: token.email,
                 source: token.id
             // added stripe_account for creating customer on the connected account
-            },{ stripe_account: stripe_account_id},
+            },{ stripe_account: stripe_account_id },
             (err, customer) => {
                 if (err){
                     res.status(500)

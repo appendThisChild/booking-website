@@ -55,6 +55,10 @@ const appointmentSchema = new Schema({
         type: Boolean,
         default: false
     },
+    dateCanceled: {
+        type: Date, 
+        default: null
+    },
     status: {
         type: String,
         enum: ["Paid", "Pending"],

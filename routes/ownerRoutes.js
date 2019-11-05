@@ -59,7 +59,11 @@ ownerRouter.route('/appointment/present')
                 )
             })
             paidApps.sort((app1, app2) => app1.appDate - app2.appDate)
-            return res.status(200).send(paidApps)
+            const appsWithCurrentPrice = paidApps.map(app => {
+                app.amount = app.amountTherapistPaid
+                return app
+            })
+            return res.status(200).send(appsWithCurrentPrice)
         })
     })
 ownerRouter.route('/appointment/past')

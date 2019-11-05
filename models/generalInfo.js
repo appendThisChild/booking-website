@@ -54,6 +54,15 @@ const generalInfoSchema = new Schema({
                 answer: "Answer"
             }
         ]
+    },
+    googleTokens: {
+        type: Array,
+        default: [
+            {
+                title: "no token",
+                tokenObj: {}
+            }
+        ]
     }
 });
 

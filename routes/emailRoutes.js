@@ -3,11 +3,9 @@ const readline = require('readline');
 const { google } = require('googleapis');
 const express = require('express')
 const emailRouter = express.Router()
+const companyEmail = process.env.EMAIL
 
 const SCOPES = ['https://www.googleapis.com/auth/gmail.send'];
-const TOKEN_PATH = 'token2.json';
-
-const companyEmail = 'blissedoutbodyworks@gmail.com'
 
 const makeBody = (to, from, subject, message) => {
     const str = ["Content-Type: text/plain; charset=\"UTF-8\"\n",
@@ -53,6 +51,11 @@ const authorize = (credentials, callback) => {
     const {client_secret, client_id, redirect_uris} = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(
         client_id, client_secret, redirect_uris[0]);
+
+
+        // change from fs to read from genInfo
+            // every as google calendar routes, but token2
+
     fs.readFile(TOKEN_PATH, (err, token) => {
         if (err) return getAccessToken(oAuth2Client, callback);
         oAuth2Client.setCredentials(JSON.parse(token));
@@ -76,6 +79,11 @@ const getAccessToken = (oAuth2Client, callback) =>  {
         if (err) return console.error('Error retrieving access token', err);
         oAuth2Client.setCredentials(token);
         // Store the token to disk for later program executions
+
+
+            // change from fs to read from genInfo
+               // every as google calendar routes, but token2
+
         fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
             if (err) return console.error(err);
             console.log('Token stored to', TOKEN_PATH);

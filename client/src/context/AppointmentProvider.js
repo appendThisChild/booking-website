@@ -122,7 +122,7 @@ class AppointmentProvider extends Component {
     }
     cancelAppointment = (_id, therapist) => {
         dataAxios.delete(`/api/calendar/${_id}/${therapist}`)
-            .then(res => console.log(res.data))
+            .then(() => window.location.reload())
             .catch(err => console.log(err.response.data.errMsg))
     }
     updateVisits = (_id, updates, callback) => {

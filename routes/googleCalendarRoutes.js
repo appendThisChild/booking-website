@@ -3,10 +3,13 @@ const readline = require('readline');
 const { google } = require('googleapis');
 const express = require('express')
 const googleRouter = express.Router()
+const stripeSecret = process.env.STRIPE_SECRET
+const stripe = require("stripe")(stripeSecret)
+const GeneralInfo = require('../models/generalInfo.js')
 const Appointment = require('../models/appointment.js')
+const User = require('../models/user.js')
 
 const SCOPES = ['https://www.googleapis.com/auth/calendar'];
-const TOKEN_PATH = 'token.json';
 
 googleRouter.route('/calendar')
   .get((req, res, next) => {
@@ -102,72 +105,202 @@ googleRouter.route('/calendar')
 
 googleRouter.route('/calendar/:id/:isTherapist')
   .delete((req, res, next) => {
-    const appId = req.params.id
-    const isTherapist = req.params.isTherapist
-    console.log(appId)
-    console.log(isTherapist)
-
-    // first we need to update the appointment 
-      // to canceled
-      // and to figure out if we are paying the therapist and how much
-        // ( this will give us back the appointment )
-
-    // check decide if refund or up one of visits Remaining
-    // we'll check the appointment for package choice
-      // if === 1 ( it was a single )
-        // Refund, we'll check if isTherapist
-          // if === true
-            // we will refund 90%
-            // set therapist paid amount to 0 
-            // setting therapist paid to false
-          // if not 
-            // we'll check if within 24 hours 
-              // if === true 
-                // refund half
-                // set therapist paid amount to half of the original - 10% of the original
-              // if not
-                // refund 90%
-                // set therapist paid amount to 0
-                // setting therapist paid to false
-      // if not ( it's a prepaid or package )
-        // we do not refund 
-          // checking therapist paid to true
-        // we will give back visits remaining if out side of 24 hours
-          // setting therapist paid to false
-
-    // delete the appointment from google calendar
-      // vvvvvvvvvvvvvvvvv
-      // vvvvvvvvvvvvvvvvv
-      // vvvvvvvvvvvvvvvvv
-
-
-      // fs.readFile('credentials.json', (err, content) => {
-      //   if (err) {
-      //     res.status(500)
-      //     return next(err)
-      //   }
-      //   authorize(JSON.parse(content), (auth) => {
-      //     const calendar = google.calendar({version: 'v3', auth});
-      //     calendar.events.delete({
-      //       calendarId: 'primary',
-      //       sendNotifications: true,
-      //       eventId: req.params.id,
-      //     }, (err) => {
-      //       if (err) {
-      //         res.status(500)
-      //         return next(err)
-      //       }
-      //       return res.status(202).send('Event deleted.');
-      //     });
-      //   });
-      // }); 
-
+    const isTherapist = req.params.isTherapist === "true"
+    const now = new Date()
+    const hour24Mark = new Date(now.setHours(now.getHours() + 24))
+    Appointment.findOne(
+      {_id: req.params.id},
+      (err, foundAppointment) => {
+        if (err) {
+          res.status(500)
+          return next(err)
+        }
+        if (!foundAppointment.canceled){
+          let newAmount = foundAppointment.amountTherapistPaid
+          const updates = {
+            canceled: true,
+            therapistPaid: true,
+            amountTherapistPaid: newAmount,
+            dateCanceled: new Date()
+          }
+          let index = 0
+          if (foundAppointment.appLengthInMinutes === 90){
+            index = 1
+          } else if (foundAppointment.appLengthInMinutes === 120){
+            index = 2 
+          }
+          if (foundAppointment.packageChoice === 1){
+            if (isTherapist){
+              updates.therapistPaid = false
+              updates.amountTherapistPaid = 0
+              const refundFee = true
+              refund(res, foundAppointment.chargeId, newAmount, refundFee, next, () => {
+                updateCanceledAppointment(res, req.params.id, updates, next, (googleId) => {
+                  deleteEventOnGoogle(res, googleId, next, (message) => {
+                    return res.status(202).send(message);
+                  })
+                })
+              })
+              
+            } else {
+              if (hour24Mark > foundAppointment.appDate){
+                const refundedAmount = parseInt(newAmount / 2)
+                updates.amountTherapistPaid = (newAmount - refundedAmount) - parseInt(newAmount * .1) 
+                const refundFee = false
+                refund(res, foundAppointment.chargeId, refundedAmount, refundFee, next, () => {
+                  updateCanceledAppointment(res, req.params.id, updates, next, (googleId) => {
+                    deleteEventOnGoogle(res, googleId, next, (message) => {
+                      return res.status(202).send(message);
+                    })
+                  })
+                })
+              } else {
+                updates.therapistPaid = false
+                updates.amountTherapistPaid = 0
+                const refundFee = true
+                refund(res, foundAppointment.chargeId, newAmount, refundFee, next, () => {
+                  updateCanceledAppointment(res, req.params.id, updates, next, (googleId) => {
+                    deleteEventOnGoogle(res, googleId, next, (message) => {
+                      return res.status(202).send(message);
+                    })
+                  })
+                })
+              }
+            }
+          } else {
+            if (isTherapist){
+              updates.therapistPaid = false
+              updates.amountTherapistPaid = 0
+              giveBackVisit(res, foundAppointment.clientID, index, next, () => {
+                updateCanceledAppointment(res, req.params.id, updates, next, (googleId) => {
+                  deleteEventOnGoogle(res, googleId, next, (message) => {
+                    return res.status(202).send(message);
+                  })
+                })
+              })
+            } else {
+              if (hour24Mark > foundAppointment.appDate){
+                updateCanceledAppointment(res, req.params.id, updates, next, (googleId) => {
+                  deleteEventOnGoogle(res, googleId, next, (message) => {
+                    return res.status(202).send(message);
+                  })
+                })
+              } else {
+                updates.therapistPaid = false
+                updates.amountTherapistPaid = 0
+                giveBackVisit(res, foundAppointment.clientID, index, next, () => {
+                  updateCanceledAppointment(res, req.params.id, updates, next, (googleId) => {
+                    deleteEventOnGoogle(res, googleId, next, (message) => {
+                      return res.status(202).send(message);
+                    })
+                  })
+                })
+              }
+            }
+          }
+        } else {
+          return res.status(202).send("Already Deleted")
+        }
+      })
   })
+
+const giveBackVisit = (res, id, index, next, callback) => {
+  User.findOne({_id: id}, (err, user) => {
+      if (err){
+          res.status(500)
+          return next(err)
+      }
+      const { visitsRemaining } = user
+      visitsRemaining.splice(index, 1, visitsRemaining[index] + 1)
+      User.findOneAndUpdate(
+          {_id: id},
+          {visitsRemaining: visitsRemaining},
+          {new: true}, 
+          (err, updatedUser) => {
+          if (err){
+              res.status(500)
+              return next(err)
+          }
+          callback("Done")
+      })
+  })
+}
+
+const refund = (res, chargeId, amount, refundFee, next, callback) => {
+  GeneralInfo.find((err, info) => {
+    if (err){
+        res.status(500)
+        return next(err)
+    }
+    const stripe_account_id = info[0].connected_stripe_account
+    stripe.refunds.create({
+      charge: chargeId,
+      amount: amount,
+      refund_application_fee: refundFee
+    },{ stripe_account: stripe_account_id }, 
+    (err, refund) => {
+      if (err){
+        res.status(500)
+        return next(err)
+      }
+      callback(refund)
+    })
+  })
+}
+
+const updateCanceledAppointment = (res, id, updates, next, callback) => {
+  Appointment.findOneAndUpdate(
+    {_id: id},
+    updates,
+    {new: true},
+    (err, updatedAppointment) => {
+        if (err){
+          res.status(500)
+          return next(err)
+        }
+       callback(updatedAppointment.googleId)
+    })
+} 
+
+const deleteEventOnGoogle = (res, googleId, next, callback) => {
+  fs.readFile('credentials.json', (err, content) => {
+    if (err) {
+      res.status(500)
+      return next(err)
+    }
+    authorize(JSON.parse(content), (auth) => {
+      const calendar = google.calendar({version: 'v3', auth});
+      calendar.events.delete({
+        calendarId: 'primary',
+        sendNotifications: true,
+        eventId: googleId,
+      }, (err) => {
+        if (err) {
+          res.status(500)
+          return next(err)
+        }
+        callback('Event deleted.')
+      });
+    });
+  }); 
+}
 
 const authorize = (credentials, callback) => {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
+
+
+    // change from fs to read from genInfo
+      // retrieve general info[0]
+        // put googleTokens in it's own variable
+        // .find() search array for obj with title === "token1"
+      // if obj comes back, set credentials to the obj.tokenObj
+      // else get access token
+
+
+
+
   fs.readFile(TOKEN_PATH, (err, token) => {
     if (err) return getAccessToken(oAuth2Client, callback);
     oAuth2Client.setCredentials(JSON.parse(token));
@@ -191,6 +324,22 @@ const getAccessToken = (oAuth2Client, callback) =>  {
       if (err) return console.error('Error retrieving access token', err);
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
+
+
+
+
+      // change from fs to read from genInfo
+        // get the general info
+          // create obj of title = token1 and tokenObj = token 
+          // get googleTokens into it's own variable
+          // insert obj into the googleTokens array 
+        // update general info 
+          // insert googleTokens
+
+
+
+
+
       fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
         if (err) return console.error(err);
         console.log('Token stored to', TOKEN_PATH);

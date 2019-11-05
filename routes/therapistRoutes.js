@@ -20,25 +20,11 @@ therapistRouter.route('/appointment/present/:id')
             const today = new Date()
             const apps = foundAppointments.filter(arr => arr.appDate.getMonth() === month && arr.appDate.getFullYear() === year && arr.appDate > today)
             apps.sort((app1, app2) => app1.appDate - app2.appDate)
-            GeneralInfo.find((err, info) => {
-                if (err){
-                    res.status(500)
-                    return next(err)
-                }
-                const appWithCurrentPrice = apps.map(app => {
-                    if (app.packageChoice !== 1){
-                        if (app.appLengthInMinutes === 60){
-                            app.amount = info[0].pricing[0][1] / 3
-                        } else if (app.appLengthInMinutes === 90){
-                            app.amount = info[0].pricing[1][1] / 3
-                        } else if (app.appLengthInMinutes === 120) {
-                            app.amount = info[0].pricing[2][1] / 3
-                        }
-                    } 
-                    return app
-                })
-                return res.status(200).send(appWithCurrentPrice)
+            const appWithCurrentPrice = apps.map(app => {
+                app.amount = app.amountTherapistPaid
+                return app
             })
+            return res.status(200).send(appWithCurrentPrice)
         })
     })
 therapistRouter.route('/appointment/past/:id')
