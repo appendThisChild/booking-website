@@ -122,7 +122,8 @@ class PickTime extends Component {
             editToggle: !prevState.editToggle
         }))
     }
-    handleEdit = () => {
+    handleEdit = e => {
+        e.preventDefault()
         this.therapistInfo()
         this.editToggler()
     }

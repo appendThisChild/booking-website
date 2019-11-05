@@ -178,8 +178,8 @@ button:focus {
     box-shadow: inset 0px 0px 55px 0px black;
 }
 .border {
-    padding-top: 45px;
-    padding-bottom: 45px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .homeContainer {
     background-image: url("./images/cawer3.jpg");
@@ -192,7 +192,7 @@ button:focus {
     border-bottom: 1px solid black;
 }
 .homeContainerInside {
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 .homeContainer > div {
     padding-bottom: 15px;
@@ -385,11 +385,11 @@ button:focus {
     background-repeat: no-repeat;
     background-position: center;
 
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 .bookingPriceDisplay > div {
     background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 }
 /* Title */
 .bookingPriceDisplay > div > h3 {
@@ -401,17 +401,9 @@ button:focus {
     padding: 5px;
     border-bottom: 1px solid black;
 }
-/* Price Choice Container */
-.bookingPriceDisplay > div > div {
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: center; */
-
-}
 .bookingPriceDisplay > div > div > div {
     padding: 10px;
     margin: 15px;
-    /* border: 1px solid black; */
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.45);
     color: white;
@@ -460,11 +452,6 @@ button:focus {
     padding: 5px;
     border-bottom: 1px solid black;
 }
-/* select container */
-.selectTherapist {
-    /* display: flex;
-    justify-content: center; */
-}
 /* select form */
 .selectTherapist > form {
     display: flex;
@@ -474,7 +461,6 @@ button:focus {
     margin-top: 15px;
     margin-right: 15px;
     margin-left: 15px;
-    /* border: 1px solid black; */
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.45);
 }
@@ -498,16 +484,15 @@ select:active, select:hover {
     margin-top: 10px;
     padding-right: 11px;
     padding-left: 11px;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    background-image: radial-gradient(rgb(11, 187, 84) 50%, rgba(0, 0, 0, 0.918));
-    border: 0px outset white;
-    box-shadow: 0px 0px 3px 0px white;
-    border-radius: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    border: 1px outset white;
+    box-shadow: 0px 0px 3px 0px black;
+    border-radius: 13px;
 }
 
 
-/* Last thing I was trying to accomplish was figuring out how to style the the scrollbar of the select elements */
 
 
 /* ===================================== */
@@ -533,7 +518,7 @@ select:active, select:hover {
 
 /* Choice containers */
 .choiceDisplay {
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -546,27 +531,72 @@ select:active, select:hover {
 }
 .choiceDisplay > div {
     background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-top: 3px;
     padding-bottom: 15px;
 }
 /* Acess to the form for changes */
 .choiceDisplay > div > form {
+    background-color: rgba(255, 255, 255, 0.65); 
+    border-radius: 3px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 5px;
     
 }
 /* form selections */
 .choiceDisplay > div > form > select {
-
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: white;
+    font-size: 24px;
+    margin-left: 30px;
+    padding-left: 5px;
+    font-family: auto;
 }
 /* form button */
 .choiceDisplay > div > form > button {
-
+    display: block;
+    font-family: auto;
+    font-size: 17px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3px;
+    background-color: rgba(255, 255, 255, 0.75);
+    border: 1px solid black;
+    border-radius: 8px;
+    padding-left: 9px;
+    padding-right: 7px;
+    padding-top : 2px;
+    padding-bottom: 2px;
+}
+/* Normal display */
+.choiceDisplay > div > div {
+    background-color: rgba(255, 255, 255, 0.65); 
+    border-radius: 3px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 5px;
 }
 /* Therapist and Length Display */
-.choiceDisplay > div > p {
-
+.choiceDisplay > div > div > p {
+    font-size: 26px;
+    font-style: italic;
+    line-height: 32px;
+    text-indent: 35px;
 }
 /* Edit and Cance Edit Buttons */
 .choiceDisplay > div > button {
-    
+    display: block;
+    font-size: 15px;
+    font-family: auto;
+    background-color: rgba(255, 255, 255, 0.75);
+    border: 1px solid black;
+    border-radius: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: auto;
+    margin-right: 3px;
+    margin-bottom: 3px;
 }
 
 
@@ -576,7 +606,7 @@ select:active, select:hover {
 
 /* calendar display */
 .calendar {
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -630,9 +660,7 @@ select:active, select:hover {
     background-color: rgba(0, 0, 0, 0);
     font-size: 14px;
     font-family: auto;
-    /* border-radius: 50%; */
     border: 0px solid black;
-    /* padding: 0px; */
     width: 100%;
 }
 
@@ -682,17 +710,15 @@ select:active, select:hover {
 }
 /* toggle forward */
 .nextWeek {
-    /* display: inline-block; */
     margin-left: auto;
     font-size: 30px;
-    /* border: 1px solid black; */
-    padding-right: 5px;
+    padding-right: 25px;
 }
 /* toggle back */
 .prevWeek {
     margin-right: auto;
     font-size: 30px;
-    padding-left: 5px;
+    padding-left: 25px;
 }
 
 
@@ -783,6 +809,35 @@ select:active, select:hover {
 /* ===================================== */
 
 
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =========Package and Submit========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+/* Styling package and submit */
+/* Styling package and submit */
+/* Styling package and submit */
+/* Styling package and submit */
+/* Styling package and submit */
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =========Package and Submit========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
 
 
 

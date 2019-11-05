@@ -64,6 +64,14 @@ const appointmentSchema = new Schema({
         type: Number,
         default: 0
     },
+    therapistPaid: {
+        type: Boolean,
+        default: true
+    },
+    amountTherapistPaid: {
+        type: Number,
+        default: 0
+    },
     appointmentCreatedAt: {
         type: Date,
         default: Date.now
@@ -71,6 +79,10 @@ const appointmentSchema = new Schema({
     googleId: {
         type: String,
         default: ''
+    },
+    chargeId : {
+        type: String,
+        default: ""
     },
     intake: {
         type: Object,

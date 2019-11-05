@@ -120,34 +120,10 @@ class AppointmentProvider extends Component {
             .then(() => callback())
             .catch(err => console.log(err.response.data.errMsg))
     }
-    cancelAppointment = (appLengthInMinutes, clientID, appDate, client, _id, googleId) => {
-        let visitsIndex = 0
-        if (appLengthInMinutes === 90){
-            visitsIndex = 1
-        } else if (appLengthInMinutes === 120){
-            visitsIndex = 2
-        }
-        const today24 = new Date()
-        today24.setHours(today24.getHours() + 24)
-        this.props.deleteEvent(googleId, () => {
-            dataAxios.delete(`/api/appointment/${_id}`)
-                .then(() => {
-                    if (client){
-                        if (new Date(appDate) > today24){
-                            this.updateVisits(clientID, { index: visitsIndex, adjust: 1 }, () => {
-                                window.location.reload();
-                            })
-                        } else {
-                            window.location.reload();
-                        }
-                    } else {
-                        this.updateVisits(clientID, { index: visitsIndex, adjust: 1 }, () => {
-                            window.location.reload();
-                        })
-                    }
-                })
-                .catch(err => console.log(err.response.data.errMsg))
-        })
+    cancelAppointment = (_id, therapist) => {
+        dataAxios.delete(`/api/calendar/${_id}/${therapist}`)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err.response.data.errMsg))
     }
     updateVisits = (_id, updates, callback) => {
         dataAxios.put(`/api/info/visits/${_id}`, updates)

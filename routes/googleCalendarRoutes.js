@@ -100,28 +100,68 @@ googleRouter.route('/calendar')
     });  
   })
 
-googleRouter.route('/calendar/:id')
+googleRouter.route('/calendar/:id/:isTherapist')
   .delete((req, res, next) => {
-    fs.readFile('credentials.json', (err, content) => {
-      if (err) {
-        res.status(500)
-        return next(err)
-      }
-      authorize(JSON.parse(content), (auth) => {
-        const calendar = google.calendar({version: 'v3', auth});
-        calendar.events.delete({
-          calendarId: 'primary',
-          sendNotifications: true,
-          eventId: req.params.id,
-        }, (err) => {
-          if (err) {
-            res.status(500)
-            return next(err)
-          }
-          return res.status(202).send('Event deleted.');
-        });
-      });
-    }); 
+    const appId = req.params.id
+    const isTherapist = req.params.isTherapist
+    console.log(appId)
+    console.log(isTherapist)
+
+    // first we need to update the appointment 
+      // to canceled
+      // and to figure out if we are paying the therapist and how much
+        // ( this will give us back the appointment )
+
+    // check decide if refund or up one of visits Remaining
+    // we'll check the appointment for package choice
+      // if === 1 ( it was a single )
+        // Refund, we'll check if isTherapist
+          // if === true
+            // we will refund 90%
+            // set therapist paid amount to 0 
+            // setting therapist paid to false
+          // if not 
+            // we'll check if within 24 hours 
+              // if === true 
+                // refund half
+                // set therapist paid amount to half of the original - 10% of the original
+              // if not
+                // refund 90%
+                // set therapist paid amount to 0
+                // setting therapist paid to false
+      // if not ( it's a prepaid or package )
+        // we do not refund 
+          // checking therapist paid to true
+        // we will give back visits remaining if out side of 24 hours
+          // setting therapist paid to false
+
+    // delete the appointment from google calendar
+      // vvvvvvvvvvvvvvvvv
+      // vvvvvvvvvvvvvvvvv
+      // vvvvvvvvvvvvvvvvv
+
+
+      // fs.readFile('credentials.json', (err, content) => {
+      //   if (err) {
+      //     res.status(500)
+      //     return next(err)
+      //   }
+      //   authorize(JSON.parse(content), (auth) => {
+      //     const calendar = google.calendar({version: 'v3', auth});
+      //     calendar.events.delete({
+      //       calendarId: 'primary',
+      //       sendNotifications: true,
+      //       eventId: req.params.id,
+      //     }, (err) => {
+      //       if (err) {
+      //         res.status(500)
+      //         return next(err)
+      //       }
+      //       return res.status(202).send('Event deleted.');
+      //     });
+      //   });
+      // }); 
+
   })
 
 const authorize = (credentials, callback) => {

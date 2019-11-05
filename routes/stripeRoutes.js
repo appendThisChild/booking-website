@@ -43,8 +43,8 @@ paymentRouter.route('/charge')
                         res.status(500)
                         return next(err)
                     }
-                    const { status } = charge
-                    return res.status(201).send(status)
+                    const { status, id } = charge
+                    return res.status(201).send({ status, id })
                 })
             })
         })

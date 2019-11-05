@@ -35,7 +35,6 @@ const MonthDisplay = props => {
     }
 
     const createMonth = (origDate, selectedDate) => {
-        console.log(selectedDate)
         const sudoDate = new Date(origDate)
         const month = []
         const startOfMonth = new Date(new Date(new Date(sudoDate.setDate(1)).setMonth(viewedMonth)).setFullYear(viewedYear))
@@ -53,10 +52,10 @@ const MonthDisplay = props => {
                     && selectedDate.getDate() === newDate.getDate()){
                     selected = true
                 }
-                const daysAway = parseInt((newDate - origDate) / 86400000) + 1
+                const daysAway = parseInt((newDate - origDate) / 86400000) + (props.nextDay - 1)
                 const dayObj = {
                     date: newDate,
-                    available: newDate >= origDate && daysAway <= 90 + props.nextDay + 1 ? true : false,
+                    available: newDate >= origDate && daysAway <= 90 + props.nextDay ? true : false,
                     selected,
                     daysAway
                 }

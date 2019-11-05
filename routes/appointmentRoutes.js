@@ -69,20 +69,6 @@ appointmentRouter.route('/:id')
             }
         )
     })
-    .delete((req, res, next) => {
-        Appointment.findOneAndUpdate(
-            {_id: req.params.id},
-            {canceled: true},
-            {new: true},
-            (err) => {
-                if (err){
-                    res.status(500)
-                    return next(err)
-                }
-                return res.status(202).send(`Appointment Canceled!`)
-            }
-        )
-    })
 appointmentRouter.route('/intake/:id')
     .put((req, res, next) => {
         const { clientPhoneNumber, intake, numberDidChange } = req.body 

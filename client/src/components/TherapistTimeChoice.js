@@ -16,6 +16,9 @@ const TherapistTimeChoice = props => {
     )
     return(
         <div className={className}>
+            {cancelButton ?
+            <button type="button" onClick={cancelFunction}>Cancel Edit</button>
+            :null}
             <form onSubmit={handleSubmit}>
                     <select name="therapistID" value={therapistID} onChange={handleChange} required={true}>
                         <option>Select Therapist</option>
@@ -25,11 +28,8 @@ const TherapistTimeChoice = props => {
                         <option>Select Length</option>
                         {mappedAppLengths}
                     </select>
-                <button>Get Availability</button>
+                <button type="submit">Find Times</button>
             </form>
-            {cancelButton ?
-            <button onClick={cancelFunction}>Cancel Edit</button>
-            :null}
         </div>
     )
 }

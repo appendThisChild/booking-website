@@ -71,11 +71,12 @@ class AppointmentBooked extends Component {
     }
     componentDidMount(){
         const { currentAppointmentInProgress } = this.props
-        if (currentAppointmentInProgress === ""){ this.props.history.push("/book")} 
-        else {
+        if (currentAppointmentInProgress.status === "Paid") {
             this.props.appointmentSubmitted()
             this.props.eraseKey()
             this.setState({dataIn: true})
+        } else {
+            this.props.history.push("/book")
         }
     }
     render(){

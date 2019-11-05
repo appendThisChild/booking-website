@@ -7,8 +7,6 @@ import { withToggler } from "./Toggler.js"
 const AppointmentBullet = props => {
     const {
         _id,
-        googleId,
-        clientID,
         appDate, 
         appLengthInMinutes, 
         amount, 
@@ -105,7 +103,7 @@ const AppointmentBullet = props => {
                 <>
                     {!canceled ?
                     <div>
-                        <button onClick={() => props.cancelAppointment(appLengthInMinutes, clientID, appDate, client, _id, googleId)}>Cancel Appointment</button>
+                        <button onClick={() => props.cancelAppointment(_id, therapist)}>Cancel Appointment</button>
                     </div>
                     :null}
                 </>

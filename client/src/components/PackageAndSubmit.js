@@ -80,11 +80,13 @@ class PackageAndSubmit extends Component {
             } 
         })
         .then(res => {
-            if (res.data === "succeeded"){
+            if (res.data.status === "succeeded"){
                 const updates = {
                     packageChoice: pChoice,
                     amount: amount,
-                    status: "Paid"
+                    status: "Paid",
+                    chargeId: res.data.id,
+                    amountTherapistPaid: pChoice === 1 ? amount : amount / 3
                 }
                 toast.update(display, {
                     render: "Payment Completed! Please wait...",
@@ -124,12 +126,13 @@ class PackageAndSubmit extends Component {
         toast.success("Completing Appointment! Please wait...", {
             transition: Slide
         })
-        const { amount } = this.state
+        const { amount, amounts } = this.state
         const { _id, appLengthInMinutes, clientID } = this.props.currentAppointmentInProgress
         const updates = {
             packageChoice: 0,
             amount: amount,
-            status: "Paid"
+            status: "Paid",
+            amountTherapistPaid: amounts[1] / 3
         }
         this.props.updateAppointment(_id, updates, () => {
             let visitsIndex = 0
@@ -147,8 +150,7 @@ class PackageAndSubmit extends Component {
     }
     componentDidMount(){
         const { currentAppointmentInProgress, genInfo } = this.props
-        if (currentAppointmentInProgress === ""){ this.props.history.push("/book")} 
-        else { 
+        if (currentAppointmentInProgress.status === "Pending") {
             const length = currentAppointmentInProgress.appLengthInMinutes
             let amounts = []
             if (length === 60){
@@ -180,6 +182,8 @@ class PackageAndSubmit extends Component {
                     }) 
                 }
             })
+        } else { 
+           this.props.history.push("/book")
         }
     }
     render(){
