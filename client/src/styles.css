@@ -828,7 +828,236 @@ select:active, select:hover {
 /* Styling package and submit */
 
 
+/* The three inside containers */
+.pAndSInside {
+    margin-bottom: 20px;
 
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* inside layers of the three containers */
+/* inside 1, 2, & 3 are the same as this */
+.pAndSInside > div {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-bottom: 15px;
+}
+.pAndSInside1 {
+    margin-bottom: 20px;
+
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.pAndSInside1:nth-child(4) {
+    margin-bottom: 0px;
+}
+/* inside layers of the three containers */
+/* inside 1, 2, & 3 are the same as this */
+.pAndSInside1 > div {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+
+
+
+
+
+/* countdown timer */
+.inside1 > p {
+    text-align: right;
+    color: white;
+    padding-top: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    font-size: 17px;
+}
+/* appointment container */
+.inside1 > div {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.45);
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 10px;
+}
+/* appointment header */
+.inside1 > div > h2 {
+    font-family: Tangerine;
+    font-size: 45px;
+    border-bottom: 1px solid black;
+    text-align: center;
+    margin-bottom: 5px;
+    text-shadow: 2px 1px 3px white;
+}
+/* appointment details */
+.inside1 > div > p {
+    font-size: 21px;
+    text-align: center;
+    line-height: 23px;
+}
+
+
+
+
+
+
+
+
+/* individual sections in the second container (4 total) */
+.inside2 > div {
+    background-color: rgba(0, 0, 0, 0.45);
+    /* border-left: 1px solid black; */
+    /* border-right: 1px solid black; */
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.inside2 > div:nth-child(1) {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    /* border-top: 1px solid black; */
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inside2 > div:nth-child(3) {
+    display: flex;
+    justify-content: center;
+}
+.inside2 > div:nth-child(4) {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    /* border-bottom: 1px solid black; */
+}
+.inside2 > div:nth-child(2) {
+    padding-top: 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* header for choose package */
+.inside2 > div > h2 {
+    font-family: Tangerine;
+    font-size: 45px;
+    border-bottom: 1px solid white;
+    text-align: center;
+    margin-bottom: 5px;
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    width: 100%;
+}
+/* package select bar */
+.inside2 > div > select {
+    border: 1px solid black;
+    margin-top: 15px;
+    font-family: auto;
+    font-size: 21px;
+}
+/* checkbox for wavier */
+.inside2 > div > input {
+    margin-right: 4px;
+    margin-top: 2px;
+    margin-bottom: 3px;
+}
+/* link for wavier download */
+.inside2 > div > a {
+    color: white;
+    font-size: 15px;
+    margin-right: 4px;
+}
+/* wavier texts */
+.inside2 > div > span {
+    color: white;
+    font-size: 15px;
+}
+/* checkbox not checked text */
+.inside2 > div > p {
+    color: red;
+    font-size: 19px;
+    padding: 3px;
+}
+/* buttons for paying or using pre-paid */
+.inside2 > div > button {
+    font-size: 20px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /* margin-bottom: 5px; */
+    font-family: auto;
+    border: 1px outset white;
+    box-shadow: 0px 0px 3px 0px black;
+    border-radius: 10px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+}
+.inside2 > div > div > button {
+    font-size: 20px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    font-family: auto;
+    border: 1px outset white;
+    box-shadow: 0px 0px 3px 0px black;
+    border-radius: 10px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+}
+
+
+
+
+
+
+
+
+
+/* cancelation policy header */
+.inside3 > div {
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 5px;
+}
+.inside3 > div > h2 {
+    margin-left: 15px;
+    margin-right: 15px;
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    padding-top: 15px;
+    font-family: Tangerine;
+    font-size: 45px;
+    border-bottom: 1px solid white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+/* bullet points */
+.inside3 > div > p {
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    font-size: 14px;
+    text-align: justify;
+}
 
 
 /* ===================================== */

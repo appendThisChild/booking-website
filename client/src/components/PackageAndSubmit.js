@@ -28,7 +28,7 @@ class PackageAndSubmit extends Component {
     }
     tenMinuteTimer = ({ hours, minutes, seconds, completed }) => {
         if (completed){
-            this.props.history.push("/book")
+            // this.props.history.push("/book")
             return null
         } else {
             let min = String(minutes)
@@ -192,60 +192,77 @@ class PackageAndSubmit extends Component {
         const { clientEmail, appLengthInMinutes, appointmentCreatedAt } = this.props.currentAppointmentInProgress
         const date = new Date(appointmentCreatedAt).getTime()
         const mappedAmounts = amounts.map((amount, i) => {
-            let description = "Single"
-            let s = ""
-            if (i === 1){
-                description = "Three"
-                s = "s"
-            }
-            return <option key={i} value={amount}>${amount / 100} "{description} {appLengthInMinutes}-Minute Massage{s}"</option>
+            let description = "Single Massage"
+            if (i === 1) description = "Package of Three"
+            return <option key={i} value={amount}>{description} ${amount / 100}</option>
         })
         return(
-            <div>
-                <Countdown date={date + 600000} renderer={this.tenMinuteTimer}/>
-                <ToastContainer autoClose={10000} />
-                {dataIn ?
-                <>
-                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={false}/>
-                    <h2>Choose a package:</h2>
-                    <select name="amount" value={amount} onChange={this.handleChange}>
-                        {except ? 
-                        <option value={0}>Pre-Paid {appLengthInMinutes}-Minute Massage</option>
-                        :null}
-                        {mappedAmounts}
-                    </select>
-                    <div>
-                        <div>
-                            <span>Read 'Liability Wavier' and check box: </span>
-                            <input type="checkbox" name="liabilityCheck" onChange={this.handleCheck}/>
-                            
+            <div className="background">
+                <div className="border">
+                    <ToastContainer autoClose={10000} />
+                    {dataIn ?
+                    <>  
+                        <div className="pAndSInside">
+                            <div className="inside1">
+                                <Countdown date={date + 600000} renderer={this.tenMinuteTimer}/>
+                                <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={false}/>
+                            </div>
                         </div>
-                        <div>
-                            <a href={`data:application/pdf;base64,${this.state.dataPDF}`} download="Massage-Therapy-Wavier.pdf">Click Here</a>
-                            <span> to download Liability Wavier</span>
+                        <div className="pAndSInside1">
+                            <div className="inside2">
+                                <div>
+                                    <h2>Select a package:</h2>
+                                    <select name="amount" value={amount} onChange={this.handleChange}>
+                                        {except ? 
+                                        <option value={0}>Pre-Paid Massage</option>
+                                        :null}
+                                        {mappedAmounts}
+                                    </select>
+                                </div>
+                                {amount !== 0 ?
+                                <div>
+                                    {liabilityCheck ? 
+                                    <>
+                                        <StripeCheckout 
+                                            name="Blissed Out Body Works"
+                                            stripeKey={apiKey}
+                                            token={this.handleSubmit}
+                                            amount={amount}
+                                            email={clientEmail}
+                                            ComponentClass="div"
+                                        >
+                                        <button>Pay With Card</button>
+                                        </StripeCheckout>
+                                        <p>{checkBoxMessage}</p>
+                                    </>
+                                    :
+                                    <>
+                                        <button onClick={this.checkBox}>Pay With Card</button>
+                                        <p>{checkBoxMessage}</p>
+                                    </>
+                                    }
+                                </div>
+                                :
+                                <div>
+                                    <button onClick={!liabilityCheck ? this.checkBox : this.handlePrepaid}>Use Pre-Paid</button>
+                                    <p>{checkBoxMessage}</p>
+                                </div>
+                                }
+                                <div>
+                                    <input type="checkbox" name="liabilityCheck" onChange={this.handleCheck}/>
+                                    <span>Read Liability Wavier.</span>
+                                </div>
+                                <div>
+                                    <a href={`data:application/pdf;base64,${this.state.dataPDF}`} download="Massage-Therapy-Wavier.pdf">Click Here</a>
+                                    <span> to download Liability Wavier.</span>
+                                </div>
+                                
+                            </div>
                         </div>
-                    </div>
-                    {amount !== 0 ?
-                    <>
-                        {liabilityCheck ? 
-                        <StripeCheckout 
-                            name="Blissed Out Body Works"
-                            stripeKey={apiKey}
-                            token={this.handleSubmit}
-                            amount={amount}
-                            email={clientEmail}
-                        />
-                        :
-                        <button onClick={this.checkBox}>Pay With Card</button>
-                        }
                     </>
-                    :
-                    <button onClick={!liabilityCheck ? this.checkBox : this.handlePrepaid}>Use Pre-Paid Visit</button>
-                    }
-                    <p>{checkBoxMessage}</p>
-                </>
-                :null}
-                <CancelationPolicyDisplay />
+                    :null}
+                    <CancelationPolicyDisplay />
+                </div>
             </div>
         )
     }

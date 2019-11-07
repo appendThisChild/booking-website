@@ -9,7 +9,7 @@ const GeneralInfo = require('../models/generalInfo.js')
 const Appointment = require('../models/appointment.js')
 const User = require('../models/user.js')
 
-const SCOPES = ['https://www.googleapis.com/auth/calendar'];
+const SCOPES = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/gmail.send'];
 
 googleRouter.route('/calendar')
   .get((req, res, next) => {
@@ -18,7 +18,7 @@ googleRouter.route('/calendar')
         res.status(500)
         return next(err)
       }
-      authorize(JSON.parse(content), (auth) => {
+      authorize(res, next, JSON.parse(content), (auth) => {
         const calendar = google.calendar({version: 'v3', auth});
         calendar.events.list({
           calendarId: 'primary',
@@ -75,7 +75,7 @@ googleRouter.route('/calendar')
         res.status(500)
         return next(err)
       }
-      authorize(JSON.parse(content), (auth) => {
+      authorize(res, next, JSON.parse(content), (auth) => {
         const calendar = google.calendar({version: 'v3', auth});
         calendar.events.insert({
           calendarId: 'primary',
@@ -218,8 +218,8 @@ const giveBackVisit = (res, id, index, next, callback) => {
           {new: true}, 
           (err, updatedUser) => {
           if (err){
-              res.status(500)
-              return next(err)
+            res.status(500)
+            return next(err)
           }
           callback("Done")
       })
@@ -268,7 +268,7 @@ const deleteEventOnGoogle = (res, googleId, next, callback) => {
       res.status(500)
       return next(err)
     }
-    authorize(JSON.parse(content), (auth) => {
+    authorize(res, next, JSON.parse(content), (auth) => {
       const calendar = google.calendar({version: 'v3', auth});
       calendar.events.delete({
         calendarId: 'primary',
@@ -285,27 +285,23 @@ const deleteEventOnGoogle = (res, googleId, next, callback) => {
   }); 
 }
 
-const authorize = (credentials, callback) => {
+const authorize = (res, next, credentials, callback) => {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(
     client_id, client_secret, redirect_uris[0]);
-
-
-    // change from fs to read from genInfo
-      // retrieve general info[0]
-        // put googleTokens in it's own variable
-        // .find() search array for obj with title === "token1"
-      // if obj comes back, set credentials to the obj.tokenObj
-      // else get access token
-
-
-
-
-  fs.readFile(TOKEN_PATH, (err, token) => {
-    if (err) return getAccessToken(oAuth2Client, callback);
-    oAuth2Client.setCredentials(JSON.parse(token));
+  GeneralInfo.find((err, info) => {
+    if (err){
+      res.status(500)
+      return next(err)
+    }
+    const googleTokens = info[0].googleTokens
+    const tokenObj = googleTokens.find((obj) => {
+      return obj.title === "token1"
+    })
+    if (!tokenObj) return getAccessToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(tokenObj.tokenObj);
     callback(oAuth2Client);
-  });
+  })
 }
 
 const getAccessToken = (oAuth2Client, callback) =>  {
@@ -323,27 +319,28 @@ const getAccessToken = (oAuth2Client, callback) =>  {
     oAuth2Client.getToken(code, (err, token) => {
       if (err) return console.error('Error retrieving access token', err);
       oAuth2Client.setCredentials(token);
-      // Store the token to disk for later program executions
-
-
-
-
-      // change from fs to read from genInfo
-        // get the general info
-          // create obj of title = token1 and tokenObj = token 
-          // get googleTokens into it's own variable
-          // insert obj into the googleTokens array 
-        // update general info 
-          // insert googleTokens
-
-
-
-
-
-      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-        if (err) return console.error(err);
-        console.log('Token stored to', TOKEN_PATH);
-      });
+      // Store the token to database for later program executions
+      GeneralInfo.find((err, info) => {
+        if (err){
+          return console.error(err)
+        }
+        const googleTokens = info[0].googleTokens
+        const newGoogleTokenObj = {
+          title: "token1",
+          tokenObj: token
+        }
+        googleTokens.push(newGoogleTokenObj)
+        GeneralInfo.findOneAndUpdate(
+          {_id: info[0]._id},
+          {googleTokens: googleTokens},
+          {new: true},
+          (err, updatedGenInfo) => {
+            if (err){
+              return console.error(err)
+            }
+            console.log("Token stored in database")
+          })
+      })
       callback(oAuth2Client);
     });
   });

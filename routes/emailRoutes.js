@@ -4,8 +4,9 @@ const { google } = require('googleapis');
 const express = require('express')
 const emailRouter = express.Router()
 const companyEmail = process.env.EMAIL
+const GeneralInfo = require('../models/generalInfo.js')
 
-const SCOPES = ['https://www.googleapis.com/auth/gmail.send'];
+const SCOPES = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/gmail.send'];
 
 const makeBody = (to, from, subject, message) => {
     const str = ["Content-Type: text/plain; charset=\"UTF-8\"\n",
@@ -28,7 +29,7 @@ emailRouter.route('/contact')
               res.status(500)
               return next(err)
             }
-            authorize(JSON.parse(content), (auth) => {
+            authorize(res, next, JSON.parse(content), (auth) => {
                 const raw = makeBody(to || companyEmail, from || companyEmail, subject, message)
                 const gmail = google.gmail({version: 'v1', auth});
                 gmail.users.messages.send({
@@ -47,20 +48,23 @@ emailRouter.route('/contact')
         });
     }) 
 
-const authorize = (credentials, callback) => {
+const authorize = (res, next, credentials, callback) => {
     const {client_secret, client_id, redirect_uris} = credentials.installed;
     const oAuth2Client = new google.auth.OAuth2(
         client_id, client_secret, redirect_uris[0]);
-
-
-        // change from fs to read from genInfo
-            // every as google calendar routes, but token2
-
-    fs.readFile(TOKEN_PATH, (err, token) => {
-        if (err) return getAccessToken(oAuth2Client, callback);
-        oAuth2Client.setCredentials(JSON.parse(token));
+    GeneralInfo.find((err, info) => {
+        if (err){
+            res.status(500)
+            return next(err)
+        }
+        const googleTokens = info[0].googleTokens
+        const tokenObj = googleTokens.find((obj) => {
+            return obj.title === "token1"
+        })
+        if (!tokenObj) return getAccessToken(oAuth2Client, callback);
+        oAuth2Client.setCredentials(tokenObj.tokenObj);
         callback(oAuth2Client);
-    });
+    })
 }
     
 const getAccessToken = (oAuth2Client, callback) =>  {
@@ -79,15 +83,27 @@ const getAccessToken = (oAuth2Client, callback) =>  {
         if (err) return console.error('Error retrieving access token', err);
         oAuth2Client.setCredentials(token);
         // Store the token to disk for later program executions
-
-
-            // change from fs to read from genInfo
-               // every as google calendar routes, but token2
-
-        fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-            if (err) return console.error(err);
-            console.log('Token stored to', TOKEN_PATH);
-        });
+        GeneralInfo.find((err, info) => {
+            if (err){
+              return console.error(err)
+            }
+            const googleTokens = info[0].googleTokens
+            const newGoogleTokenObj = {
+              title: "token1",
+              tokenObj: token
+            }
+            googleTokens.push(newGoogleTokenObj)
+            GeneralInfo.findOneAndUpdate(
+              {_id: info[0]._id},
+              {googleTokens: googleTokens},
+              {new: true},
+              (err, updatedGenInfo) => {
+                if (err){
+                  return console.error(err)
+                }
+                console.log("Token stored in database")
+              })
+        })
         callback(oAuth2Client);
         });
     });

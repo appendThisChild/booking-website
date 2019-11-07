@@ -17,6 +17,9 @@ class Home extends Component {
     showMore = () => {
         this.setState(prevState => ({ reviewsShown: prevState.reviewsShown + 3 }))
     }
+    // componentDidMount(){
+    //     this.props.getEvents()
+    // }
     render(){
         const { homeTitle, homeInfo, homeTherapistSubtitle } = this.props.genInfo
         const mappedHomeInfo = homeInfo.map((para, i) => <p key={i}> {para}</p>)
