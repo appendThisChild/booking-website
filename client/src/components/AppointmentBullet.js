@@ -39,7 +39,7 @@ const AppointmentBullet = props => {
         amPm = "pm";
     }
     if (date.getMinutes() === 0) min = "00";
-    const intakeEntries = Object.entries(intake)
+    const intakeEntries = Object.entries(intake.body)
     const specailRequests = intakeEntries.map((bodyPart, i) => {
         const name = bodyPart[0]
         const foundIndexs = []
@@ -96,7 +96,10 @@ const AppointmentBullet = props => {
                     <p>Phone #: {phoStr2}</p>
                     <p>Package Choice: {packages[packageChoice]}</p>
                     <p>Special Requests:</p>
+                    <p>Body:</p>
                     {noRequest ? '"None"' : specailRequests}
+                    <p>Comments:</p>
+                    <p>{intake.comments === "" ? '"None"' : intake.comments}</p>
                 </div>
                 :null}
                 {(future && client) || (future && therapist) ?

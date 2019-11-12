@@ -5,6 +5,12 @@
 button:focus {
     outline: none;
 }
+input:focus {
+    outline: none;
+}
+textarea:focus {
+    outline: none;
+}
 @font-face {
     font-family: ChopinScript;
     src:url(./fonts/ChopinScript.otf)
@@ -187,7 +193,7 @@ button:focus {
     background-size: 200%;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 53% center;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
 }
@@ -206,7 +212,6 @@ button:focus {
     text-shadow: 2px 1px 3px black;
     text-align: center;
     color: white;
-
 }
 .homeContainer > div > p {
     text-indent: 25px;
@@ -226,39 +231,20 @@ button:focus {
 /* Therapist Display */
 .therapistContainer {
     display: flex;
-    /* justify-content: center; */
-    /* flex-wrap: wrap; */
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    /* border: 1px solid black; */
     margin-top: 15px;
     width: 275px;
     margin-left: auto;
     margin-right: auto;
 }
 .therapistContainer::-webkit-scrollbar {
-    /* height: 10px; */
     display: none;
 }
-/* .therapistContainer::-webkit-scrollbar-track {
-    background: #ffffff73;
-    border-radius: 50px;
-    height: 25px;
-    margin: 117px;
-}
-.therapistContainer::-webkit-scrollbar-thumb {
-    background: rgba(82, 82, 82, 0.849);
-    height: 5px;
-    border-radius: 50px;
-  }
-.therapistContainer::-webkit-scrollbar-thumb:hover {
-    background: #555;
-} */
 .therapist {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding-top: 25px; */
     padding-right: 25px;
     padding-left: 25px;
     scroll-snap-align: center;
@@ -290,6 +276,20 @@ button:focus {
     color: white;
     text-shadow: 1px 1px 1px black;
     line-height: 28px;
+}
+.bulletContainer {
+    display: flex;
+}
+.bulletBlack {
+    font-size: 22px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.bulletGray {
+    color: gray;
+    font-size: 22px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 
@@ -426,8 +426,8 @@ button:focus {
 
 
 
-/* Booing Therapist Choice */
 
+/* Booing Therapist Choice */
 .bookingTherapistDisplay {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -866,8 +866,13 @@ select:active, select:hover {
 /* inside 1, 2, & 3 are the same as this */
 .pAndSInside1 > div {
     background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
-    padding-top: 15px;
-    padding-bottom: 15px;
+    /* padding-top: 10px; */
+    padding-bottom: 10px;
+}
+.pAndSInside2 > div {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 
@@ -900,7 +905,7 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     text-align: center;
     margin-bottom: 5px;
-    text-shadow: 2px 1px 3px white;
+    /* text-shadow: 2px 1px 3px white; */
 }
 /* appointment details */
 .inside1 > div > p {
@@ -917,41 +922,43 @@ select:active, select:hover {
 
 
 /* individual sections in the second container (4 total) */
-.inside2 > div {
-    background-color: rgba(0, 0, 0, 0.45);
-    /* border-left: 1px solid black; */
-    /* border-right: 1px solid black; */
-    margin-left: 15px;
-    margin-right: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+.inside2 > h2 {
+    font-family: Tangerine;
+    font-size: 55px;
+    border-bottom: 1px solid black;
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    width: 100%;
+    padding: 5px;
 }
-.inside2 > div:nth-child(1) {
+.inside2 > div {
+    background-color: rgba(0, 0, 0, 0.50);
+    margin-left: 10px;
+    margin-right: 10px;
+    
+    display: flex;
+    justify-content: center;
+}
+.inside2 > div:nth-child(2) {
+    padding-top: 25px;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    /* border-top: 1px solid black; */
-    padding-top: 15px;
+   
+}
+.inside2 > div:nth-child(3) {
+    padding-top: 20px;
+    padding-bottom: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.inside2 > div:nth-child(3) {
-    display: flex;
-    justify-content: center;
-}
-.inside2 > div:nth-child(4) {
-    display: flex;
-    justify-content: center;
+
+.inside2 > div:nth-child(5) {
     padding-bottom: 15px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    /* border-bottom: 1px solid black; */
-}
-.inside2 > div:nth-child(2) {
-    padding-top: 17px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 /* header for choose package */
 .inside2 > div > h2 {
@@ -967,7 +974,6 @@ select:active, select:hover {
 /* package select bar */
 .inside2 > div > select {
     border: 1px solid black;
-    margin-top: 15px;
     font-family: auto;
     font-size: 21px;
 }
@@ -1001,7 +1007,6 @@ select:active, select:hover {
     padding-right: 8px;
     padding-top: 5px;
     padding-bottom: 5px;
-    /* margin-bottom: 5px; */
     font-family: auto;
     border: 1px outset white;
     box-shadow: 0px 0px 3px 0px black;
@@ -1032,9 +1037,9 @@ select:active, select:hover {
 
 /* cancelation policy header */
 .inside3 > div {
-    margin-left: 15px;
-    margin-right: 15px;
-    background-color: rgba(0, 0, 0, 0.45);
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgba(0, 0, 0, 0.35);
     border-radius: 5px;
 }
 .inside3 > div > h2 {
@@ -1067,6 +1072,338 @@ select:active, select:hover {
 /* ===================================== */
 /* ===================================== */
 /* ===================================== */
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =========Appointment Booked========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+.appointmentBookedContainers {
+    margin-bottom: 20px;
+
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.appointmentBookedContainers:nth-child(3) {
+    margin-bottom: 0px;
+}
+.intakeFormDone {
+    margin-bottom: 0px;
+}
+.appointmentBookedContainers > div {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+}
+.bookedInside2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.appointmentBookedContainers > form {
+    background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
+    padding-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* header of the final booking page */
+.appointmentBookedContainers > div > h1 {
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    padding: 10px;
+    font-family: Tangerine;
+    font-size: 55px;
+    text-align: center;
+}
+/* appointment header */
+.appointmentBookedContainers > div > div {
+    background-color: rgba(255, 255, 255, 0.45);
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.appointmentBookedContainers > div > div > h2 {
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 45px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+/* appointment data */
+.appointmentBookedContainers > div > div > p {
+    font-size: 21px;
+    text-align: center;
+    line-height: 23px;
+}
+.appointmentBookedContainers > div > div > h3 {
+    padding-top: 15px;
+    padding-bottom: 5px;
+    font-style: oblique;
+    font-size: 25px;
+    text-align: center;
+    line-height: 23px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* form header */
+.appointmentBookedContainers > form > h1 {
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    padding: 5px;
+    font-family: Tangerine;
+    font-size: 55px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+/* questions in form */
+.appointmentBookedContainers > form > h4 {
+    background-color: rgba(0, 0, 0, 0.50);
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    font-size: 37px;
+    font-family: Tangerine;
+    border-bottom: 1px solid white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.appointmentBookedContainers > form > h4:nth-child(4) {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.appointmentBookedContainers > form > h4:nth-child(16) {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+/* form submit button */
+.appointmentBookedContainers > form > button {
+    display: block;
+    font-size: 20px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: auto;
+    border: 1px outset white;
+    box-shadow: 0px 0px 3px 0px black;
+    border-radius: 10px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+}
+/* all body-parts & number change */
+.appointmentBookedContainers > form > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.50);
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.appointmentBookedContainers > form > div:nth-child(15) {
+    padding-bottom: 5px;
+}
+.appointmentBookedContainers > form > div:nth-child(17) {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding-bottom: 10px;
+}
+/* shows number on file */
+.appointmentBookedContainers > form > div > p {
+    color: white;
+    font-size: 22px;
+}
+/* button to change number */
+.appointmentBookedContainers > form > div > button {
+    font-size: 16px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-top: 5px;
+    font-family: auto;
+    border: 1px outset white;
+    box-shadow: 0px 0px 3px 0px black;
+    border-radius: 8px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+}
+/* input to change number */
+.appointmentBookedContainers > form > div > input {
+    text-align: center;
+    font-size: 22px;
+    font-family: auto;
+    border-radius: 10px;
+}
+.appointmentBookedContainers > form > div > textarea {
+    resize: none;
+    width: 100%;
+    height: 175px;
+    font-size: 22px;
+    font-family: auto;
+    border-radius: 3px;
+    padding-left: 7px;
+}
+/* body-part header */
+.appointmentBookedContainers > form > div > h5 {
+    font-size: 20px;
+    color: white;
+    font-family: auto;
+    font-weight: normal;
+}
+/* both parts container */
+.appointmentBookedContainers > form > div > div {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+/* body-part input containers */
+.appointmentBookedContainers > form > div > div > div {
+    padding: 5px;
+}
+/* text */
+.appointmentBookedContainers > form > div > div > div > span {
+    font-size: 17px;
+    color: white;
+}
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =========Appointment Booked========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===========Contact Us Page=========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+/* contact containers */
+.contact {
+    
+}
+/* faqs container */
+.contact > div {
+
+}
+/* contact form */
+.contact > form {
+
+}
+
+
+
+
+/* faqs header */
+.contact > div > h2 {
+
+}
+/* individual faq container */
+.contact > div > div {
+
+}
+/* question */
+.contact > div > div > h3 {
+
+}
+/* toggle inside faq question */
+.contact > div > div > h3 > span {
+
+}
+/* answer */
+.contact > div > div > p {
+
+}
+
+
+
+
+
+
+/* contact form header */
+.contact > form > h2 {
+
+}
+/* sub-headers */
+.contact > form > p {
+
+}
+/* input fields */
+.contact > form > input {
+
+}
+/* message area */
+.contact > form > textarea {
+
+}
+/* submit button for form */
+.contact > form > button {
+
+}
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===========Contact Us Page=========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
 
 
 

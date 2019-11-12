@@ -28,7 +28,7 @@ class PackageAndSubmit extends Component {
     }
     tenMinuteTimer = ({ hours, minutes, seconds, completed }) => {
         if (completed){
-            // this.props.history.push("/book")
+            this.props.history.push("/book")
             return null
         } else {
             let min = String(minutes)
@@ -182,6 +182,7 @@ class PackageAndSubmit extends Component {
                     }) 
                 }
             })
+            window.scrollTo(0, 0);
         } else { 
            this.props.history.push("/book")
         }
@@ -189,7 +190,7 @@ class PackageAndSubmit extends Component {
     render(){
         const { dataIn, liabilityCheck, checkBoxMessage, amount, amounts, except } = this.state
         const { apiKey } = this.props
-        const { clientEmail, appLengthInMinutes, appointmentCreatedAt } = this.props.currentAppointmentInProgress
+        const { clientEmail, appointmentCreatedAt } = this.props.currentAppointmentInProgress
         const date = new Date(appointmentCreatedAt).getTime()
         const mappedAmounts = amounts.map((amount, i) => {
             let description = "Single Massage"
@@ -210,8 +211,8 @@ class PackageAndSubmit extends Component {
                         </div>
                         <div className="pAndSInside1">
                             <div className="inside2">
+                                <h2>Select a package:</h2>
                                 <div>
-                                    <h2>Select a package:</h2>
                                     <select name="amount" value={amount} onChange={this.handleChange}>
                                         {except ? 
                                         <option value={0}>Pre-Paid Massage</option>

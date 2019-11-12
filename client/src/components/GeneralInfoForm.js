@@ -95,8 +95,7 @@ const GeneralInfoForm = props => {
                     onChange={handleChange}
                     placeholder={"Place question here..."}
                 />
-                <input 
-                    type="text"
+                <textarea
                     name={aIndex}
                     value={obj.answer}
                     onChange={handleChange}

@@ -5,7 +5,7 @@ import { withUser } from "../context/UserProvider.js"
 import NumberChange from "./NumberChange.js"
 
 const IntakeForm = props => {
-    const { clientPhoneNumber, head, neck, shoulders, chest, abs, upperBack, middleBack, lowerBack, glute, thigh, calf, handleChange, handleSubmit, handleNumberDidChange, firstCharCap, numberDisplay } = props
+    const { clientPhoneNumber, head, neck, shoulders, chest, abs, upperBack, middleBack, lowerBack, glute, thigh, calf, comments, handleChange, handleSubmit, handleNumberDidChange, firstCharCap, numberDisplay } = props
     const bodyParts = ["head", "neck", "shoulders", "chest", "abs", "upperBack", "middleBack", "lowerBack", "glute", "thigh", "calf"]
     const bodyArrs = [head, neck, shoulders, chest, abs, upperBack, middleBack, lowerBack, glute, thigh, calf]
     const mappedBodyParts = bodyArrs.map((bodyPart, i) => {
@@ -22,14 +22,15 @@ const IntakeForm = props => {
         return(
             <div key={i}>
                 <h5>{firstCharCap(bodyParts[i])}: </h5>
-                {mappedLeftRight}
+                <div>
+                    {mappedLeftRight}
+                </div>
             </div>
         )
     })
     return(
         <form onSubmit={handleSubmit}>
             <h1>Before you go!</h1>
-            <h2>Please fill in our Intake Form:</h2>
             <h4>Is this number correct?</h4>
             <NumberChange
                 handleChange={handleChange}
@@ -39,6 +40,15 @@ const IntakeForm = props => {
             />
             <h4>Where are you experiencing pain?</h4>
             {mappedBodyParts}
+            <h4>Anything else we should know?</h4>
+            <div>
+                <textarea 
+                    name="comments"
+                    value={comments}
+                    onChange={handleChange}
+                    placeholder="Comments..."
+                />
+            </div>
             <button>Submit Intake Form</button>
         </form>
     )

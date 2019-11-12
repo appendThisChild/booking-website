@@ -15,8 +15,12 @@ class TherapistDisplay extends Component {
         this.props.getAllTherapists()
     }
     render(){
-        const mappedTherapists = this.props.therapists.map(therapist => 
-            <Therapist {...therapist} key={therapist._id}/>
+        const bulletArray = []
+        for (let i = 0; i < this.props.therapists.length; i++){
+            bulletArray.push("bullet")
+        }
+        const mappedTherapists = this.props.therapists.map((therapist, i) => 
+            <Therapist {...therapist} key={therapist._id} numbers={{ therapist: i, total: bulletArray }}/>
         )
         return(
             <div className="therapistContainer">

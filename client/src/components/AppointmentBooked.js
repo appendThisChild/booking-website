@@ -24,7 +24,8 @@ class AppointmentBooked extends Component {
             lowerBack: [false, false],
             glute: [false, false],
             thigh: [false, false],
-            calf: [false, false]
+            calf: [false, false],
+            comments: ''
         }
     }
     handleChange = e => {
@@ -44,21 +45,25 @@ class AppointmentBooked extends Component {
     }
     handleSubmit = e => {
         e.preventDefault()
-        const { clientPhoneNumber, head, neck, shoulders, chest, abs, upperBack, middleBack, lowerBack, glute, thigh, calf, numberDidChange } = this.state
+        console.log("Submit")
+        const { clientPhoneNumber, head, neck, shoulders, chest, abs, upperBack, middleBack, lowerBack, glute, thigh, calf, comments, numberDidChange } = this.state
         const data = {
             clientPhoneNumber: this.props.numberDeconstruct(clientPhoneNumber),
             intake: {
-                head,
-                neck,
-                shoulders,
-                chest,
-                abs,
-                upperBack,
-                middleBack,
-                lowerBack,
-                glute,
-                thigh,
-                calf
+                body: {
+                    head,
+                    neck,
+                    shoulders,
+                    chest,
+                    abs,
+                    upperBack,
+                    middleBack,
+                    lowerBack,
+                    glute,
+                    thigh,
+                    calf
+                },
+                comments
             },
             numberDidChange
         }
@@ -75,6 +80,7 @@ class AppointmentBooked extends Component {
             this.props.appointmentSubmitted()
             this.props.eraseKey()
             this.setState({dataIn: true})
+            window.scrollTo(0, 0);
         } else {
             this.props.history.push("/book")
         }
@@ -82,21 +88,33 @@ class AppointmentBooked extends Component {
     render(){
         const { dataIn, formDone } = this.state
         return(
-            <div>
+            <div className="background">
+                <div className="border">
                 {dataIn ?
-                <>
-                    <h1>{formDone ? "Form submitted!" : "Appointment has been booked!"}</h1>
-                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={true}/>
+                <>  
+                    <div className="appointmentBookedContainers">
+                        <div>
+                            <h1>{formDone ? "Form submitted!" : "Appointment booked!"}</h1>
+                        </div>
+                    </div>
+                    <div className={`appointmentBookedContainers ${formDone ? "intakeFormDone" : ""}`}>
+                        <div className="bookedInside2">
+                            <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={true}/>
+                        </div>
+                    </div>
                     {!formDone ?
-                    <IntakeForm 
-                        handleChange={this.handleChange}
-                        handleSubmit={this.handleSubmit}
-                        handleNumberDidChange={this.handleNumberDidChange}
-                        {...this.state}
-                    />
+                    <div className="appointmentBookedContainers">
+                        <IntakeForm 
+                            handleChange={this.handleChange}
+                            handleSubmit={this.handleSubmit}
+                            handleNumberDidChange={this.handleNumberDidChange}
+                            {...this.state}
+                        />
+                    </div>
                     :null}
                 </>
                 :null}
+                </div>
             </div>
         )
     }

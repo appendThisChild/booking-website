@@ -29,11 +29,10 @@ const Appointment = props => {
             <p>Length: {appLengthInMinutes} Minutes</p>
             {showAddress ?
             <>
-                <p>Therapist's #: {phoStr1}</p>
-                <p>Address:</p>
-                <p>{street}</p>
-                <p>{city}</p>
-                <p>{state}</p>
+                <h3>Therapist's info:</h3>
+                <p>{phoStr1}</p>
+                <p>{street},</p>
+                <p>{city}, {state}</p>
                 <p>{zipcode}</p>
             </>
             :null}

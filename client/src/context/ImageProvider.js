@@ -39,10 +39,7 @@ class ImageProvider extends Component {
     // gets all the images metadata from the system
     updateFile = (_id, filename, data) => {
         axios.put(`/images/${_id}/${filename}`, data)
-            .then(res => {
-                const updatedUser = res.data
-                this.props.updateState(updatedUser)
-            })
+            .then(() => window.location.reload())
             .catch(err => console.log(err.response.data.errMsg))
     }
 

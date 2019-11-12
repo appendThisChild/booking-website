@@ -22,7 +22,10 @@ class Therapist extends Component {
         }
     }
     render(){
-        const { firstName, lastName, address, firstCharCap } = this.props
+        const { firstName, lastName, address, firstCharCap, numbers } = this.props
+        const mappedShownTherapists = numbers.total.map((bullet, i) => {
+            return <span key={i} className={i === numbers.therapist ? "bulletBlack" : "bulletGray"}>&#x2022;</span>
+        })
         return(
             <div className="therapist">
                 <div className="displayImg">
@@ -31,6 +34,9 @@ class Therapist extends Component {
                 <div>
                     <p>{firstCharCap(firstName)} {firstCharCap(lastName)}</p>
                     <p>{address.city}, {address.state}</p>
+                </div>
+                <div className="bulletContainer">
+                    {mappedShownTherapists}
                 </div>
             </div>
         )
