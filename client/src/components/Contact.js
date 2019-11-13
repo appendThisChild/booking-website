@@ -38,6 +38,14 @@ class Contact extends Component {
         })
     }
 
+
+
+    ////// Yo, it worked!!!!!!
+
+
+
+
+
     render(){
         const { from, subject, message } = this.state
         const { FAQs } = this.props.genInfo
