@@ -53,36 +53,42 @@ class SignIn extends Component {
     }
     render(){
         return(
-            <div>
-                {this.state.formToggle ?
-                <>
-                    <h1>Sign Up</h1>
-                    <p>{this.props.errMsg}</p>
-                    <SignupAuthForm
-                        firstName={this.state.firstName}
-                        lastName={this.state.lastName}
-                        email={this.state.email}
-                        password={this.state.password}
-                        handleChange={this.handleChange}
-                        handleSubmit={this.handleSignupSubmit}
-                        btnText="Sign Up"   
-                    />
-                    <p onClick={this.toggleForm}>Already have an Account? Click here to Login!</p>
-                </>
-                :
-                <>
-                    <h1>Login</h1>
-                    <p>{this.props.errMsg}</p>
-                    <LoginAuthForm
-                        email={this.state.email}
-                        password={this.state.password}
-                        handleChange={this.handleChange}
-                        handleSubmit={this.handleLoginSubmit}
-                        btnText="Log In"   
-                    />
-                    <p onClick={this.toggleForm}>New Client? Click here to create an account!</p>
-                </>
-                }
+            <div className="background">
+                <div className="border">
+                    <div className="loginSignup">
+                        {this.state.formToggle ?
+                        <div>
+                            <h1>Sign Up</h1>
+                            
+                            <p>Already have an Account? <span onClick={this.toggleForm}>Click here</span> to Login!</p>
+                            <SignupAuthForm
+                                errMsg={this.props.errMsg}
+                                firstName={this.state.firstName}
+                                lastName={this.state.lastName}
+                                email={this.state.email}
+                                password={this.state.password}
+                                handleChange={this.handleChange}
+                                handleSubmit={this.handleSignupSubmit}
+                                btnText="Sign Up"   
+                            />
+                        </div>
+                        :
+                        <div>
+                            <h1>Login</h1>
+                            <p>New Client? <span onClick={this.toggleForm}>Click here</span> to create an account!</p>
+                            
+                            <LoginAuthForm
+                                errMsg={this.props.errMsg}
+                                email={this.state.email}
+                                password={this.state.password}
+                                handleChange={this.handleChange}
+                                handleSubmit={this.handleLoginSubmit}
+                                btnText="Log In"   
+                            />
+                        </div>
+                        }
+                    </div>
+                </div>
             </div>
         )
     }

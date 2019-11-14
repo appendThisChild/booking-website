@@ -16,12 +16,13 @@ class TherapistProvider extends Component {
         super()
         this.state = {
             therapists: [],
+            therapistImages: [],
             therapistAppointments: []
         }
     }
-    getAllTherapists = () => {
+    getAllTherapists = (callback) => {
         dataAxios.get("/therapists")
-            .then(res => this.setState({ therapists: res.data }))
+            .then(res => this.setState({ therapists: res.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
     getAllAppointmentsForSelectedTherapist = (id, callback) => {
@@ -29,13 +30,19 @@ class TherapistProvider extends Component {
             .then(res => this.setState({ therapistAppointments: res.data }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
+    saveImageFile = (imageObj) => {
+        this.setState(prevState => ({
+            therapistImages: [...prevState.therapistImages, imageObj]
+        }))
+    }
     render(){
         return(
             <TherapistContext.Provider
                 value={{
                     ...this.state,
                     getAllTherapists: this.getAllTherapists,
-                    getAllAppointmentsForSelectedTherapist: this.getAllAppointmentsForSelectedTherapist
+                    getAllAppointmentsForSelectedTherapist: this.getAllAppointmentsForSelectedTherapist,
+                    saveImageFile: this.saveImageFile
                 }}>
                 {this.props.children}
             </TherapistContext.Provider>

@@ -247,23 +247,25 @@ textarea:focus {
     align-items: center;
     padding-right: 25px;
     padding-left: 25px;
+    padding-top: 7px;
     scroll-snap-align: center;
     scroll-snap-stop: always;
     padding-bottom: 5px;
 }
-.displayImg {
+.displayImgContainer {
     height: 225px;
     width:  225px;
     overflow-y: hidden;
     border-radius: 50%;
     margin-bottom: 10px;
-    /* border: 1px solid white; */
     box-shadow: 0px 0px 10px 1px black;
 }
-.displayImg > img {
+.displayImg  {
+    height: 225px;
     width:  225px;
-    position: 50% 50%;
+    border-radius: 50%;
 }
+
 .therapist > div:nth-child(2n) {
     background-color: rgba(0, 0, 0, 0.45);
     border-radius: 5px;
@@ -1276,7 +1278,7 @@ select:active, select:hover {
 }
 .appointmentBookedContainers > form > div > textarea {
     resize: none;
-    width: 100%;
+    width: 99.5%;
     height: 175px;
     font-size: 22px;
     font-family: auto;
@@ -1331,39 +1333,91 @@ select:active, select:hover {
 
 /* contact containers */
 .contact {
-    
+    margin-bottom: 20px;
+
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/sacred_geometry_png_1194283.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 175%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.contact:nth-child(3) {
+    margin-bottom: 0px;
 }
 /* faqs container */
 .contact > div {
-
+    background-image: radial-gradient(rgba(243, 243, 46, .50) 25%, rgba(243, 243, 46, 0.95) 85%);
+    padding-bottom: 10px;
 }
 /* contact form */
 .contact > form {
-
+    background-image: radial-gradient(rgba(243, 243, 46, .50) 25%, rgba(243, 243, 46, 0.95) 85%);
+    padding-bottom: 10px;
 }
+
+
+
 
 
 
 
 /* faqs header */
 .contact > div > h2 {
-
+    padding-top: 5px;
+    font-family: Tangerine;
+    font-size: 55px;
+    text-align: center;
+}
+/* Sub-header */
+.contact > div > h3 {
+    text-align: center;
+    font-weight: normal;
+    font-size: 22px;
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
 }
 /* individual faq container */
 .contact > div > div {
-
+    margin-top: 10px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
 }
+/* first line container */
+.contact > div > div > div {
+    display: flex;
+    padding-bottom: 5px;
+    
+}
+/* .questionOpened { 
+    padding-bottom: 5px;
+} */
 /* question */
-.contact > div > div > h3 {
-
+.contact > div > div > div > h3 {
+    margin: auto;
+    font-weight: normal;
+    font-size: 22px;
+    color: white;
+    text-align: center;
 }
 /* toggle inside faq question */
-.contact > div > div > h3 > span {
-
+.contact > div > div > div > span {
+    margin-top: auto;
+    margin-left: auto;
+    margin-bottom: auto;
+    font-size: 30px;
+    
 }
 /* answer */
 .contact > div > div > p {
+    border-top: 1px solid black;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.35);
 
+    font-size: 18px;
+    color: white;
 }
 
 
@@ -1373,23 +1427,56 @@ select:active, select:hover {
 
 /* contact form header */
 .contact > form > h2 {
-
+    padding-top: 5px;
+    font-family: Tangerine;
+    font-size: 55px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+/* container of the section */
+.contact > form > div {
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 10px;
 }
 /* sub-headers */
-.contact > form > p {
+/* .contact > form  > div > p {
 
-}
+} */
 /* input fields */
-.contact > form > input {
+.contact > form > div > input {
+    display: block;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    width: 235px;
+    font-size: 18px;
+    font-family: auto;
+    padding-left: 3px;
 
 }
 /* message area */
-.contact > form > textarea {
-
+.contact > form > div > textarea {
+    border: 1px solid black;
+    width: 99.5%;
+    resize: none;
+    font-size: 18px;
+    font-family: auto;
+    padding-left: 3px;
 }
 /* submit button for form */
-.contact > form > button {
-
+.contact > form > div > button {
+    margin-top: 5px;
+    border: 2px outset white;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 
@@ -1400,6 +1487,119 @@ select:active, select:hover {
 /* ===================================== */
 /* ===================================== */
 /* ===========Contact Us Page=========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===========Login and Signup========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+
+
+/* container for the login and signup */
+.loginSignup {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/cropped-Sacred-Geometrix-LOGO-for-etsy-3.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 125%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+/* inside container */
+.loginSignup > div {
+    background-image: radial-gradient(rgba(255, 166, 0, 0.5) 25%, rgba(255, 166, 0, 0.95) 85%);
+    padding-bottom: 10px;
+}
+/* header */
+.loginSignup > div > h1 {
+    padding: 5px;
+    font-family: Tangerine;
+    font-size: 55px;
+    text-align: center;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+/* warning message */
+.loginSignup > div > form > span {
+    display: block;
+    text-align: center;
+    font-size: 19px;
+    color: red;
+}
+/* login/signup switch */
+.loginSignup > div > p {
+    text-align: center;
+    font-size: 17px;
+}
+.loginSignup > div > p > span {
+    text-decoration: underline;
+}
+.loginSignup > div > p > span:hover {
+    color: blue;
+}
+/* form */
+.loginSignup > div > form {
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 20px;
+    padding-bottom: 10px;
+}
+/* sections */
+.loginSignup > div > form > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* input fields */
+.loginSignup > div > form > div > input {
+    width: 85%;
+    font-size: 18px;
+    font-family: auto;
+    margin: 5px;
+    padding-left: 5px;
+    border: 1px solid black;
+}
+/* submit button */
+.loginSignup > div > form > button {
+    display: block;
+    border: 2px outset grey;
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: auto;
+    padding-top: 1px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===========Login and Signup========== */
 /* ===================================== */
 /* ===================================== */
 /* ===================================== */

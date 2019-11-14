@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import DefaultImg from "../images/default-img.jpg"
 
-import { withImage } from "../context/ImageProvider.js"
+import { withTherapist } from "../context/TherapistProvider.js"
 import { withUser } from "../context/UserProvider.js"
 
 class Therapist extends Component {
@@ -12,14 +12,20 @@ class Therapist extends Component {
             image: DefaultImg
         }
     }
-
-    componentDidMount(){
-        const { profileImgName } = this.props
+    setImage = () => {
+        const { profileImgName, _id } = this.props
         if (profileImgName !== 'none'){
-            this.props.getFile(profileImgName, (image) => {
-                this.setState({image: image})
+            const therapistImage = this.props.therapistImages.filter((imageObj) => {
+                return imageObj.id === _id
             })
+            if (therapistImage.length > 0) this.setState({ image: therapistImage[0].file });
         }
+    }
+    componentDidMount(){
+        this.setImage()
+    }
+    componentDidUpdate(prevProps){
+        if (this.state.image === DefaultImg && prevProps.therapistImages !== this.props.therapistImages) this.setImage();
     }
     render(){
         const { firstName, lastName, address, firstCharCap, numbers } = this.props
@@ -28,8 +34,8 @@ class Therapist extends Component {
         })
         return(
             <div className="therapist">
-                <div className="displayImg">
-                <img src={this.state.image} alt={"one"}/>
+                <div className="displayImgContainer">
+                <img src={this.state.image} alt={"one"} className="displayImg"/>
                 </div>
                 <div>
                     <p>{firstCharCap(firstName)} {firstCharCap(lastName)}</p>
@@ -43,4 +49,4 @@ class Therapist extends Component {
     }
 }
 
-export default withUser(withImage(Therapist));
+export default withTherapist(withUser(Therapist));

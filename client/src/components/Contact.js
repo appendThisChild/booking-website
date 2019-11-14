@@ -38,14 +38,6 @@ class Contact extends Component {
         })
     }
 
-
-
-    ////// Yo, it worked!!!!!!
-
-
-
-
-
     render(){
         const { from, subject, message } = this.state
         const { FAQs } = this.props.genInfo
@@ -54,23 +46,27 @@ class Contact extends Component {
             <div className="background">
                 <div className="border">
                     <ToastContainer autoClose={10000} />
+                   
+                    <div className="contact">
+                        <form onSubmit={this.handleSubmit}>
+                            <h2>Contact Us</h2>
+                            <div>
+                                {/* <p>Email:</p> */}
+                                <input type="email" name="from" value={from} onChange={this.handleChange} required={true} placeholder="Your Email..."/>
+                                {/* <p>Subject:</p> */}
+                                <input type="text" name="subject" value={subject} onChange={this.handleChange} required={true} placeholder="Subject..."/>
+                                {/* <p>Message:</p> */}
+                                <textarea name="message" value={message} onChange={this.handleChange} rows="4" cols="50" required={true} placeholder="Message..." />
+                                <button>Send Message</button>
+                            </div>
+                        </form>
+                    </div>
                     <div className="contact">
                         <div>
                             <h2>FAQs</h2>
+                            <h3>( Frequently Asked Questions )</h3>
                             {mappedFAQs}
                         </div>
-                    </div>
-                    <div className="contact">
-                        <form onSubmit={this.handleSubmit}>
-                            <h2>Contact Us:</h2>
-                            <p>Email:</p>
-                            <input type="email" name="from" value={from} onChange={this.handleChange} required={true} placeholder="Your Email..."/>
-                            <p>Subject:</p>
-                            <input type="text" name="subject" value={subject} onChange={this.handleChange} required={true} placeholder="Subject..."/>
-                            <p>Message:</p>
-                            <textarea name="message" value={message} onChange={this.handleChange} rows="4" cols="50" required={true} placeholder="Message..." />
-                            <button>Send Message</button>
-                        </form>
                     </div>
                 </div>
             </div>

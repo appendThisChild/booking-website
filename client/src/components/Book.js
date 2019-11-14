@@ -16,7 +16,7 @@ class Book extends Component {
         }
     }
     componentDidMount(){
-        this.props.getAllTherapists()
+        this.props.getAllTherapists(() => {})
     }
     handlePickTime = e => {
         e.preventDefault()

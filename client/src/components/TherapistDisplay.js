@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Therapist from './Therapist.js'
 
+import { withImage } from "../context/ImageProvider.js"
 import { withTherapist } from "../context/TherapistProvider.js"
 
 class TherapistDisplay extends Component {
@@ -12,7 +13,18 @@ class TherapistDisplay extends Component {
         }
     }
     componentDidMount(){
-        this.props.getAllTherapists()
+        if (this.props.therapists.length === 0) {
+            this.props.getAllTherapists(() => {
+                this.props.therapists.forEach(therapist => {
+                    if (therapist.profileImgName !== 'none'){
+                        this.props.getFile(therapist.profileImgName, (image) => {
+                            this.props.saveImageFile({ id: therapist._id, file: image})
+                        })
+                    }
+                })
+                
+            })
+        }
     }
     render(){
         const bulletArray = []
@@ -30,4 +42,4 @@ class TherapistDisplay extends Component {
     }
 }
 
-export default withTherapist(TherapistDisplay);
+export default withImage(withTherapist(TherapistDisplay));

@@ -45,7 +45,6 @@ class AppointmentBooked extends Component {
     }
     handleSubmit = e => {
         e.preventDefault()
-        console.log("Submit")
         const { clientPhoneNumber, head, neck, shoulders, chest, abs, upperBack, middleBack, lowerBack, glute, thigh, calf, comments, numberDidChange } = this.state
         const data = {
             clientPhoneNumber: this.props.numberDeconstruct(clientPhoneNumber),
