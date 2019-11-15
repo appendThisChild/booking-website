@@ -43,22 +43,28 @@ class ImageDisplay extends Component {
     render(){
         const { profileImgName } = this.props.user
         return(
-            <div>
+            <article>
                 <h2>Profile Image:</h2>
                 <img src={this.state.imageDisplay} alt="file" className="displayImg"/>
                 {profileImgName === "none" ?
                 <form onSubmit={this.handleUpload}>
-                    <p>Upload a Image</p>
-                    <input type="file" required={true} onChange={(e) => this.handleChange(e)}/>
+                    <p>Upload a Image:</p>
+                    <div>
+                        <p>Choose File</p>
+                        <input type="file" required={true} onChange={(e) => this.handleChange(e)}/>
+                    </div>
                     <button>Upload</button>
                 </form>
                 :
                 <form onSubmit={this.handleReplace}>
-                    <p>Replace the Iamge</p>
-                    <input type="file" required={true} onChange={(e) => this.handleChange(e)}/>
+                    <p>Replace the Iamge:</p>
+                    <div>
+                        <p>Choose File</p>
+                        <input type="file" required={true} onChange={(e) => this.handleChange(e)} />
+                    </div>
                     <button>Replace</button>
                 </form>}
-            </div>
+            </article>
         )
     }
 }

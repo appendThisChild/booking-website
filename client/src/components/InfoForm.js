@@ -55,7 +55,7 @@ const InfoForm = props => {
     return(
         <form onSubmit={handleSubmit}>
             <h2>Email: </h2>
-            <p>{emailExists}</p>
+            <span>{emailExists}</span>
             <input 
                 type="email"
                 name="email"
@@ -89,34 +89,31 @@ const InfoForm = props => {
             {props.user.isTherapist ?
             <>
                 <h2>Address: </h2>
-                <div>
-                    <span>Street: </span>
-                    <input 
-                        type="text"
-                        name="street"
-                        value={street}
-                        onChange={handleAddressChange}
-                        placeholder="123 Sesame Street"/>
-                    <span>City: </span>
-                    <input 
-                        type="text"
-                        name="city"
-                        value={city}
-                        onChange={handleAddressChange}
-                        placeholder="New York City"/>
-                    <span>State: </span>
-                    <select name="state" value={state} onChange={handleAddressChange}>
-                        <option value="">Select State</option>
-                        {mappedStates}
-                    </select>
-                    <span>Zip Code:</span>
-                    <input 
-                        type="text"
-                        name="zipcode"
-                        value={zipcode}
-                        onChange={handleAddressChange}
-                        placeholder="10128"/>
-                </div>
+                <p>Street: </p>
+                <input 
+                    type="text"
+                    name="street"
+                    value={street}
+                    onChange={handleAddressChange}
+                    placeholder="123 Sesame Street"/>
+                <p>City: </p>
+                <input 
+                    type="text"
+                    name="city"
+                    value={city}
+                    onChange={handleAddressChange}
+                    placeholder="New York City"/>
+                <p>State: </p>
+                <select name="state" value={state} onChange={handleAddressChange}>
+                    {mappedStates}
+                </select>
+                <p>Zip Code:</p>
+                <input 
+                    type="text"
+                    name="zipcode"
+                    value={zipcode}
+                    onChange={handleAddressChange}
+                    placeholder="10128"/>
                 <h2>Availability: </h2>
                 {mappedAvailabilityTimes}
             </>

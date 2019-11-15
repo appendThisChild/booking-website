@@ -79,6 +79,7 @@ class PersonalInfo extends Component {
     }
     componentDidMount(){
         this.props.getCurrentinfo(this.props.user._id)
+        window.scroll(0,0)
     }
     render(){
         const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist, _id } = this.props.user
@@ -93,27 +94,33 @@ class PersonalInfo extends Component {
             } else {
                 minutes = "120"
             }
-            return <p key={i}>Pre-Paid {minutes}-Minute Visits Remaining: {remain}</p>
+            return <p key={i}>{minutes}-Minute: {remain}</p>
         })
         return(
-            <div>
+            <div className="personalInfoBackground">
                 <ProfileNav isOn={1}/>
-                <div>
-                    {mappedRemaining}
-                </div>
-                {this.props.on ?
-                <>
+                {!this.props.on ?
+                <main>
+                    <section>
+                        <h5>Pre-paid Visits Remaining:</h5>
+                        <div>
+                            {mappedRemaining}
+                        </div>
+                    </section>
                     <button onClick={this.props.toggle}>Edit Information</button>
-                    <h2>Email: </h2><p>{email}</p>
-                    <h2>First Name: </h2><p>{this.props.firstCharCap(firstName)}</p>
-                    <h2>Last Name: </h2><p>{this.props.firstCharCap(lastName)}</p>
-                    <h2>Phone #: </h2><p>{this.props.numberDisplay(phoneNumber)}</p>
+                    <h2>Email:</h2>
+                    <p>{email}</p>
+                    <h2>First Name:</h2>
+                    <p>{this.props.firstCharCap(firstName)}</p>
+                    <h2>Last Name:</h2>
+                    <p>{this.props.firstCharCap(lastName)}</p>
+                    <h2>Phone #:</h2>
+                    <p>{this.props.numberDisplay(phoneNumber)}</p>
                     {isTherapist ?
                     <>
-                        <h2>Adress: </h2>
-                        <p>{street}</p>
-                        <p>{city}</p>
-                        <p>{state}</p>
+                        <h2>Address: </h2>
+                        <p>{street},</p>
+                        <p>{city}, {state}</p>
                         <p>{zipcode}</p>
                         <h2>Availability: </h2>
                         {mappedAvailabilty}
@@ -121,9 +128,9 @@ class PersonalInfo extends Component {
                         <ImageDisplay />
                     </>
                     : null}
-                </>
+                </main>
                 :
-                <>
+                <main>
                     <button onClick={this.props.toggle}>Cancel Edit</button>
                     <InfoForm 
                         handleChange={this.handleChange}
@@ -136,7 +143,7 @@ class PersonalInfo extends Component {
                         checkInput={this.state.checkInput}
                         {...this.state}
                     />
-                </>
+                </main>
                 }
             </div>
         )

@@ -41,7 +41,7 @@ class BlackoutDates extends Component {
         const blackout = blackoutDates.sort((app1, app2) => new Date(app1.blackoutDate) - new Date(app2.blackoutDate))
         const mappedBlackoutDates = blackout.map(obj => <Blackout key={obj._id} date={obj.blackoutDate} handleDelete={this.deleteBlackOut} _id={obj._id}/>)
         return(
-            <div>
+            <aside>
                 <h3>Reserve a date:</h3>
                 <form onSubmit={this.handleSubmit}>
                     <input 
@@ -53,13 +53,13 @@ class BlackoutDates extends Component {
                     />
                     <button>Submit Date</button>
                 </form>
-                <h3>Reserved Dates:</h3>
+                <h3>Reserved dates:</h3>
                 {dataIn ?
                 <>
                 {mappedBlackoutDates}
                 </>
                 : null}
-            </div>
+            </aside>
         )
     }
 }

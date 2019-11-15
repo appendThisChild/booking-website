@@ -7,8 +7,8 @@ const Blackout = props => {
     const day = new Date(date).getUTCDate()
     return(
         <div>
-            <span>{month}/{day}/{year}</span>
-            <span onClick={() => handleDelete(_id)}> &#9747; Delete</span>
+            <span>{month}/{day}/{year} -</span>
+            <span onClick={() => handleDelete(_id)}>Delete</span>
         </div>
     )
 }

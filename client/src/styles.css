@@ -586,7 +586,7 @@ select:active, select:hover {
     line-height: 32px;
     text-indent: 35px;
 }
-/* Edit and Cance Edit Buttons */
+/* Edit and Cancel Edit Buttons */
 .choiceDisplay > div > button {
     display: block;
     font-size: 15px;
@@ -1780,17 +1780,30 @@ select:active, select:hover {
 .appointmentBullet > div > div > p {
     font-size: 17px;
 }
+.appointmentBullet > div > div > h4 {
+    font-size: 16px;
+}
+.appointmentBullet > div > div > p:last-child {
+    color: white;
+}
+.appointmentBullet > div > div > p:nth-last-child(3) {
+    color: white;
+}
 /* special request container */
 .appointmentBullet > div > div > div {
-
+    display: flex;
 }
 /* body part */
 .appointmentBullet > div > div > div > p {
-
+    padding-left: 24px;
+    padding-right: 4px;
+    font-size: 17px;
 }
 /* answer to body part */
 .appointmentBullet > div > div > div > span {
-
+    font-size: 17px;
+    padding-right: 4px;
+    color: white;
 }
 /* cancel button */
 .appointmentBullet > div > button {
@@ -1813,7 +1826,6 @@ select:active, select:hover {
 
 /* month detail containers */
 .mappedAppointments > aside {
-    /* border: 1px solid black; */
     margin-top: 5px;
     padding: 5px;
     padding-bottom: 0px;
@@ -1859,6 +1871,368 @@ select:active, select:hover {
 /* ===================================== */
 /* ===================================== */
 /* =========Profile and History========= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ============Personal Info============ */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+/* main container for personal info */
+.personalInfoBackground {
+    background-image: linear-gradient(rgb(208, 255, 0), rgb(226, 0, 0));
+    background-attachment: fixed;
+    padding-bottom: 15px;
+}
+/* container over info and form when switched */
+.personalInfoBackground > main {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-top: 15px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+/* container for remaining visits */
+.personalInfoBackground > main > section {
+    border: 1px solid black;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.45);
+}
+.personalInfoBackground > main > section > h5 {
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+    text-align: center;
+    font-size: 16px;
+}
+.personalInfoBackground > main > section > div {
+    display: flex;
+    justify-content: center;
+}
+.personalInfoBackground > main > section > div > p {
+    font-size: 16px;
+    padding: 5px;
+    padding-top: 3px;
+    padding-bottom: 0px;
+    color: white;
+}
+/* toggle button for edit buttons */
+.personalInfoBackground > main > button {
+    display: block;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    margin-left: auto;
+    padding: 2px;
+    border: 1px solid black;
+    border-radius: 3px;
+    font-family: auto;
+    font-size: 14px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0);
+}
+/* section headers */
+.personalInfoBackground > main > h2 {
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-style: italic;
+    font-size: 24px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+/* section details */
+.personalInfoBackground > main > p {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+/* availability day containers */
+.personalInfoBackground > main > div {
+    padding: 5px;
+}
+/* day headers */
+.personalInfoBackground > main > div > h3 {
+    font-style: italic;
+    text-align: center;
+}
+/* start and end times for each day */
+.personalInfoBackground > main > div > p {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+
+
+
+
+/* blackout dates display */
+.personalInfoBackground > main > aside {
+    border: 1px solid black;
+    margin-top: 5px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.45);
+}
+/* title for reserve date and dates */
+.personalInfoBackground > main > aside > h3 {
+    text-align: center;
+    font-style: italic;
+    font-size: 24px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+/* form for reserve dates */
+.personalInfoBackground > main > aside > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+/* date selector */
+.personalInfoBackground > main > aside > form > input {
+    text-align: center;
+    font-size: 18px;
+    font-family: auto;
+    border-radius: 5px;
+    margin: 5px;
+}
+/* submit button for dates */
+.personalInfoBackground > main > aside > form > button {
+    border: 1px solid black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5));
+    border-radius: 10px;
+    margin: 5px;
+    font-size: 16px;
+    font-family: auto;
+    padding: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0);
+}
+/* dates reserved containers */
+.personalInfoBackground > main > aside > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* date and delete tags */
+.personalInfoBackground > main > aside > div > span {
+    font-size: 18px;
+    color: white;
+}
+.personalInfoBackground > main > aside > div > span:last-child {
+    margin-left: 5px;
+    text-decoration: underline;
+    font-size: 16px;
+    color: black;
+}
+
+
+
+
+
+
+
+/* profile image display */
+.personalInfoBackground > main > article {
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    margin-top: 10px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.45);
+}
+/* image title */
+.personalInfoBackground > main > article > h2 {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    font-size: 24px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+/* img tag, this will over right anything classname I have set */
+/* .personalInfoBackground > main > article > img {
+
+} */
+/* form for image */
+.personalInfoBackground > main > article > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+/* sub-header for form */
+.personalInfoBackground > main > article > form > p {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    font-size: 22px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+/* file upload input */
+.personalInfoBackground > main > article > form > div {
+    font-size: 15px;
+    font-family: auto;
+    text-align: center;
+    height: 32px;
+    margin: 5px;
+}
+.personalInfoBackground > main > article > form > div > p {
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.342);
+    border-radius: 10px;
+    font-size: 21px;
+    padding: 3px;
+    color: rgb(243, 243, 243);
+    cursor: pointer;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0);
+}
+.personalInfoBackground > main > article > form > div > input {
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 106px;
+    height: 31px;
+    position: relative;
+    top: -32px;
+    opacity: 0;
+    cursor: pointer;
+}
+/* submit button to upload image */
+.personalInfoBackground > main > article > form > button {
+    border: 1px solid black;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5));
+    border-radius: 10px;
+    margin: 5px;
+    font-size: 16px;
+    font-family: auto;
+    padding: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0);
+}
+
+
+
+
+
+/* form display for editing info */
+.personalInfoBackground > main > form {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* error display messages */
+.personalInfoBackground > main > form > span {
+    color: rgb(45, 30, 255);
+    font-size: 18px;
+}
+/* section headers */
+.personalInfoBackground > main > form > h2 {
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    font-size: 24px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+/* input fields */
+.personalInfoBackground > main > form > input {
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: auto;
+    text-align: center;
+    width: 75%;
+    margin-bottom: 5px;
+}
+/* address sub-headers */
+.personalInfoBackground > main > form > p {
+    font-weight: bold;
+    font-size: 17px;
+}
+/* state selector */
+.personalInfoBackground > main > form > select {
+    border: 2px inset white;
+    border-radius: 10px;
+    font-size: 17px;
+    font-family: auto;
+    padding-left: 15px;
+    margin-bottom: 5px;
+}
+/* submit button */
+.personalInfoBackground > main > form > button {
+    font-family: auto;
+    font-size: 18px;
+    margin-top: 10px;
+    padding-right: 7px;
+    padding-left: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    border: 1px outset white;
+    box-shadow: 0px 1px 3px 0px black;
+    border-radius: 13px;
+}
+
+
+
+
+
+/* availability containers */
+.personalInfoBackground > main > form > div {
+    width: 100%;
+    padding: 5px;
+}
+/* day header */
+.personalInfoBackground > main > form > div > h3 {
+    font-style: italic;
+    text-align: center;
+}
+/* start and end time containers */
+.personalInfoBackground > main > form > div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* outliners */
+.personalInfoBackground > main > form > div > div > span {
+    font-size: 18px;
+}
+/* selection inputs */
+.personalInfoBackground > main > form > div > div > select {
+    border: 2px inset white;
+    margin-left: 4px;
+    font-size: 16px;
+    font-family: auto;
+}
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ============Personal Info============ */
 /* ===================================== */
 /* ===================================== */
 /* ===================================== */

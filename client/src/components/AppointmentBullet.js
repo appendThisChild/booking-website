@@ -101,11 +101,11 @@ const AppointmentBullet = props => {
                     <p>Client: {clientName}</p>
                     <p>Client #: {phoStr2}</p>
                     <p>Package Choice: {packages[packageChoice]}</p>
-                    <p>Special Requests:</p>
+                    <h4>Special Requests:</h4>
                     <p>Body:</p>
-                    {noRequest ? '"None"' : specailRequests}
+                    {noRequest ? <p>"None"</p> : specailRequests}
                     <p>Comments:</p>
-                    <p>{intake.comments === "" ? '"None"' : intake.comments}</p>
+                    <p>"{intake.comments === "" ? 'None' : intake.comments}"</p>
                 </div>
                 :null}
             </div>
