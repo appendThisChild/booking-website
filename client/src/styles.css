@@ -1477,6 +1477,7 @@ select:active, select:hover {
     padding-right: 5px;
     padding-top: 2px;
     padding-bottom: 2px;
+    box-shadow: 1px 1px 4px 0px black;
 }
 
 
@@ -1603,6 +1604,265 @@ select:active, select:hover {
 /* ===================================== */
 /* ===================================== */
 /* ===================================== */
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =========Profile and History========= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+
+
+
+/* background container for the history */
+.history {
+    background-image: linear-gradient(rgb(153, 183, 248), rgb(119, 0, 255));
+    background-attachment: fixed;
+    padding-bottom: 15px;
+}
+/* same for therapist history */
+.therapistHistory {
+    background-image: linear-gradient(rgb(187, 63, 110), rgb(0, 247, 255));
+    background-attachment: fixed;
+    padding-bottom: 15px;
+}
+.companyHistory {
+
+}
+
+
+
+/* profile nav */
+.profileNav {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+/* links */
+.profileNav > a {
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    border-radius: 3px;
+    padding: 3px;
+    margin: 2px;
+    font-size: 18px;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.linkHighlight {
+    background-color: rgba(255, 255, 0, 0.5);
+}
+.linkNoHighlight {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+
+
+
+/* head container over all appointment displays */
+.mappedAppointments {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-top: 15px;
+    padding-bottom: 10px;
+}
+/* headers */
+.mappedAppointments > h1 {
+    text-align: center;
+    font-size: 49px;
+    font-weight: normal;
+    font-family: Tangerine;
+}
+/* sub-titles */
+.mappedAppointments > p {
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}   
+/* month toggle container */
+.monthTogglers {
+    display: flex;
+}
+/* month toggles */
+.rightToggle {
+    margin-left: auto;
+    font-size: 16px;
+}
+.leftToggle {
+    font-size: 16px;
+}
+/* month title */
+.mappedAppointments > h2 {
+    text-align: center;
+    font-size: 37px;
+    font-weight: normal;
+    font-family: Tangerine;
+}
+.mappedAppointments > section {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+
+
+
+
+
+/* appointment */
+.appointmentBullet {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+    padding: 5px;
+}
+.appointmentOpened{
+    background-color: rgba(169, 241, 0, 0.8);
+}
+.appointmentCanceled {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+/* expand  */
+.appointmentBullet > nav {
+    display: flex;
+    justify-content: center;
+}
+.appointmentBullet > nav > span {
+    text-decoration: underline;
+    
+}
+/* first and second info containers */
+.appointmentBullet > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.appointmentBullet > div:nth-child(2) {
+    border-top: 1px solid black;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+/* base info */
+.appointmentBullet > div > span {
+    display: inline-block;
+    font-size: 19px;
+    padding-left: 3px;
+    padding-right: 2px;
+    
+}
+/* secondary info */
+.appointmentBullet > div > p {
+    font-size: 17px;
+}
+/* additional info for therapist and company histories container*/
+.appointmentBullet > div > div {
+    border-top: 1px solid black;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+/* info inside */
+.appointmentBullet > div > div > p {
+    font-size: 17px;
+}
+/* special request container */
+.appointmentBullet > div > div > div {
+
+}
+/* body part */
+.appointmentBullet > div > div > div > p {
+
+}
+/* answer to body part */
+.appointmentBullet > div > div > div > span {
+
+}
+/* cancel button */
+.appointmentBullet > div > button {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 7px;
+    font-size: 11px;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+
+    display: block;
+    margin-left: auto;
+}
+
+
+
+
+
+/* month detail containers */
+.mappedAppointments > aside {
+    /* border: 1px solid black; */
+    margin-top: 5px;
+    padding: 5px;
+    padding-bottom: 0px;
+    
+} 
+/* sections */
+/* detail texts */
+.mappedAppointments > aside > div {
+    border: 1px solid black;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 5px;
+} 
+.mappedAppointments > aside > div:nth-child(2) {
+    border-top: 0px solid black;
+} 
+.mappedAppointments > aside > div:last-child {
+    border-top: 1px solid black;
+    margin-top: 5px;
+} 
+.mappedAppointments > aside > div > p {
+    font-size: 19px;
+    padding: 3px;
+    text-align: center;
+} 
+.mappedAppointments > aside > div > span {
+    display: block;
+    font-size: 17px;
+    padding: 3px;
+} 
+.mappedAppointments > aside > div > span:nth-child(2) {
+    padding-left: 12px;
+}
+.mappedAppointments > aside > div > span:last-child {
+    border-top: 1px solid black;
+    padding-left: 3px;
+}
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =========Profile and History========= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
 
 
 

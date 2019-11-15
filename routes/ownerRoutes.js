@@ -18,6 +18,19 @@ ownerRouter.route('/user')
         })
     })
 ownerRouter.route('/user/:_id')
+    .get((req, res, next) => {
+        console.log(req.params._id)
+        User.findOne(
+            {_id : req.params._id}, 
+            (err, foundUser) => {
+                if (err){
+                    res.status(500)
+                    return next(err)
+                }
+                foundUser.password = null
+                return res.status(200).send(foundUser)
+        })
+    })
     .put((req, res, next) => {
         User.findOneAndUpdate(
             {_id: req.params._id},

@@ -114,8 +114,8 @@ class History extends Component {
         const { clientAppointmentsPresent, clientAppointmentsPast } = this.props
         const { switchPastMonth, switchPresentMonth } = this
         return(
-            <div>
-                <ProfileNav />
+            <div className="history">
+                <ProfileNav isOn={0}/>
                 {dataIn ?
                 <>
                     <AppointmentHistory 

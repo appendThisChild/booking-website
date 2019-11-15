@@ -30,8 +30,11 @@ class OwnerProvider extends Component {
 
 
     setAccount = (_id, dateData, callback) => {
-        const account = this.state.accounts.filter(account => account._id === _id)[0]
-        this.setState({ searchedAccount: account }, () => this.getAccountClientHistory(_id, dateData, callback))
+        dataAxios.get(`/api/owner/user/${_id}`)
+            .then(res => this.setState({ searchedAccount: res.data }, () => {
+                this.getAccountClientHistory(_id, dateData, () => callback(res.data.isTherapist))
+            }))
+            .catch(err => console.log(err.response.data.errMsg))
     }
 
     getAccountClientHistory = (_id, dateData, callback) => {

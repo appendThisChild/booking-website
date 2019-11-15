@@ -97,7 +97,7 @@ class PersonalInfo extends Component {
         })
         return(
             <div>
-                <ProfileNav />
+                <ProfileNav isOn={1}/>
                 <div>
                     {mappedRemaining}
                 </div>

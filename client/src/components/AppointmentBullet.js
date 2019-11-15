@@ -24,6 +24,7 @@ const AppointmentBullet = props => {
     } = props
     const { street, city, state, zipcode } = address
     const packages = ["Pre-Paid Massage", "One Massage", "Three Massage Package"]
+    const daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const phoStr1 = props.numberDisplay(therapistPhoneNumber)
     const phoStr2 = props.numberDisplay(clientPhoneNumber)
     const date = new Date(appDate)
@@ -65,35 +66,40 @@ const AppointmentBullet = props => {
     })
     const noRequest = specailRequests.every((element) => element === null)
     return(
-        <div>
-
-            {/* Edit later to change color */}
-            {canceled ? <span>"Appointment below was canceled"</span>: null}
-
-
-            <div onClick={props.toggle}>
-                <span>Date: {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}</span>
-                <span>Time: {hour}:{min} {amPm}</span>
-                <span>Length: {appLengthInMinutes} Minutes</span>
-                <span>Amount: ${amount / 100}</span>
+        <div className={`${canceled ? "appointmentCanceled " : ""}appointmentBullet${props.on ? "": " appointmentOpened"}`}>
+            <div>
+                
+                <span>{date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()} ({daysOfTheWeek[date.getDay()]})</span>
+                <span>|</span>
+                <span>@ {hour}:{min} {amPm}</span>
+                <span>|</span>
+                <span>{appLengthInMinutes} Minutes</span>
             </div>
             {props.on ?
             null
             :
-            <>
-                <div>
+            <div>
+                 {(future && client) || (future && therapist) ?
+                <>
+                    {!canceled ?
+                    <>
+                        <button onClick={() => props.cancelAppointment(_id, therapist)}>Cancel Appointment</button>
+                    </>
+                    :null}
+                </>
+                :null}
+                <>
+                    <p>Amount: ${amount / 100}</p>
                     <p>Therapist: {therapistName}</p>
-                    <p>Phone #: {phoStr1}</p>
+                    <p>Therapist #: {phoStr1}</p>
                     <p>Address:</p>
-                    <p>{street}</p>
-                    <p>{city}</p>
-                    <p>{state}</p>
-                    <p>{zipcode}</p>
-                </div>
+                    <p>{street},</p>
+                    <p>{city}, {state} {zipcode}</p>
+                </>
                 {!client ?
                 <div>
                     <p>Client: {clientName}</p>
-                    <p>Phone #: {phoStr2}</p>
+                    <p>Client #: {phoStr2}</p>
                     <p>Package Choice: {packages[packageChoice]}</p>
                     <p>Special Requests:</p>
                     <p>Body:</p>
@@ -102,17 +108,11 @@ const AppointmentBullet = props => {
                     <p>{intake.comments === "" ? '"None"' : intake.comments}</p>
                 </div>
                 :null}
-                {(future && client) || (future && therapist) ?
-                <>
-                    {!canceled ?
-                    <div>
-                        <button onClick={() => props.cancelAppointment(_id, therapist)}>Cancel Appointment</button>
-                    </div>
-                    :null}
-                </>
-                :null}
-            </>
+            </div>
             }
+            <nav>
+                <span onClick={props.toggle}>{props.on ? "Expand" : "Condense"}</span>
+            </nav>
         </div>
     )
 }

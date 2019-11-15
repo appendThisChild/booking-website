@@ -99,7 +99,7 @@ class CiteInfo extends Component {
         const { connected } = genInfo
         return(
             <div>
-                <ProfileNav />
+                <ProfileNav isOn={5}/>
                 {genInfo._id !== "none" ? 
                 <>
                     {on ?

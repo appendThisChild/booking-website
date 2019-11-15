@@ -115,8 +115,8 @@ class TherapistHistory extends Component {
         const { yearEarnings, therapistEarnings, serviceDeducted } = therEarningsData
         const { switchPastMonth, switchPresentMonth } = this
         return(
-            <div>
-                <ProfileNav />
+            <div className="therapistHistory">
+                <ProfileNav isOn={2}/>
                 {dataIn ?
                 <>
                     <AppointmentHistory 
@@ -142,8 +142,12 @@ class TherapistHistory extends Component {
                         month={pastMonth} 
                         year={pastYear} 
                         toggle={pastToggle}
-                        switchMonth={switchPastMonth}/>
-                    <p>{pastYear}'s Earnings: ${yearEarnings} - "20% Service Deductions (-${serviceDeducted})" = ${therapistEarnings}</p>
+                        switchMonth={switchPastMonth}
+                        yearEarnings={yearEarnings}
+                        yearServiceDeducted={serviceDeducted}
+                        yearTherapistEarnings={therapistEarnings}
+                        yearView={true}
+                    />
                 </>
                 : null
                 }

@@ -15,7 +15,8 @@ class AccontHistory extends Component {
             pastMonth: new Date().getMonth() + 1,
             pastYear: new Date().getFullYear(),
             presentToggle: 0,
-            pastToggle: 0
+            pastToggle: 0,
+            dataIn: false
         }
     }
     // get client history
@@ -98,6 +99,22 @@ class AccontHistory extends Component {
             })
         }
     }
+    componentDidMount(){
+        const date = new Date()
+        const dateData = {
+            month: date.getMonth() + 1,
+            year: date.getFullYear()
+        }
+        this.props.setAccount(this.props.match.params.id, dateData, (isTherapist) => {
+            if (isTherapist){
+                this.props.getAccountTherapistHistory(this.props.match.params.id, dateData, () => {
+                    this.setState({ dataIn: true})
+                })
+            } else {
+                this.setState({ dataIn: true})
+            }
+        })
+    }
     render(){
         const { searchedAccount, firstCharCap } = this.props
         const { presentToggle, pastToggle, pastMonth, pastYear, presentMonth, presentYear } = this.state
@@ -106,37 +123,38 @@ class AccontHistory extends Component {
         return(
             <div>
                 <ProfileNav />
-                {searchedAccount.firstName ? 
-                <h1>{firstCharCap(searchedAccount.firstName)} {firstCharCap(searchedAccount.lastName)}</h1>
-                :null}
-                <h3>{searchedAccount.isTherapist ? "Therapist History" : "History"}</h3>
-                {searchedAccount.isTherapist ?
-                <AppointmentHistory 
-                history={searchedTherapistHistory} 
-                title={""} 
-                subTitle={"Old to Oldest"} 
-                future={false}
-                therapist={false}
-                client={false}
-                owner={false}
-                month={presentMonth} 
-                year={presentYear} 
-                toggle={presentToggle}
-                switchMonth={switchPresentMonth}/>
-                :null}
-                <h3>{searchedAccount.isTherapist ? "Client History" : null}</h3>
-                <AppointmentHistory 
-                history={searchedClientHistory} 
-                title={""} 
-                subTitle={"Old to Oldest"} 
-                future={false}
-                client={true}
-                therapist={false}
-                owner={false} 
-                month={pastMonth} 
-                year={pastYear} 
-                toggle={pastToggle}
-                switchMonth={switchPastMonth}/>
+                {this.state.dataIn ?
+                <>
+                    {searchedAccount.isTherapist ?
+                    <AppointmentHistory 
+                    history={searchedTherapistHistory} 
+                    title={searchedAccount.isTherapist ? `${firstCharCap(searchedAccount.firstName)} ${firstCharCap(searchedAccount.lastName)}'s Therapist History` : ""} 
+                    subTitle={"Old to Oldest"} 
+                    future={false}
+                    therapist={false}
+                    client={false}
+                    owner={false}
+                    month={presentMonth} 
+                    year={presentYear} 
+                    toggle={presentToggle}
+                    switchMonth={switchPresentMonth}
+                    yearView={false}
+                    />
+                    :null}
+                    <AppointmentHistory 
+                    history={searchedClientHistory} 
+                    title={searchedAccount.isTherapist ? `${firstCharCap(searchedAccount.firstName)} ${firstCharCap(searchedAccount.lastName)}'s Client History` : `${firstCharCap(searchedAccount.firstName)} ${firstCharCap(searchedAccount.lastName)}'s History`} 
+                    subTitle={"Old to Oldest"} 
+                    future={false}
+                    client={true}
+                    therapist={false}
+                    owner={false} 
+                    month={pastMonth} 
+                    year={pastYear} 
+                    toggle={pastToggle}
+                    switchMonth={switchPastMonth}/>
+                </>
+                : null }
             </div>
         )
     }

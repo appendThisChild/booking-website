@@ -76,7 +76,7 @@ class App extends Component {
                     <Route path="/therapistHistory" render={renderProps => <TherapistHistory {...renderProps}/>}/> 
                     <Route path="/companyHistory" render={renderProps => <CompanyHistory {...renderProps}/>}/> 
                     <Route path="/accounts" render={renderProps => <AllAccounts {...renderProps}/>}/> 
-                    <Route path="/accountHistory" render={renderProps => <AccountHistory {...renderProps}/>}/> 
+                    <Route path="/accountHistory/:id" render={renderProps => <AccountHistory {...renderProps}/>}/> 
                     <Route path="/citeInfo" render={renderProps => <CiteInfo {...renderProps}/>}/>
                     <Route path="/reviews" render={renderProps => <Reviews {...renderProps}/> }/>
                 </Switch>

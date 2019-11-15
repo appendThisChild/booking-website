@@ -116,8 +116,8 @@ class CompanyHistory extends Component {
         const { yearEarnings, therapistEarnings, websiteDeductions, companyEarnings } = companyEarningsData
         const { switchPastMonth, switchPresentMonth } = this
         return(
-            <div>
-                <ProfileNav />
+            <div className="companyHistory">
+                <ProfileNav isOn={3}/>
                 {dataIn ?
                 <>
                     <AppointmentHistory 
@@ -143,8 +143,12 @@ class CompanyHistory extends Component {
                         month={pastMonth} 
                         year={pastYear} 
                         toggle={pastToggle}
-                        switchMonth={switchPastMonth}/>
-                    <p>{pastYear}'s Company Earnings: ${yearEarnings} - "80% Therapist(s) Payment (-${therapistEarnings})" - "10% Website Service (-${websiteDeductions})" = ${companyEarnings}</p>
+                        switchMonth={switchPastMonth}
+                        yearEarnings={yearEarnings}
+                        yearTherapistEarnings={therapistEarnings}
+                        yearWebsiteDeductions={websiteDeductions}
+                        yearCompanyEarnings={companyEarnings}
+                        />
                 </>
                 : null
                 }

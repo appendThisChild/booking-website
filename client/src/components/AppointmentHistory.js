@@ -22,57 +22,85 @@ const AppointmentHistory = props => {
     const count90 = history.filter(app => app.appLengthInMinutes === 90).length
     const count120 = history.filter(app => app.appLengthInMinutes === 120).length
     return(
-        <div>
+        <div className="mappedAppointments">
             <h1>{title}</h1>
             <p>{subTitle}</p>
             {future ?
-            <>
+            <nav className="monthTogglers">
                 {toggle !== 0 ?
                 <>
-                    <span onClick={() => switchMonth(-1)}>{"<<< Previous Month"}</span>
-                    <span onClick={() => switchMonth(1)}>{"Next Month >>>"}</span>
+                    <span className="leftToggle" onClick={() => switchMonth(-1)}>{"<<< Previous Month"}</span>
+                    <span className="rightToggle" onClick={() => switchMonth(1)}>{"Next Month >>>"}</span>
                 </>
                 :
-                    <span onClick={() => switchMonth(1)}>{" Next Month >>>"}</span>
+                    <span className="rightToggle" onClick={() => switchMonth(1)}>{" Next Month >>>"}</span>
                 }
-            </>
+            </nav>
             :
-            <>
+            <nav className="monthTogglers">
                 {toggle !== 0 ?
                 <>
-                    <span onClick={() => switchMonth(-1)}>{"<<< Previous Month"}</span> 
-                    <span onClick={() => switchMonth(1)}>{"Next Month >>>"}</span>
+                    <span className="leftToggle" onClick={() => switchMonth(-1)}>{"<<< Previous Month"}</span> 
+                    <span className="rightToggle" onClick={() => switchMonth(1)}>{"Next Month >>>"}</span>
                 </>
                 :
-                    <span onClick={() => switchMonth(-1)}>{"<<< Previous Month"}</span>
+                    <span className="leftToggle" onClick={() => switchMonth(-1)}>{"<<< Previous Month"}</span>
                 }
-            </>
+            </nav>
             }
             <h2>{monthsOftheYear[month]} {year}</h2>
-            <p>"Click on Appointment to Expand"</p>
-            {mappedHistory}
+            {/* <p>"Click on Appointment to Expand"</p> */}
+            {history.length === 0 ? <section><p>"No Appointments"</p></section> : mappedHistory}
             {client ? 
             null
             :
             <>
                 {!future ?
-                <>
-                    <div>
-                        <span>60-Minute Appointments: #{count60}</span>
-                        <span>90-Minute Appointments: #{count90}</span>
-                        <span>120-Minute Appointments: #{count120}</span>
-                        <span>Total Hours: {monthHours}hrs</span>
-                    </div>
+                <aside>
+                    
                     {owner ?
-                    <div>
-                        <span>{monthsOftheYear[month]}'s Company Earnings: ${monthEarnings} - "80% Therapist(s) Payment (-${therapistEarnings})" - "10% Website Service (-${websiteDeductions})" = ${companyEarnings}</span>
-                    </div>
+                    <>
+                        <div>
+                            <p>{monthsOftheYear[month]}'s Company Earnings</p>
+                            <span>${monthEarnings} "Earnings"</span>
+                            <span>- ${therapistEarnings} "80% Therapist(s) Payment"</span>
+                            <span>- ${websiteDeductions} "10% Website Service"</span>
+                            <span>= ${companyEarnings}</span>
+                        </div>
+                        <div>
+                            <p>{props.year}'s Company Earnings</p>
+                            <span>${props.yearEarnings} "Earnings"</span>
+                            <span>- ${props.yearTherapistEarnings} "80% Therapist(s) Payment"</span>
+                            <span>- ${props.yearWebsiteDeductions} "10% Website Service"</span>
+                            <span>= ${props.yearCompanyEarnings}</span>
+                        </div>
+                    </>
                     :
-                    <div>
-                        <span>{monthsOftheYear[month]}'s Earnings: ${monthEarnings} - "20% Service Deductions (-${serviceDeducted})" = ${therapistEarnings}</span>
-                    </div>
+                    <>
+                        <div>
+                            <p>{monthsOftheYear[month]}'s Hours</p>
+                            <span>60-Min Count: {count60}</span>
+                            <span>90-Min Count: {count90}</span>
+                            <span>120-Min Count: {count120}</span>
+                            <span>Total Hours: {monthHours}</span>
+                        </div>
+                        <div>
+                            <p>{monthsOftheYear[month]}'s Earnings</p>
+                            <span>${monthEarnings} "Earnings"</span>
+                            <span>- ${serviceDeducted} "20% Service Deductions"</span>
+                            <span>= ${therapistEarnings}</span>
+                        </div>
+                        {props.yearView ?
+                        <div>
+                            <p>{props.year}'s Earnings</p>
+                            <span>${props.yearEarnings} "Earnings"</span>
+                            <span>- ${props.yearServiceDeducted} "20% Service Deductions"</span>
+                            <span>= ${props.yearTherapistEarnings}</span>
+                        </div>
+                        : null}
+                    </>
                     }
-                </>
+                </aside>
                 :
                 null
                 }

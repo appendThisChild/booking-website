@@ -12,22 +12,8 @@ class AllAccounts extends Component {
 
         }
     }
-    sendToAccount = () => {
-        this.props.history.push("/accountHistory")
-    }
     getHistory = (_id, isTherapist) => {
-        const date = new Date()
-        const dateData = {
-            month: date.getMonth() + 1,
-            year: date.getFullYear()
-        }
-        this.props.setAccount(_id, dateData, () => {
-            if (isTherapist){
-                this.props.getAccountTherapistHistory(_id, dateData, this.sendToAccount)
-            } else {
-                this.sendToAccount()
-            }
-        })
+        this.props.history.push(`/accountHistory/${_id}`)
     }
     componentDidMount(){
         this.props.getAllAccounts()
@@ -49,7 +35,7 @@ class AllAccounts extends Component {
         const mappedClients = clients.map((account, i) => <Account key={account._id} order={i} {...account} getHistory={this.getHistory}/>)
         return(
             <div>
-                <ProfileNav />
+                <ProfileNav isOn={4}/>
                 <h2>Therapists: </h2>
                 {mappedTherapists}
                 <h2>Clients: </h2>
