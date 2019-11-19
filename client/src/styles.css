@@ -309,11 +309,11 @@ textarea {
 .ratings {
     display: flex;
     justify-content: center;
-    padding-top: 15px;
+    padding-top: 8px;
 }
 .ratings > span {
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     padding-top: 8px;
 }
 .reviewItem {
@@ -2816,8 +2816,8 @@ select:active, select:hover {
         display: none;
     }
     .navBarBaseClass {
+        transition: 0s;
         position: relative;
-        /* overflow: auto; */
         background-color: rgba(255, 255, 255, 0.7);
         border-bottom-right-radius: 0px;
         padding-top: 0px;
@@ -2831,7 +2831,6 @@ select:active, select:hover {
         display: inline;
     }
     .navBarLinks > a {
-        /* display: inline; */
         padding: 0px;
         margin-left: 1%;
         margin-right: 1%;
@@ -2841,26 +2840,38 @@ select:active, select:hover {
 
 
 
-
+    /* all pages with special styling */
+    .background {
+        background-size: 620px;
+    }
     .border {
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
     }
+
+
+
+
+    /* home */
     .homeContainer {
         width: 45%;
         border: 1px solid black;
         background-size: 1008px;
         background-position: 53% center;
+        border-radius: 5px;
     }
     .homeContainer > div {
-        height: 98.1%;
+        border-radius: 4px;
     }
     .homeContainerInside > div > p {
+        margin: 8px;
         margin-top: 8%;
-        /* margin-bottom: 4%; */
     }
-    
+    .homeContainerInside2 > div > p {
+        margin: 8px;
+        margin-top: 8%;
+    }
     .homeContainer:last-child {
         width: 94%;
         border: 1px solid black;
@@ -2868,6 +2879,121 @@ select:active, select:hover {
     .homeContainerInside {
         margin-bottom: 20px;
     }
+    .homeContainerInside > div {
+        height: 99.3%;
+    }
+    .homeContainerInside2 > div {
+        height: 99.3%;
+    }
+    .reviewItem {
+        border-radius: 5px;
+        margin: 8px;
+        padding: 7px;
+    }
+
+
+
+
+    /* book */
+    .bookingPriceDisplay {
+        border: 1px solid black;
+        border-radius: 5px;
+        background-size: 500px;
+    }
+    .bookingPriceDisplay > div {
+        height: 99.1%;
+        border-radius: 4px;
+    }
+    .bookingPriceDisplay > div > div {
+        height: 89.8%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .bookingPriceDisplay > div > div > div {
+        margin-top: 15%;
+        margin-bottom: 15%;
+        width: 225px;
+    }
+    .bookingTherapistDisplay {
+        border: 1px solid black;
+        border-radius: 5px;
+        background-size: 500px;
+    }
+    .bookingTherapistDisplay > div {
+        border-radius: 4px;
+    }
+    .selectTherapist > form {
+        margin-top: 0px;
+    }
+
+
+
+
+    /* pick time */
+    .border > section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .choiceDisplay {
+        border: 1px solid black;
+        border-radius: 5px;
+        background-size: 500px;
+    }
+    .choiceDisplay > div {
+        border-radius: 4px;
+    }
+    .calendar {
+        border: 1px solid black;
+        border-radius: 5px;
+        background-size: 500px;
+        margin-bottom: 0px;
+    }
+    .calendar > div {
+        border-radius: 4px;
+    }
+    .availableAppointments {
+        border: 1px solid black;
+        border-radius: 5px;
+        background-size: 500px;
+    }
+    .availableAppointments > div {
+        border-radius: 4px;
+        padding-bottom: 5px;
+        height: 99.3%;
+    }
+
+
+    .buttonContainer {
+        padding: 5px;
+    }
+    .availableDays {
+        width: 250px;
+        padding: 5px;
+    }
+    .availableDays > div {
+        margin: 0px; 
+        margin-top: 10px;
+    }
+
+
+
+
+    /* package and submit */
+    /* next already set up */
+    /* next already set up */
+    /* next already set up */
+    /* next already set up */
+    /* next already set up */
+
+
+
+    /* footer */
+    .footer {
+        background-size: 1150px;
+    }
+
 }
 
 @media (min-width: 769px){
@@ -2876,6 +3002,49 @@ select:active, select:hover {
         background-size: 620px;
         background-position: 151% 25%;
     }
+
+
+    /* home */
+    .homeContainer {
+        background-position: 50% center;
+    }
+    .homeContainerInside > div {
+        height: 99.1%;
+    }
+    .homeContainerInside2 > div {
+        height: 99.1%;
+    }
+
+
+    .therapistContainer {
+        margin-top: 8%;
+        width: 345px;
+    }
+    .displayImgContainer {
+        height: 295px;
+        width:  295px;
+    }
+    .displayImg {
+        height: 295px;
+        width:  295px;
+    }
+
+    .bookingPriceDisplay > div > div > div {
+        width: 300px;
+    }
+    .bookingPriceDisplay > div {
+        height: 99.3%;
+    }
+
+
+
+    .calendar > div > div > div {
+        margin: 30px;
+    }
+    .availableDays {
+        width: 350px;
+    }
+    
 }
 @media (min-width: 1248px){
     /* header */
@@ -2883,4 +3052,14 @@ select:active, select:hover {
         background-size: 620px;
         background-position: 125% 25%;
     }
+
+
+    .homeContainerInside > div {
+        height: 98.6%;
+    }
+    .homeContainerInside2 > div {
+        height: 98.6%;
+    }
+
+   
 }

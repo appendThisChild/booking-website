@@ -233,20 +233,22 @@ class PickTime extends Component {
         return(
             <div className="background">
                 <div className="border">
-                    <ChoiceDisplay  
-                        handleEdit={this.handleEdit} 
-                        therapistName={therapistName} 
-                        appLengthInMinutes={appLengthInMinutes} 
-                        editToggler={this.editToggler} 
-                        editToggle={editToggle} 
-                    />
-                    <MonthDisplay 
-                        monthsOfTheYear={monthsOfTheYear}
-                        startDay={startDay} 
-                        nextDay={nextDay}
-                        viewedDay={viewedDay}
-                        setViewedDay={this.setViewedDay}
-                    />
+                    <section>
+                        <ChoiceDisplay  
+                            handleEdit={this.handleEdit} 
+                            therapistName={therapistName} 
+                            appLengthInMinutes={appLengthInMinutes} 
+                            editToggler={this.editToggler} 
+                            editToggle={editToggle} 
+                        />
+                        <MonthDisplay 
+                            monthsOfTheYear={monthsOfTheYear}
+                            startDay={startDay} 
+                            nextDay={nextDay}
+                            viewedDay={viewedDay}
+                            setViewedDay={this.setViewedDay}
+                        />
+                    </section>
                     <AvailableAppointments 
                         appointmentsArr={dayShowing} 
                         handlePackageAndSubmit={this.handlePackageAndSubmit}

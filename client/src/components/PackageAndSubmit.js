@@ -28,7 +28,7 @@ class PackageAndSubmit extends Component {
     }
     tenMinuteTimer = ({ hours, minutes, seconds, completed }) => {
         if (completed){
-            this.props.history.push("/book")
+            // this.props.history.push("/book")
             return null
         } else {
             let min = String(minutes)
