@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import DefaultImg from "../images/default-img.jpg"
+
 
 import { withImage } from '../context/ImageProvider.js'
 import { withUser } from "../context/UserProvider.js"
@@ -10,7 +10,7 @@ class ImageDisplay extends Component {
         super(props)
         this.state = {
             imageData: "",
-            imageDisplay: DefaultImg
+            imageDisplay: props.imageDisplay
         }
     }
     handleChange = e => {
@@ -33,13 +33,11 @@ class ImageDisplay extends Component {
         const { _id, profileImgName } = this.props.user
         this.props.updateFile(_id, profileImgName, data)
     }
-    componentDidMount(){
-        const { profileImgName } = this.props.user
-        if (profileImgName !== "none"){
-            this.props.getFile(profileImgName, (image) => this.setState({ imageDisplay: image }))
+    componentDidUpdate(prevProps){
+        if (prevProps.imageDisplay !== this.props.imageDisplay){
+            this.setState({imageDisplay: this.props.imageDisplay})
         }
     }
-
     render(){
         const { profileImgName } = this.props.user
         return(

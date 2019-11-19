@@ -6,6 +6,9 @@ import InfoForm from "./InfoForm.js"
 import BlackoutDates from "./BlackoutDates.js"
 import ImageDisplay from "./ImageDisplay.js"
 
+import DefaultImg from "../images/default-img.jpg"
+import { withImage } from '../context/ImageProvider.js'
+
 import { withUser } from "../context/UserProvider.js"
 import { withToggler } from "./Toggler.js"
 
@@ -21,7 +24,8 @@ class PersonalInfo extends Component {
             lastName: props.user.lastName,
             address: props.user.address,
             availability: props.user.availability,
-            phoneNumber: props.user.phoneNumber
+            phoneNumber: props.user.phoneNumber,
+            imageDisplay: DefaultImg
         }
     }
     handleChange = e => {
@@ -66,7 +70,7 @@ class PersonalInfo extends Component {
                     availability: this.state.availability,
                     phoneNumber: this.props.numberDeconstruct(this.state.phoneNumber)
                 }
-                this.props.updateUserInfo(infoUpdates)
+                this.props.updateUserInfo(infoUpdates, () => {})
                 this.props.toggle()
                 this.setState({emailExists: ""})
             } else {
@@ -77,9 +81,19 @@ class PersonalInfo extends Component {
             }
         })
     }
+    // updateState
     componentDidMount(){
-        this.props.getCurrentinfo(this.props.user._id)
         window.scroll(0,0)
+    }
+    UNSAFE_componentWillMount(){
+        this.props.getCurrentinfo(this.props.user._id, () => {
+            if (this.state.imageDisplay === DefaultImg){
+                const { profileImgName } = this.props.user
+                if (profileImgName !== "none"){
+                    this.props.getFile(profileImgName, (image) => this.setState({ imageDisplay: image }))
+                }
+            }
+        })
     }
     render(){
         const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist, _id } = this.props.user
@@ -99,7 +113,7 @@ class PersonalInfo extends Component {
         return(
             <div className="personalInfoBackground">
                 <ProfileNav isOn={1}/>
-                {!this.props.on ?
+                {this.props.on ?
                 <main>
                     <section>
                         <h5>Pre-paid Visits Remaining:</h5>
@@ -125,7 +139,7 @@ class PersonalInfo extends Component {
                         <h2>Availability: </h2>
                         {mappedAvailabilty}
                         <BlackoutDates therapistID={_id}/>
-                        <ImageDisplay />
+                        <ImageDisplay imageDisplay={this.state.imageDisplay}/>
                     </>
                     : null}
                 </main>
@@ -150,4 +164,4 @@ class PersonalInfo extends Component {
     }
 }
 
-export default withToggler(withUser(PersonalInfo));
+export default withImage(withToggler(withUser(PersonalInfo)));

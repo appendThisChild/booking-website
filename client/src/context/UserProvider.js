@@ -76,29 +76,29 @@ class UserProvider extends Component {
             })
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
-    updateUserInfo = (updates) => {
+    updateUserInfo = (updates, callback) => {
         const _id = this.state.user._id
         dataAxios.put(`/api/info/${_id}`, updates)
             .then(res => {
-                this.updateState(res.data)
+                this.updateState(res.data, () => callback())
             })
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
-    getCurrentinfo = (_id) => {
+    getCurrentinfo = (_id, callback) => {
         dataAxios.get(`/api/info/${_id}`)
             .then(res => {
-                this.updateState(res.data)
+                this.updateState(res.data, () => callback())
             })
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
-    updateState = credentials => {
+    updateState = (credentials, callback) => {
         const { user, token } = credentials
         localStorage.user = JSON.stringify(user)
         localStorage.token = token
         this.setState({
             user,
             token
-        })
+        }, () => callback())
     }
     makingAppointment = () => {
         this.setState(() => ({
@@ -176,7 +176,7 @@ class UserProvider extends Component {
                     inputLowercaseNospace: this.inputLowercaseNospace,
                     numberDisplay: this.numberDisplay,
                     numberDeconstruct: this.numberDeconstruct,
-                    updateState: this.updateState,
+                    // updateState: this.updateState,
                     checkVisitsRemaining: this.checkVisitsRemaining,
                     getCurrentinfo: this.getCurrentinfo
                 }}>

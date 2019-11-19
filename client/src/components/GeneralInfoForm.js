@@ -15,7 +15,7 @@ const GeneralInfoForm = props => {
                     rows="4" 
                     cols="50"
                 />
-                <span onClick={() => removeLine(nameIndex)}> &#9747; Delete</span>
+                <span onClick={() => removeLine(nameIndex)}> &#9747;</span>
             </div>
         )
     })
@@ -34,7 +34,7 @@ const GeneralInfoForm = props => {
         const nameIndex = name + ` ${i} ` + index2
         return(
             <div key={i}>
-                <span>{minutesArr[i]}-Minutes $</span>
+                <p>{minutesArr[i]}-Minutes $</p>
                 <input 
                     type="number"
                     name={nameIndex}
@@ -51,7 +51,7 @@ const GeneralInfoForm = props => {
         const nameIndex = name + ` ${i} ` + index2
         return(
             <div key={i}>
-                <span>{minutesArr[i]}-Minutes $</span>
+                <p>{minutesArr[i]}-Minutes $</p>
                 <input 
                     type="number"
                     name={nameIndex}
@@ -75,7 +75,7 @@ const GeneralInfoForm = props => {
                     rows="4" 
                     cols="50"
                 />
-                <span onClick={() => removeLine(nameIndex)}> &#9747; Delete</span>
+                <span onClick={() => removeLine(nameIndex)}> &#9747;</span>
             </div>
         )
     })
@@ -88,20 +88,23 @@ const GeneralInfoForm = props => {
         const aIndex = name + ` ${i} ` + answerParam
         return(
             <div key={i}>
-                <input 
-                    type="text"
-                    name={qIndex}
-                    value={obj.question}
-                    onChange={handleChange}
-                    placeholder={"Place question here..."}
-                />
-                <textarea
-                    name={aIndex}
-                    value={obj.answer}
-                    onChange={handleChange}
-                    placeholder={"Place answer here..."}
-                />
-                <span onClick={() => removeLine(nameIndex)}> &#9747; Delete</span>
+                <p>{i + 1}.) </p>
+                <div>
+                    <input 
+                        type="text"
+                        name={qIndex}
+                        value={obj.question}
+                        onChange={handleChange}
+                        placeholder={"Place question here..."}
+                    />
+                    <textarea
+                        name={aIndex}
+                        value={obj.answer}
+                        onChange={handleChange}
+                        placeholder={"Place answer here..."}
+                    />
+                </div>
+                <span onClick={() => removeLine(nameIndex)}> &#9747;</span>
             </div>
         )
     })
@@ -118,7 +121,9 @@ const GeneralInfoForm = props => {
             />
             <h3>Home's Main Paragraphs:</h3>
             {mappedHomeInfo}
-            <p onClick={() => addLine("homeInfo")}> &#x2b; Add Line</p>
+            <aside>
+                <p onClick={() => addLine("homeInfo")}> &#x2b; Add Line</p>
+            </aside>
             <h3>Home's Therapist Subtitle:</h3>
             <textarea 
                 name="homeTherapistSubtitle"
@@ -129,17 +134,21 @@ const GeneralInfoForm = props => {
                 placeholder="Text..." 
             />
             <h3>Pricing:</h3>
-            <p>(in cents)</p>
+            <span>(in cents)</span>
             <h4>Single</h4>
             {mappedSingles}
             <h4>Triple</h4>
             {mappedTriples}
             <h3>Cancelation Policy:</h3>
             {mappedCancelPolicy}
-            <p onClick={() => addLine("cancelationPolicy")}> &#x2b; Add Line</p>
+            <aside>
+                <p onClick={() => addLine("cancelationPolicy")}> &#x2b; Add Line</p>
+            </aside>
             <h3>Frequently asked questions (FAQs):</h3>
             {mappedFAQs}
-            <p onClick={() => addLine("FAQs")}> &#x2b; Add Line</p>
+            <aside>
+                <p onClick={() => addLine("FAQs")}> &#x2b; Add Line</p>
+            </aside>
             <button>Submit Cite Changes</button>
         </form>
     )

@@ -88,6 +88,7 @@ class CiteInfo extends Component {
         })
     }
     componentDidMount(){
+        window.scroll(0,0)
         if (this.props.genInfo.liabilityWavierId !== "none"){
             this.props.downloadPDF((pdf) => {
                 this.setState({dataPDF: pdf})
@@ -98,7 +99,7 @@ class CiteInfo extends Component {
         const { genInfo, createGeneralInfo, on, toggle, connectWithStripe } = this.props
         const { connected } = genInfo
         return(
-            <div>
+            <div className="citeInfo">
                 <ProfileNav isOn={5}/>
                 {genInfo._id !== "none" ? 
                 <>
@@ -112,21 +113,23 @@ class CiteInfo extends Component {
                             {...genInfo}
                         />
                         {!connected ?
-                        <>
+                        <aside>
                             <button onClick={this.send} className="stripe-connect"></button>
                             <p>Copy & Paste the Authorization Code Here:</p>
-                            <input 
-                                type="text"
-                                name="authCode"
-                                value={this.state.authCode}
-                                onChange={this.handleChange}
-                                placeholder="Authorization Code..."
-                            />
-                            <button onClick={() => connectWithStripe({authCode: this.state.authCode}, (message) => {
-                                this.setState({message: message})
-                            })}>Authorize</button>
+                            <div>
+                                <input 
+                                    type="text"
+                                    name="authCode"
+                                    value={this.state.authCode}
+                                    onChange={this.handleChange}
+                                    placeholder="Authorization Code..."
+                                />
+                                <button className="stripeAuthorize" onClick={() => connectWithStripe({authCode: this.state.authCode}, (message) => {
+                                    this.setState({message: message})
+                                })}>Authorize</button>
+                            </div>
                             <span>{this.state.message}</span>
-                        </>
+                        </aside>
                         :null}
                     </>
                     :

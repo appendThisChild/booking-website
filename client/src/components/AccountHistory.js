@@ -121,7 +121,7 @@ class AccontHistory extends Component {
         const { searchedTherapistHistory, searchedClientHistory } = this.props
         const { switchPastMonth, switchPresentMonth } = this
         return(
-            <div>
+            <div className="accountHistory">
                 <ProfileNav />
                 {this.state.dataIn ?
                 <>

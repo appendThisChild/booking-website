@@ -11,6 +11,9 @@ input:focus {
 textarea:focus {
     outline: none;
 }
+textarea {
+    resize: none;
+}
 @font-face {
     font-family: ChopinScript;
     src:url(./fonts/ChopinScript.otf)
@@ -198,6 +201,9 @@ textarea:focus {
     border-bottom: 1px solid black;
 }
 .homeContainerInside {
+    margin-bottom: 20px;
+}
+.homeContainerInside2 {
     margin-bottom: 20px;
 }
 .homeContainer > div {
@@ -1635,9 +1641,16 @@ select:active, select:hover {
     padding-bottom: 15px;
 }
 .companyHistory {
-
+    background-image: linear-gradient(rgb(238, 255, 0), rgb(0, 68, 214));
+    background-attachment: fixed;
+    padding-bottom: 15px;
 }
+/* individual account history */
+.accountHistory {
 
+    /* background-attachment: fixed; */
+    padding-bottom: 15px;
+}
 
 
 /* profile nav */
@@ -1683,6 +1696,7 @@ select:active, select:hover {
 }
 /* headers */
 .mappedAppointments > h1 {
+    padding-top: 5px;
     text-align: center;
     font-size: 49px;
     font-weight: normal;
@@ -2240,6 +2254,508 @@ select:active, select:hover {
 
 
 
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =============All Acounts============= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+/* All accounts */
+/* main container */
+.allAccounts {
+    padding-bottom: 15px;
+}
+/* definition seperations */
+.allAccounts > h2 {
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 49px;
+    font-weight: normal;
+    font-family: Tangerine;
+}
+/* dividual accounts */
+.allAccounts > section {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+    padding: 5px;
+}
+/* first and second containers */
+.allAccounts > section > div:nth-child(1) {
+    display: flex;
+    align-items: center;
+}
+.allAccounts > section > div:nth-child(2) {
+    margin-top: 5px;
+    border-top: 1px solid black;
+}
+/* main info */
+.allAccounts > section > div > span {
+    font-size: 20px;
+    padding-right: 5px;
+}
+/* .allAccounts > section > div > div {
+
+} */
+.allAccounts > section > div > div > p {
+    font-size: 18px;
+}
+/* address and availability headers */
+.allAccounts > section > div > h4 {
+    font-size: 16px;
+}
+/* details */
+.allAccounts > section > div > p {
+    font-size: 18px;
+    text-align: center;
+}
+/* get appointments and change status buttons */
+.allAccounts > section > div > button {
+    display: block;
+    margin-left: auto;
+    margin-top: 5px;
+    font-size: 16px;
+    font-family: auto;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    border: 0px outset white;
+    border-radius: 5px;
+}
+
+
+
+
+
+/* availability overall container */
+/* .allAccounts > section > div > aside {
+
+} */
+/* individual availabilty containers */
+.allAccounts > section > div > aside > div {
+    padding-top: 5px;
+}
+/* day header */
+.allAccounts > section > div > aside > div > h3 {
+    font-size: 16px;
+    text-align: center;
+    text-decoration: underline;
+}
+/* day details */
+.allAccounts > section > div > aside > div > p {
+    font-size: 18px;
+    text-align: center;
+}
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* =============All Acounts============= */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ==============Cite Info============== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+/* main container */
+.citeInfo {
+    padding-bottom: 15px;
+}
+/* create info and edit info toggles */
+.citeInfo > button {
+    display: block;
+    margin: 5px;
+    margin-left: auto;
+    font-size: 16px;
+    font-family: auto;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    border: 0px outset white;
+    box-shadow: 0px 1px 4px 0px black;
+    border-radius: 5px;
+}
+
+
+
+
+
+/* conatiner of info */
+.citeInfo > section {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 5px;
+}
+/* main title */
+.citeInfo > section > h2 {
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-size: 49px;
+    font-weight: normal;
+    font-family: Tangerine;
+    padding-top: 5px;
+}
+/* sub-titles */
+.citeInfo > section > h3 {
+    border-top: 1px solid black;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+.citeInfo > section > h3:nth-child(2) {
+    border-top: 0px solid black;
+}
+/* paragraphs */
+.citeInfo > section > p {
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 5px;
+    margin-bottom: 10px;
+}
+/* download wavier */
+.citeInfo > section > a {
+    font-size: 18px;
+    display: block;
+    text-align: center;
+}
+/* sub-headers for liability wavier */
+.citeInfo > section > h4 {
+    text-decoration: underline;
+    text-align: center;
+}
+/* upload link*/
+.citeInfo > section > input {
+    border: 1px solid black;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    font-family: auto;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+
+
+/* faqs */
+.citeInfo > section > section {
+    display: flex;
+    margin-bottom: 10px;
+}
+/* number */
+.citeInfo > section > section > p {
+    font-size: 20px;
+    padding-right: 5px;
+}
+/* faq container */
+.citeInfo > section > section > div {
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 5px;
+}
+/* faq headers */
+.citeInfo > section > section > div > h4 {
+    text-decoration: underline;
+}
+.citeInfo > section > section > div > h4:nth-child(3) {
+    margin-top: 5px;
+}
+/* faq details */
+.citeInfo > section > section > div > p {
+    font-size: 18px;
+    
+}
+
+
+
+/* pricing display main container */
+/* .citeInfo > section > div {
+    
+} */
+/* inside container */
+/* .citeInfo > section > div > div {
+
+} */
+/* title */
+.citeInfo > section > div > div > h3 {
+    border-top: 1px solid black;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+/* container inside that */
+.citeInfo > section > div > div > div {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+/* sub-containers */
+.citeInfo > section > div > div > div > div {
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 164px;
+}
+/* single & triple headers */
+.citeInfo > section > div > div > div > div > h4{
+    text-decoration: underline;
+    text-align: center;
+}
+/* lines */
+.citeInfo > section > div > div > div > div > p {
+    font-size: 18px;
+}
+
+
+
+
+
+/* edit form */
+.citeInfo > form {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 5px;
+}
+/* main header */
+.citeInfo > form > h2 {
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-size: 49px;
+    font-weight: normal;
+    font-family: Tangerine;
+    padding-top: 5px;
+}
+/* sub-headers */
+.citeInfo > form > h3 {
+    border-top: 1px solid black;
+    font-size: 20px;
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.citeInfo > form > h3:nth-child(2) {
+    border-top: 0px solid black;
+    margin-top: 0px;
+}
+/* home title input */
+.citeInfo > form > input {
+    border: 2px inset white;
+    font-size: 18px;
+    font-family: auto;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* add lines  */
+.citeInfo > form > aside {
+    display: flex;
+}
+.citeInfo > form > aside > p {
+    margin: 5px;
+    margin-left: auto;
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-family: auto;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    border: 0px outset white;
+    box-shadow: 0px 1px 4px 0px black;
+    border-radius: 5px;
+}
+/* in cents */
+/* .citeInfo > form > span {
+    
+} */
+/* therapist sub-section */
+.citeInfo > form > textarea {
+    border: 2px inset white;
+    font-size: 18px;
+    font-family: auto;
+    width: 96%;
+    padding: 3px;
+}
+/* pricing sub-titles */
+.citeInfo > form > h4 {
+    text-align: center;
+    font-size: 18px;
+    padding: 5px;
+}
+/* submit button */
+.citeInfo > form > button {
+    display: block;
+    font-family: auto;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 7px;
+    padding-left: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    border: 1px outset white;
+    box-shadow: 0px 1px 3px 0px black;
+    border-radius: 8px;
+}
+/* any mapped container */
+.citeInfo > form > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+/* number and prefixes to lines */
+.citeInfo > form > div > p {
+    font-size: 18px;
+}
+/* price lines inputs */
+.citeInfo > form > div > input {
+    border: 2px inset white;
+    font-size: 18px;
+    font-family: auto;
+    width: 100px;
+    padding-left: 3px;
+}
+/* question lines */
+.citeInfo > form > div > div > input {
+    border: 2px inset white;
+    font-size: 18px;
+    font-family: auto;
+    width: 97.25%;
+    padding-left: 3px;
+    margin-bottom: 2px;
+}
+/* paragrapg changes */
+.citeInfo > form > div > textarea {
+    border: 2px inset white;
+    font-size: 18px;
+    font-family: auto;
+    width: 96%;
+    padding: 3px;
+}
+/* answers */
+.citeInfo > form > div > div > textarea {
+    border: 2px inset white;
+    font-size: 18px;
+    font-family: auto;
+    width: 96%;
+    padding: 3px;
+}
+/* delete buttons */
+.citeInfo > form > div > span {
+    margin-left: 5px;
+    font-size: 16px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    border: 0px outset white;
+    box-shadow: 0px 1px 4px 0px black;
+    border-radius: 5px;
+}
+
+
+
+
+
+/* connecting stripe in the beginning */
+.citeInfo > aside {
+    margin-top: 15px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 5px;
+}
+/* instruction */
+.citeInfo > aside > p {
+    text-align: center;
+    font-size: 18px;
+}
+/* authorize input and button container */
+.citeInfo > aside > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* text input  */
+.citeInfo > aside > div > input {
+    width: 75%;
+    font-size: 18px;
+    font-family: auto;
+    text-align: center;
+}
+/* message */
+.citeInfo > aside > span {
+    text-align: center;
+    font-size: 18px;
+    display: block;
+}
+/* button for setting info */
+.stripeAuthorize {
+    margin: 5px;
+    font-size: 16px;
+    font-family: auto;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    border: 0px outset white;
+    box-shadow: 0px 1px 4px 0px black;
+    border-radius: 5px;
+}
+/* stripe connections */
+.stripe-connect {
+    background-image: url("./images/blue-on-dark.png");
+    background-size: 100%;
+    height: 41px;
+    width: 233px;
+    border-radius: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ==============Cite Info============== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
 
 /* ===================================== */
 /* ===================================== */
@@ -2290,10 +2806,81 @@ select:active, select:hover {
 
 
 
-/* stripe connections */
-.stripe-connect {
-    background-image: url("./images/blue-on-dark.png");
-    height: 33px;
-    width: 193px;
-    border-radius: 5px;
-} 
+@media (min-width: 608px){
+    /* header */
+    .headerBackground {
+        background-size: 620px;
+        background-position: 238% 25%;
+    }
+    .navToggle {
+        display: none;
+    }
+    .navBarBaseClass {
+        position: relative;
+        /* overflow: auto; */
+        background-color: rgba(255, 255, 255, 0.7);
+        border-bottom-right-radius: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-top: 13px;
+    }
+    .navBarHidden {
+        width: 100%;
+    }
+    .navBarLinks {
+        display: inline;
+    }
+    .navBarLinks > a {
+        /* display: inline; */
+        padding: 0px;
+        margin-left: 1%;
+        margin-right: 1%;
+        font-size: 27px;
+    }
+
+
+
+
+
+    .border {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+    .homeContainer {
+        width: 45%;
+        border: 1px solid black;
+        background-size: 1008px;
+        background-position: 53% center;
+    }
+    .homeContainer > div {
+        height: 98.1%;
+    }
+    .homeContainerInside > div > p {
+        margin-top: 8%;
+        /* margin-bottom: 4%; */
+    }
+    
+    .homeContainer:last-child {
+        width: 94%;
+        border: 1px solid black;
+    }
+    .homeContainerInside {
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 769px){
+    /* header */
+    .headerBackground {
+        background-size: 620px;
+        background-position: 151% 25%;
+    }
+}
+@media (min-width: 1248px){
+    /* header */
+    .headerBackground {
+        background-size: 620px;
+        background-position: 125% 25%;
+    }
+}

@@ -57,7 +57,7 @@ class Home extends Component {
                             {mappedHomeInfo}
                         </div>
                     </div>
-                    <div className={`homeContainer ${"homeContainerInside"}`}>
+                    <div className={`homeContainer ${"homeContainerInside2"}`}>
                         <div>
                             <h1>Our Therapists</h1>
                             <p>{homeTherapistSubtitle}</p>

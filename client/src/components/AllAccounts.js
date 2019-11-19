@@ -17,6 +17,7 @@ class AllAccounts extends Component {
     }
     componentDidMount(){
         this.props.getAllAccounts()
+        window.scroll(0,0)
     }
     render(){
         const { accounts } = this.props
@@ -34,7 +35,7 @@ class AllAccounts extends Component {
         const mappedTherapists = therapists.map((account, i) => <Account key={account._id} order={i} {...account} getHistory={this.getHistory}/>)
         const mappedClients = clients.map((account, i) => <Account key={account._id} order={i} {...account} getHistory={this.getHistory}/>)
         return(
-            <div>
+            <div className="allAccounts">
                 <ProfileNav isOn={4}/>
                 <h2>Therapists: </h2>
                 {mappedTherapists}

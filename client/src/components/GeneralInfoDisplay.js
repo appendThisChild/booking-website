@@ -8,17 +8,19 @@ const GeneralInfoDisplay = props => {
     const mappedCancelPolicy = cancelationPolicy.map((para, i) => <p key={i}>{i + 1}.) {para}</p>)
     const mappedFAQs = FAQs.map((obj, i) => {
         return(
-            <div key={i}>
+            <section key={i}>
                 <p>{i + 1}.)</p>
-                <p>Question:</p>
-                <p>"{obj.question}"</p>
-                <p>Answer:</p>
-                <p>"{obj.answer}"</p>
-            </div>
+                <div>
+                    <h4>Question:</h4>
+                    <p>"{obj.question}"</p>
+                    <h4>Answer:</h4>
+                    <p>"{obj.answer}"</p>
+                </div>
+            </section>
         )
     })
     return(
-        <div>
+        <section>
             <h2>Cite Info</h2>
             <h3>Home Title:</h3>
             <p>{homeTitle}</p>
@@ -33,7 +35,7 @@ const GeneralInfoDisplay = props => {
             {mappedFAQs}
             {liabilityWavierId !== "none" ?
             <>
-                <h3>Liability Wavier</h3>
+                <h3>Liability Wavier:</h3>
                 {/* Creates download link for pdf */}
                 <a href={`data:application/pdf;base64,${pdf}`} download="Massage-Therapy-Wavier.pdf">Download Wavier</a>
                 <h4>Replace Wavier (pdf)</h4>
@@ -41,12 +43,12 @@ const GeneralInfoDisplay = props => {
             </>
             :
             <>
+                <h3>Liability Wavier:</h3>
                 <h4>Upload a Liability Wavier (pdf)</h4>
                 <input type="file" onChange={(e) => handleUpload(e)} accept="application/pdf"/>
             </>
             }
-            
-        </div>
+        </section>
     )
 }
 
