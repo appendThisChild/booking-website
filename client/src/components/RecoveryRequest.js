@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 
 import { usePasswordRecovery } from "../context/PasswordRecoveryProvider.js"
 
@@ -16,9 +16,9 @@ const Request = () => {
 
     if (!request){
         return(
-            <div>
+            <div className="passwordRecovery">
                 <form onSubmit={handleSubmit}>
-                    <h2>Enter email address:</h2>
+                    <h2>Enter email address</h2>
                     <input type="email" value={email} onChange={e => setEmail(e.target.value)} required={true}/> 
                     <button>Reset Password</button>
                 </form>
@@ -26,7 +26,7 @@ const Request = () => {
         )
     } else {
         return(
-            <div>
+            <div className="passwordRecovery">
                 <main>
                     <h2>Request Sent!</h2>
                     <p>Check email for password reset.</p>

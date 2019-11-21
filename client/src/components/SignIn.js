@@ -23,6 +23,9 @@ class SignIn extends Component {
             [e.target.name]: e.target.value
         })
     }
+    sendToReset = () => {
+        this.props.history.push("/recover/request/0")
+    }
     handleLoginSubmit = e => {
         e.preventDefault()
         const credentials = {
@@ -71,6 +74,7 @@ class SignIn extends Component {
                                 handleSubmit={this.handleSignupSubmit}
                                 btnText="Sign Up"   
                             />
+                            <p>Forgot password? <span onClick={this.sendToReset}>Click here</span> to reset.</p>
                         </div>
                         :
                         <div>
@@ -85,6 +89,7 @@ class SignIn extends Component {
                                 handleSubmit={this.handleLoginSubmit}
                                 btnText="Log In"   
                             />
+                            <p>Forgot password? <span onClick={this.sendToReset}>Click here</span> to reset.</p>
                         </div>
                         }
                     </div>

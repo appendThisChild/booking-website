@@ -1557,6 +1557,7 @@ select:active, select:hover {
 .loginSignup > div > p {
     text-align: center;
     font-size: 17px;
+    margin: 5px;
 }
 .loginSignup > div > p > span {
     text-decoration: underline;
@@ -2905,6 +2906,183 @@ select:active, select:hover {
 
 
 
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ==========Password Recovery========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
+/* main container */
+.passwordRecovery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(white, rgb(0, 204, 255));
+}
+/* request form */
+.passwordRecovery > form {
+    border: 1px solid black;
+    padding: 10px;
+    width: 280px;
+    margin-top: 35%;
+    margin-bottom: 35%;
+    background-color: rgba(0, 0, 0, 0.20);
+}
+/* header */
+.passwordRecovery > form > h2 {
+    border-bottom: 1px solid black;
+    text-align: center; 
+    font-family: Tangerine;
+    font-size: 49px;
+    font-weight: normal;
+}
+/* email input */
+.passwordRecovery > form > input {
+    border: 2px inset white;
+    display: block;
+    width: 200px;
+    font-family: auto;
+    font-size: 18px;
+    margin: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* submit button */
+.passwordRecovery > form > button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px outset white;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    box-shadow: 0px 1px 5px 0px black;
+    border-radius: 8px;
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 18px;
+    font-family: auto;
+}
+
+
+
+
+
+
+/* message after sent request */
+.passwordRecovery > main {
+    border: 1px solid black;
+    padding: 10px;
+    width: 280px;
+    margin-top: 38%;
+    margin-bottom: 38%;
+    background-color: rgba(0, 0, 0, 0.20);
+}
+.passwordRecovery > main > h2 {
+    border-bottom: 1px solid black;
+    text-align: center; 
+    font-family: Tangerine;
+    font-size: 49px;
+    font-weight: normal;
+    padding-bottom: 4px;
+}
+.passwordRecovery > main > p {
+    text-align: center; 
+    font-size: 19px;
+    padding-top: 4px;
+}
+
+
+
+
+
+
+/* container for changes being made */
+.passwordRecovery > section {
+    border: 1px solid black;
+    padding: 10px;
+    width: 280px;
+    margin-top: 38%;
+    margin-bottom: 38%;
+    background-color: rgba(0, 0, 0, 0.20);
+}
+.passwordRecovery > section > h2 {
+    text-align: center; 
+    font-family: Tangerine;
+    font-size: 49px;
+    font-weight: normal;
+    padding-bottom: 3px;
+}
+.passwordRecovery > section > h3 {
+    border-bottom: 1px solid black;
+    text-align: center; 
+    font-family: Tangerine;
+    font-size: 49px;
+    font-weight: normal;
+    padding-bottom: 3px;
+}
+.passwordRecovery > section > h5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: right;
+    font-size: 16px;
+    font-weight: normal;
+}
+.passwordRecovery > section > p {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.passwordRecovery > section > article {
+    display: flex;
+    flex-direction: column;
+}
+.passwordRecovery > section > article > span {
+    font-size: 18px;
+}
+.passwordRecovery > section > article > input {
+    font-size: 18px;
+    border: 2px inset white;
+    font-family: auto;
+}
+.passwordRecovery > section > button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border: 1px outset white;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    box-shadow: 0px 1px 5px 0px black;
+    border-radius: 8px;
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 18px;
+    font-family: auto;
+}
+
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ==========Password Recovery========== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+
 /* ===================================== */
 /* ===================================== */
 /* ===================================== */
@@ -3331,6 +3509,24 @@ select:active, select:hover {
 
 
 
+
+    /* password recovery */
+    .passwordRecovery > section {
+        margin-top: 28%;
+        margin-bottom: 28%;
+    }
+    .passwordRecovery > form {
+        margin-top: 28%;
+        margin-bottom: 28%;
+    }
+    .passwordRecovery > main {
+        margin-top: 28%;
+        margin-bottom: 28%;
+    }
+
+
+
+
                                                                                                            
 
     /* footer */
@@ -3473,7 +3669,18 @@ select:active, select:hover {
         background-position: 125% 25%;
     }
 
-
+    .passwordRecovery > section {
+        margin-top: 20%;
+        margin-bottom: 20%;
+    }
+    .passwordRecovery > form {
+        margin-top: 20%;
+        margin-bottom: 20%;
+    }
+    .passwordRecovery > main {
+        margin-top: 20%;
+        margin-bottom: 20%;
+    }
 
 
     .homeContainerInside > div {

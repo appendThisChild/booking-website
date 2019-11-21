@@ -4,25 +4,27 @@ import axios from "axios"
 const PasswordRecoveryContext = React.createContext()
 
 const PasswordRecoveryProvider = props => {
-    // const [count, setCount] = useState(0)
-    // const countMeno = useMemo(() => ({ count, setCount }), [count])
-    // const state = {
-    //     // count
-    // }
-
-
     const recoveryRequest = (email, callback) => {
-        console.log(email)
-        // create recovery instance 
-        axios.post("/recover", {email: email})
-            .then(res => console.log(res.data))
+        axios.post("/recover/request", { email: email })
+            .then(res => callback(res.data))
             .catch(err => console.log(err.response.data.errMsg))
-        callback()
+    }
+    const checkForRequest = (id, callback) => {
+        axios.get(`/recover/request/${id}`)
+            .then(res => callback(res.data))
+            .catch(err => console.log(err.response.data.errMsg))
+    }
+    const updatePassword = (id, password, callback) => {
+        axios.put(`/recover/change/${id}`, { password: password })
+            .then(res => callback(res.data))
+            .catch(err => console.log(err.response.data.errMsg))
     }
     return(
         <PasswordRecoveryContext.Provider 
             value={{
-                recoveryRequest
+                recoveryRequest,
+                checkForRequest,
+                updatePassword
             }} 
             {...props} 
         />
