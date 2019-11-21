@@ -117,7 +117,7 @@ class History extends Component {
             <div className="history">
                 <ProfileNav isOn={0}/>
                 {dataIn ?
-                <>
+                <div className="historyFlex">
                     <AppointmentHistory 
                         history={clientAppointmentsPresent} 
                         title={"Upcoming Appointments"} 
@@ -142,7 +142,7 @@ class History extends Component {
                         year={pastYear} 
                         toggle={pastToggle}
                         switchMonth={switchPastMonth}/>
-                </>
+                </div>
                 : null
                 }
             </div>

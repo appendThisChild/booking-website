@@ -6,7 +6,7 @@ const OwnerContext = React.createContext()
 const dataAxios = axios.create()
 
 dataAxios.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token")
+    const token = sessionStorage.getItem("token")
     config.headers.Authorization = `Bearer ${token}`
     return config
 })

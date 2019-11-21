@@ -37,12 +37,20 @@ class AllAccounts extends Component {
         return(
             <div className="allAccounts">
                 <ProfileNav isOn={4}/>
-                <h2>Therapists: </h2>
-                {mappedTherapists}
-                <h2>Clients: </h2>
-                {mappedClients}
-                <h2>Owners: </h2>
-                {mappedOwners}
+                <main>
+                    <div>
+                        <h2>Therapists:</h2>
+                        {mappedTherapists}
+                    </div>
+                    <div>
+                        <h2>Clients:</h2>
+                        {mappedClients}
+                    </div>
+                    <div>
+                        <h2>Owners:</h2>
+                        {mappedOwners}
+                    </div>
+                </main>
             </div>
         )
     }

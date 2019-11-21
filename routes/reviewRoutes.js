@@ -13,9 +13,10 @@ reviewRouter.route('/')
                 return review.rating < 3 && new Date(review.createdAt).setMonth(new Date(review.createdAt).getMonth() + 1) < new Date()
             })
             const reviews = []
-            foundReviews.forEach(review1 => {
+            foundReviews.sort((rev1, rev2) => rev2.createdAt - rev1.createdAt )
+            foundReviews.forEach((review1, i) => {
                 const isPresent = oldBadReviews.some(review2 => review2._id === review1._id )
-                if (!isPresent) reviews.push(review1);
+                if (!isPresent && i < 50) reviews.push(review1);
             })
             oldBadReviews.forEach(review => {
                 Review.findOneAndRemove(
@@ -28,7 +29,7 @@ reviewRouter.route('/')
                     }
                 )
             })
-            reviews.sort((rev1, rev2) => rev2.createdAt - rev1.createdAt )
+            
             const rating = (reviews.reduce((total, sum) => total + sum.rating, 0) / reviews.length).toFixed(2)
             return res.status(200).send({ reviews: reviews, rating: Number(rating) })
         })

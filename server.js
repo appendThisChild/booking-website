@@ -44,6 +44,8 @@ app.use('/api', require('./routes/googleCalendarRoutes.js'))
 app.use('/email', require('./routes/emailRoutes.js'))
 // reviews portal
 app.use('/reviews', require('./routes/reviewRoutes.js'))
+// password recovery
+app.use('/recover', require('./routes/passwordRecoveryRoutes.js'))
 
 app.use((err, req, res, next) => {
     console.log('Caught Error')

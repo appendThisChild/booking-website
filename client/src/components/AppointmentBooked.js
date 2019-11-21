@@ -91,14 +91,16 @@ class AppointmentBooked extends Component {
                 <div className="border">
                 {dataIn ?
                 <>  
-                    <div className="appointmentBookedContainers">
-                        <div>
-                            <h1>{formDone ? "Form submitted!" : "Appointment booked!"}</h1>
+                    <div className="appointmentBookedCentered">
+                        <div className="appointmentBookedContainers">
+                            <div>
+                                <h1>{formDone ? "Form submitted!" : "Appointment booked!"}</h1>
+                            </div>
                         </div>
-                    </div>
-                    <div className={`appointmentBookedContainers ${formDone ? "intakeFormDone" : ""}`}>
-                        <div className="bookedInside2">
-                            <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={true}/>
+                        <div className={`appointmentBookedContainers ${formDone ? "intakeFormDone" : ""}`}>
+                            <div className="bookedInside2">
+                                <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={true}/>
+                            </div>
                         </div>
                     </div>
                     {!formDone ?

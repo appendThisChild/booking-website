@@ -7,7 +7,7 @@ const UserContext = React.createContext()
 const dataAxios = axios.create()
 
 dataAxios.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token")
+    const token = sessionStorage.getItem("token")
     config.headers.Authorization = `Bearer ${token}`
     return config
 })
@@ -16,8 +16,8 @@ class UserProvider extends Component {
     constructor(){
         super()
         this.state = {
-            user: JSON.parse(localStorage.getItem('user')) || {},
-            token: localStorage.getItem('token') || "",
+            user: JSON.parse(sessionStorage.getItem('user')) || {},
+            token: sessionStorage.getItem('token') || "",
             makingAppointment: false,
             errMsg: ""
         }
@@ -26,8 +26,8 @@ class UserProvider extends Component {
         axios.post("/auth/signup", credentials)
             .then(res => {
                 const { user, token } = res.data
-                localStorage.user = JSON.stringify(user)
-                localStorage.token = token
+                sessionStorage.user = JSON.stringify(user)
+                sessionStorage.token = token
                 this.setState({
                     user,
                     token
@@ -45,8 +45,8 @@ class UserProvider extends Component {
         axios.post("/auth/login", credentials)
             .then(res => {
                 const { user, token } = res.data
-                localStorage.user = JSON.stringify(user)
-                localStorage.token = token
+                sessionStorage.user = JSON.stringify(user)
+                sessionStorage.token = token
                 this.setState({
                     user,
                     token
@@ -61,8 +61,8 @@ class UserProvider extends Component {
             .catch(err => this.setState({errMsg: err.response.data.errMsg}))
     }
     logout = () => {
-        localStorage.removeItem("token")
-        localStorage.removeItem("user")
+        sessionStorage.removeItem("token")
+        sessionStorage.removeItem("user")
         this.setState({
             user: {},
             token: ""
@@ -93,8 +93,8 @@ class UserProvider extends Component {
     }
     updateState = (credentials, callback) => {
         const { user, token } = credentials
-        localStorage.user = JSON.stringify(user)
-        localStorage.token = token
+        sessionStorage.user = JSON.stringify(user)
+        sessionStorage.token = token
         this.setState({
             user,
             token

@@ -28,7 +28,9 @@ class Book extends Component {
         return(
             <div className="background">
                 <div className="border">
-                    <PricingDisplay pricing={this.props.genInfo.pricing} className={"bookingPriceDisplay"}/>
+                    <div className="bookingPriceCentered">
+                        <PricingDisplay pricing={this.props.genInfo.pricing} className={"bookingPriceDisplay"}/>
+                    </div>
                     <div className="bookingTherapistDisplay">
                         <div>
                             <h3>Book a Massage:</h3>

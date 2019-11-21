@@ -16,7 +16,7 @@ const AppointmentHistory = props => {
     const websiteDeductions = (monthEarnings * .1).toFixed(2) - Number(adjustment)
     const therapistEarnings = (monthEarnings * .8).toFixed(2)
     const companyEarnings = (monthEarnings - websiteDeductions - therapistEarnings).toFixed(2)
-    const serviceDeducted = (parseFloat(websiteDeductions) + parseFloat(companyEarnings))
+    const serviceDeducted = (parseFloat(websiteDeductions) + parseFloat(companyEarnings)).toFixed(2)
     const monthHours = history.reduce((total, sum) => total + sum.appLengthInMinutes, 0) / 60
     const count60 = history.filter(app => app.appLengthInMinutes === 60).length
     const count90 = history.filter(app => app.appLengthInMinutes === 90).length

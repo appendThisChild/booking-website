@@ -102,7 +102,7 @@ class CiteInfo extends Component {
             <div className="citeInfo">
                 <ProfileNav isOn={5}/>
                 {genInfo._id !== "none" ? 
-                <>
+                <main>
                     {on ?
                     <>
                         <button onClick={toggle}>Edit Cite Info</button>
@@ -144,11 +144,11 @@ class CiteInfo extends Component {
                         />
                     </>
                     }
-                </>
+                </main>
                 :
-                <>
+                <main>
                     <button onClick={createGeneralInfo}>Create General Info</button>
-                </>
+                </main>
                 }
             </div>
         )

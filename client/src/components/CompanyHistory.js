@@ -119,7 +119,7 @@ class CompanyHistory extends Component {
             <div className="companyHistory">
                 <ProfileNav isOn={3}/>
                 {dataIn ?
-                <>
+                <div className="historyFlex">
                     <AppointmentHistory 
                         history={companyAppointmentsPresent} 
                         title={"Upcoming Appointments"} 
@@ -149,7 +149,7 @@ class CompanyHistory extends Component {
                         yearWebsiteDeductions={websiteDeductions}
                         yearCompanyEarnings={companyEarnings}
                         />
-                </>
+                </div>
                 : null
                 }
             </div>

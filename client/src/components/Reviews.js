@@ -55,15 +55,15 @@ class Reviews extends Component {
     render(){
         const { email, name, message, rating } = this.state
         return(
-            <div>
+            <div className="reviewPage">
                 {JSON.parse(localStorage.getItem('review')) ?
                 <form onSubmit={this.handleSubmit}>
                     <ToastContainer autoClose={10000} />
                     <h2>Give us a review!</h2>
-                    <p>We appreciate your feedback!</p>
+                    <span>We appreciate your feedback!</span>
                     <StarRatings
                         rating={rating}
-                        starDimension="25px"
+                        starDimension="30px"
                         changeRating={this.handleRatingChange}
                         name="rating"
                     />
@@ -76,19 +76,17 @@ class Reviews extends Component {
                         name="message"
                         value={message}
                         onChange={this.handleChange}
-                        rows="4" 
-                        cols="50"
                         placeholder="Comment..." 
                         required={true}
                     />
                     <button>Submit</button>
                 </form>
                 :
-                <>
-                    <h2>Your Review was Successful!</h2>
+                <main>
+                    <h2>Your Review was Submitted!</h2>
                     <p>We appreciate you taking the time to leave us a review. Your feedback is very important to us.</p>
                     <h3>Thank you!</h3>
-                </>
+                </main>
                 }
             </div>
         )

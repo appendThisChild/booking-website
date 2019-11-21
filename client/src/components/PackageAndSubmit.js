@@ -28,7 +28,7 @@ class PackageAndSubmit extends Component {
     }
     tenMinuteTimer = ({ hours, minutes, seconds, completed }) => {
         if (completed){
-            // this.props.history.push("/book")
+            this.props.history.push("/book")
             return null
         } else {
             let min = String(minutes)
@@ -203,10 +203,12 @@ class PackageAndSubmit extends Component {
                     <ToastContainer autoClose={10000} />
                     {dataIn ?
                     <>  
-                        <div className="pAndSInside">
-                            <div className="inside1">
-                                <Countdown date={date + 600000} renderer={this.tenMinuteTimer}/>
-                                <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={false}/>
+                        <div className="packageAndSubmitCenter">
+                            <div className="pAndSInside">
+                                <div className="inside1">
+                                    <Countdown date={date + 600000} renderer={this.tenMinuteTimer}/>
+                                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={false}/>
+                                </div>
                             </div>
                         </div>
                         <div className="pAndSInside1">

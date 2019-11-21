@@ -829,11 +829,6 @@ select:active, select:hover {
 
 
 
-/* Styling package and submit */
-/* Styling package and submit */
-/* Styling package and submit */
-/* Styling package and submit */
-/* Styling package and submit */
 
 
 /* The three inside containers */
@@ -876,6 +871,16 @@ select:active, select:hover {
     background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
     /* padding-top: 10px; */
     padding-bottom: 10px;
+}
+.pAndSInside2 {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
+    background-color: rgb(245, 245, 244);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .pAndSInside2 > div {
     background-image: radial-gradient(rgba(17, 121, 17, .50) 25%, rgba(17, 121, 17, 0.95) 85%);
@@ -1524,6 +1529,8 @@ select:active, select:hover {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 /* inside container */
 .loginSignup > div {
@@ -2271,7 +2278,7 @@ select:active, select:hover {
     padding-bottom: 15px;
 }
 /* definition seperations */
-.allAccounts > h2 {
+.allAccounts > main > div > h2 {
     border-bottom: 1px solid black;
     margin-top: 10px;
     text-align: center;
@@ -2280,7 +2287,7 @@ select:active, select:hover {
     font-family: Tangerine;
 }
 /* dividual accounts */
-.allAccounts > section {
+.allAccounts > main > div > section {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     background-color: rgba(0, 0, 0, 0.15);
@@ -2288,36 +2295,36 @@ select:active, select:hover {
     padding: 5px;
 }
 /* first and second containers */
-.allAccounts > section > div:nth-child(1) {
+.allAccounts > main > div > section > div:nth-child(1) {
     display: flex;
     align-items: center;
 }
-.allAccounts > section > div:nth-child(2) {
+.allAccounts > main > div > section > div:nth-child(2) {
     margin-top: 5px;
     border-top: 1px solid black;
 }
 /* main info */
-.allAccounts > section > div > span {
+.allAccounts > main > div > section > div > span {
     font-size: 20px;
     padding-right: 5px;
 }
-/* .allAccounts > section > div > div {
+/* .allAccounts > main > div > section > div > div {
 
 } */
-.allAccounts > section > div > div > p {
+.allAccounts > main > div > section > div > div > p {
     font-size: 18px;
 }
 /* address and availability headers */
-.allAccounts > section > div > h4 {
+.allAccounts > main > div > section > div > h4 {
     font-size: 16px;
 }
 /* details */
-.allAccounts > section > div > p {
+.allAccounts > main > div > section > div > p {
     font-size: 18px;
     text-align: center;
 }
 /* get appointments and change status buttons */
-.allAccounts > section > div > button {
+.allAccounts > main > div > section > div > button {
     display: block;
     margin-left: auto;
     margin-top: 5px;
@@ -2337,21 +2344,21 @@ select:active, select:hover {
 
 
 /* availability overall container */
-/* .allAccounts > section > div > aside {
+/* .allAccounts > main > div > section > div > aside {
 
 } */
 /* individual availabilty containers */
-.allAccounts > section > div > aside > div {
+.allAccounts > main > div > section > div > aside > div {
     padding-top: 5px;
 }
 /* day header */
-.allAccounts > section > div > aside > div > h3 {
+.allAccounts > main > div > section > div > aside > div > h3 {
     font-size: 16px;
     text-align: center;
     text-decoration: underline;
 }
 /* day details */
-.allAccounts > section > div > aside > div > p {
+.allAccounts > main > div > section > div > aside > div > p {
     font-size: 18px;
     text-align: center;
 }
@@ -2384,7 +2391,7 @@ select:active, select:hover {
     padding-bottom: 15px;
 }
 /* create info and edit info toggles */
-.citeInfo > button {
+.citeInfo > main > button {
     display: block;
     margin: 5px;
     margin-left: auto;
@@ -2405,14 +2412,14 @@ select:active, select:hover {
 
 
 /* conatiner of info */
-.citeInfo > section {
+.citeInfo > main > section {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     background-color: rgba(0, 0, 0, 0.15);
     padding: 5px;
 }
 /* main title */
-.citeInfo > section > h2 {
+.citeInfo > main > section > h2 {
     border-bottom: 1px solid black;
     text-align: center;
     font-size: 49px;
@@ -2421,35 +2428,35 @@ select:active, select:hover {
     padding-top: 5px;
 }
 /* sub-titles */
-.citeInfo > section > h3 {
+.citeInfo > main > section > h3 {
     border-top: 1px solid black;
     font-size: 20px;
     padding-top: 10px;
     padding-bottom: 5px;
 }
-.citeInfo > section > h3:nth-child(2) {
+.citeInfo > main > section > h3:nth-child(2) {
     border-top: 0px solid black;
 }
 /* paragraphs */
-.citeInfo > section > p {
+.citeInfo > main > section > p {
     font-size: 18px;
     background-color: rgba(0, 0, 0, 0.15);
     padding: 5px;
     margin-bottom: 10px;
 }
 /* download wavier */
-.citeInfo > section > a {
+.citeInfo > main > section > a {
     font-size: 18px;
     display: block;
     text-align: center;
 }
 /* sub-headers for liability wavier */
-.citeInfo > section > h4 {
+.citeInfo > main > section > h4 {
     text-decoration: underline;
     text-align: center;
 }
 /* upload link*/
-.citeInfo > section > input {
+.citeInfo > main > section > input {
     border: 1px solid black;
     display: block;
     background-color: rgba(0, 0, 0, 0.15);
@@ -2466,29 +2473,29 @@ select:active, select:hover {
 
 
 /* faqs */
-.citeInfo > section > section {
+.citeInfo > main > section > section {
     display: flex;
     margin-bottom: 10px;
 }
 /* number */
-.citeInfo > section > section > p {
+.citeInfo > main > section > section > p {
     font-size: 20px;
     padding-right: 5px;
 }
 /* faq container */
-.citeInfo > section > section > div {
+.citeInfo > main > section > section > div {
     background-color: rgba(0, 0, 0, 0.15);
     padding: 5px;
 }
 /* faq headers */
-.citeInfo > section > section > div > h4 {
+.citeInfo > main > section > section > div > h4 {
     text-decoration: underline;
 }
-.citeInfo > section > section > div > h4:nth-child(3) {
+.citeInfo > main > section > section > div > h4:nth-child(3) {
     margin-top: 5px;
 }
 /* faq details */
-.citeInfo > section > section > div > p {
+.citeInfo > main > section > section > div > p {
     font-size: 18px;
     
 }
@@ -2496,40 +2503,40 @@ select:active, select:hover {
 
 
 /* pricing display main container */
-/* .citeInfo > section > div {
+/* .citeInfo > main > section > div {
     
 } */
 /* inside container */
-/* .citeInfo > section > div > div {
+/* .citeInfo > main > section > div > div {
 
 } */
 /* title */
-.citeInfo > section > div > div > h3 {
+.citeInfo > main > section > div > div > h3 {
     border-top: 1px solid black;
     font-size: 20px;
     padding-top: 10px;
     padding-bottom: 5px;
 }
 /* container inside that */
-.citeInfo > section > div > div > div {
+.citeInfo > main > section > div > div > div {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
 /* sub-containers */
-.citeInfo > section > div > div > div > div {
+.citeInfo > main > section > div > div > div > div {
     background-color: rgba(0, 0, 0, 0.15);
     padding: 5px;
     margin-bottom: 10px;
     width: 164px;
 }
 /* single & triple headers */
-.citeInfo > section > div > div > div > div > h4{
+.citeInfo > main > section > div > div > div > div > h4{
     text-decoration: underline;
     text-align: center;
 }
 /* lines */
-.citeInfo > section > div > div > div > div > p {
+.citeInfo > main > section > div > div > div > div > p {
     font-size: 18px;
 }
 
@@ -2538,14 +2545,14 @@ select:active, select:hover {
 
 
 /* edit form */
-.citeInfo > form {
+.citeInfo > main > form {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     background-color: rgba(0, 0, 0, 0.15);
     padding: 5px;
 }
 /* main header */
-.citeInfo > form > h2 {
+.citeInfo > main > form > h2 {
     border-bottom: 1px solid black;
     text-align: center;
     font-size: 49px;
@@ -2554,19 +2561,19 @@ select:active, select:hover {
     padding-top: 5px;
 }
 /* sub-headers */
-.citeInfo > form > h3 {
+.citeInfo > main > form > h3 {
     border-top: 1px solid black;
     font-size: 20px;
     margin-top: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
-.citeInfo > form > h3:nth-child(2) {
+.citeInfo > main > form > h3:nth-child(2) {
     border-top: 0px solid black;
     margin-top: 0px;
 }
 /* home title input */
-.citeInfo > form > input {
+.citeInfo > main > form > input {
     border: 2px inset white;
     font-size: 18px;
     font-family: auto;
@@ -2576,10 +2583,10 @@ select:active, select:hover {
     margin-right: auto;
 }
 /* add lines  */
-.citeInfo > form > aside {
+.citeInfo > main > form > aside {
     display: flex;
 }
-.citeInfo > form > aside > p {
+.citeInfo > main > form > aside > p {
     margin: 5px;
     margin-left: auto;
     margin-bottom: 0px;
@@ -2595,11 +2602,11 @@ select:active, select:hover {
     border-radius: 5px;
 }
 /* in cents */
-/* .citeInfo > form > span {
+/* .citeInfo > main > form > span {
     
 } */
 /* therapist sub-section */
-.citeInfo > form > textarea {
+.citeInfo > main > form > textarea {
     border: 2px inset white;
     font-size: 18px;
     font-family: auto;
@@ -2607,13 +2614,13 @@ select:active, select:hover {
     padding: 3px;
 }
 /* pricing sub-titles */
-.citeInfo > form > h4 {
+.citeInfo > main > form > h4 {
     text-align: center;
     font-size: 18px;
     padding: 5px;
 }
 /* submit button */
-.citeInfo > form > button {
+.citeInfo > main > form > button {
     display: block;
     font-family: auto;
     font-size: 18px;
@@ -2630,18 +2637,18 @@ select:active, select:hover {
     border-radius: 8px;
 }
 /* any mapped container */
-.citeInfo > form > div {
+.citeInfo > main > form > div {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 5px;
 }
 /* number and prefixes to lines */
-.citeInfo > form > div > p {
+.citeInfo > main > form > div > p {
     font-size: 18px;
 }
 /* price lines inputs */
-.citeInfo > form > div > input {
+.citeInfo > main > form > div > input {
     border: 2px inset white;
     font-size: 18px;
     font-family: auto;
@@ -2649,7 +2656,7 @@ select:active, select:hover {
     padding-left: 3px;
 }
 /* question lines */
-.citeInfo > form > div > div > input {
+.citeInfo > main > form > div > div > input {
     border: 2px inset white;
     font-size: 18px;
     font-family: auto;
@@ -2658,7 +2665,7 @@ select:active, select:hover {
     margin-bottom: 2px;
 }
 /* paragrapg changes */
-.citeInfo > form > div > textarea {
+.citeInfo > main > form > div > textarea {
     border: 2px inset white;
     font-size: 18px;
     font-family: auto;
@@ -2666,7 +2673,7 @@ select:active, select:hover {
     padding: 3px;
 }
 /* answers */
-.citeInfo > form > div > div > textarea {
+.citeInfo > main > form > div > div > textarea {
     border: 2px inset white;
     font-size: 18px;
     font-family: auto;
@@ -2674,7 +2681,7 @@ select:active, select:hover {
     padding: 3px;
 }
 /* delete buttons */
-.citeInfo > form > div > span {
+.citeInfo > main > form > div > span {
     margin-left: 5px;
     font-size: 16px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
@@ -2688,7 +2695,7 @@ select:active, select:hover {
 
 
 /* connecting stripe in the beginning */
-.citeInfo > aside {
+.citeInfo > main > aside {
     margin-top: 15px;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -2696,25 +2703,25 @@ select:active, select:hover {
     padding: 5px;
 }
 /* instruction */
-.citeInfo > aside > p {
+.citeInfo > main > aside > p {
     text-align: center;
     font-size: 18px;
 }
 /* authorize input and button container */
-.citeInfo > aside > div {
+.citeInfo > main > aside > div {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 /* text input  */
-.citeInfo > aside > div > input {
+.citeInfo > main > aside > div > input {
     width: 75%;
     font-size: 18px;
     font-family: auto;
     text-align: center;
 }
 /* message */
-.citeInfo > aside > span {
+.citeInfo > main > aside > span {
     text-align: center;
     font-size: 18px;
     display: block;
@@ -2754,6 +2761,147 @@ select:active, select:hover {
 /* ===================================== */
 /* ===================================== */
 
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===============Reviews=============== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+
+
+
+/* making review container */
+.reviewPage {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-image: radial-gradient(rgb(255, 0, 119), rgb(167, 0, 0));
+    padding: 5px;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+
+
+
+/* form container */
+.reviewPage > form {
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* header */
+.reviewPage > form > h2 {
+    border-bottom: 1px solid black;
+    width: 100%;
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 49px;
+    font-weight: normal;
+}
+/* subtitle */
+.reviewPage > form > span { 
+    font-size: 17px;
+    padding: 4px;
+}
+/* star container */
+.reviewPage > form > div {
+    
+}
+/* input titles */
+.reviewPage > form > p {
+    font-size: 19px;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+/* inputs */
+.reviewPage > form > input {
+    font-family: auto;
+    font-size: 18px;
+    width: 100%;
+}
+/* comments */
+.reviewPage > form > textarea {
+    font-family: auto;
+    width: 99%;
+    height: 100px;
+    font-size: 18px;
+}
+/* submit button */
+.reviewPage > form > button {  
+    border: 1px outset white;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    box-shadow: 0px 1px 5px 0px black;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 20px;
+    font-family: auto;
+}
+
+
+
+/* after submit container */
+.reviewPage > main {
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* header */
+.reviewPage > main > h2 {
+    border-bottom: 1px solid black;
+    width: 100%;
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 49px;
+    font-weight: normal;
+}
+/* message */
+.reviewPage > main > p {
+    font-size: 19px;
+    width: 90%;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+/* thanks!!!! */
+.reviewPage > main > h3 {
+    border-top: 1px solid black;
+    padding-top: 10px;
+    width: 100%;
+    text-align: center;
+    font-family: Tangerine;
+    font-size: 49px;
+    font-weight: normal;
+}
+
+
+
+
+
+
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
+/* ===============Reviews=============== */
+/* ===================================== */
+/* ===================================== */
+/* ===================================== */
 
 
 
@@ -2860,34 +3008,40 @@ select:active, select:hover {
         background-size: 1008px;
         background-position: 53% center;
         border-radius: 5px;
+        height: 100%;
+    }
+    .homeContainerInside2 {
+        height: auto;
+        width: 100%;
+    }
+    .homeTherapistCentered {
+        width: 45%;
+        display: flex;
+        align-items: center;
     }
     .homeContainer > div {
         border-radius: 4px;
+        padding-bottom: 5px;
     }
     .homeContainerInside > div > p {
-        margin: 8px;
-        margin-top: 8%;
+        margin: 10px;
     }
     .homeContainerInside2 > div > p {
-        margin: 8px;
-        margin-top: 8%;
+        margin: 10px;
     }
-    .homeContainer:last-child {
-        width: 94%;
+    .homeContainerInside3 {
+        width: 450px;
         border: 1px solid black;
     }
     .homeContainerInside {
         margin-bottom: 20px;
     }
-    .homeContainerInside > div {
-        height: 99.3%;
-    }
-    .homeContainerInside2 > div {
-        height: 99.3%;
-    }
     .reviewItem {
         border-radius: 5px;
         margin: 8px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 350px;
         padding: 7px;
     }
 
@@ -2895,17 +3049,20 @@ select:active, select:hover {
 
 
     /* book */
+    .bookingPriceCentered {
+        display: flex;
+        align-items: center;
+    }
     .bookingPriceDisplay {
         border: 1px solid black;
         border-radius: 5px;
         background-size: 500px;
+        /* height: 100%; */
     }
     .bookingPriceDisplay > div {
-        height: 99.1%;
         border-radius: 4px;
     }
     .bookingPriceDisplay > div > div {
-        height: 89.8%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -2957,11 +3114,11 @@ select:active, select:hover {
         border: 1px solid black;
         border-radius: 5px;
         background-size: 500px;
+        height: 100%;
     }
     .availableAppointments > div {
         border-radius: 4px;
         padding-bottom: 5px;
-        height: 99.3%;
     }
 
 
@@ -2981,13 +3138,200 @@ select:active, select:hover {
 
 
     /* package and submit */
-    /* next already set up */
-    /* next already set up */
-    /* next already set up */
-    /* next already set up */
-    /* next already set up */
+    .packageAndSubmitCenter {
+        display: flex;
+        width: 43%;
+        align-items: center;
+    }
+    .pAndSInside {
+        margin-bottom: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 100%;
+        background-size: 500px;
+    }
+    .pAndSInside1 {
+        height: 100%;
+        margin-bottom: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 50%;
+        background-size: 500px;
+    }
+    .pAndSInside2 {
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 94%;
+        background-size: 500px;
+    }
+    .inside1 {
+        border-radius: 4px;
+    }
+    .inside2 {
+        border-radius: 4px;
+    }
+    .inside3 {
+        border-radius: 4px;
+    }
 
 
+
+
+
+    /* Appointment booked */
+    .appointmentBookedCentered {
+        width: 45%;
+    }
+    .appointmentBookedContainers {
+        border: 1px solid black;
+        border-radius: 5px;
+        background-size: 500px;
+    }
+    .appointmentBookedContainers:nth-child(3) {
+        width: 45%;
+    }
+    .appointmentBookedContainers > div {
+        border-radius: 4px;
+    }
+
+
+
+
+    /* contact us */
+    .contactCentered {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
+        height: 100%
+    }
+    .contact {
+        width: 45%;
+        border: 1px solid black;
+        margin-bottom: 0px;
+        height: 100%;
+        background-size: 500px;
+        border-radius: 5px;
+    }
+    .contact > div {
+        border-radius: 4px;
+    }
+
+
+
+
+
+    /* sign-in */
+    .loginSignup {
+        background-size: 500px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+    .loginSignup > div {
+        border-radius: 4px;
+    }
+
+
+
+
+    /* histories */
+    .historyFlex {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
+    }
+    .mappedAppointments {
+        border: 1px solid black;
+        width: 45%;
+        border-radius: 5px;
+    }
+
+
+
+
+
+    /* personal info */
+    .personalInfoBackground > main {
+        border: 1px solid black;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px;
+    }
+    .personalInfoBackground > main > section {
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .personalInfoBackground > main > aside {
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .personalInfoBackground > main > article {
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .personalInfoBackground > main > form > input {
+        width: 300px;
+    }
+
+
+
+
+
+
+    /* All accounts */
+    .allAccounts > main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    .allAccounts > main > div {
+        border-radius: 5px;
+        width: 300px                             ;
+        margin-top: 15px;
+        border: 1px solid black;
+        padding-bottom: 10px;
+    }
+
+
+
+
+    /*  */
+    .citeInfo > main {
+        width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid black;
+        /* border-top: 0px solid black; */
+        border-bottom: 0px solid black;
+
+        margin-top: 15px;
+        /* padding-bottom: 10px; */
+    }
+
+
+
+
+
+    /* review page */
+    .reviewPage {
+        display: flex;
+        justify-content: center;
+        padding-top: 10%;
+        padding-bottom: 10%;
+    }
+    .reviewPage > form {
+        width: 300px;
+    }
+    .reviewPage > main {
+        width: 300px;
+    }
+
+
+
+                                                                                                           
 
     /* footer */
     .footer {
@@ -3013,6 +3357,23 @@ select:active, select:hover {
     }
     .homeContainerInside2 > div {
         height: 99.1%;
+    }
+    .homeContainerInside3 {
+        width: 93.5%;
+    }
+    .homeContainerInside3 > div {
+        padding-bottom: 10px;
+    }
+    .reviewsByThree {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .reviewItem {
+        width: 30%;
+        margin-top: 0px;
+        margin-bottom: 8px;
     }
 
 
@@ -3044,7 +3405,66 @@ select:active, select:hover {
     .availableDays {
         width: 350px;
     }
+
+
+
     
+    .packageAndSubmitCenter {
+        width: 38%;
+    }
+    .pAndSInside1 {
+        width: 45%;
+    }
+    .pAndSInside2 {
+        width: 70%;
+    }
+    
+
+
+    .appointmentBullet {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 3px;
+    }
+    .mappedAppointments > aside {
+        width: 92%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0px;
+        margin-top: 10px;
+    }
+
+
+
+
+    .personalInfoBackground > main {
+        width: 550px;
+    }
+
+
+
+
+
+    .allAccounts > main > div > section {
+        border: 1px solid black;
+        border-radius: 3px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+
+
+    .reviewPage > form {
+        width: 400px;
+        padding: 30px;
+    }
+    .reviewPage > main {
+        width: 400px;
+        padding: 30px;
+    }
 }
 @media (min-width: 1248px){
     /* header */
@@ -3054,12 +3474,16 @@ select:active, select:hover {
     }
 
 
+
+
     .homeContainerInside > div {
         height: 98.6%;
     }
     .homeContainerInside2 > div {
         height: 98.6%;
     }
-
+    .homeContainerInside3 {
+        width: 93.5%;
+    } 
    
 }

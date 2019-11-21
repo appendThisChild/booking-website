@@ -15,6 +15,7 @@ import GoogleCalendarProvider from "./context/GoogleCalendarProvider.js"
 import GeneralInfoProvider from "./context/GeneralInfoProvider.js"
 import EmailProvider from "./context/EmailProvider.js"
 import ReviewProvider from "./context/ReviewProvider.js"
+import { PasswordRecoveryProvider } from "./context/PasswordRecoveryProvider.js"
 
 ReactDOM.render(
     <BrowserRouter>
@@ -28,7 +29,9 @@ ReactDOM.render(
                                     <ReviewProvider>
                                         <GeneralInfoProvider>
                                             <EmailProvider>
-                                                <App />
+                                                <PasswordRecoveryProvider>
+                                                    <App />
+                                                </PasswordRecoveryProvider>
                                             </EmailProvider>
                                         </GeneralInfoProvider>
                                     </ReviewProvider>

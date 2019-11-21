@@ -57,14 +57,16 @@ class Home extends Component {
                             {mappedHomeInfo}
                         </div>
                     </div>
-                    <div className={`homeContainer ${"homeContainerInside2"}`}>
-                        <div>
-                            <h1>Our Therapists</h1>
-                            <p>{homeTherapistSubtitle}</p>
-                            <TherapistDisplay />
+                    <div className="homeTherapistCentered">
+                        <div className={`homeContainer ${"homeContainerInside2"}`}>
+                            <div>
+                                <h1>Our Therapists</h1>
+                                <p>{homeTherapistSubtitle}</p>
+                                <TherapistDisplay />
+                            </div>
                         </div>
                     </div>
-                    <div className={`homeContainer`}>
+                    <div className={`homeContainer ${"homeContainerInside3"}`}>
                         <div>
                             <h1>Reviews</h1>
                             <div className="ratings">
@@ -76,7 +78,9 @@ class Home extends Component {
                                 />
                                 <span> - {this.props.rating}/5</span>
                             </div>
-                            {mappedReviews}
+                            <section className="reviewsByThree">
+                                {mappedReviews}
+                            </section>
                             <span onClick={this.showMore} className="addReviews">Show more</span>
                         </div>
                     </div>
