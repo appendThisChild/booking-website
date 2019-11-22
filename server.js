@@ -4,6 +4,8 @@ const app = express()
 require('dotenv').config()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+// added this line below for deployment
+const path = require('path')
 const expressJwt = require('express-jwt')
 const { checkIfOwner, checkIfTherapist, mongoURI, options } = require("./utils/app.js")
 const PORT = process.env.PORT || 6350
@@ -13,7 +15,8 @@ app.use(morgan('dev'))
 app.use("/api", expressJwt({secret: process.env.SECRET}))
 app.use("/api/owner", (req, res, next) => checkIfOwner(req, res, next))
 app.use("/api/therapist", (req, res, next) => checkIfTherapist(req, res, next))
-
+// added this line below for deployment
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 const conn = mongoose.connect(process.env.MONGODB_URI || mongoURI, options)
 conn.then(() => console.log('[o] Connected to the DB'), (err) => console.log(err))
@@ -54,6 +57,10 @@ app.use((err, req, res, next) => {
         res.status(err.status)
     }
     return res.send({errMsg: err.message})
+})
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html") )
 })
 
 app.listen(PORT, () => {
