@@ -23,6 +23,7 @@ import AccountHistory from "./components/AccountHistory.js"
 import CiteInfo from "./components/CiteInfo.js"
 import Reviews from "./components/Reviews.js"
 import PasswordRecovery from "./components/PasswordRecovery.js"
+import Connect from "./components/Connect.js"
 import Footer from "./components/Footer.js"
 
 
@@ -80,7 +81,8 @@ class App extends Component {
                     <Route path="/accountHistory/:id" render={renderProps => <AccountHistory {...renderProps}/>}/> 
                     <Route path="/citeInfo" render={renderProps => <CiteInfo {...renderProps}/>}/>
                     <Route path="/reviews" render={renderProps => <Reviews {...renderProps}/>}/>
-                    <Route path="/recover/:req/:id" render={renderProps => <PasswordRecovery {...renderProps}/>} />
+                    <Route path="/recover/:req/:id" render={renderProps => <PasswordRecovery {...renderProps}/>}/>
+                    <Route path="/connect/:id" render={renderProps => <Connect {...renderProps}/>}/>
                 </Switch>
                 :null}
                 <Footer />

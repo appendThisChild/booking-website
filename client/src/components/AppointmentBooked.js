@@ -5,6 +5,7 @@ import { withUser } from "../context/UserProvider.js"
 
 import Appointment from "./Appointment.js";
 import IntakeForm from "./IntakeForm.js"
+import CheckingAffiliate from "./CheckingAffiliate.js"
 
 class AppointmentBooked extends Component {
     constructor(props){
@@ -113,6 +114,7 @@ class AppointmentBooked extends Component {
                         />
                     </div>
                     :null}
+                    <CheckingAffiliate appointment={this.props.currentAppointmentInProgress} />
                 </>
                 :null}
                 </div>

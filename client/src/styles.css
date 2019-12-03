@@ -85,23 +85,17 @@ textarea {
     opacity: .95;
     font-size: 60px;
     font-family: ChopinScript;
-    grid-column: 35/-1;
-    grid-row: 17/-1;
+    grid-column: 17/-1;
+    grid-row: 23/-1;
 }
 .headerTitle3 {
     opacity: .95;
     font-size: 70px;
     font-family: ChopinScript;
     grid-column: 0/-1;
-    grid-row: 25/-1;
+    grid-row: 35/-1;
 }
-.headerTitle4 {
-    opacity: .95;
-    font-size: 60px;
-    font-family: ChopinScript;
-    grid-column: 26/-1;
-    grid-row: 37/ -1;
-}
+
 
 
 
@@ -2419,6 +2413,9 @@ select:active, select:hover {
     background-color: rgba(0, 0, 0, 0.15);
     padding: 5px;
 }
+.citeInfo > main > section:nth-child(3) {
+    margin-top: 15px;
+}
 /* main title */
 .citeInfo > main > section > h2 {
     border-bottom: 1px solid black;
@@ -2468,6 +2465,73 @@ select:active, select:hover {
     margin-right: auto;
 }
 
+
+/* create affiliate form */
+.citeInfo > main > section > form {
+    border: 1px solid black;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+.citeInfo > main > section > form > h3 {
+    text-align: center;
+}
+.citeInfo > main > section > form > input {
+    margin-left: 5px;
+    width: 50%;
+    font-family: auto;
+    font-size: 16px;
+}
+.citeInfo > main > section > form > button {
+    margin: 5px;
+    font-size: 16px;
+    font-family: auto;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgb(255, 255, 255));
+    border: 0px outset white;
+    box-shadow: 0px 1px 4px 0px black;
+    border-radius: 5px;
+}
+/* affiliates mapped */
+.citeInfo > main > section > aside {
+    /* border: 1px solid black; */
+    margin-top: 5px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+.citeInfo > main > section > aside > div {
+    background-color: rgba(0, 0, 0, .15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+.citeInfo > main > section > aside > div > p {
+    font-size: 16px;
+}
+.citeInfo > main > section > aside > div > input {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px;
+    width: 98%;
+    font-family: auto;
+    font-size: 19px;
+    text-align: center;
+}
+.citeInfo > main > section > aside > button {
+    border: 0px;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 12px;
+    display: block;
+    margin-left: auto;
+    text-decoration: underline;
+}
 
 
 
@@ -2813,9 +2877,9 @@ select:active, select:hover {
     padding: 4px;
 }
 /* star container */
-.reviewPage > form > div {
+/* .reviewPage > form > div {
     
-}
+} */
 /* input titles */
 .reviewPage > form > p {
     font-size: 19px;

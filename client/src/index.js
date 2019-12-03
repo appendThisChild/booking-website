@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import App from "./App.js"
-import { BrowserRouter} from "react-router-dom"
+import { BrowserRouter } from "react-router-dom"
 import "./styles.css"
 
 // Providers
@@ -16,6 +16,7 @@ import GeneralInfoProvider from "./context/GeneralInfoProvider.js"
 import EmailProvider from "./context/EmailProvider.js"
 import ReviewProvider from "./context/ReviewProvider.js"
 import { PasswordRecoveryProvider } from "./context/PasswordRecoveryProvider.js"
+import { AffiliateProvider } from "./context/AffiliateProvider.js"
 
 ReactDOM.render(
     <BrowserRouter>
@@ -30,7 +31,9 @@ ReactDOM.render(
                                         <GeneralInfoProvider>
                                             <EmailProvider>
                                                 <PasswordRecoveryProvider>
-                                                    <App />
+                                                    <AffiliateProvider>
+                                                        <App />
+                                                    </AffiliateProvider>
                                                 </PasswordRecoveryProvider>
                                             </EmailProvider>
                                         </GeneralInfoProvider>

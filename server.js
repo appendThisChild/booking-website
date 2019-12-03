@@ -49,6 +49,8 @@ app.use('/email', require('./routes/emailRoutes.js'))
 app.use('/reviews', require('./routes/reviewRoutes.js'))
 // password recovery
 app.use('/recover', require('./routes/passwordRecoveryRoutes.js'))
+// affiliate 
+app.use('/affiliate', require('./routes/affiliateRoutes.js'))
 
 app.use((err, req, res, next) => {
     console.log('Caught Error')
@@ -58,10 +60,10 @@ app.use((err, req, res, next) => {
     }
     return res.send({errMsg: err.message})
 })
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html") )
-})
+// added this line below for deployment
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "client", "build", "index.html") )
+// })
 
 app.listen(PORT, () => {
     console.log(`[+] Server is running on PORT ${PORT}`)

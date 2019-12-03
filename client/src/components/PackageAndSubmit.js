@@ -227,7 +227,7 @@ class PackageAndSubmit extends Component {
                                     {liabilityCheck ? 
                                     <>
                                         <StripeCheckout 
-                                            name="Blissed Out Body Works"
+                                            name="Massage Therapy Matters"
                                             stripeKey={apiKey}
                                             token={this.handleSubmit}
                                             amount={amount}

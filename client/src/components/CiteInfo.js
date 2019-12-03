@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import ProfileNav from './ProfileNav.js';
 import GeneralInfoDisplay from './GeneralInfoDisplay.js'
 import GeneralInfoForm from './GeneralInfoForm.js'
+import AffiliateDisplay from './AffiliateDisplay.js';
 
 import { withGeneral } from '../context/GeneralInfoProvider.js'
 import { withToggler } from "./Toggler.js"
@@ -112,6 +113,7 @@ class CiteInfo extends Component {
                             pdf={this.state.dataPDF}
                             {...genInfo}
                         />
+                        <AffiliateDisplay />
                         {!connected ?
                         <aside>
                             <button onClick={this.send} className="stripe-connect"></button>

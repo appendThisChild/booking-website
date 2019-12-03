@@ -29,6 +29,7 @@ infoRouter.route('/')
 infoRouter.route('/download/:filename')
     .get((req, res, next) => {
         const filename = req.params.filename
+        if (filename === 'none') return res.send("none");
         gfs.files.find({filename: filename}).toArray((err, files) => {
             if (err){
                 res.status(500)
