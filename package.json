@@ -2,7 +2,7 @@
   "name": "booking-website",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "dependencies": {
     "bcrypt": "^3.0.6",
     "dotenv": "^8.1.0",
