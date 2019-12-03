@@ -17,7 +17,7 @@ const Affiliate = ({ display, _id, name, visitsUsing, purchases, handleDelete })
                 <p>120-Min Single: {purchases[2][0]}</p>
                 <p>120-Min Triple: {purchases[2][1]}</p>
                 <h4>Affiliate Link:</h4>
-                <input readOnly value={`localhost:3000/connect/${_id}`} onFocus={handleFocus}/>
+                <input readOnly value={`https://www.mtmscheduling.com/connect/${_id}`} onFocus={handleFocus}/>
             </div>
             <button onClick={() => handleDelete(_id)}>delete</button>
         </aside>
