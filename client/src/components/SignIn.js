@@ -24,7 +24,7 @@ class SignIn extends Component {
         })
     }
     sendToReset = () => {
-        this.props.history.push("/recover/request/0")
+        this.props.history.push("/recovery/request/0")
     }
     handleLoginSubmit = e => {
         e.preventDefault()

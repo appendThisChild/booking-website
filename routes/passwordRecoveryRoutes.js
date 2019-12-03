@@ -101,7 +101,7 @@ passwordRecoveryRouter.route('/request')
                     
 We've received a request for a password reset for the account attached to this email. If you've found this to be false, no need to continue any further. If true, follow the link below to reset your password.
                     
-Link for reset: http://localhost:3000/recover/change/${newPasswordRecoveryObj._id}
+Link for reset: http://localhost:3000/recovery/change/${newPasswordRecoveryObj._id}
                     
 Thanks!
 Automated Message - Blissed Out Body Works`
