@@ -24,7 +24,8 @@ class CiteInfo extends Component {
         }
     }
     send = () => {
-        window.location.href = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FxhgoH6aBA1AL6rOGYGo9g0GVYEIy9jj&scope=read_write`
+        console.log("Some Change")
+        window.location.href = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FxhgPOCEOk2Mz7IixDTNn8fhONiUBHI8&scope=read_write`
     }
     handleChange = e => {
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
