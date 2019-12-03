@@ -24,7 +24,6 @@ class CiteInfo extends Component {
         }
     }
     send = () => {
-        console.log("Some Change")
         window.location.href = `https://connect.stripe.com/oauth/authorize?response_type=code&client_id=ca_FxhgPOCEOk2Mz7IixDTNn8fhONiUBHI8&scope=read_write`
     }
     handleChange = e => {
