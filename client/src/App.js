@@ -80,7 +80,7 @@ class App extends Component {
                     <Route path="/accounts" render={renderProps => <AllAccounts {...renderProps}/>}/> 
                     <Route path="/accountHistory/:id" render={renderProps => <AccountHistory {...renderProps}/>}/> 
                     <Route path="/citeInfo" render={renderProps => <CiteInfo {...renderProps}/>}/>
-                    <Route path="/reviews" render={renderProps => <Reviews {...renderProps}/>}/>
+                    <Route path="/review" render={renderProps => <Reviews {...renderProps}/>}/>
                     <Route path="/recover/:req/:id" render={renderProps => <PasswordRecovery {...renderProps}/>}/>
                     <Route path="/connect/:id" render={renderProps => <Connect {...renderProps}/>}/>
                 </Switch>
