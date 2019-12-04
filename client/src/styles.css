@@ -3202,7 +3202,7 @@ select:active, select:hover {
 @media (min-width: 608px){
     /* header */
     .headerBackground {
-        background-position: 150% 5%;
+        background-position: 255% 5%;
     }
     .navToggle {
         display: none;
