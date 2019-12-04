@@ -62,9 +62,8 @@ textarea {
 .headerBackground {
     background-image: url("./images/thisFlower.png");
     background-size: 200%;
-    background-position: -50% 25%;
+    background-position: -30% 5%;
     background-repeat: no-repeat;
-    overflow: hidden;
     height: 300px;
 } 
 .titleContainer {
