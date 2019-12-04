@@ -64,6 +64,7 @@ textarea {
     background-size: 150%;
     background-position: -50% 25%;
     background-repeat: no-repeat;
+    overflow: hidden;
     height: 300px;
 } 
 .titleContainer {
@@ -175,7 +176,7 @@ textarea {
     background-image: url("./images/kisscc0-mandala-islamic-geometric-patterns-sacred-geometry-border-4-derivative-9-5b3e06150d5b14.0181865015307914450547.png");
     background-color: rgb(245, 245, 244);
     background-size: 100%;
-    background-attachment: fixed, scroll;
+    background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
     box-shadow: inset 0px 0px 55px 0px black;
