@@ -61,9 +61,9 @@ textarea {
 /* Header */
 .headerBackground {
     background-image: url("./images/thisFlower.png");
-    background-size: 200%;
+    /* background-size: 200%; */
     /* background-size: 485px; */
-    /* background-size: 360pt; */
+    background-size: 480pt;
     background-position: -30% 5%;
     /* background-position: -50% 25%; */
     background-repeat: no-repeat;
@@ -3202,7 +3202,7 @@ select:active, select:hover {
 @media (min-width: 608px){
     /* header */
     .headerBackground {
-        background-position: 38% 5%;
+        background-position: 150% 5%;
     }
     .navToggle {
         display: none;
