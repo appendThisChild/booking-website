@@ -2,8 +2,35 @@
     margin: 0px;
     padding: 0px;
 }
+h1 {
+    cursor: default;
+}
+h2 {
+    cursor: default;
+}
+h3 {
+    cursor: default;
+}
+h4 {
+    cursor: default;
+}
+h5 {
+    cursor: default;
+}
+h6 {
+    cursor: default;
+}
+p {
+    cursor: default;
+}
+span {
+    cursor: default;
+}
 button:focus {
     outline: none;
+}
+button {
+    cursor: pointer;
 }
 input:focus {
     outline: none;
@@ -350,6 +377,7 @@ textarea {
     text-decoration: underline;
     color: white;
     font-size: 17px;
+    cursor: pointer;
 }
 
 
@@ -712,18 +740,21 @@ select:active, select:hover {
 .weekToggleContainer {
     display: flex;
     justify-content: space-between;
+    
 }
 /* toggle forward */
 .nextWeek {
     margin-left: auto;
     font-size: 30px;
     padding-right: 25px;
+    cursor: pointer;
 }
 /* toggle back */
 .prevWeek {
     margin-right: auto;
     font-size: 30px;
     padding-left: 25px;
+    cursor: pointer;
 }
 
 
@@ -1558,6 +1589,7 @@ select:active, select:hover {
 }
 .loginSignup > div > p > span {
     text-decoration: underline;
+    cursor: pointer;
 }
 .loginSignup > div > p > span:hover {
     color: blue;
@@ -1722,9 +1754,11 @@ select:active, select:hover {
 .rightToggle {
     margin-left: auto;
     font-size: 16px;
+    cursor: pointer;
 }
 .leftToggle {
     font-size: 16px;
+    cursor: pointer;
 }
 /* month title */
 .mappedAppointments > h2 {
@@ -1764,7 +1798,7 @@ select:active, select:hover {
 }
 .appointmentBullet > nav > span {
     text-decoration: underline;
-    
+    cursor: pointer;
 }
 /* first and second info containers */
 .appointmentBullet > div:nth-child(1) {
@@ -3183,6 +3217,7 @@ select:active, select:hover {
 }
 .ryanLink:hover {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 
