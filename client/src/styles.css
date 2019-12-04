@@ -178,7 +178,7 @@ textarea {
     background-image: url("./images/kisscc0-mandala-islamic-geometric-patterns-sacred-geometry-border-4-derivative-9-5b3e06150d5b14.0181865015307914450547.png");
     background-color: rgb(245, 245, 244);
     background-size: 100%;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
     box-shadow: inset 0px 0px 55px 0px black;
@@ -190,7 +190,7 @@ textarea {
 .homeContainer {
     background-image: url("./images/cawer3.jpg");
     background-color: rgb(245, 245, 244);
-    background-size: 200%;
+    background-size: 600pt;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: 53% center;
@@ -385,8 +385,8 @@ textarea {
     border-bottom: 1px solid black;
     background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
+    background-size: 242pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
 
@@ -438,8 +438,8 @@ textarea {
     border-bottom: 1px solid black;
     background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
+    background-size: 242pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -529,8 +529,8 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     background-image: url("./images//115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
+    background-size: 242pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -617,8 +617,8 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
+    background-size: 242pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -737,8 +737,8 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
+    background-size: 242pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -836,8 +836,8 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
+    background-size: 242pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -854,8 +854,8 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
+    background-size: 242pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -874,8 +874,8 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
+    background-size: 242pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -1102,8 +1102,8 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     background-image: url("./images/115-1150399_gold-sacred-geometry-png.png");
     background-color: rgb(245, 245, 244);
-    background-size: 100%;
-    background-attachment: fixed;
+    background-size: 242pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -1347,8 +1347,8 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     background-image: url("./images/sacred_geometry_png_1194283.png");
     background-color: rgb(245, 245, 244);
-    background-size: 175%;
-    background-attachment: fixed;
+    background-size: 300pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
@@ -1522,8 +1522,8 @@ select:active, select:hover {
     border-bottom: 1px solid black;
     background-image: url("./images/cropped-Sacred-Geometrix-LOGO-for-etsy-3.png");
     background-color: rgb(245, 245, 244);
-    background-size: 125%;
-    background-attachment: fixed;
+    background-size: 300pt;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: 50% 50%;
     margin-top: 5%;
@@ -1636,24 +1636,24 @@ select:active, select:hover {
 /* background container for the history */
 .history {
     background-image: linear-gradient(rgb(153, 183, 248), rgb(119, 0, 255));
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     padding-bottom: 15px;
 }
 /* same for therapist history */
 .therapistHistory {
     background-image: linear-gradient(rgb(187, 63, 110), rgb(0, 247, 255));
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     padding-bottom: 15px;
 }
 .companyHistory {
     background-image: linear-gradient(rgb(238, 255, 0), rgb(0, 68, 214));
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     padding-bottom: 15px;
 }
 /* individual account history */
 .accountHistory {
 
-    /* background-attachment: fixed; */
+    background-attachment: fixed;
     padding-bottom: 15px;
 }
 
@@ -1911,7 +1911,7 @@ select:active, select:hover {
 /* main container for personal info */
 .personalInfoBackground {
     background-image: linear-gradient(rgb(208, 255, 0), rgb(226, 0, 0));
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     padding-bottom: 15px;
 }
 /* container over info and form when switched */
@@ -3249,7 +3249,6 @@ select:active, select:hover {
     .homeContainer {
         width: 45%;
         border: 1px solid black;
-        background-size: 1008px;
         background-position: 53% center;
         border-radius: 5px;
         height: 100%;
@@ -3300,7 +3299,7 @@ select:active, select:hover {
     .bookingPriceDisplay {
         border: 1px solid black;
         border-radius: 5px;
-        background-size: 500px;
+        /* background-size: 500px; */
         /* height: 100%; */
     }
     .bookingPriceDisplay > div {
@@ -3319,7 +3318,7 @@ select:active, select:hover {
     .bookingTherapistDisplay {
         border: 1px solid black;
         border-radius: 5px;
-        background-size: 500px;
+        /* background-size: 500px; */
     }
     .bookingTherapistDisplay > div {
         border-radius: 4px;
@@ -3340,7 +3339,7 @@ select:active, select:hover {
     .choiceDisplay {
         border: 1px solid black;
         border-radius: 5px;
-        background-size: 500px;
+        /* background-size: 500px; */
     }
     .choiceDisplay > div {
         border-radius: 4px;
@@ -3348,7 +3347,7 @@ select:active, select:hover {
     .calendar {
         border: 1px solid black;
         border-radius: 5px;
-        background-size: 500px;
+        /* background-size: 500px; */
         margin-bottom: 0px;
     }
     .calendar > div {
@@ -3357,7 +3356,7 @@ select:active, select:hover {
     .availableAppointments {
         border: 1px solid black;
         border-radius: 5px;
-        background-size: 500px;
+        /* background-size: 500px; */
         height: 100%;
     }
     .availableAppointments > div {
@@ -3392,7 +3391,7 @@ select:active, select:hover {
         border: 1px solid black;
         border-radius: 5px;
         width: 100%;
-        background-size: 500px;
+        /* background-size: 500px; */
     }
     .pAndSInside1 {
         height: 100%;
@@ -3400,13 +3399,13 @@ select:active, select:hover {
         border: 1px solid black;
         border-radius: 5px;
         width: 50%;
-        background-size: 500px;
+        /* background-size: 500px; */
     }
     .pAndSInside2 {
         border: 1px solid black;
         border-radius: 5px;
         width: 94%;
-        background-size: 500px;
+        /* background-size: 500px; */
     }
     .inside1 {
         border-radius: 4px;
@@ -3429,7 +3428,7 @@ select:active, select:hover {
     .appointmentBookedContainers {
         border: 1px solid black;
         border-radius: 5px;
-        background-size: 500px;
+        /* background-size: 500px; */
     }
     .appointmentBookedContainers:nth-child(3) {
         width: 45%;
@@ -3453,7 +3452,7 @@ select:active, select:hover {
         border: 1px solid black;
         margin-bottom: 0px;
         height: 100%;
-        background-size: 500px;
+        /* background-size: 500px; */
         border-radius: 5px;
     }
     .contact > div {
@@ -3466,7 +3465,7 @@ select:active, select:hover {
 
     /* sign-in */
     .loginSignup {
-        background-size: 500px;
+        /* background-size: 500px; */
         border: 1px solid black;
         border-radius: 5px;
     }

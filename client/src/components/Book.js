@@ -31,11 +31,13 @@ class Book extends Component {
                     <div className="bookingPriceCentered">
                         <PricingDisplay pricing={this.props.genInfo.pricing} className={"bookingPriceDisplay"}/>
                     </div>
-                    <div className="bookingTherapistDisplay">
-                        <div>
-                            <h3>Book a Massage:</h3>
-                            <TherapistDisplay />
-                            <TherapistTimeChoice handleSubmit={this.handlePickTime} className="selectTherapist"/>
+                    <div className="bookingPriceCentered">
+                        <div className="bookingTherapistDisplay">
+                            <div>
+                                <h3>Book a Massage:</h3>
+                                <TherapistDisplay />
+                                <TherapistTimeChoice handleSubmit={this.handlePickTime} className="selectTherapist"/>
+                            </div>
                         </div>
                     </div>
                 </div>
