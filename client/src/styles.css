@@ -61,11 +61,11 @@ textarea {
 /* Header */
 .headerBackground {
     background-image: url("./images/thisFlower.png");
-    /* background-size: 200%; */
+    background-size: 200%;
     /* background-size: 485px; */
-    background-size: 360pt;
-    /* background-position: -30% 5%; */
-    background-position: -50% 25%;
+    /* background-size: 360pt; */
+    background-position: -30% 5%;
+    /* background-position: -50% 25%; */
     background-repeat: no-repeat;
     height: 300px;
 } 
@@ -3202,8 +3202,7 @@ select:active, select:hover {
 @media (min-width: 608px){
     /* header */
     .headerBackground {
-        /*  */
-        background-position: 238% 25%;
+        background-position: 38% 5%;
     }
     .navToggle {
         display: none;
@@ -3606,8 +3605,8 @@ select:active, select:hover {
 @media (min-width: 769px){
     /* header */
     .headerBackground {
-        background-size: 620px;
-        background-position: 151% 25%;
+        background-size: 360pt;
+        background-position: 127% 25%;
     }
 
 
@@ -3732,7 +3731,6 @@ select:active, select:hover {
 @media (min-width: 1248px){
     /* header */
     .headerBackground {
-        background-size: 620px;
         background-position: 125% 25%;
     }
 
