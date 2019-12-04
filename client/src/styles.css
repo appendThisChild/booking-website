@@ -61,8 +61,10 @@ textarea {
 /* Header */
 .headerBackground {
     background-image: url("./images/thisFlower.png");
-    background-size: 200%;
-    background-position: -30% 5%;
+    /* background-size: 200%; */
+    background-size: 485px;
+    /* background-position: -30% 5%; */
+    background-position: -50% 25%;
     background-repeat: no-repeat;
     height: 300px;
 } 
