@@ -10,28 +10,39 @@ class ImageDisplay extends Component {
         super(props)
         this.state = {
             imageData: "",
-            imageDisplay: props.imageDisplay
+            imageDisplay: props.imageDisplay,
+            message: ""
         }
     }
     handleChange = e => {
-        const data = new FormData()
-        data.append('image', e.target.files[0])
-        this.setState({
-            imageDisplay: URL.createObjectURL(e.target.files[0]),
-            imageData : data
-        })
+        const file = e.target.files[0]
+        const fileSize =  ((file.size/1024)/1024).toFixed(4)
+        if (fileSize <= 1){
+            const data = new FormData()
+            data.append('image', e.target.files[0])
+            this.setState({
+                imageDisplay: URL.createObjectURL(e.target.files[0]),
+                imageData : data
+            })
+        } else {
+            this.setState({ message: '"File is too large"'})
+        }
     }
     handleUpload = e => {
         e.preventDefault()
         const data = this.state.imageData
-        const { _id } = this.props.user
-        this.props.postFile(_id, data)
+        if (data !== ""){
+            const { _id } = this.props.user
+            this.props.postFile(_id, data)
+        }
     }
     handleReplace = e => {
         e.preventDefault()
         const data = this.state.imageData
-        const { _id, profileImgName } = this.props.user
-        this.props.updateFile(_id, profileImgName, data)
+        if (data !== ""){
+            const { _id, profileImgName } = this.props.user
+            this.props.updateFile(_id, profileImgName, data)
+        }
     }
     componentDidUpdate(prevProps){
         if (prevProps.imageDisplay !== this.props.imageDisplay){
@@ -47,6 +58,8 @@ class ImageDisplay extends Component {
                 {profileImgName === "none" ?
                 <form onSubmit={this.handleUpload}>
                     <p>Upload a Image:</p>
+                    <span>(max: 1MB)</span>
+                    <span style={{color: "red"}}>{this.state.message}</span>
                     <div>
                         <p>Choose File</p>
                         <input type="file" required={true} onChange={(e) => this.handleChange(e)}/>
@@ -56,6 +69,8 @@ class ImageDisplay extends Component {
                 :
                 <form onSubmit={this.handleReplace}>
                     <p>Replace the Iamge:</p>
+                    <span>(max: 1MB)</span>
+                    <span style={{color: "red"}}>{this.state.message}</span>
                     <div>
                         <p>Choose File</p>
                         <input type="file" required={true} onChange={(e) => this.handleChange(e)} />
