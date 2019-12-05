@@ -37,7 +37,8 @@ const storage = new GridFsStorage({
     },
     options: { 
         useNewUrlParser: true, 
-        useUnifiedTopology: true 
+        useUnifiedTopology: true,
+        retryWrites: false 
     }
 })
 const upload = multer({ storage })
