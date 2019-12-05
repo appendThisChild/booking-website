@@ -3197,7 +3197,7 @@ select:active, select:hover {
     display: flex;
     background-image: url("./images/thisFlower.png");
     background-size: 500%;
-    background-position: center;
+    background-position: 50% 35%;
 }
 .footer > div {
     display: flex;
