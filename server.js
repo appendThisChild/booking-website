@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+// added line for heroku redirect to https
+const sslRedirect = require('heroku-ssl-redirect')
 require('dotenv').config()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
@@ -10,6 +12,7 @@ const expressJwt = require('express-jwt')
 const { checkIfOwner, checkIfTherapist, mongoURI, options } = require("./utils/app.js")
 const PORT = process.env.PORT || 6350
 
+app.use(sslRedirect())
 app.use(express.json())
 app.use(morgan('dev'))
 app.use("/api", expressJwt({secret: process.env.SECRET}))
