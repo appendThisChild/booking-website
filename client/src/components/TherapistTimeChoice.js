@@ -7,13 +7,22 @@ import { withUser } from "../context/UserProvider.js"
 // firstCharCap
 
 const TherapistTimeChoice = props => {
-    const { therapists, handleChange, therapistID, appLengthInMinutes, appLengths, handleSubmit, className, cancelButton, cancelFunction } = props
+    const { therapists, handleChange, therapistID, appLengthInMinutes, inStudio, appLengths, handleSubmit, className, cancelButton, cancelFunction } = props
     const mappedTherapists = therapists.map((therapist, i) => 
         <option value={therapist._id} key={i}>{props.firstCharCap(therapist.firstName)} {props.firstCharCap(therapist.lastName)}</option>
     )
     const mappedAppLengths = appLengths.map((length, i) => 
         <option value={length} key={i}>{length} Minutes</option>
     )
+    const selectedTherapist = therapists.filter(therapist => {
+        return therapist._id === therapistID
+    })
+    let studio = true
+    let site = true
+    if (therapistID !== ""){
+        studio = selectedTherapist[0].placements.inStudio
+        site = selectedTherapist[0].placements.onSite
+    }
     return(
         <div className={className}>
             {cancelButton ?
@@ -28,6 +37,13 @@ const TherapistTimeChoice = props => {
                         <option>Select Length</option>
                         {mappedAppLengths}
                     </select>
+                    {therapistID !== "" ?
+                    <select name="inStudio" required={true} value={inStudio} onChange={handleChange}>
+                        {studio ? <option value={true}>In Studio</option> :null}
+                        {site ? <option value={false}>On-Site</option> :null}
+                    </select>
+                    : null}
+                    
                 <button type="submit">Find Times</button>
             </form>
         </div>

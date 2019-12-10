@@ -106,7 +106,11 @@ const appointmentSchema = new Schema({
             },
             comments: ""
         }
-    } 
+    },
+    inStudio: {
+        type: Boolean,
+        default: true
+    }
 })
 
 module.exports = mongoose.model("Appointment", appointmentSchema)
