@@ -207,7 +207,7 @@ class PackageAndSubmit extends Component {
                             <div className="pAndSInside">
                                 <div className="inside1">
                                     <Countdown date={date + 600000} renderer={this.tenMinuteTimer}/>
-                                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={false}/>
+                                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={this.props.currentAppointmentInProgress.inStudio ? false : true} showTherapistInfo={false}/>
                                 </div>
                             </div>
                         </div>

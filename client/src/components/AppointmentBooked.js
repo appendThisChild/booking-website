@@ -100,7 +100,7 @@ class AppointmentBooked extends Component {
                         </div>
                         <div className={`appointmentBookedContainers ${formDone ? "intakeFormDone" : ""}`}>
                             <div className="bookedInside2">
-                                <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={true}/>
+                                <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={true} showTherapistInfo={true}/>
                             </div>
                         </div>
                     </div>

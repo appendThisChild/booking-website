@@ -166,16 +166,12 @@ class PickTime extends Component {
         this.editToggler()
     }
     sendToNextPage = () => {
-        // check if on-site, if so = send to different page for address entry
-
-
-        // figure out what I want to do with the next step here
-
-
-
-
-
-        this.props.history.push("/selectPackageAndSubmit")
+        const selectedInStudio = this.props.inStudio === "true" ? true : false
+        if (selectedInStudio){
+            this.props.history.push("/selectPackageAndSubmit")
+        } else {
+            this.props.history.push("/on-site-address")
+        }
     }
     handlePackageAndSubmit = (year, month, date, hour, minutes) => {
         const scheduleChoice = new Date(year, month, date, hour, minutes)

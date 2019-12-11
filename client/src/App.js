@@ -10,6 +10,7 @@ import Header from "./components/Header.js"
 import Home from "./components/Home.js"
 import Book from "./components/Book.js"
 import PickTime from "./components/PickTime.js"
+import OnSiteAddress from "./components/OnSiteAddress.js"
 import PackageAndSubmit from "./components/PackageAndSubmit.js"
 import AppointmentBooked from "./components/AppointmentBooked.js"
 import Contact from "./components/Contact.js"
@@ -25,6 +26,7 @@ import Reviews from "./components/Reviews.js"
 import PasswordRecovery from "./components/PasswordRecovery.js"
 import Connect from "./components/Connect.js"
 import Footer from "./components/Footer.js"
+
 
 
 class App extends Component {
@@ -66,6 +68,7 @@ class App extends Component {
                         ? <PickTime {...renderProps}/>
                         : <SignIn {...renderProps}/>
                     )}/>
+                    <Route path="/on-site-address" render={renderProps => <OnSiteAddress {...renderProps}/>}/>
                     <Route path="/selectPackageAndSubmit" render={renderProps => <PackageAndSubmit {...renderProps}/>}/>
                     <Route path="/appointmentBooked" render={renderProps => <AppointmentBooked {...renderProps}/>}/>
                     <Route path="/contact" render={renderProps => <Contact {...renderProps}/>}/>

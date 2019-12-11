@@ -154,7 +154,6 @@ class AppointmentProvider extends Component {
         this.setState({ apiKey: ""})
     }
     render(){
-        // console.log(this.state)
         return(
             <AppointmentContext.Provider
                 value={{

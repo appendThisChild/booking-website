@@ -25,19 +25,20 @@ class GoogleProvider extends Component {
             .catch(err => console.log(err.response.data.errMsg))
     }
     postEvent = (event, callback) => {
-        const minutes = new Date(event.appDate).getMinutes()
-        const date = new Date(event.appDate).setMinutes(minutes + event.appLengthInMinutes)
-        const toSend = {
-            appointment: event,
-            endDate: new Date(date)
-        }
-        dataAxios.post('/api/calendar', toSend)
-            .then(() => { 
-                callback("Success") 
-            })
-            .catch(err => {
-                callback(err.response.data.errMsg)
-            })
+        // const minutes = new Date(event.appDate).getMinutes()
+        // const date = new Date(event.appDate).setMinutes(minutes + event.appLengthInMinutes)
+        // const toSend = {
+        //     appointment: event,
+        //     endDate: new Date(date)
+        // }
+        // dataAxios.post('/api/calendar', toSend)
+        //     .then(() => { 
+        //         callback("Success") 
+        //     })
+        //     .catch(err => {
+        //         callback(err.response.data.errMsg)
+        //     })
+        callback("nothing")
     }
     deleteEvent = (id, callback) => {
         dataAxios.delete(`/api/calendar/${id}`)

@@ -26,6 +26,10 @@ const generalInfoSchema = new Schema({
             [19997, 39996]
         ]
     },
+    onSitePricing: {
+        type: Number,
+        default: 2000
+    },
     cancelationPolicy: {
         type: Array,
         default: [

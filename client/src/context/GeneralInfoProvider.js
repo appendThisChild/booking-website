@@ -31,6 +31,7 @@ class GeneratorInfoProvider extends Component {
                     [14998, 29997],
                     [19997, 39996]
                 ],
+            onSitePricing: 2000,
             cancelationPolicy: ["nothing"],
             liabilityWavierId: 'none',
             FAQs: [
