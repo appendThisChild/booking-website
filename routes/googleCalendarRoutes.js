@@ -263,26 +263,30 @@ const updateCanceledAppointment = (res, id, updates, next, callback) => {
 } 
 
 const deleteEventOnGoogle = (res, googleId, next, callback) => {
-  fs.readFile('credentials.json', (err, content) => {
-    if (err) {
-      res.status(500)
-      return next(err)
-    }
-    authorize(res, next, JSON.parse(content), (auth) => {
-      const calendar = google.calendar({version: 'v3', auth});
-      calendar.events.delete({
-        calendarId: 'primary',
-        sendNotifications: true,
-        eventId: googleId,
-      }, (err) => {
-        if (err) {
-          res.status(500)
-          return next(err)
-        }
-        callback('Event deleted.')
+  if (googleId === ""){
+    callback("No calendar event to delete!")
+  } else {
+    fs.readFile('credentials.json', (err, content) => {
+      if (err) {
+        res.status(500)
+        return next(err)
+      }
+      authorize(res, next, JSON.parse(content), (auth) => {
+        const calendar = google.calendar({version: 'v3', auth});
+        calendar.events.delete({
+          calendarId: 'primary',
+          sendNotifications: true,
+          eventId: googleId,
+        }, (err) => {
+          if (err) {
+            res.status(500)
+            return next(err)
+          }
+          callback('Event deleted.')
+        });
       });
-    });
-  }); 
+    }); 
+  }
 }
 
 const authorize = (res, next, credentials, callback) => {

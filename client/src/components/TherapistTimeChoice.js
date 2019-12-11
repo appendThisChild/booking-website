@@ -30,11 +30,11 @@ const TherapistTimeChoice = props => {
             :null}
             <form onSubmit={handleSubmit}>
                     <select name="therapistID" value={therapistID} onChange={handleChange} required={true}>
-                        <option>Select Therapist</option>
+                        <option value="">Select Therapist</option>
                         {mappedTherapists}
                     </select>
                     <select name="appLengthInMinutes" required={true} value={appLengthInMinutes} onChange={handleChange}>
-                        <option>Select Length</option>
+                        <option value="">Select Length</option>
                         {mappedAppLengths}
                     </select>
                     {therapistID !== "" ?

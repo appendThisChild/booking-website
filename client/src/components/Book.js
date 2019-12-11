@@ -29,7 +29,7 @@ class Book extends Component {
             <div className="background">
                 <div className="border">
                     <div className="bookingPriceCentered">
-                        <PricingDisplay pricing={this.props.genInfo.pricing} className={"bookingPriceDisplay"}/>
+                        <PricingDisplay pricing={this.props.genInfo.pricing} travelFee={this.props.genInfo.onSitePricing} className={"bookingPriceDisplay"}/>
                     </div>
                     <div className="bookingPriceCentered">
                         <div className="bookingTherapistDisplay">

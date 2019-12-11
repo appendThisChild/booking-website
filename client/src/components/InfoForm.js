@@ -3,7 +3,7 @@ import React from 'react'
 import { withUser } from "../context/UserProvider.js"
 
 const InfoForm = props => {
-    const { handleSubmit, handleChange, handleAddressChange, handleAvailabilityChange, btnText, email, firstName, lastName, address, availability, phoneNumber, daysOfTheWeek, emailExists, checkInput } = props
+    const { handleSubmit, handleChange, handleAddressChange, handleAvailabilityChange, handlePlacementsChange, btnText, email, firstName, lastName, address, availability, placements, phoneNumber, daysOfTheWeek, emailExists, checkInput } = props
     const { street, city, state, zipcode } = address
     const states = [ "AK","AL","AR","AS","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]
     const timeNames = []
@@ -49,6 +49,20 @@ const InfoForm = props => {
             <div key={i}>
                 <h3>{daysOfTheWeek[i]}</h3>
                 {mappedDay}
+            </div>
+        )
+    })
+    const placementsArr = Object.entries(placements)
+    const mappedPlacements = placementsArr.map((arr, i) => {
+        return(
+            <div key={i}>
+                <div>
+                    <span>{arr[0] === "inStudio" ? "In Studio" : "On-Site"}:</span>
+                    <select name={arr[0]} value={arr[1]} onChange={handlePlacementsChange}>
+                        <option value={true}>Yes</option>
+                        <option value={false}>No</option>
+                    </select>
+                </div>
             </div>
         )
     })
@@ -116,6 +130,8 @@ const InfoForm = props => {
                     placeholder="10128"/>
                 <h2>Availability: </h2>
                 {mappedAvailabilityTimes}
+                <h2>In Studio or On-Site: </h2>
+                {mappedPlacements}
             </>
             :null}
             <button>{btnText}</button>

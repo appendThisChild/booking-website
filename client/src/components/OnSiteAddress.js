@@ -39,7 +39,6 @@ const OnSiteAddress = props => {
     const handleSubmit = e => {
         e.preventDefault()
         updateAppointment(props.currentAppointmentInProgress._id, { address }, () => {
-            console.log(props.currentAppointmentInProgress)
             props.history.push("/selectPackageAndSubmit")
         })
     }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const GeneralInfoForm = props => {
-    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, FAQs, handleChange, handleSubmit, removeLine, addLine } = props
+    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, onSitePricing, cancelationPolicy, FAQs, handleChange, handleSubmit, removeLine, addLine } = props
     const mappedHomeInfo = homeInfo.map((para, i) => {
         const name = "homeInfo"
         const nameIndex = name + ` ${i}`
@@ -139,6 +139,18 @@ const GeneralInfoForm = props => {
             {mappedSingles}
             <h4>Triple</h4>
             {mappedTriples}
+            <h3>Travel Fee:</h3>
+            <span>(in cents)</span>
+            <div>
+                <p>$</p>
+                <input 
+                    name="onSitePricing"
+                    type="number"
+                    value={onSitePricing}
+                    onChange={handleChange}
+                    placeholder="Travel fee..."
+                />
+            </div>
             <h3>Cancelation Policy:</h3>
             {mappedCancelPolicy}
             <aside>

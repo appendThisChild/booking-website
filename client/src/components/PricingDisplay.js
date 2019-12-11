@@ -3,7 +3,7 @@ import React from 'react'
 // import PriceDisplay from './PriceDisplay.js';
 
 const PricingDisplay = props => {
-    const { pricing, className } = props
+    const { pricing, className, travelFee } = props
     const minutesArr = [60, 90, 120]
     const singles = []
     const triples = []
@@ -31,6 +31,13 @@ const PricingDisplay = props => {
                         <h4>Package of 3</h4>
                         {mappedTriples}
                     </div>
+                    {travelFee ?
+                    <div>
+                        <h4>On-Site Travel Fee</h4>
+                        <p>${travelFee / 100} will be added for individual bookings.</p>
+                        <p>( Travel fee is NOT refundable )</p>
+                    </div>
+                    :null}
                 </div>
             </div>
         </div>

@@ -76,6 +76,10 @@ const appointmentSchema = new Schema({
         type: Number,
         default: 0
     },
+    travelFee: {
+        type: Number,
+        default: 0
+    },
     appointmentCreatedAt: {
         type: Date,
         default: Date.now
