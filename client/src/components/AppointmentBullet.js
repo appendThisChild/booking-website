@@ -20,6 +20,8 @@ const AppointmentBullet = props => {
         client,
         therapist,
         intake,
+        inStudio,
+        travelFee,
         future
     } = props
     const { street, city, state, zipcode } = address
@@ -64,6 +66,10 @@ const AppointmentBullet = props => {
         }
         
     })
+    let amountShown = amount
+    if (!client){
+        amountShown = amount + travelFee
+    }
     const noRequest = specailRequests.every((element) => element === null)
     return(
         <div className={`${canceled ? "appointmentCanceled " : ""}appointmentBullet${props.on ? "": " appointmentOpened"}`}>
@@ -89,9 +95,10 @@ const AppointmentBullet = props => {
                 </>
                 :null}
                 <>
-                    <p>Amount: ${amount / 100}</p>
+                    <p>Amount: ${amountShown / 100}</p>
                     <p>Therapist: {therapistName}</p>
                     <p>Therapist #: {phoStr1}</p>
+                    <p>Location: {inStudio ? "In Studio" : "On-Site"}</p>
                     <p>Address:</p>
                     <p>{street},</p>
                     <p>{city}, {state} {zipcode}</p>

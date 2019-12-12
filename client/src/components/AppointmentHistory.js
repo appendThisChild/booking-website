@@ -13,6 +13,7 @@ const AppointmentHistory = props => {
         adjustment = ((websiteDeductedAlready.reduce((total, sum) => total + sum.amount, 0) / 100) * .1).toFixed(2)
     }
     const monthEarnings = filterNotCanceled.reduce((total, sum) => total + sum.amount, 0) / 100
+    const travelFees = filterNotCanceled.reduce((total, sum) =>  total + sum.travelFee, 0) / 100
     const websiteDeductions = (monthEarnings * .1).toFixed(2) - Number(adjustment)
     const therapistEarnings = (monthEarnings * .8).toFixed(2)
     const companyEarnings = (monthEarnings - websiteDeductions - therapistEarnings).toFixed(2)
@@ -62,8 +63,8 @@ const AppointmentHistory = props => {
                     <>
                         <div>
                             <p>{monthsOftheYear[month]}'s Company Earnings</p>
-                            <span>${monthEarnings} "Earnings"</span>
-                            <span>- ${therapistEarnings} "80% Therapist(s) Payment"</span>
+                            <span>${monthEarnings + travelFees} "Earnings"</span>
+                            <span>- ${(parseFloat(therapistEarnings) + travelFees).toFixed(2)} "80% Therapist(s) Payment"</span>
                             <span>- ${websiteDeductions} "10% Website Service"</span>
                             <span>= ${companyEarnings}</span>
                         </div>
@@ -86,9 +87,9 @@ const AppointmentHistory = props => {
                         </div>
                         <div>
                             <p>{monthsOftheYear[month]}'s Earnings</p>
-                            <span>${monthEarnings} "Earnings"</span>
+                            <span>${monthEarnings + travelFees} "Earnings"</span>
                             <span>- ${serviceDeducted} "20% Service Deductions"</span>
-                            <span>= ${therapistEarnings}</span>
+                            <span>= ${(parseFloat(therapistEarnings) + travelFees).toFixed(2)}</span>
                         </div>
                         {props.yearView ?
                         <div>
