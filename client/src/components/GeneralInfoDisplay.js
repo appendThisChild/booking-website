@@ -3,7 +3,7 @@ import React from 'react'
 import PricingDisplay from './PricingDisplay.js';
 
 const GeneralInfoDisplay = props => {
-    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, FAQs, liabilityWavierId, handleUpload, handleReplace, pdf } = props
+    const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, FAQs, liabilityWavierId, handleUpload, handleReplace, pdf, onSitePricing } = props
     const mappedHomeInfo = homeInfo.map((para, i) => <p key={i}>{i + 1}.) {para}</p>)
     const mappedCancelPolicy = cancelationPolicy.map((para, i) => <p key={i}>{i + 1}.) {para}</p>)
     const mappedFAQs = FAQs.map((obj, i) => {
@@ -29,6 +29,8 @@ const GeneralInfoDisplay = props => {
             <h3>Home Therapist Subtitle:</h3>
             <p>{homeTherapistSubtitle}</p>
             <PricingDisplay pricing={pricing} className={""}/>
+            <h3>Travel Fee:</h3>
+            <p>Fee: ${onSitePricing / 100}</p>
             <h3>Cancelation Policy:</h3>
             {mappedCancelPolicy}
             <h3>Frequently asked questions (FAQs):</h3>

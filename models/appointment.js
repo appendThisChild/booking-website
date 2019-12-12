@@ -76,6 +76,10 @@ const appointmentSchema = new Schema({
         type: Number,
         default: 0
     },
+    travelFee: {
+        type: Number,
+        default: 0
+    },
     appointmentCreatedAt: {
         type: Date,
         default: Date.now
@@ -106,7 +110,11 @@ const appointmentSchema = new Schema({
             },
             comments: ""
         }
-    } 
+    },
+    inStudio: {
+        type: Boolean,
+        default: true
+    }
 })
 
 module.exports = mongoose.model("Appointment", appointmentSchema)

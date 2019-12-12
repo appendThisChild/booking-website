@@ -38,6 +38,7 @@ class GoogleProvider extends Component {
             .catch(err => {
                 callback(err.response.data.errMsg)
             })
+        // callback("nothing")
     }
     deleteEvent = (id, callback) => {
         dataAxios.delete(`/api/calendar/${id}`)

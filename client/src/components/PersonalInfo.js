@@ -24,6 +24,7 @@ class PersonalInfo extends Component {
             lastName: props.user.lastName,
             address: props.user.address,
             availability: props.user.availability,
+            placements: props.user.placements,
             phoneNumber: props.user.phoneNumber,
             imageDisplay: DefaultImg
         }
@@ -33,6 +34,16 @@ class PersonalInfo extends Component {
         this.setState({
             [e.target.name] : value
         })
+    }
+    handlePlacementsChange = e => {
+        const value = e.target.value
+        const name = e.target.name
+        this.setState(prevState => ({
+            placements: {
+                ...prevState.placements,
+                [name]: value === "true" ? true : false
+            }
+        }))
     }
     handleAddressChange = e => {
         const value = e.target.value
@@ -68,6 +79,7 @@ class PersonalInfo extends Component {
                     lastName: this.props.inputLowercaseNospace(this.state.lastName),
                     address: this.state.address,
                     availability: this.state.availability,
+                    placements: this.state.placements,
                     phoneNumber: this.props.numberDeconstruct(this.state.phoneNumber)
                 }
                 this.props.updateUserInfo(infoUpdates, () => {})
@@ -96,7 +108,7 @@ class PersonalInfo extends Component {
         })
     }
     render(){
-        const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist, _id } = this.props.user
+        const { email, firstName, lastName, address, availability, phoneNumber, visitsRemaining, isTherapist, _id, placements } = this.props.user
         const { street, city, state, zipcode } = address
         const mappedAvailabilty = availability.map((arr, i) => <Availability key={i} day={this.state.daysOfTheWeek[i]} arr={arr}/>)
         const mappedRemaining = visitsRemaining.map((remain, i) => {
@@ -110,6 +122,8 @@ class PersonalInfo extends Component {
             }
             return <p key={i}>{minutes}-Minute: {remain}</p>
         })
+        const placementsArr = Object.entries(placements)
+        const mappedPlacements = placementsArr.map((arr, i) => <p key={i}>{arr[0] === "inStudio" ? "In Studio" : "On-Site"}: {arr[1] ? "Yes" : "No"}</p>)
         return(
             <div className="personalInfoBackground">
                 <ProfileNav isOn={1}/>
@@ -138,6 +152,8 @@ class PersonalInfo extends Component {
                         <p>{zipcode}</p>
                         <h2>Availability: </h2>
                         {mappedAvailabilty}
+                        <h2>In Studio or On-Site: </h2>
+                        {mappedPlacements}
                         <BlackoutDates therapistID={_id}/>
                         <ImageDisplay imageDisplay={this.state.imageDisplay}/>
                     </>
@@ -151,6 +167,7 @@ class PersonalInfo extends Component {
                         daysOfTheWeek={this.state.daysOfTheWeek}
                         handleAddressChange={this.handleAddressChange}
                         handleAvailabilityChange={this.handleAvailabilityChange}
+                        handlePlacementsChange={this.handlePlacementsChange}
                         handleSubmit={this.handleSubmit}
                         btnText="Submit Edit"
                         emailExists={this.state.emailExists}

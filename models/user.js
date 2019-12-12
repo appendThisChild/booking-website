@@ -61,6 +61,13 @@ const userSchema = new Schema({
     profileImgName: {
         type: String,
         default: "none"
+    },
+    placements: {
+        type: Object,
+        default: {
+            inStudio: true,
+            onSite: false
+        }
     }
 })
 

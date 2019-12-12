@@ -42,7 +42,8 @@ class AppointmentProvider extends Component {
             canceled: false,
             status: "",
             amount: "",
-            apiKey: ""
+            apiKey: "",
+            inStudio: "true"
         }
     }
     // owner
@@ -91,7 +92,8 @@ class AppointmentProvider extends Component {
                 therapistName: this.state.therapistName,
                 therapistEmail: this.state.therapistEmail,
                 therapistPhoneNumber: this.state.therapistPhoneNumber,
-                address: this.state.address
+                address: this.state.address,
+                inStudio: this.state.inStudio === "true" ? true : false
             }
             dataAxios.post("/api/appointment", newAppointment)
                 .then(res => this.setState({ currentAppointmentInProgress: res.data.app, apiKey: res.data.key }, () => callback()))

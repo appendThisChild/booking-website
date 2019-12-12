@@ -3,7 +3,7 @@ import React from "react"
 import TherapistTimeChoice from "./TherapistTimeChoice.js"
 
 const ChoiceDisplay = props => {
-    const { editToggle, handleEdit, therapistName, appLengthInMinutes, editToggler } = props
+    const { editToggle, handleEdit, therapistName, appLengthInMinutes, isInStudio, editToggler } = props
 
     return(
         <div>
@@ -18,6 +18,7 @@ const ChoiceDisplay = props => {
                         <div>
                             <p>{therapistName}</p>
                             <p>{appLengthInMinutes} Minutes</p>
+                            <p>{isInStudio === "true" ? "In Studio" : "On-Site"}</p>
                         </div>
                     </div>
                 </div>

@@ -55,7 +55,8 @@ class PackageAndSubmit extends Component {
             transition: Slide
         })
         const { amount, amounts } = this.state
-        const { appLengthInMinutes, _id, clientID } = this.props.currentAppointmentInProgress
+        const { genInfo } = this.props
+        const { appLengthInMinutes, _id, clientID, inStudio } = this.props.currentAppointmentInProgress
         const index = amounts.findIndex((num) => num === amount)
         let message = "-Minute Massage"
         let pChoice = 1
@@ -71,6 +72,7 @@ class PackageAndSubmit extends Component {
         }
         axios.post('/payment/charge', { 
             token, 
+            isInStudio: inStudio,
             product: { 
                 name: `${appLengthInMinutes}${message}`, 
                 price: {
@@ -83,10 +85,11 @@ class PackageAndSubmit extends Component {
             if (res.data.status === "succeeded"){
                 const updates = {
                     packageChoice: pChoice,
-                    amount: amount,
+                    amount: inStudio ? amount : amount + genInfo.onSitePricing,
                     status: "Paid",
                     chargeId: res.data.id,
-                    amountTherapistPaid: pChoice === 1 ? amount : amount / 3
+                    amountTherapistPaid: pChoice === 1 ? amount : amount / 3,
+                    travelFee: inStudio ? 0 : genInfo.onSitePricing
                 }
                 toast.update(display, {
                     render: "Payment Completed! Please wait...",
@@ -121,6 +124,58 @@ class PackageAndSubmit extends Component {
             }
         })
         .catch(err => console.log(err.response.data.errMsg))
+    }
+    handleTravelFee = (token) => {
+        const display = toast("Receiving Payment, please wait...", {
+            transition: Slide
+        })
+        const { amounts } = this.state
+        const { genInfo, currentAppointmentInProgress } = this.props
+        const { _id, appLengthInMinutes, clientID } = currentAppointmentInProgress
+        axios.post('/payment/travelFee', {
+            token,
+            product : {
+                name: "Travel Fee"
+            }
+        })
+        .then(res => {
+            if (res.data.status === "succeeded"){
+                toast.update(display, {
+                    render: "Payment Completed! Please wait...",
+                    type: toast.TYPE.SUCCESS,
+                    transition: Flip
+                })
+                const updates = {
+                    packageChoice: 0,
+                    amount: genInfo.onSitePricing,
+                    status: "Paid",
+                    chargeId: res.data.id,
+                    amountTherapistPaid: amounts[1] / 3,
+                    travelFee: genInfo.onSitePricing
+                }
+                this.props.updateAppointment( _id, updates, () => {
+                    let visitsIndex = 0
+                    if (appLengthInMinutes === 90){
+                        visitsIndex = 1
+                    } else if (appLengthInMinutes === 120){
+                        visitsIndex = 2
+                    }
+                    this.props.updateVisits(clientID, { index: visitsIndex, adjust: -1 }, () => {
+                        this.props.postEvent(this.props.currentAppointmentInProgress, (message) => {
+                            this.props.history.push('/appointmentBooked')
+                        })
+                    })
+                })
+            } else {
+                toast.update(display, {
+                    render: `Payment Failed: ${res.data}`,
+                    type: toast.TYPE.ERROR,
+                    transition: Flip
+                })
+            }
+        })
+        .catch(err => console.log(err.response.data.errMsg))
+
     }
     handlePrepaid = () => {
         toast.success("Completing Appointment! Please wait...", {
@@ -189,8 +244,8 @@ class PackageAndSubmit extends Component {
     }
     render(){
         const { dataIn, liabilityCheck, checkBoxMessage, amount, amounts, except } = this.state
-        const { apiKey } = this.props
-        const { clientEmail, appointmentCreatedAt } = this.props.currentAppointmentInProgress
+        const { apiKey, genInfo } = this.props
+        const { clientEmail, appointmentCreatedAt, inStudio } = this.props.currentAppointmentInProgress
         const date = new Date(appointmentCreatedAt).getTime()
         const mappedAmounts = amounts.map((amount, i) => {
             let description = "Single Massage"
@@ -207,7 +262,7 @@ class PackageAndSubmit extends Component {
                             <div className="pAndSInside">
                                 <div className="inside1">
                                     <Countdown date={date + 600000} renderer={this.tenMinuteTimer}/>
-                                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={false}/>
+                                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={this.props.currentAppointmentInProgress.inStudio ? false : true} showTherapistInfo={false}/>
                                 </div>
                             </div>
                         </div>
@@ -224,13 +279,16 @@ class PackageAndSubmit extends Component {
                                 </div>
                                 {amount !== 0 ?
                                 <div>
+                                    {!inStudio ?
+                                        <span style={{ fontSize: '19px', textAlign: 'center', paddingBottom: '10px'}}>${genInfo.onSitePricing / 100} Travel Fee will be added to this transaction.</span>
+                                    :null}
                                     {liabilityCheck ? 
                                     <>
                                         <StripeCheckout 
                                             name="Massage Therapy Matters"
                                             stripeKey={apiKey}
                                             token={this.handleSubmit}
-                                            amount={amount}
+                                            amount={inStudio ? amount : amount + genInfo.onSitePricing}
                                             email={clientEmail}
                                             ComponentClass="div"
                                         >
@@ -246,10 +304,38 @@ class PackageAndSubmit extends Component {
                                     }
                                 </div>
                                 :
+                                <>
+                                {!inStudio ?
                                 <div>
-                                    <button onClick={!liabilityCheck ? this.checkBox : this.handlePrepaid}>Use Pre-Paid</button>
-                                    <p>{checkBoxMessage}</p>
+                                    <span style={{ fontSize: '19px', textAlign: 'center', paddingBottom: '10px'}}>${genInfo.onSitePricing / 100} Travel Fee will be added to this transaction.</span>
+                                    {liabilityCheck ? 
+                                    <>
+                                        <StripeCheckout 
+                                            name="Massage Therapy Matters"
+                                            stripeKey={apiKey}
+                                            token={this.handleTravelFee}
+                                            amount={genInfo.onSitePricing}
+                                            email={clientEmail}
+                                            ComponentClass="div"
+                                        >
+                                        <button>Pay With Card</button>
+                                        </StripeCheckout>
+                                        <p>{checkBoxMessage}</p>
+                                    </>
+                                    :
+                                    <>
+                                        <button onClick={this.checkBox}>Pay With Card</button>
+                                        <p>{checkBoxMessage}</p>
+                                    </>
+                                    }
                                 </div>
+                                :
+                                    <div>
+                                        <button onClick={!liabilityCheck ? this.checkBox : this.handlePrepaid}>Use Pre-Paid</button>
+                                        <p>{checkBoxMessage}</p>
+                                    </div>
+                                }
+                                </>
                                 }
                                 <div>
                                     <input type="checkbox" name="liabilityCheck" onChange={this.handleCheck}/>

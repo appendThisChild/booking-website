@@ -16,6 +16,7 @@ class CiteInfo extends Component {
             homeInfo: props.genInfo.homeInfo, 
             homeTherapistSubtitle: props.genInfo.homeTherapistSubtitle, 
             pricing: props.genInfo.pricing, 
+            onSitePricing: props.genInfo.onSitePricing,
             cancelationPolicy: props.genInfo.cancelationPolicy,
             FAQs: props.genInfo.FAQs,
             dataPDF: '',
@@ -46,12 +47,13 @@ class CiteInfo extends Component {
     }
     handleSubmit = e => {
         e.preventDefault()
-        const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, cancelationPolicy, FAQs } = this.state
+        const { homeTitle, homeInfo, homeTherapistSubtitle, pricing, onSitePricing, cancelationPolicy, FAQs } = this.state
         const newGenInfo = {
             homeTitle: homeTitle, 
             homeInfo: homeInfo, 
             homeTherapistSubtitle: homeTherapistSubtitle, 
             pricing: pricing,
+            onSitePricing: onSitePricing,
             cancelationPolicy: cancelationPolicy,
             FAQs: FAQs
         }
