@@ -93,10 +93,11 @@ ownerRouter.route('/appointment/past')
             })
             const today = new Date()
             const pastYearApps = appsWithCurrentPrice.filter(arr => arr.status === "Paid" && arr.therapistPaid === true && arr.appDate.getFullYear() === year && arr.appDate < today)
+            const pastYearAppsForTravelFees = appsWithCurrentPrice.filter(arr => arr.status === "Paid" && arr.appDate.getFullYear() === year && arr.appDate < today)
             const websiteDeductedAlready = pastYearApps.filter(app => app.canceled === true && app.packageChoice === 1)
             const adjustment = ((websiteDeductedAlready.reduce((total, sum) => total + sum.amount, 0) / 100) * .1).toFixed(2)
             const purchaseEarnings = pastYearApps.reduce((total, sum) => total + sum.amount, 0) / 100
-            const travelFees = pastYearApps.reduce((total, sum) => total + sum.travelFee, 0) / 100
+            const travelFees = pastYearAppsForTravelFees.reduce((total, sum) => total + sum.travelFee, 0) / 100
             const pastYearEarnings = purchaseEarnings + travelFees
             const therapistEarnings = (purchaseEarnings * .80 + travelFees).toFixed(2)
             const websiteDeductions = (purchaseEarnings * .10).toFixed(2) - adjustment

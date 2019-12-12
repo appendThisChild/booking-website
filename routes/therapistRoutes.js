@@ -46,8 +46,9 @@ therapistRouter.route('/appointment/past/:id')
             })
             
             const pastYearApps = appsWithCurrentPrice.filter(arr => arr.therapistPaid === true && arr.appDate.getFullYear() === year && arr.appDate < today)
+            const pastYearAppsForTravelFees = appsWithCurrentPrice.filter(arr => arr.status === "Paid" && arr.appDate.getFullYear() === year && arr.appDate < today)
             const purchaseEarnings = pastYearApps.reduce((total, sum) => total + sum.amount, 0) / 100
-            const travelFees = pastYearApps.reduce((total, sum) => total + sum.travelFee, 0) / 100
+            const travelFees = pastYearAppsForTravelFees.reduce((total, sum) => total + sum.travelFee, 0) / 100
             const pastYearEarnings =  purchaseEarnings + travelFees
             const therapistEarnings = (purchaseEarnings * .80 + travelFees).toFixed(2) 
             const serviceDeducted = (purchaseEarnings * .20).toFixed(2)

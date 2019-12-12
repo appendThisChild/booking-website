@@ -13,7 +13,7 @@ const AppointmentHistory = props => {
         adjustment = ((websiteDeductedAlready.reduce((total, sum) => total + sum.amount, 0) / 100) * .1).toFixed(2)
     }
     const monthEarnings = filterNotCanceled.reduce((total, sum) => total + sum.amount, 0) / 100
-    const travelFees = filterNotCanceled.reduce((total, sum) =>  total + sum.travelFee, 0) / 100
+    const travelFees = history.reduce((total, sum) =>  total + sum.travelFee, 0) / 100
     const websiteDeductions = (monthEarnings * .1).toFixed(2) - Number(adjustment)
     const therapistEarnings = (monthEarnings * .8).toFixed(2)
     const companyEarnings = (monthEarnings - websiteDeductions - therapistEarnings).toFixed(2)
