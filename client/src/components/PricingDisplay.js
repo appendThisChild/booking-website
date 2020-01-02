@@ -1,7 +1,5 @@
 import React from 'react'
 
-// import PriceDisplay from './PriceDisplay.js';
-
 const PricingDisplay = props => {
     const { pricing, className, travelFee } = props
     const minutesArr = [60, 90, 120]

@@ -39,6 +39,7 @@ const TherapistTimeChoice = props => {
                     </select>
                     {therapistID !== "" ?
                     <select name="inStudio" required={true} value={inStudio} onChange={handleChange}>
+                        <option value="">Select Location</option>
                         {studio ? <option value={true}>In Studio</option> :null}
                         {site ? <option value={false}>On-Site</option> :null}
                     </select>

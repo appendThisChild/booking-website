@@ -61,7 +61,7 @@ class Home extends Component {
                         <div className={`homeContainer ${"homeContainerInside2"}`}>
                             <div>
                                 <h1>Our Therapists</h1>
-                                <p>{homeTherapistSubtitle}</p>
+                                <p style={{textAlign: "center"}}>{homeTherapistSubtitle}</p>
                                 <TherapistDisplay />
                             </div>
                         </div>

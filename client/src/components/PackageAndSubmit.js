@@ -279,7 +279,7 @@ class PackageAndSubmit extends Component {
                                 </div>
                                 {amount !== 0 ?
                                 <div>
-                                    {!inStudio ?
+                                    {!inStudio && genInfo.onSitePricing ?
                                         <span style={{ fontSize: '19px', textAlign: 'center', paddingBottom: '10px'}}>${genInfo.onSitePricing / 100} Travel Fee will be added to this transaction.</span>
                                     :null}
                                     {liabilityCheck ? 
@@ -307,7 +307,9 @@ class PackageAndSubmit extends Component {
                                 <>
                                 {!inStudio ?
                                 <div>
-                                    <span style={{ fontSize: '19px', textAlign: 'center', paddingBottom: '10px'}}>${genInfo.onSitePricing / 100} Travel Fee will be added to this transaction.</span>
+                                    {genInfo.onSitePricing ?
+                                        <span style={{ fontSize: '19px', textAlign: 'center', paddingBottom: '10px'}}>${genInfo.onSitePricing / 100} Travel Fee will be added to this transaction.</span>
+                                    :null}
                                     {liabilityCheck ? 
                                     <>
                                         <StripeCheckout 

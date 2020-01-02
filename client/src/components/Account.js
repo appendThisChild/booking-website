@@ -7,11 +7,13 @@ import { withOwner } from "../context/OwnerProvider.js"
 import Availability from "./Availability.js"
 
 const Account = props => {
-    const { firstName, lastName, visitsRemaining, on, isTherapist, email, phoneNumber, address, availability, _id, getHistory, order } = props
+    const { firstName, lastName, visitsRemaining, on, isTherapist, email, phoneNumber, address, availability, _id, getHistory, order, placements } = props
     const daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const { street, city, state, zipcode } = address
     const pho1 = props.numberDisplay(phoneNumber)
     const mappedAvailabilty = availability.map((arr, i) => <Availability key={i} day={daysOfTheWeek[i]} arr={arr}/>)
+    const placementsArr = Object.entries(placements)
+    const mappedPlacements = placementsArr.map((arr, i) => <p key={i}>{arr[0] === "inStudio" ? "In Studio" : "On-Site"}: {arr[1] ? "Yes" : "No"}</p>)
     return(
         <section>
             <div onClick={props.toggle}>
@@ -39,6 +41,8 @@ const Account = props => {
                     <aside>
                         {mappedAvailabilty}
                     </aside>
+                    <h4>In Studio or On-Site:</h4>
+                    {mappedPlacements}
                 </>
                 :null}
                 {props.user.isOwner ? 

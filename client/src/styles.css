@@ -119,7 +119,7 @@ textarea {
     opacity: .95;
     font-size: 70px;
     font-family: ChopinScript;
-    grid-column: 0/-1;
+    grid-column: 1/-1;
     grid-row: 35/-1;
 }
 
@@ -2420,6 +2420,7 @@ select:active, select:hover {
 .allAccounts > main > div > section > div > p {
     font-size: 18px;
     text-align: center;
+    overflow: auto;
 }
 /* get appointments and change status buttons */
 .allAccounts > main > div > section > div > button {
@@ -2442,9 +2443,9 @@ select:active, select:hover {
 
 
 /* availability overall container */
-/* .allAccounts > main > div > section > div > aside {
+.allAccounts > main > div > section > div > aside {
 
-} */
+}
 /* individual availabilty containers */
 .allAccounts > main > div > section > div > aside > div {
     padding-top: 5px;
