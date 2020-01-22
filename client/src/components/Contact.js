@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { ToastContainer, toast, Slide } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
+import Picture from "../images/shutterstock_99093647.jpg"
+
 import { withEmail } from '../context/EmailProvider.js'
 import { withGeneral } from '../context/GeneralInfoProvider.js'
 
@@ -43,32 +45,26 @@ class Contact extends Component {
         const { FAQs } = this.props.genInfo
         const mappedFAQs = FAQs.map((obj, i) => <FAQsDisplay key={i} faq={obj} />)
         return(
-            <div className="background">
-                <div className="border">
-                    <div className="contactCentered">
-                    <ToastContainer autoClose={10000} />
-                        <div className="contact">
-                            <form onSubmit={this.handleSubmit}>
-                                <h2>Contact Us</h2>
-                                <div>
-                                    {/* <p>Email:</p> */}
-                                    <input type="email" name="from" value={from} onChange={this.handleChange} required={true} placeholder="Your Email..."/>
-                                    {/* <p>Subject:</p> */}
-                                    <input type="text" name="subject" value={subject} onChange={this.handleChange} required={true} placeholder="Subject..."/>
-                                    {/* <p>Message:</p> */}
-                                    <textarea name="message" value={message} onChange={this.handleChange} rows="4" cols="50" required={true} placeholder="Message..." />
-                                    <button>Send Message</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div className="contact">
+            <div className="contactContainer">
+                <ToastContainer autoClose={10000} />
+                <div className="contact">
+                    <img src={Picture} alt="Hot Stones"/>
+                    <section>
+                        <form onSubmit={this.handleSubmit}>
+                            <h1>Contact Us</h1>
                             <div>
-                                <h2>FAQs</h2>
-                                <h3>(Frequently Asked Questions)</h3>
-                                {mappedFAQs}
+                                <input type="email" name="from" value={from} onChange={this.handleChange} required={true} placeholder="Your Email..."/>
+                                <input type="text" name="subject" value={subject} onChange={this.handleChange} required={true} placeholder="Subject..."/>
+                                <textarea name="message" value={message} onChange={this.handleChange} rows="4" cols="50" required={true} placeholder="Message..." />
+                                <button>Send Message</button>
                             </div>
-                        </div>
-                    </div>
+                        </form>
+                        <aside>
+                            <h1>FAQs</h1>
+                            <h2>(Frequently Asked Questions)</h2>
+                            {mappedFAQs}
+                        </aside>
+                    </section>
                 </div>
             </div>
         )

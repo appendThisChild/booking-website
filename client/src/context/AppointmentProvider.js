@@ -26,7 +26,7 @@ class AppointmentProvider extends Component {
             clientAppointmentsPresent: [],
             clientAppointmentsPast: [],
             currentAppointmentInProgress: "",
-            appLengths: [60, 90, 120],
+            appLengths: [60, 75, 90],
             clientID: "",
             clientName: "",
             clientEmail: "",

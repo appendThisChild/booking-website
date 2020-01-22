@@ -46,17 +46,13 @@ const Change = props => {
                     </>
                     :
                     <>
-                        <h3>Change Password:</h3>
+                        <h3>Change Password</h3>
                         <h5>Must be at least 8 characters</h5>
                         <p>{errMsg}</p>
-                        <article>
-                            <span>New Password:</span>
-                            <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                        </article>
-                        <article>
-                            <span>Confirm Password:</span>
-                            <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
-                        </article>
+                        <div>
+                            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="New Password..."/>
+                            <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Confirm Password..."/>
+                        </div>
                         <button onClick={changePassword}>Change Password</button>
                     </>
                     }

@@ -2,7 +2,7 @@ import React from 'react'
 
 const PricingDisplay = props => {
     const { pricing, className, travelFee } = props
-    const minutesArr = [60, 90, 120]
+    const minutesArr = [60, 75, 90]
     const singles = []
     const triples = []
     pricing.forEach(priceArr => {
@@ -17,9 +17,9 @@ const PricingDisplay = props => {
     const mappedSingles = singles.map((price, i) => <p key={i}>{minutesArr[i]} Minutes - ${price / 100}</p>)
     const mappedTriples = triples.map((price, i) => <p key={i}>{minutesArr[i]} Minutes - ${price / 100}</p>)
     return(
-        <div className={className}>
+        <section className={className}>
             <div>
-                <h3>Pricing:</h3>
+                <h1>Pricing</h1>
                 <div>
                     <div>
                         <h4>Single Massage</h4>
@@ -32,13 +32,13 @@ const PricingDisplay = props => {
                     {travelFee ?
                     <div>
                         <h4>On-Site Travel Fee</h4>
-                        <p>${travelFee / 100} will be added for individual bookings.</p>
-                        <p>( Travel fee is NOT refundable )</p>
+                        <p>${travelFee / 100} will be added for individual bookings. Travel fee is NOT refundable.</p>
+                        {/* <p></p> */}
                     </div>
                     :null}
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

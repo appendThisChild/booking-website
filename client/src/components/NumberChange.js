@@ -5,7 +5,7 @@ import { withToggler } from "../components/Toggler.js"
 const NumberChange = props => {
     const {handleChange, handleNumberDidChange, on, toggle, numberDisplay, clientPhoneNumber } = props
     return(
-        <div>
+        <aside>
             {on ?
             <>
                 <p>{numberDisplay(clientPhoneNumber)}</p>
@@ -17,7 +17,7 @@ const NumberChange = props => {
             :
             <input type="tel" name="clientPhoneNumber" value={clientPhoneNumber} onChange={handleChange} />
             }
-        </div>
+        </aside>
     )
 }
 

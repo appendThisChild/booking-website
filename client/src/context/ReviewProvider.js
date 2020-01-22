@@ -8,12 +8,13 @@ class ReviewProvider extends Component {
         super()
         this.state = {
             reviews: [],
-            rating: 5
+            rating: 5,
+            numberOfReviews: 0
         }
     }
     getReviews = callback => {
         axios.get('/reviews')
-            .then(res => this.setState({ reviews: res.data.reviews, rating: res.data.rating }, () => callback()))
+            .then(res => this.setState({ reviews: res.data.reviews, rating: res.data.rating, numberOfReviews: res.data.numberOfReviews }, () => callback()))
             .catch(err => console.log(err.response.data.errMsg))
     }
     postReview = (data, callback) => {

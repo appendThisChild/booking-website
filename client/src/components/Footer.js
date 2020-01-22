@@ -4,12 +4,9 @@ const Footer = () => {
     return(
         <div className={"footer"}>
             <div>
-                <p>&#169; 2019 Massage Therapy Matters</p>
+                <p className={"ryanLink"} >&#169; 2020 Pettingill Industries</p>
+                <p>&#169; 2020 Massage Therapy Matters</p>
                 <p> All rights reserved.</p>
-            </div>
-            <div>
-                <p>Website Design:</p>
-                <p className={"ryanLink"}>Pettingill Industries</p>
             </div>
         </div>
     )

@@ -69,14 +69,12 @@ const MonthDisplay = props => {
 
     return(
         <div className="calendar">
-            <div>
-                <h4>{props.monthsOfTheYear[viewedMonth]}</h4>
-                    <div className="weekToggleContainer">
-                        <span onClick={() => {toggleMonth(-1)}} className="prevWeek" >{"<"}</span>
-                        <span onClick={() => {toggleMonth(1)}} className="nextWeek" >{">"}</span>
-                    </div>
-                <DatesDisplayed month={dateArr} setViewedDay={setViewedDay}/>
+            <h4>{props.monthsOfTheYear[viewedMonth]}</h4>
+            <div className="weekToggleContainer">
+                <span onClick={() => {toggleMonth(-1)}} className="prevWeek" >{"<"}</span>
+                <span onClick={() => {toggleMonth(1)}} className="nextWeek" >{">"}</span>
             </div>
+            <DatesDisplayed month={dateArr} setViewedDay={setViewedDay}/>
         </div>
     )
 }

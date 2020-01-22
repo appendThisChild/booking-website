@@ -8,23 +8,23 @@ const AvailableAppointmentDay = props => {
         <AvailableTime year={year} month={month} date={date} timeBlock={time} handlePackageAndSubmit={handlePackageAndSubmit} key={i}/>
     )
     return(
-        <div>
-            <div className="weekToggleContainer">
-                {viewedDay < nextDay ?
-                null
-                :
-                <span onClick={() => {newDay(-1)}} className="prevWeek" >{"<<<"}</span>}
-                {viewedDay > 90 + nextDay ?
-                null
-                :
-                <span onClick={() => {newDay(1)}} className="nextWeek" >{">>>"}</span>}
-            </div>
+        <>
             <div className="availableDays">
                 <h1>{day}</h1>
                 <p>{month + 1}/{date}</p>
-                {mappedTimes}
+                <div className="weekToggleContainer">
+                    {viewedDay < nextDay ?
+                    null
+                    :
+                    <span onClick={() => {newDay(-1)}} className="prevWeek" >{"<<<"}</span>}
+                    {viewedDay > 90 + nextDay ?
+                    null
+                    :
+                    <span onClick={() => {newDay(1)}} className="nextWeek" >{">>>"}</span>}
+                </div>
+                {props.availableTimeBlocks.length === 0 ? <p style={{ fontStyle: "italic", fontSize: "25px"}}>"No available times"</p> : mappedTimes}
             </div>
-        </div>
+        </>
     )
 }
 

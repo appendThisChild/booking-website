@@ -56,13 +56,11 @@ class SignIn extends Component {
     }
     render(){
         return(
-            <div className="background">
-                <div className="border">
+            <div>
                     <div className="loginSignup">
                         {this.state.formToggle ?
                         <div>
                             <h1>Sign Up</h1>
-                            
                             <p>Already have an Account? <span onClick={this.toggleForm}>Click here</span> to Login!</p>
                             <SignupAuthForm
                                 errMsg={this.props.errMsg}
@@ -93,7 +91,6 @@ class SignIn extends Component {
                         </div>
                         }
                     </div>
-                </div>
             </div>
         )
     }

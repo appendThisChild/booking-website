@@ -99,8 +99,8 @@ ownerRouter.route('/appointment/past')
             const purchaseEarnings = pastYearApps.reduce((total, sum) => total + sum.amount, 0) / 100
             const travelFees = pastYearAppsForTravelFees.reduce((total, sum) => total + sum.travelFee, 0) / 100
             const pastYearEarnings = purchaseEarnings + travelFees
-            const therapistEarnings = (purchaseEarnings * .80 + travelFees).toFixed(2)
-            const websiteDeductions = (purchaseEarnings * .10).toFixed(2) - adjustment
+            const therapistEarnings = (purchaseEarnings * .5 + travelFees).toFixed(2)
+            const websiteDeductions = (purchaseEarnings * .1).toFixed(2) - adjustment
             const companyEarnings = (pastYearEarnings - therapistEarnings - websiteDeductions).toFixed(2)
             const data = {
                 yearEarnings: pastYearEarnings,

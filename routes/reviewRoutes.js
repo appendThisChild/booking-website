@@ -31,7 +31,7 @@ reviewRouter.route('/')
             })
             
             const rating = (reviews.reduce((total, sum) => total + sum.rating, 0) / reviews.length).toFixed(2)
-            return res.status(200).send({ reviews: reviews, rating: Number(rating) })
+            return res.status(200).send({ reviews: reviews, rating: Number(rating), numberOfReviews: foundReviews.length })
         })
     })
     .post((req, res, next) => {

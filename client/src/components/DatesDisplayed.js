@@ -30,11 +30,11 @@ const DatesDisplayed = props => {
 
     const datesMapped = datesOrdered.map((arr, i) => <DaysDisplay setViewedDay={setViewedDay} arr={arr} key={i}/>)
     return(
-        <div>
+        <main>
             <div>
                 {datesMapped}
             </div>
-        </div>
+        </main>
     )
 }
 

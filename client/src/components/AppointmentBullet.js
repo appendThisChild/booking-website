@@ -73,23 +73,19 @@ const AppointmentBullet = props => {
     const noRequest = specailRequests.every((element) => element === null)
     return(
         <div className={`${canceled ? "appointmentCanceled " : ""}appointmentBullet${props.on ? "": " appointmentOpened"}`}>
-            <div>
-                
-                <span>{date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()} ({daysOfTheWeek[date.getDay()]})</span>
-                <span>|</span>
-                <span>@ {hour}:{min} {amPm}</span>
-                <span>|</span>
-                <span>{appLengthInMinutes} Minutes</span>
-            </div>
+            <main>
+                <p>{daysOfTheWeek[date.getDay()]} <span>{date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}</span></p>
+                <p>{appLengthInMinutes} Minutes @ {hour}:{min} {amPm}</p>
+            </main>
             {props.on ?
             null
             :
-            <div>
+            <section>
                  {(future && client) || (future && therapist) ?
                 <>
                     {!canceled ?
                     <>
-                        <button onClick={() => props.cancelAppointment(_id, therapist)}>Cancel Appointment</button>
+                        <button onClick={() => props.cancelAppointment(_id, therapist)}>Cancel</button>
                     </>
                     :null}
                 </>
@@ -115,7 +111,7 @@ const AppointmentBullet = props => {
                     <p>"{intake.comments === "" ? 'None' : intake.comments}"</p>
                 </div>
                 :null}
-            </div>
+            </section>
             }
             <nav>
                 <span onClick={props.toggle}>{props.on ? "Expand" : "Condense"}</span>

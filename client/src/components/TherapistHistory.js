@@ -118,7 +118,7 @@ class TherapistHistory extends Component {
             <div className="therapistHistory">
                 <ProfileNav isOn={2}/>
                 {dataIn ?
-                <div className="historyFlex">
+                <>
                     <AppointmentHistory 
                         history={therAppointmentsPresent} 
                         title={"Upcoming Appointments"} 
@@ -148,7 +148,7 @@ class TherapistHistory extends Component {
                         yearTherapistEarnings={therapistEarnings}
                         yearView={true}
                     />
-                </div>
+                </>
                 : null
                 }
             </div>

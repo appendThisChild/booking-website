@@ -16,7 +16,7 @@ class Book extends Component {
         }
     }
     componentDidMount(){
-        this.props.getAllTherapists(() => {})
+        window.scroll(0,0)
     }
     handlePickTime = e => {
         e.preventDefault()
@@ -26,21 +26,18 @@ class Book extends Component {
     }
     render(){
         return(
-            <div className="background">
-                <div className="border">
-                    <div className="bookingPriceCentered">
-                        <PricingDisplay pricing={this.props.genInfo.pricing} travelFee={this.props.genInfo.onSitePricing} className={"bookingPriceDisplay"}/>
-                    </div>
-                    <div className="bookingPriceCentered">
-                        <div className="bookingTherapistDisplay">
-                            <div>
-                                <h3>Book a Massage:</h3>
-                                <TherapistDisplay />
-                                <TherapistTimeChoice handleSubmit={this.handlePickTime} className="selectTherapist"/>
-                            </div>
+            <div className="book">
+                <main>
+                    <div>
+                        <h1>Book a Massage</h1>
+                        <div>
+                            <TherapistDisplay />
+                            <TherapistTimeChoice handleSubmit={this.handlePickTime} className=""/>
                         </div>
                     </div>
-                </div>
+                </main>
+                <div className="firstBookDivide"></div>
+                <PricingDisplay pricing={this.props.genInfo.pricing} travelFee={this.props.genInfo.onSitePricing} className={""}/>
             </div>
         )
     }

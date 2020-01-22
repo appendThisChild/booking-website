@@ -68,13 +68,15 @@ class AppointmentBooked extends Component {
             numberDidChange
         }
         this.props.updateIntake(this.props.currentAppointmentInProgress._id, data, () => {
-            this.setState({ formDone: true })
+            window.scroll(0,0);
+            this.setState({ formDone: true });
         })
     }
     handleNumberDidChange = () => {
         this.setState({ numberDidChange: true })
     }
     componentDidMount(){
+        window.scroll(0,0);
         const { currentAppointmentInProgress } = this.props
         if (currentAppointmentInProgress.status === "Paid") {
             this.props.appointmentSubmitted()
@@ -88,36 +90,22 @@ class AppointmentBooked extends Component {
     render(){
         const { dataIn, formDone } = this.state
         return(
-            <div className="background">
-                <div className="border">
+            <div className="bookedApp">
                 {dataIn ?
                 <>  
-                    <div className="appointmentBookedCentered">
-                        <div className="appointmentBookedContainers">
-                            <div>
-                                <h1>{formDone ? "Form submitted!" : "Appointment booked!"}</h1>
-                            </div>
-                        </div>
-                        <div className={`appointmentBookedContainers ${formDone ? "intakeFormDone" : ""}`}>
-                            <div className="bookedInside2">
-                                <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={true} showTherapistInfo={true}/>
-                            </div>
-                        </div>
-                    </div>
+                    <h1>{formDone ? "Form submitted!" : "Appointment booked!"}</h1>
+                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={true} showTherapistInfo={true}/>
                     {!formDone ?
-                    <div className="appointmentBookedContainers">
-                        <IntakeForm 
-                            handleChange={this.handleChange}
-                            handleSubmit={this.handleSubmit}
-                            handleNumberDidChange={this.handleNumberDidChange}
-                            {...this.state}
-                        />
-                    </div>
+                    <IntakeForm 
+                        handleChange={this.handleChange}
+                        handleSubmit={this.handleSubmit}
+                        handleNumberDidChange={this.handleNumberDidChange}
+                        {...this.state}
+                    />
                     :null}
                     <CheckingAffiliate appointment={this.props.currentAppointmentInProgress} />
                 </>
                 :null}
-                </div>
             </div>
         )
     }

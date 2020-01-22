@@ -1,4 +1,7 @@
 import React, { Component } from "react"
+
+import Secure from "../images/secure-stripe-payment-logo1.png"
+
 import Countdown from "react-countdown-now"
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
@@ -65,9 +68,9 @@ class PackageAndSubmit extends Component {
             pChoice++
         }
         let length = 0
-        if (appLengthInMinutes === 90){
+        if (appLengthInMinutes === 75){
             length = 1
-        } else if (appLengthInMinutes === 120){
+        } else if (appLengthInMinutes === 90){
             length = 2
         }
         axios.post('/payment/charge', { 
@@ -99,9 +102,9 @@ class PackageAndSubmit extends Component {
                 this.props.updateAppointment(_id, updates, () => {
                     if (pChoice === 2){
                         let visitsIndex = 0
-                        if (appLengthInMinutes === 90){
+                        if (appLengthInMinutes === 75){
                             visitsIndex = 1
-                        } else if (appLengthInMinutes === 120){
+                        } else if (appLengthInMinutes === 90){
                             visitsIndex = 2
                         }
                         this.props.updateVisits(clientID, { index: visitsIndex, adjust: 2 }, () => {
@@ -155,9 +158,9 @@ class PackageAndSubmit extends Component {
                 }
                 this.props.updateAppointment( _id, updates, () => {
                     let visitsIndex = 0
-                    if (appLengthInMinutes === 90){
+                    if (appLengthInMinutes === 75){
                         visitsIndex = 1
-                    } else if (appLengthInMinutes === 120){
+                    } else if (appLengthInMinutes === 90){
                         visitsIndex = 2
                     }
                     this.props.updateVisits(clientID, { index: visitsIndex, adjust: -1 }, () => {
@@ -191,9 +194,9 @@ class PackageAndSubmit extends Component {
         }
         this.props.updateAppointment(_id, updates, () => {
             let visitsIndex = 0
-            if (appLengthInMinutes === 90){
+            if (appLengthInMinutes === 75){
                 visitsIndex = 1
-            } else if (appLengthInMinutes === 120){
+            } else if (appLengthInMinutes === 90){
                 visitsIndex = 2
             }
             this.props.updateVisits(clientID, { index: visitsIndex, adjust: -1 }, () => {
@@ -204,15 +207,16 @@ class PackageAndSubmit extends Component {
         })
     }
     componentDidMount(){
+        window.scroll(0,0);
         const { currentAppointmentInProgress, genInfo } = this.props
         if (currentAppointmentInProgress.status === "Pending") {
             const length = currentAppointmentInProgress.appLengthInMinutes
             let amounts = []
             if (length === 60){
                 amounts = genInfo.pricing[0]
-            } else if (length === 90) {
+            } else if (length === 75) {
                 amounts = genInfo.pricing[1]
-            } else if (length === 120) {
+            } else if (length === 90) {
                 amounts = genInfo.pricing[2]
             }
             this.props.downloadPDF((pdf) => {
@@ -237,7 +241,6 @@ class PackageAndSubmit extends Component {
                     }) 
                 }
             })
-            window.scrollTo(0, 0);
         } else { 
            this.props.history.push("/book")
         }
@@ -253,108 +256,115 @@ class PackageAndSubmit extends Component {
             return <option key={i} value={amount}>{description} ${amount / 100}</option>
         })
         return(
-            <div className="background">
-                <div className="border">
-                    <ToastContainer autoClose={10000} />
+            <>
+                <ToastContainer autoClose={10000} />
+                <div className="packageAndSubmit">
+                    
                     {dataIn ?
                     <>  
-                        <div className="packageAndSubmitCenter">
-                            <div className="pAndSInside">
-                                <div className="inside1">
-                                    <Countdown date={date + 600000} renderer={this.tenMinuteTimer}/>
-                                    <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={this.props.currentAppointmentInProgress.inStudio ? false : true} showTherapistInfo={false}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="pAndSInside1">
-                            <div className="inside2">
-                                <h2>Select a package:</h2>
-                                <div>
-                                    <select name="amount" value={amount} onChange={this.handleChange}>
-                                        {except ? 
-                                        <option value={0}>Pre-Paid Massage</option>
-                                        :null}
-                                        {mappedAmounts}
-                                    </select>
-                                </div>
-                                {amount !== 0 ?
-                                <div>
-                                    {!inStudio && genInfo.onSitePricing ?
-                                        <span style={{ fontSize: '19px', textAlign: 'center', paddingBottom: '10px'}}>${genInfo.onSitePricing / 100} Travel Fee will be added to this transaction.</span>
-                                    :null}
-                                    {liabilityCheck ? 
-                                    <>
-                                        <StripeCheckout 
-                                            name="Massage Therapy Matters"
-                                            stripeKey={apiKey}
-                                            token={this.handleSubmit}
-                                            amount={inStudio ? amount : amount + genInfo.onSitePricing}
-                                            email={clientEmail}
-                                            ComponentClass="div"
-                                        >
-                                        <button>Pay With Card</button>
-                                        </StripeCheckout>
-                                        <p>{checkBoxMessage}</p>
-                                    </>
-                                    :
-                                    <>
-                                        <button onClick={this.checkBox}>Pay With Card</button>
-                                        <p>{checkBoxMessage}</p>
-                                    </>
-                                    }
-                                </div>
+                        <Appointment appointment={this.props.currentAppointmentInProgress} showAddress={this.props.currentAppointmentInProgress.inStudio ? false : true} showTherapistInfo={false}/>
+                        <main className="selectPackage">
+                            <Countdown date={date + 600000} renderer={this.tenMinuteTimer}/>
+                            <h1>Select a package</h1>
+                            <select name="amount" value={amount} onChange={this.handleChange}>
+                                {except ? 
+                                <option value={0}>Pre-Paid Massage</option>
+                                :null}
+                                {mappedAmounts}
+                            </select>
+                            {amount !== 0 ?
+                            <div>
+                                {!inStudio && genInfo.onSitePricing ?
+                                    <span>${genInfo.onSitePricing / 100} Travel Fee will be added to this transaction.</span>
+                                :null}
+                                {liabilityCheck ? 
+                                <>
+                                    {checkBoxMessage ? <p>{checkBoxMessage}</p> : null}
+                                    <StripeCheckout 
+                                        name="Massage Therapy Matters"
+                                        stripeKey={apiKey}
+                                        token={this.handleSubmit}
+                                        amount={inStudio ? amount : amount + genInfo.onSitePricing}
+                                        email={clientEmail}
+                                        ComponentClass="div"
+                                    >
+                                    <button>Pay With Card</button>
+                                    </StripeCheckout>
+                                </>
                                 :
                                 <>
-                                {!inStudio ?
-                                <div>
-                                    {genInfo.onSitePricing ?
-                                        <span style={{ fontSize: '19px', textAlign: 'center', paddingBottom: '10px'}}>${genInfo.onSitePricing / 100} Travel Fee will be added to this transaction.</span>
-                                    :null}
-                                    {liabilityCheck ? 
-                                    <>
-                                        <StripeCheckout 
-                                            name="Massage Therapy Matters"
-                                            stripeKey={apiKey}
-                                            token={this.handleTravelFee}
-                                            amount={genInfo.onSitePricing}
-                                            email={clientEmail}
-                                            ComponentClass="div"
-                                        >
-                                        <button>Pay With Card</button>
-                                        </StripeCheckout>
-                                        <p>{checkBoxMessage}</p>
-                                    </>
-                                    :
-                                    <>
-                                        <button onClick={this.checkBox}>Pay With Card</button>
-                                        <p>{checkBoxMessage}</p>
-                                    </>
-                                    }
-                                </div>
-                                :
+                                    {checkBoxMessage ? <p>{checkBoxMessage}</p> : null}
                                     <div>
-                                        <button onClick={!liabilityCheck ? this.checkBox : this.handlePrepaid}>Use Pre-Paid</button>
-                                        <p>{checkBoxMessage}</p>
+                                        <button onClick={this.checkBox}>Pay With Card</button>
                                     </div>
-                                }
                                 </>
                                 }
-                                <div>
-                                    <input type="checkbox" name="liabilityCheck" onChange={this.handleCheck}/>
-                                    <span>Read Liability Wavier.</span>
-                                </div>
-                                <div>
-                                    <a href={`data:application/pdf;base64,${this.state.dataPDF}`} download="Massage-Therapy-Wavier.pdf">Click Here</a>
-                                    <span> to download Liability Wavier.</span>
-                                </div>
-                                
                             </div>
-                        </div>
+                            :
+                            <>
+                            {!inStudio ?
+                            <div>
+                                {genInfo.onSitePricing ?
+                                    <span>${genInfo.onSitePricing / 100} Travel Fee will be added to this transaction.</span>
+                                :null}
+                                {liabilityCheck ? 
+                                <>
+                                    {checkBoxMessage ? <p>{checkBoxMessage}</p> : null}
+                                    {genInfo.onSitePricing ?
+                                    <StripeCheckout 
+                                        name="Massage Therapy Matters"
+                                        stripeKey={apiKey}
+                                        token={this.handleTravelFee}
+                                        amount={genInfo.onSitePricing}
+                                        email={clientEmail}
+                                        ComponentClass="div"
+                                    >
+                                    <button>Pay With Card</button>
+                                    </StripeCheckout>
+                                    :
+                                    <div>
+                                        <button onClick={this.handlePrepaid}>Use Pre-Paid</button>
+                                    </div>
+                                    }
+                                </>
+                                :
+                                <>
+                                    {checkBoxMessage ? <p>{checkBoxMessage}</p> : null}
+                                    {genInfo.onSitePricing ?
+                                    <div>
+                                        <button onClick={this.checkBox}>Pay With Card</button>
+                                    </div>
+                                    :
+                                    <div>
+                                        <button onClick={this.checkBox}>Use Pre-Paid</button>
+                                    </div>
+                                    }
+                                </>
+                                }
+                            </div>
+                            :
+                            <div>
+                                {checkBoxMessage ? <p>{checkBoxMessage}</p> : null}
+                                <div>
+                                    <button onClick={!liabilityCheck ? this.checkBox : this.handlePrepaid}>Use Pre-Paid</button>
+                                </div>
+                            </div>
+                            }
+                            </>
+                            }
+                            <aside>
+                                <span><input type="checkbox" name="liabilityCheck" onChange={this.handleCheck}/> Read Liability Wavier.</span>
+                            </aside>
+                            <aside>
+                                <span><a href={`data:application/pdf;base64,${this.state.dataPDF}`} download="Massage-Therapy-Wavier.pdf">Click Here</a> to download Liability Wavier.</span>
+                            </aside>
+                            <img src={Secure} alt="Stripe Secured Checkout"/>
+                        </main>
                     </>
                     :null}
-                    <CancelationPolicyDisplay />
                 </div>
-            </div>
+                <CancelationPolicyDisplay />
+            </>
         )
     }
 }

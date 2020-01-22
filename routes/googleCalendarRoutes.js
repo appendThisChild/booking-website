@@ -124,9 +124,9 @@ googleRouter.route('/calendar/:id/:isTherapist')
             dateCanceled: new Date()
           }
           let index = 0
-          if (foundAppointment.appLengthInMinutes === 90){
+          if (foundAppointment.appLengthInMinutes === 75){
             index = 1
-          } else if (foundAppointment.appLengthInMinutes === 120){
+          } else if (foundAppointment.appLengthInMinutes === 90){
             index = 2 
           }
           if (foundAppointment.packageChoice === 1){

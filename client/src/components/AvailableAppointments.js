@@ -9,10 +9,8 @@ const AvailableAppointments = props => {
     )
     return(
         <div className="availableAppointments">
-            <div>
-                <h1>Select a time:</h1>
-                {mappedDays}
-            </div>
+            <h1>Select a Time</h1>
+            {mappedDays}
         </div>
     )
 }

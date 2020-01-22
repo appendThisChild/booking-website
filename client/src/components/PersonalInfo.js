@@ -116,9 +116,9 @@ class PersonalInfo extends Component {
             if (i === 0){
                 minutes = "60"
             } else if (i === 1){
-                minutes = "90"
+                minutes = "75"
             } else {
-                minutes = "120"
+                minutes = "90"
             }
             return <p key={i}>{minutes}-Minute: {remain}</p>
         })

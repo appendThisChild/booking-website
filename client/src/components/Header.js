@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 
+import Logo from "../images/thisFlower.png"
+
 import Nav from "./Nav.js"
 
 class Header extends Component {
@@ -13,6 +15,9 @@ class Header extends Component {
     render(){
         return(
             <div className={"headerBackground"}>
+                <section>
+                    <img src={Logo} alt="Company Logo"/>
+                </section>
                 <div className={"titleContainer"}>
                     <h1 className={"headerTitle1"}>Massage</h1>
                     <h1 className={"headerTitle2"}>Therapy</h1>

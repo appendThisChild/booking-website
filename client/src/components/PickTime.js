@@ -87,14 +87,14 @@ class PickTime extends Component {
                     buffer = 120;
                 }
                 // creates time blocks to represent appointment
-                const timeBlockArr = this.createTimeBlocks(hours, minutes, obj.appLengthInMinutes + buffer)
+                const timeBlockArr = this.createTimeBlocks(hours, minutes, obj.appLengthInMinutes === 75 ? 90 : obj.appLengthInMinutes + buffer)
                 // pushes the times blocks to the area if they aren't already present
                 timeBlockArr.forEach(arr1 => {
                     const alreadyPresent = appBookedBlocks.some(arr2 => arr1[0] === arr2[0] && arr1[1] === arr2[1])
                     if (!alreadyPresent) appBookedBlocks.push(arr1)
                 })
                 // create array to display scheduled appointments as normal 
-                const normalTimeBlockArr = this.createTimeBlocks(obj.appDate.getHours(), obj.appDate.getMinutes(), obj.appLengthInMinutes)
+                const normalTimeBlockArr = this.createTimeBlocks(obj.appDate.getHours(), obj.appDate.getMinutes(), obj.appLengthInMinutes === 75 ? 90 : obj.appLengthInMinutes)
                 normalTimeBlockArr.forEach(arr => normalAppBookedBlocks.push(arr))
             })
             // removes booked spaces from the times available
@@ -120,8 +120,8 @@ class PickTime extends Component {
                     buffer = 120;
                 }
                 // creates time blocks for time available
-                const timeBlockArr = this.createTimeBlocks(hours, minutes, parseInt(this.props.appLengthInMinutes) + buffer)
-                const normalTimeBlockArr = this.createTimeBlocks(arr1[0], arr1[1], parseInt(this.props.appLengthInMinutes))
+                const timeBlockArr = this.createTimeBlocks(hours, minutes, parseInt(this.props.appLengthInMinutes) === 75 ? 90 : parseInt(this.props.appLengthInMinutes) + buffer)
+                const normalTimeBlockArr = this.createTimeBlocks(arr1[0], arr1[1], parseInt(this.props.appLengthInMinutes) === 75 ? 90 : parseInt(this.props.appLengthInMinutes))
                 // check if all blocks are available in array
                 timeBlockArr.forEach(arr2 => {
                     const isThere = normalAppBookedBlocks.some(arr3 => arr2[0] === arr3[0] && arr2[1] === arr3[1])
@@ -161,6 +161,7 @@ class PickTime extends Component {
         }))
     }
     handleEdit = e => {
+        window.scroll(0,0)
         e.preventDefault()
         this.therapistInfo()
         this.editToggler()
@@ -191,8 +192,8 @@ class PickTime extends Component {
             hr--;
             buffer = 120;
         }
-        const choiceTimes = this.createTimeBlocks(hour, minutes, parseInt(this.props.appLengthInMinutes))
-        const choiceTimesWithBuffer = this.createTimeBlocks(hr, mins, parseInt(this.props.appLengthInMinutes) + buffer)
+        const choiceTimes = this.createTimeBlocks(hour, minutes, parseInt(this.props.appLengthInMinutes) === 75 ? 90 : parseInt(this.props.appLengthInMinutes))
+        const choiceTimesWithBuffer = this.createTimeBlocks(hr, mins, parseInt(this.props.appLengthInMinutes) === 75 ? 90 : parseInt(this.props.appLengthInMinutes) + buffer)
         this.props.getAllAppointmentsForSelectedTherapist(this.props.therapistID, () => {
             this.props.therapistAppointments.map(obj => obj.appDate = new Date(obj.appDate))
             // getting all appointments that match the date selected
@@ -218,14 +219,14 @@ class PickTime extends Component {
                     buffer = 120;
                 }
                 // creates time blocks to represent appointment
-                const timeBlockArrWithBuffer = this.createTimeBlocks(hours, minutes, obj.appLengthInMinutes + buffer)
+                const timeBlockArrWithBuffer = this.createTimeBlocks(hours, minutes, obj.appLengthInMinutes === 75 ? 90 : obj.appLengthInMinutes + buffer)
                 // pushes the times blocks to the area if they aren't already present
                 timeBlockArrWithBuffer.forEach(arr1 => {
                     const alreadyPresent = listOfAppointmentsWithBuffer.some(arr2 => arr1[0] === arr2[0] && arr1[1] === arr2[1])
                     if (!alreadyPresent) listOfAppointmentsWithBuffer.push(arr1)
                 })
                 // creates normal list of times to push in array
-                const timeBlockArr = this.createTimeBlocks(obj.appDate.getHours(), obj.appDate.getMinutes(), obj.appLengthInMinutes)
+                const timeBlockArr = this.createTimeBlocks(obj.appDate.getHours(), obj.appDate.getMinutes(), obj.appLengthInMinutes === 75 ? 90 : obj.appLengthInMinutes)
                 timeBlockArr.forEach(arr => listOfCurrentAppointments.push(arr))
             })
             // check if choice for appointment doesn't exist in a buffer && flipping buffers check
@@ -305,6 +306,7 @@ class PickTime extends Component {
         })
     }
     componentDidMount(){
+        window.scroll(0,0)
         if(this.props.therapistID === "" || this.props.appLengthInMinutes === "") this.props.history.push("/book")
         const hour = new Date().getHours()
         let dayToView = 1
@@ -323,33 +325,29 @@ class PickTime extends Component {
         const { therapistName, appLengthInMinutes } = this.props
         const { startDay, viewedDay, editToggle, dayShowing, nextDay, monthsOfTheYear } = this.state
         return(
-            <div className="background">
-                <div className="border">
-                    <section>
-                        <ChoiceDisplay  
-                            handleEdit={this.handleEdit} 
-                            therapistName={therapistName} 
-                            appLengthInMinutes={appLengthInMinutes}
-                            isInStudio={this.props.inStudio} 
-                            editToggler={this.editToggler} 
-                            editToggle={editToggle} 
-                        />
-                        <MonthDisplay 
-                            monthsOfTheYear={monthsOfTheYear}
-                            startDay={startDay} 
-                            nextDay={nextDay}
-                            viewedDay={viewedDay}
-                            setViewedDay={this.setViewedDay}
-                        />
-                    </section>
-                    <AvailableAppointments 
-                        appointmentsArr={dayShowing} 
-                        handlePackageAndSubmit={this.handlePackageAndSubmit}
-                        viewedDay={viewedDay} 
-                        newDay={this.newDay}
-                        nextDay={nextDay}
-                    /> 
-                </div>
+            <div className="pickTime">
+                <MonthDisplay 
+                    monthsOfTheYear={monthsOfTheYear}
+                    startDay={startDay} 
+                    nextDay={nextDay}
+                    viewedDay={viewedDay}
+                    setViewedDay={this.setViewedDay}
+                />
+                <AvailableAppointments 
+                    appointmentsArr={dayShowing} 
+                    handlePackageAndSubmit={this.handlePackageAndSubmit}
+                    viewedDay={viewedDay} 
+                    newDay={this.newDay}
+                    nextDay={nextDay}
+                /> 
+                <ChoiceDisplay  
+                    handleEdit={this.handleEdit} 
+                    therapistName={therapistName} 
+                    appLengthInMinutes={appLengthInMinutes}
+                    isInStudio={this.props.inStudio} 
+                    editToggler={this.editToggler} 
+                    editToggle={editToggle} 
+                />
             </div> 
         )
     }

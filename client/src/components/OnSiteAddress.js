@@ -43,6 +43,7 @@ const OnSiteAddress = props => {
         })
     }
     useEffect(() => {
+        window.scroll(0,0)
         if (props.currentAppointmentInProgress.status === "Pending"){
             setDataIn(true)
         } else {
@@ -52,50 +53,42 @@ const OnSiteAddress = props => {
     }, [])
     const mappedStates = states.map((str, i) => <option value={str} key={i}>{str}</option> )
     return(
-        <div className="background">
-            <div className="border">
-                {dataIn ? 
-                <>
-                    <div className="packageAndSubmitCenter">
-                        <div className="pAndSInside">
-                            <div className="inside1">
-                                <Countdown date={date + 600000} renderer={tenMinuteTimer}/>
-                                <Appointment appointment={props.currentAppointmentInProgress} showAddress={false} showTherapistInfo={false}/>
-                                <form onSubmit={handleSubmit}>
-                                    <h1>On-Site Address:</h1>
-                                    <h3>Address the Therapist will be visiting for appointment.</h3>
-                                    <input 
-                                        type="text"
-                                        name="street"
-                                        value={address.street}
-                                        onChange={handleChange}
-                                        required={true}
-                                        placeholder="Street..."/>
-                                    <input 
-                                        type="text"
-                                        name="city"
-                                        value={address.city}
-                                        onChange={handleChange}
-                                        required={true}
-                                        placeholder="City..."/>
-                                    <select name="state" value={address.state} onChange={handleChange} required={true}>
-                                        {mappedStates}
-                                    </select>
-                                    <input 
-                                        type="text"
-                                        name="zipcode"
-                                        value={address.zipcode}
-                                        onChange={handleChange}
-                                        required={true}
-                                        placeholder="Zip Code..."/>
-                                    <button>Submit Address</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>    
-                </>
-                :null}
-            </div>
+        <div className="onSiteAddress">
+            {dataIn ? 
+            <>
+                <Appointment appointment={props.currentAppointmentInProgress} showAddress={false} showTherapistInfo={false}/>
+                <form onSubmit={handleSubmit}>
+                    <Countdown date={date + 600000} renderer={tenMinuteTimer}/>
+                    <h1>On-Site Address</h1>
+                    <h3>Address the Therapist will be visiting for appointment.</h3>
+                    <input 
+                        type="text"
+                        name="street"
+                        value={address.street}
+                        onChange={handleChange}
+                        required={true}
+                        placeholder="Street..."/>
+                    <input 
+                        type="text"
+                        name="city"
+                        value={address.city}
+                        onChange={handleChange}
+                        required={true}
+                        placeholder="City..."/>
+                    <select name="state" value={address.state} onChange={handleChange} required={true}>
+                        {mappedStates}
+                    </select>
+                    <input 
+                        type="text"
+                        name="zipcode"
+                        value={address.zipcode}
+                        onChange={handleChange}
+                        required={true}
+                        placeholder="Zip Code..."/>
+                    <button>Submit Address</button>
+                </form>
+            </>
+            :null}
         </div>
     )
 }

@@ -18,8 +18,7 @@ const Request = () => {
         return(
             <div className="passwordRecovery">
                 <form onSubmit={handleSubmit}>
-                    <h2>Enter email address</h2>
-                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} required={true}/> 
+                    <input type="email" value={email} onChange={e => setEmail(e.target.value)} required={true} placeholder="Email address..."/> 
                     <button>Reset Password</button>
                 </form>
             </div>

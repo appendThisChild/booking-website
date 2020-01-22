@@ -15,9 +15,7 @@ const AvailableTime = props => {
     }
     if (timeBlock[1] === 0) secondBlock = "00";
     return(
-        <div>
-            <button onClick={() => handlePackageAndSubmit(year, month, date, timeBlock[0], timeBlock[1])}>{minuteBlock}:{secondBlock} {amPm}</button>
-        </div>
+        <button onClick={() => handlePackageAndSubmit(year, month, date, timeBlock[0], timeBlock[1])}>{minuteBlock}:{secondBlock} {amPm}</button>
     )
 }
 

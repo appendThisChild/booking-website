@@ -124,7 +124,7 @@ class AccontHistory extends Component {
             <div className="accountHistory">
                 <ProfileNav />
                 {this.state.dataIn ?
-                <div className="historyFlex">
+                <>
                     {searchedAccount.isTherapist ?
                     <AppointmentHistory 
                     history={searchedTherapistHistory} 
@@ -153,7 +153,7 @@ class AccontHistory extends Component {
                     year={pastYear} 
                     toggle={pastToggle}
                     switchMonth={switchPastMonth}/>
-                </div>
+                </>
                 : null }
             </div>
         )

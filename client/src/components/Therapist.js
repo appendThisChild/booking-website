@@ -30,7 +30,7 @@ class Therapist extends Component {
     render(){
         const { firstName, lastName, address, firstCharCap, numbers } = this.props
         const mappedShownTherapists = numbers.total.map((bullet, i) => {
-            return <span key={i} className={i === numbers.therapist ? "bulletBlack" : "bulletGray"}>&#x2022;</span>
+            return <span key={i} className={i === numbers.therapist ? "bulletBlack" : "bulletGray"}></span>
         })
         return(
             <div className="therapist">

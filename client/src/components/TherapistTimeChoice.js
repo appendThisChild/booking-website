@@ -24,7 +24,7 @@ const TherapistTimeChoice = props => {
         site = selectedTherapist[0].placements.onSite
     }
     return(
-        <div className={className}>
+        <section className={className}>
             {cancelButton ?
             <button type="button" onClick={cancelFunction}>Cancel Edit</button>
             :null}
@@ -44,10 +44,9 @@ const TherapistTimeChoice = props => {
                         {site ? <option value={false}>On-Site</option> :null}
                     </select>
                     : null}
-                    
-                <button type="submit">Find Times</button>
+                <button type="submit">{cancelButton ? "Refresh Times" : "Find Times"}</button>
             </form>
-        </div>
+        </section>
     )
 }
 

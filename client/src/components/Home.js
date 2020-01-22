@@ -1,90 +1,45 @@
 import React, { Component } from "react"
-import StarRatings from 'react-star-ratings'
 
-import TherapistDisplay from "./TherapistDisplay"
+import HomeTopSection from "./HomeTopSection.js"
+import HomeTherapistSection from "./HomeTherapistSection.js"
 
 import { withGoogle } from "../context/GoogleCalendarProvider.js"
 import { withGeneral } from '../context/GeneralInfoProvider.js'
 import { withReview } from "../context/ReviewProvider.js"
+import HomeReviewsSection from "./HomeReviewsSection.js"
 
 class Home extends Component {
     constructor(){
         super()
         this.state = {
-            reviewsShown: 3
+            reviewsShown: 2
         }
     }
     showMore = () => {
-        this.setState(prevState => ({ reviewsShown: prevState.reviewsShown + 3 }))
+        this.setState(prevState => ({ reviewsShown: prevState.reviewsShown + 2 }))
     }
-    // componentDidMount(){
-    //     this.props.getEvents()
-    // }
+    componentDidMount(){
+        window.scroll(0,0)
+    }
     render(){
         const { homeTitle, homeInfo, homeTherapistSubtitle } = this.props.genInfo
-        const mappedHomeInfo = homeInfo.map((para, i) => <p key={i}> {para}</p>)
-        const mappedReviews = this.props.reviews.map((review, i) => {
-            if (i < this.state.reviewsShown){
-                const month = new Date(review.createdAt).getMonth()
-                const date = new Date(review.createdAt).getDate()
-                const year = new Date(review.createdAt).getFullYear()
-                return(
-                    <div key={i} className="reviewItem">
-                        <div className="ratings2">
-                            <StarRatings
-                                rating={review.rating}
-                                starRatedColor="gold"
-                                starDimension="20px"
-                                starSpacing="0px"
-                            />
-                            <span> - {review.rating}/5</span>
-                        </div>
-                        <h3>{review.name}</h3> 
-                        <p> ~ {review.message}</p>
-                        <p> - {month}/{date}/{year}</p>
-                    </div>
-                )
-            } else {
-                return null
-            }
-        })
+        const { reviews, rating, numberOfReviews, history } = this.props
+        
         return(
-            <div className={"background"}>
-                <div className={"border"}>
-                    <div className={`homeContainer ${"homeContainerInside"}`}>
-                        <div>
-                            <h1>{homeTitle}</h1>
-                            {mappedHomeInfo}
-                        </div>
-                    </div>
-                    <div className="homeTherapistCentered">
-                        <div className={`homeContainer ${"homeContainerInside2"}`}>
-                            <div>
-                                <h1>Our Therapists</h1>
-                                <p style={{textAlign: "center"}}>{homeTherapistSubtitle}</p>
-                                <TherapistDisplay />
-                            </div>
-                        </div>
-                    </div>
-                    <div className={`homeContainer ${"homeContainerInside3"}`}>
-                        <div>
-                            <h1>Reviews</h1>
-                            <div className="ratings">
-                                <StarRatings 
-                                    rating={this.props.rating}
-                                    starRatedColor="gold"
-                                    starDimension="35px"
-                                    starSpacing="2px"
-                                />
-                                <span> - {this.props.rating}/5</span>
-                            </div>
-                            <section className="reviewsByThree">
-                                {mappedReviews}
-                            </section>
-                            <span onClick={this.showMore} className="addReviews">Show more</span>
-                        </div>
+            <div className="home">
+                <div className="firstDivide">
+                    <div>
+                        <h1>{homeTitle}</h1>
                     </div>
                 </div>
+                <HomeTopSection content={homeInfo} history={history} />
+                <div className="secondDivide">
+                    <div>
+                        <h1>Love YOU and your Body</h1>
+                    </div>
+                </div>
+                <HomeTherapistSection subTitle={homeTherapistSubtitle} />
+                <HomeReviewsSection numberOfReviews={numberOfReviews} reviews={reviews} rating={rating} showMore={this.showMore} reviewsShown={this.state.reviewsShown}/>
             </div>
         )
     }
