@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import Logo from "../images/thisFlower.png"
+import Logo from "../images/thisFlower.jpg"
 
 import Nav from "./Nav.js"
 
