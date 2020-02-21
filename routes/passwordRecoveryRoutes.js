@@ -104,7 +104,7 @@ We've received a request for a password reset for the account attached to this e
 Link for reset: https://www.mtmscheduling.com/recovery/change/${newPasswordRecoveryObj._id}
 
 Thanks!
-Automated Message - Massage Therapy Matters`
+Automated Message - Blissed Out Body Works`
                     fs.readFile('credentials.json', (err, content) => {
                         if (err) {
                           res.status(500)

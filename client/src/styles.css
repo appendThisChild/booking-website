@@ -98,20 +98,25 @@ textarea {
     font-family: ChopinScript;
     letter-spacing: 1px;
 }
+.headerTitle0 {
+    font-size: 70px;
+    grid-column: 5/-1;
+    grid-row: 10/-1;
+}
 .headerTitle1 {
     font-size: 70px;
-    grid-column: 4/-1;
-    grid-row: 6/-1;
+    grid-column: 29/-1;
+    grid-row: 20/-1;
 }
 .headerTitle2 {
     font-size: 60px;
-    grid-column: 17/-1;
-    grid-row: 23/-1;
+    grid-column: 2/-1;
+    grid-row: 29/-1;
 }
 .headerTitle3 {
     font-size: 70px;
-    grid-column: 1/-1;
-    grid-row: 35/-1;
+    grid-column: 21/-1;
+    grid-row: 37/-1;
 }
 
 

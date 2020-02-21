@@ -5,7 +5,7 @@ const Footer = () => {
         <div className={"footer"}>
             <div>
                 <p className={"ryanLink"} >&#169; 2020 Pettingill Industries</p>
-                <p>&#169; 2020 Massage Therapy Matters</p>
+                <p>&#169; 2020 Blissed Out Body Works</p>
                 <p> All rights reserved.</p>
             </div>
         </div>
