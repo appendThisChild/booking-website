@@ -22,7 +22,7 @@ class Header extends Component {
                     <h1 className={"headerTitle0"}>Blissed</h1>
                     <h1 className={"headerTitle1"} style={{ paddingLeft: "10px"}}>out</h1>
                     <h1 className={"headerTitle2"}>Body</h1>
-                    <h1 className={"headerTitle3"} style={{ paddingLeft: "10px"}}>works</h1>
+                    <h1 className={"headerTitle3"} style={{ paddingLeft: "10px"}}>work</h1>
                 </div>
                 <span className={"navToggle"} onClick={this.props.sideNavToggler}>&#9776;</span>
                 <Nav sideNavToggler={this.props.sideNavToggler} navSideToggle={this.props.navSideToggle}/> 

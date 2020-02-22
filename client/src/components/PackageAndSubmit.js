@@ -281,7 +281,7 @@ class PackageAndSubmit extends Component {
                                 <>
                                     {checkBoxMessage ? <p>{checkBoxMessage}</p> : null}
                                     <StripeCheckout 
-                                        name="Blissed Out Body Works"
+                                        name="Blissed Out Body Work"
                                         stripeKey={apiKey}
                                         token={this.handleSubmit}
                                         amount={inStudio ? amount : amount + genInfo.onSitePricing}
@@ -312,7 +312,7 @@ class PackageAndSubmit extends Component {
                                     {checkBoxMessage ? <p>{checkBoxMessage}</p> : null}
                                     {genInfo.onSitePricing ?
                                     <StripeCheckout 
-                                        name="Blissed Out Body Works"
+                                        name="Blissed Out Body Work"
                                         stripeKey={apiKey}
                                         token={this.handleTravelFee}
                                         amount={genInfo.onSitePricing}
