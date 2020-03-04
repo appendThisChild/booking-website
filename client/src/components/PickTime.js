@@ -153,6 +153,7 @@ class PickTime extends Component {
         this.setState(prevState => ({ viewedDay: prevState.viewedDay + num }), () => this.gettingAvailability())
     }
     setViewedDay = num => {
+        console.log(num)
         this.setState({ viewedDay: num}, () => this.gettingAvailability())
     }
     editToggler = () => {
@@ -313,7 +314,7 @@ class PickTime extends Component {
         if ( hour > 17 ) dayToView = 2
         const startDay = new Date(new Date().setDate(new Date().getDate() + dayToView))
         this.setState({ 
-            startDay: startDay,
+            startDay,
             viewedDay: dayToView,
             nextDay: dayToView + 1
          }, () =>  {

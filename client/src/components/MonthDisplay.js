@@ -52,7 +52,7 @@ const MonthDisplay = props => {
                     && selectedDate.getDate() === newDate.getDate()){
                     selected = true
                 }
-                const daysAway = parseInt((newDate - origDate) / 86400000) + (props.nextDay - 1)
+                const daysAway = Math.round((newDate - origDate) / 86400000) + (props.nextDay - 1)
                 const dayObj = {
                     date: newDate,
                     available: newDate >= origDate && daysAway <= 90 + props.nextDay ? true : false,
@@ -66,7 +66,7 @@ const MonthDisplay = props => {
         }
         return month
     }
-
+    
     return(
         <div className="calendar">
             <h4>{props.monthsOfTheYear[viewedMonth]}</h4>
